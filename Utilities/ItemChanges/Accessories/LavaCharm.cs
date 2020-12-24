@@ -11,7 +11,7 @@ namespace TerraTemp.Utilities.ItemChanges.Accessories {
 
         public override int AppliedItemID => ItemID.LavaCharm;
 
-        public override List<int> ItemsThatContainThis => new List<int> {
+        public override List<int> AlternativeIDs => new List<int> {
             ItemID.LavaWaders
         };
 

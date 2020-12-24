@@ -16,7 +16,7 @@ namespace TerraTemp.Common.GlobalItems {
         //Vanilla Accessories/Armor, when equipped, give additional changes here
         public override void UpdateAccessory(Item item, Player player, bool hideVisual) {
             foreach (ItemChange change in TerraTemp.itemChanges) {
-                if (item.type == change.AppliedItemID || change.ItemsThatContainThis.Contains(item.type)) {
+                if (item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) {
                     TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
                     temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
@@ -29,7 +29,7 @@ namespace TerraTemp.Common.GlobalItems {
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             foreach (ItemChange change in TerraTemp.itemChanges) {
-                if ((item.type == change.AppliedItemID || change.ItemsThatContainThis.Contains(item.type)) && change.AdditionalTooltip != null) {
+                if ((item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) && change.AdditionalTooltip != null) {
                     TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", change.AdditionalTooltip);
                     tooltips.Add(newLine);
                 }
