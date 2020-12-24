@@ -22,7 +22,7 @@ namespace TerraTemp.Common.Players {
                 if (temperaturePlayer.currentTemperature > TempPlayer.NormalTemperature) {
                     player.allDamageMult += 0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature);
                     player.moveSpeed *= 1 + (0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature));
-                    
+
                 }
             }
 
