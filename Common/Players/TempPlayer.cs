@@ -125,6 +125,16 @@ namespace TerraTemp {
                     }
                 }
             }
+
+            //Increase desired temperature if player is adjacent to lava without an obsidian rose or obsidian skin effect
+            if (player.adjLava && !player.lavaWet && !player.lavaRose && !player.lavaImmune) {
+                desiredTemperature += 12.5f;
+            }
+
+            //Set desired temperature to the average temperature of lava in the real world if the player enters it without an active lava charm or obsidian rose
+            if (player.lavaWet && player.lavaTime <= 0 && !player.lavaRose && !player.lavaImmune) {
+                desiredTemperature = 1125f;
+            }
         }
 
         public override void PostUpdate() {
@@ -132,12 +142,27 @@ namespace TerraTemp {
             // multiplied by the player's temperature change resistance.
             float difference = desiredTemperature - currentTemperature;
             currentTemperature += difference / 60f / 45f * (1f - temperatureChangeResist);
+            CheckForTemperatureEffects();
         }
-
         #endregion
 
-        #region Temperature Effects
-        public override void PostUpdateBuffs() {
+        #region I/O
+        //Saving/Loading Temperature
+        public override TagCompound Save() {
+            return new TagCompound {
+                {"currentTemp", currentTemperature},
+            };
+        }
+        public override void Load(TagCompound tag) {
+            currentTemperature = tag.GetFloat("currentTemp");
+        }
+        #endregion
+
+        #region Custom Methods
+        /// <summary>
+        /// Method that checks & applies the effects of the player's current Body Temperature.
+        /// </summary>
+        public void CheckForTemperatureEffects() {
             //Heat Effects
             if (currentTemperature > comfortableHigh) {
                 //Sweaty Effect
@@ -170,18 +195,6 @@ namespace TerraTemp {
                     player.KillMe(deathReason, 9999, 0);
                 }
             }
-        }
-        #endregion
-
-        #region I/O
-        //Saving/Loading Temperature
-        public override TagCompound Save() {
-            return new TagCompound {
-                {"currentTemp", currentTemperature},
-            };
-        }
-        public override void Load(TagCompound tag) {
-            currentTemperature = tag.GetFloat("currentTemp");
         }
         #endregion
     }
