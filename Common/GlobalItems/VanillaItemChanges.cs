@@ -11,7 +11,7 @@ namespace TerraTemp.Common.GlobalItems {
     public class VanillaItemChanges : GlobalItem {
 
         //Vanilla Accessories/Armor, when equipped, give additional changes here
-        public override void UpdateAccessory(Item item, Player player, bool hideVisual) {
+        public override void UpdateEquip(Item item, Player player) {
             foreach (ItemChange change in TerraTemp.itemChanges) {
                 if (item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) {
                     TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
