@@ -1,6 +1,6 @@
 ﻿using Terraria;
 
-namespace TerraTemp.Utilities.TempBiomes {
+namespace TerraTemp.Content.Changes.TempBiomes {
 
     public class Snow : TempBiome {
 

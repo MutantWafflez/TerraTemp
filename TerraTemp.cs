@@ -6,8 +6,8 @@ using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTemp.Content.Changes;
 using TerraTemp.ID;
-using TerraTemp.Utilities;
 
 namespace TerraTemp {
 

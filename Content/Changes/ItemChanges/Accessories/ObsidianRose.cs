@@ -1,6 +1,6 @@
 ﻿using Terraria.ID;
 
-namespace TerraTemp.Utilities.ItemChanges.Accessories {
+namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
     public class ObsidianRose : ItemChange {
         public override int AppliedItemID => ItemID.ObsidianRose;

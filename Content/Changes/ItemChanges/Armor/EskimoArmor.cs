@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Terraria.ID;
 
-namespace TerraTemp.Utilities.ItemChanges.Armor {
+namespace TerraTemp.Content.Changes.ItemChanges.Armor {
 
     public class EskimoHat : ItemChange {
         public override int AppliedItemID => ItemID.EskimoHood;

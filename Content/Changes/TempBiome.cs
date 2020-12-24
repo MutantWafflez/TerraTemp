@@ -1,6 +1,6 @@
 ﻿using Terraria;
 
-namespace TerraTemp.Utilities {
+namespace TerraTemp.Content.Changes {
 
     /// <summary>
     /// Class that is instantiated for each biome in the game that affects temperature

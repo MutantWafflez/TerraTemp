@@ -1,6 +1,6 @@
 ﻿using Terraria;
 
-namespace TerraTemp.Utilities.TempBiomes {
+namespace TerraTemp.Content.Changes.TempBiomes {
 
     public class Jungle : TempBiome {
         public override float TemperatureModification => 12.5f;

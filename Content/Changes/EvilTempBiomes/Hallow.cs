@@ -1,10 +1,10 @@
 ﻿using Terraria;
 
-namespace TerraTemp.Utilities.EvilTempBiomes {
+namespace TerraTemp.Content.Changes.EvilTempBiomes {
 
     public class Hallow : EvilTempBiome {
         public override float TemperatureResistanceModification => 0.1f;
 
-        public virtual bool EvilZoneBool(Player player) => player.ZoneHoly;
+        public override bool EvilZoneBool(Player player) => player.ZoneHoly;
     }
 }

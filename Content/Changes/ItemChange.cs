@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TerraTemp.Utilities {
+namespace TerraTemp.Content.Changes {
 
     public abstract class ItemChange {
 

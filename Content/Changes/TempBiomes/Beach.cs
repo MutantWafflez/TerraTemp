@@ -1,6 +1,6 @@
 ﻿using Terraria;
 
-namespace TerraTemp.Utilities.TempBiomes {
+namespace TerraTemp.Content.Changes.TempBiomes {
 
     public class Beach : TempBiome {
         public override float TemperatureModification => -2.5f;
