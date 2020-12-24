@@ -24,8 +24,8 @@ namespace TerraTemp.Utilities {
     }
 
     /// <summary>
-    /// Class that is instantiated for each evil biome (including the Hallow) that affects temperature.
-    /// Exists so the evil biomes can affect temperature on top of the normal biome effects.
+    /// Class that is instantiated for each evil biome (including the Hallow) that affects
+    /// temperature. Exists so the evil biomes can affect temperature on top of the normal biome effects.
     /// </summary>
     public abstract class EvilTempBiome {
 

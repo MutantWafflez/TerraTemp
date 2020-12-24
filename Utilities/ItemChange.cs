@@ -10,8 +10,9 @@ namespace TerraTemp.Utilities {
         public virtual int AppliedItemID => -1;
 
         /// <summary>
-        /// List that returns what item's IDs have the given item as a material in any part of the crafting tree or is an alternative to the item.
-        /// For example, for the Lava Charm, this would include the Lava Waders, since the Lava Charm is a material in the crafting tree.
+        /// List that returns what item's IDs have the given item as a material in any part of the
+        /// crafting tree or is an alternative to the item. For example, for the Lava Charm, this
+        /// would include the Lava Waders, since the Lava Charm is a material in the crafting tree.
         /// </summary>
         public virtual List<int> AlternativeIDs => new List<int>();
 

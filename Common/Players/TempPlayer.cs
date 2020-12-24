@@ -31,7 +31,7 @@ namespace TerraTemp {
         public float desiredTemperature = NormalTemperature;
 
         /// <summary>
-        /// Value that modifies  how fast the player's body temperature will move towards the desired temperature.
+        /// Value that modifies how fast the player's body temperature will move towards the desired temperature.
         /// </summary>
         public float temperatureChangeResist;
 
@@ -46,8 +46,9 @@ namespace TerraTemp {
         public float comfortableLow; //Default 10f
 
         /// <summary>
-        /// Absolute maximum value above/below the player's comfortable range before the player dies.
-        /// For example, if this value is 10 degrees and the comfortable ranges are their defaults, the player will die at 0 and 40 degrees respectively.
+        /// Absolute maximum value above/below the player's comfortable range before the player
+        /// dies. For example, if this value is 10 degrees and the comfortable ranges are their
+        /// defaults, the player will die at 0 and 40 degrees respectively.
         /// </summary>
         public float criticalRangeMaximum; //Default 10f
 
@@ -57,7 +58,8 @@ namespace TerraTemp {
         public TempBiome currentBiome;
 
         /// <summary>
-        /// The player's current evil biome, influencing the current environment temperature on top of the current biome.
+        /// The player's current evil biome, influencing the current environment temperature on top
+        /// of the current biome.
         /// </summary>
         public EvilTempBiome currentEvilBiome;
 
@@ -173,9 +175,8 @@ namespace TerraTemp {
 
         #region Custom Methods
 
-        /// <summary>
-        /// Method that checks & applies the effects of the player's current Body Temperature.
-        /// </summary>
+        /// <summary> Method that checks & applies the effects of the player's current Body
+        /// Temperature. </summary>
         public void CheckForTemperatureEffects() {
             //Heat Effects
             if (currentTemperature > comfortableHigh) {
