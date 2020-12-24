@@ -137,11 +137,9 @@ namespace TerraTemp {
             //Heat Effects
             if (currentTemperature > comfortableHigh) {
                 //Sweaty Effect
-                if (currentTemperature < comfortableHigh + (criticalRangeMaximum / 2f)) {
-                    player.AddBuff(ModContent.BuffType<Sweaty>(), 5);
-                }
+                player.AddBuff(ModContent.BuffType<Sweaty>(), 5);
                 //Heat Stroke
-                else if (currentTemperature > comfortableHigh + (criticalRangeMaximum / 2f) && currentTemperature < comfortableHigh + criticalRangeMaximum) {
+                if (currentTemperature > comfortableHigh + (criticalRangeMaximum / 2f) && currentTemperature < comfortableHigh + criticalRangeMaximum) {
                     player.AddBuff(ModContent.BuffType<HeatStroke>(), 5);
                 }
                 //Death
@@ -155,9 +153,7 @@ namespace TerraTemp {
             //Cold Effects
             else if (currentTemperature < comfortableLow) {
                 //Chilly Effect
-                if (currentTemperature > comfortableLow - (criticalRangeMaximum / 2f)) {
-                    player.AddBuff(ModContent.BuffType<Shivering>(), 5);
-                }
+                player.AddBuff(ModContent.BuffType<Shivering>(), 5);
                 //Hypothermia
                 if (currentTemperature < comfortableLow - (criticalRangeMaximum / 2f) && currentTemperature > comfortableLow - criticalRangeMaximum) {
                     player.AddBuff(ModContent.BuffType<Hypothermia>(), 5);
