@@ -1,6 +1,7 @@
 ﻿using Terraria;
 
 namespace TerraTemp.Utilities.EvilTempBiomes {
+
     public class Crimson : EvilTempBiome {
         public override float TemperatureModification => 7.5f;
 

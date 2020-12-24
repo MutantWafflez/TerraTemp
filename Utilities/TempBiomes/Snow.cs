@@ -1,10 +1,11 @@
 ﻿using Terraria;
 
 namespace TerraTemp.Utilities.TempBiomes {
+
     public class Snow : TempBiome {
+
         public override float TemperatureModification {
-            get
-            {
+            get {
                 //If raining, make it colder
                 if (Main.raining) {
                     return -15f;

@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using TerraTemp.Common.Players;
 
 namespace TerraTemp.Content.Items.Accessories {
+
     public class FlameRune : ModItem {
 
         public override void SetStaticDefaults() {
@@ -33,6 +34,5 @@ namespace TerraTemp.Content.Items.Accessories {
             recipe.SetResult(this);
             recipe.AddRecipe();
         }
-
     }
 }

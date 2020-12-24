@@ -7,7 +7,9 @@ using Terraria.ModLoader;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Items {
+
     public class Thermometer : ModItem {
+
         public override void SetStaticDefaults() {
             Tooltip.SetDefault("Displays several temperature related statistics");
         }

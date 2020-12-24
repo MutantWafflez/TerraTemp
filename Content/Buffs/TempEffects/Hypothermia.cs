@@ -2,6 +2,7 @@
 using Terraria.ModLoader;
 
 namespace TerraTemp.Content.Buffs.TempEffects {
+
     public class Hypothermia : ModBuff {
 
         public override void SetDefaults() {
@@ -20,6 +21,5 @@ namespace TerraTemp.Content.Buffs.TempEffects {
             player.chilled = true;
             player.blackout = true;
         }
-
     }
 }

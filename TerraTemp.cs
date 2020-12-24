@@ -10,8 +10,8 @@ using TerraTemp.ID;
 using TerraTemp.Utilities;
 
 namespace TerraTemp {
-    public class TerraTemp : Mod {
 
+    public class TerraTemp : Mod {
         public static List<TempBiome> tempBiomes;
         public static List<EvilTempBiome> evilTempBiomes;
 
@@ -20,6 +20,7 @@ namespace TerraTemp {
         public static float? dailyTemperatureDeviation = 1f;
 
         #region Loading Overrides
+
         public override void PostSetupContent() {
             List<Type> tempBiomeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.BaseType == typeof(TempBiome)).ToList();
             tempBiomes = new List<TempBiome>();
@@ -46,9 +47,11 @@ namespace TerraTemp {
             itemChanges = null;
             dailyTemperatureDeviation = null;
         }
-        #endregion
+
+        #endregion Loading Overrides
 
         #region Temperature Deviation
+
         public override void MidUpdateDustTime() {
             if (Main.netMode == NetmodeID.Server) {
                 if (Main.time >= 32400.0 && !Main.dayTime && !Main.gameMenu) {
@@ -65,20 +68,24 @@ namespace TerraTemp {
                 }
             }
         }
-        #endregion
+
+        #endregion Temperature Deviation
 
         #region Packet Handling
+
         public override void HandlePacket(BinaryReader reader, int whoAmI) {
             PacketID packetMessage = (PacketID)reader.ReadByte();
             switch (packetMessage) {
                 case PacketID.DailyTemperatureDeviation:
                     dailyTemperatureDeviation = reader.ReadSingle();
                     break;
+
                 default:
                     Logger.Error($"Message of ID type {packetMessage} not found!");
                     break;
             }
         }
-        #endregion
+
+        #endregion Packet Handling
     }
 }

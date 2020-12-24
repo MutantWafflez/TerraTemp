@@ -8,6 +8,7 @@ using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Utilities;
 
 namespace TerraTemp {
+
     /// <summary>
     /// Player class that handles the actual temperature of each player in the mod.
     /// </summary>
@@ -18,26 +19,32 @@ namespace TerraTemp {
         /// Normal temperature, or completely average.
         /// </summary>
         public const float NormalTemperature = 20f;
+
         /// <summary>
         /// Player's current body temperature.
         /// </summary>
         public float currentTemperature;
+
         /// <summary>
         /// The temperature that the player's body temperature will move towards.
         /// </summary>
         public float desiredTemperature = NormalTemperature;
+
         /// <summary>
         /// Value that modifies  how fast the player's body temperature will move towards the desired temperature.
         /// </summary>
         public float temperatureChangeResist;
+
         /// <summary>
         /// Range of heat that the player can sustain with no negative side effects.
         /// </summary>
         public float comfortableHigh; //Default 30f
+
         /// <summary>
         /// Range of cold that the player can sustain with no negative side effects.
         /// </summary>
         public float comfortableLow; //Default 10f
+
         /// <summary>
         /// Absolute maximum value above/below the player's comfortable range before the player dies.
         /// For example, if this value is 10 degrees and the comfortable ranges are their defaults, the player will die at 0 and 40 degrees respectively.
@@ -48,6 +55,7 @@ namespace TerraTemp {
         /// The player's current biome, influencing the current environment temperature.
         /// </summary>
         public TempBiome currentBiome;
+
         /// <summary>
         /// The player's current evil biome, influencing the current environment temperature on top of the current biome.
         /// </summary>
@@ -62,6 +70,7 @@ namespace TerraTemp {
         }
 
         #region Update Overrides
+
         //Reset Temperature upon death
         public override void UpdateDead() {
             currentTemperature = NormalTemperature;
@@ -144,21 +153,26 @@ namespace TerraTemp {
             currentTemperature += difference / 60f / 45f * (1f - temperatureChangeResist);
             CheckForTemperatureEffects();
         }
-        #endregion
+
+        #endregion Update Overrides
 
         #region I/O
+
         //Saving/Loading Temperature
         public override TagCompound Save() {
             return new TagCompound {
                 {"currentTemp", currentTemperature},
             };
         }
+
         public override void Load(TagCompound tag) {
             currentTemperature = tag.GetFloat("currentTemp");
         }
-        #endregion
+
+        #endregion I/O
 
         #region Custom Methods
+
         /// <summary>
         /// Method that checks & applies the effects of the player's current Body Temperature.
         /// </summary>
@@ -196,6 +210,7 @@ namespace TerraTemp {
                 }
             }
         }
-        #endregion
+
+        #endregion Custom Methods
     }
 }

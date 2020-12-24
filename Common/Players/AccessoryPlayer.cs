@@ -2,11 +2,11 @@
 using Terraria.ModLoader;
 
 namespace TerraTemp.Common.Players {
+
     /// <summary>
     /// Player that handles the accessory items in this mod.
     /// </summary>
     public class AccessoryPlayer : ModPlayer {
-
         public bool flameRune;
         public bool frostRune;
 
@@ -22,7 +22,6 @@ namespace TerraTemp.Common.Players {
                 if (temperaturePlayer.currentTemperature > TempPlayer.NormalTemperature) {
                     player.allDamageMult += 0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature);
                     player.moveSpeed *= 1 + (0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature));
-
                 }
             }
 

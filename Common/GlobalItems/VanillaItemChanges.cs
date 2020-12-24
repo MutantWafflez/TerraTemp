@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Common.GlobalItems {
+
     /// <summary>
     /// GlobalItem class that handles all vanilla item changes for the mod.
     /// </summary>

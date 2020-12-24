@@ -2,6 +2,7 @@
 using Terraria.ModLoader;
 
 namespace TerraTemp.Content.Buffs.TempEffects {
+
     //TODO: Add custom shivering buff sprite
     public class Shivering : ModBuff {
 
@@ -18,6 +19,5 @@ namespace TerraTemp.Content.Buffs.TempEffects {
             player.statDefense = (int)(player.statDefense * 0.9f);
             player.moveSpeed *= 0.85f;
         }
-
     }
 }
