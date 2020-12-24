@@ -17,6 +17,6 @@ namespace TerraTemp {
             TerraTemp.dailyTemperatureDeviation = tag.GetFloat("temperatureDeviation");
         }
 
-        #endregion
+        #endregion I/O
     }
 }

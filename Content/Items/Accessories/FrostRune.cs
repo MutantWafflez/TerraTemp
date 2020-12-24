@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Common.Players;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Items.Accessories {
 
@@ -10,7 +11,7 @@ namespace TerraTemp.Content.Items.Accessories {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Frost Rune");
             Tooltip.SetDefault("2% increased defense and damage reduction for each degree below normal body temperature"
-                + "\n5 degree reduction in heat comfortability range");
+                + "\n" + TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedHeatComfortability", 5));
         }
 
         public override void SetDefaults() {

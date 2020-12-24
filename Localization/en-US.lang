@@ -23,3 +23,19 @@ DeathMessage.Cold.7=succumbed to the Hypothermia.
 DeathMessage.Cold.8=attempted amateur cyrogenics.
 DeathMessage.Cold.9=became a snowperson.
 DeathMessage.Cold.10=celebrated Christmas too hard.
+
+#Global Tooltips
+GlobalTooltip.IncreasedColdComfortability={0} degree increased cold comfortability range
+GlobalTooltip.DecreasedColdComfortability={0} degree decreased cold comfortability range
+
+GlobalTooltip.IncreasedHeatComfortability={0} degree increased heat comfortability range
+GlobalTooltip.DecreasedHeatComfortability={0} degree decreased heat comfortability range
+
+GlobalTooltip.IncreasedGlobalComfortability={0} degree increased global comfortability range
+GlobalTooltip.DecreasedGlobalComfortability={0} degree decreased global comfortability range
+
+GlobalTooltip.IncreasedTempResistance={0}% increased temperature change resistance
+GlobalTooltip.DecreasedTempResistance={0}% decreased temperature change resistance
+
+GlobalTooltip.IncreasedCriticalRange={0} degree increased critical range
+GlobalTooltip.DecreasedCriticalRange={0} degree decreased critical range
