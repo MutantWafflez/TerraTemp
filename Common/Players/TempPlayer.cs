@@ -70,12 +70,12 @@ namespace TerraTemp {
         public override void PostUpdateMiscEffects() {
             //Updating the player's current biome
             foreach (TempBiome biome in TerraTemp.tempBiomes) {
-                if (biome.PlayerZoneBool) {
+                if (biome.PlayerZoneBool(player)) {
                     currentBiome = biome;
                     break;
                 }
                 //Current biome being null means the player is in Forest, the default biome
-                if (!biome.PlayerZoneBool && biome == TerraTemp.tempBiomes.Last()) {
+                if (!biome.PlayerZoneBool(player) && biome == TerraTemp.tempBiomes.Last()) {
                     currentBiome = null;
                     break;
                 }
@@ -83,12 +83,12 @@ namespace TerraTemp {
 
             //Updating the player's current evil biome
             foreach (EvilTempBiome biome in TerraTemp.evilTempBiomes) {
-                if (biome.EvilZoneBool) {
+                if (biome.EvilZoneBool(player)) {
                     currentEvilBiome = biome;
                     break;
                 }
                 //Current evil biome being null means the player is not in any evil biome, thus no change
-                if (!biome.EvilZoneBool && biome == TerraTemp.evilTempBiomes.Last()) {
+                if (!biome.EvilZoneBool(player) && biome == TerraTemp.evilTempBiomes.Last()) {
                     currentEvilBiome = null;
                     break;
                 }

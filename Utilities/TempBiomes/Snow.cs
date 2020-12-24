@@ -2,18 +2,17 @@
 
 namespace TerraTemp.Utilities.TempBiomes {
     public class Snow : TempBiome {
-
-        public override bool PlayerZoneBool => Main.LocalPlayer.ZoneSnow;
-
         public override float TemperatureModification {
             get
             {
-                //If raining and the player is NOT on the surface/behind a wall, decrease temperature further
-                if (Main.raining && Main.LocalPlayer.ZoneOverworldHeight && Main.LocalPlayer.behindBackWall) {
+                //If raining, make it colder
+                if (Main.raining) {
                     return -15f;
                 }
                 return -10f;
             }
         }
+
+        public override bool PlayerZoneBool(Player player) => player.ZoneSnow;
     }
 }
