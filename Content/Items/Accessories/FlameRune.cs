@@ -24,5 +24,15 @@ namespace TerraTemp.Content.Items.Accessories {
             player.GetModPlayer<AccessoryPlayer>().flameRune = true;
         }
 
+        public override void AddRecipes() {
+            ModRecipe recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.HellstoneBar, 10);
+            recipe.AddIngredient(ItemID.StoneBlock, 20);
+            recipe.AddIngredient(ItemID.Fireblossom, 3);
+            recipe.AddTile(TileID.Bookcases);
+            recipe.SetResult(this);
+            recipe.AddRecipe();
+        }
+
     }
 }

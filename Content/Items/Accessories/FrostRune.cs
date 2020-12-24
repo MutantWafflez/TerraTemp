@@ -24,5 +24,15 @@ namespace TerraTemp.Content.Items.Accessories {
             player.GetModPlayer<AccessoryPlayer>().frostRune = true;
         }
 
+        public override void AddRecipes() {
+            ModRecipe recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.FrostCore);
+            recipe.AddIngredient(ItemID.StoneBlock, 20);
+            recipe.AddIngredient(ItemID.Shiverthorn, 3);
+            recipe.AddTile(TileID.Bookcases);
+            recipe.SetResult(this);
+            recipe.AddRecipe();
+        }
+
     }
 }
