@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTemp.Content.Buffs.TempEffects;
@@ -145,7 +146,7 @@ namespace TerraTemp {
                 //Death
                 if (currentTemperature > comfortableHigh + criticalRangeMaximum) {
                     PlayerDeathReason deathReason = new PlayerDeathReason {
-                        SourceCustomReason = player.name + " overheated."
+                        SourceCustomReason = player.name + " " + Language.GetTextValue("Mods.TerraTemp.DeathMessage.Heat." + Main.rand.Next(0, 11))
                     };
                     player.KillMe(deathReason, 9999, 0);
                 }
@@ -161,7 +162,7 @@ namespace TerraTemp {
                 //Death
                 if (currentTemperature < comfortableLow - criticalRangeMaximum) {
                     PlayerDeathReason deathReason = new PlayerDeathReason {
-                        SourceCustomReason = player.name + " froze to death."
+                        SourceCustomReason = player.name + " " + Language.GetTextValue("Mods.TerraTemp.DeathMessage.Cold." + Main.rand.Next(0, 11))
                     };
                     player.KillMe(deathReason, 9999, 0);
                 }

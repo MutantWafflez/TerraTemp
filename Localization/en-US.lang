@@ -1,0 +1,25 @@
+﻿# Heat Death Messages
+DeathMessage.Heat.0=overheated.
+DeathMessage.Heat.1=now knows what the Sun feels like.
+DeathMessage.Heat.2=was baconized.
+DeathMessage.Heat.3=was overwhelmed by extremely warm air atoms.
+DeathMessage.Heat.4=suntanned for too long.
+DeathMessage.Heat.5=got sunbleached.
+DeathMessage.Heat.6=underwent incineration.
+DeathMessage.Heat.7=got a bit too warm and cozy.
+DeathMessage.Heat.8=became a baked potato.
+DeathMessage.Heat.9=was fried.
+DeathMessage.Heat.10=did not achieve homeostasis.
+
+#Cold Death Messages
+DeathMessage.Cold.0=froze to death.
+DeathMessage.Cold.1=became a popsicle.
+DeathMessage.Cold.2=now knows what living on Pluto feels like.
+DeathMessage.Cold.3=became an ice cube.
+DeathMessage.Cold.4=was sent to the Ice Age.
+DeathMessage.Cold.5=had a visit with Mr. Freeze.
+DeathMessage.Cold.6=tried to preserve themselves.
+DeathMessage.Cold.7=succumbed to the Hypothermia.
+DeathMessage.Cold.8=attempted amateur cyrogenics.
+DeathMessage.Cold.9=became a snowperson.
+DeathMessage.Cold.10=celebrated Christmas too hard.
