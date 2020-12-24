@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
@@ -28,7 +29,13 @@ namespace TerraTemp.Common.GlobalItems {
             foreach (ItemChange change in TerraTemp.itemChanges) {
                 if ((item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) && change.AdditionalTooltip != null) {
                     TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", change.AdditionalTooltip);
-                    tooltips.Add(newLine);
+                    TooltipLine materialLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Material");
+                    if (materialLine != null && materialLine == tooltips.Last()) {
+                        tooltips.Insert(tooltips.IndexOf(materialLine), newLine);
+                    }
+                    else {
+                        tooltips.Add(newLine);
+                    }
                 }
             }
         }
