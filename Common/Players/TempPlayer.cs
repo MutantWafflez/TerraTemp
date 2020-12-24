@@ -8,6 +8,9 @@ using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Utilities;
 
 namespace TerraTemp {
+    /// <summary>
+    /// Player class that handles the actual temperature of each player in the mod.
+    /// </summary>
     public class TempPlayer : ModPlayer {
         //ALL Temperature in this mod USES CELSIUS!
 
