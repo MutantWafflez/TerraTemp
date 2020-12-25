@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System;
 using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;

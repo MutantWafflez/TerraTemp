@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Terraria.Localization;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes {
