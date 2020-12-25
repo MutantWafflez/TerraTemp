@@ -33,20 +33,15 @@ namespace TerraTemp.Common.GlobalItems {
                 if ((item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) && change.AdditionalTooltip != null) {
                     TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", change.AdditionalTooltip);
 
-                    //All of these checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
-                    //For example, having lines below the Set Bonus text when that never occurs in Vanilla is something we want to avoid.
-                    TooltipLine materialLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Material");
-                    TooltipLine setBonusLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "SetBonus");
-                    TooltipLine buffDurationline = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "BuffTime");
+                    //These checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
+                    TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Tooltip0");
+                    TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Defense");
 
-                    if (buffDurationline != null) {
-                        tooltips.Insert(tooltips.IndexOf(buffDurationline), newLine);
+                    if (defenseLine != null) {
+                        tooltips.Insert(tooltips.IndexOf(defenseLine) + 1, newLine);
                     }
-                    else if (setBonusLine != null) {
-                        tooltips.Insert(tooltips.IndexOf(setBonusLine), newLine);
-                    }
-                    else if (materialLine != null && materialLine == tooltips.Last()) {
-                        tooltips.Insert(tooltips.IndexOf(materialLine), newLine);
+                    else if (toolTipZero != null) {
+                        tooltips.Insert(tooltips.IndexOf(toolTipZero) + 1, newLine);
                     }
                     else {
                         tooltips.Add(newLine);
