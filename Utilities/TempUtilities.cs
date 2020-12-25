@@ -1,5 +1,8 @@
 ﻿using System;
 using Terraria.Localization;
+using System.Linq;
+using Terraria;
+using System.Collections.Generic;
 
 namespace TerraTemp.Utilities {
 
@@ -31,12 +34,12 @@ namespace TerraTemp.Utilities {
         /// If the given localization text has a argument, this is where that can be input.
         /// </param>
         /// <returns> The given string value attached to input key, if it exists. </returns>
-        public static string GetTerraTempTextValue(string key, object arg0 = null, bool addEndingLineBreak = false) {
+        public static string GetTerraTempTextValue(string key, object arg0 = null) {
             if (arg0 != null) {
-                return Language.GetTextValue("Mods.TerraTemp." + key, arg0) + (addEndingLineBreak ? "\n" : "");
+                return Language.GetTextValue("Mods.TerraTemp." + key, arg0);
             }
             else {
-                return Language.GetTextValue("Mods.TerraTemp." + key) + (addEndingLineBreak ? "\n" : "");
+                return Language.GetTextValue("Mods.TerraTemp." + key);
             }
         }
 
@@ -64,47 +67,54 @@ namespace TerraTemp.Utilities {
             float criticalChange = Math.Abs(criticalRangeChange);
 
             string fullLine = "";
+            List<string> stringsToAdd = new List<string>();
 
             //Global Change Check
             if (heatComfortabilityChange * -1 == coldComfortabilityChange && heatChange != 0f) {
                 if (heatComfortabilityChange > 0f) {
-                    fullLine += GetTerraTempTextValue("GlobalTooltip.IncreasedGlobalComfortability", heatChange, true);
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedGlobalComfortability", heatChange));
                 }
                 else if (heatComfortabilityChange < 0f) {
-                    fullLine += GetTerraTempTextValue("GlobalTooltip.DecreasedGlobalComfortability", heatChange, true);
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedGlobalComfortability", heatChange));
                 }
             }
             //Heat/Cold Change Check
             else {
                 if (heatComfortabilityChange > 0f) {
-                    fullLine += GetTerraTempTextValue("GlobalTooltip.IncreasedHeatComfortability", heatChange, true);
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedHeatComfortability", heatChange));
                 }
                 else if (heatComfortabilityChange < 0f) {
-                    fullLine += GetTerraTempTextValue("GlobalTooltip.DecreasedHeatComfortability", heatChange, true);
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedHeatComfortability", heatChange));
                 }
 
                 if (coldComfortabilityChange < 0f) {
-                    fullLine += GetTerraTempTextValue("GlobalTooltip.IncreasedColdComfortability", coldChange, true);
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedColdComfortability", coldChange));
                 }
                 else if (coldComfortabilityChange > 0f) {
-                    fullLine += GetTerraTempTextValue("GlobalTooltip.DecreasedColdComfortability", coldChange, true);
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedColdComfortability", coldChange));
                 }
             }
 
             //Temperature Resistance Change Check
             if (temperatureResistanceChange > 0f) {
-                fullLine += GetTerraTempTextValue("GlobalTooltip.IncreasedTempResistance", tempResistChange, true);
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedTempResistance", tempResistChange));
             }
             else if (temperatureResistanceChange < 0f) {
-                fullLine += GetTerraTempTextValue("GlobalTooltip.DecreasedTempResistance", tempResistChange, true);
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedTempResistance", tempResistChange));
             }
 
             //Critical Temperature Change Check
             if (criticalRangeChange > 0f) {
-                fullLine += GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange", criticalChange, true);
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange", criticalChange));
             }
             else if (criticalRangeChange < 0f) {
-                fullLine += GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange", criticalChange, true);
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange", criticalChange));
+            }
+
+            if (stringsToAdd.Any()) {
+                foreach (string line in stringsToAdd) {
+                    fullLine += line + (line != stringsToAdd.Last() ? "\n" : "");
+                }
             }
 
             return fullLine == "" ? null : fullLine;
