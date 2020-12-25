@@ -31,7 +31,11 @@ namespace TerraTemp.Common.GlobalItems {
                 if ((item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) && change.AdditionalTooltip != null) {
                     TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", change.AdditionalTooltip);
                     TooltipLine materialLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Material");
-                    if (materialLine != null && materialLine == tooltips.Last()) {
+                    TooltipLine setBonusLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "SetBonus");
+                    if (setBonusLine != null) {
+                        tooltips.Insert(tooltips.IndexOf(setBonusLine), newLine);
+                    }
+                    else if (materialLine != null && materialLine == tooltips.Last()) {
                         tooltips.Insert(tooltips.IndexOf(materialLine), newLine);
                     }
                     else {

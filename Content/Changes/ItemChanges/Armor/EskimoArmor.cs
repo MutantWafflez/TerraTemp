@@ -39,4 +39,28 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor {
 
         public override string AdditionalTooltip => $"{Math.Abs(ColdComfortabilityChange)} degree increased cold comfortability range";
     }
+
+    public class EskimoSetBonus : SetBonusChange {
+        public override int HelmetPieceID => ItemID.EskimoHood;
+
+        public override int ChestPieceID => ItemID.EskimoCoat;
+
+        public override int LegPieceID => ItemID.EskimoPants;
+
+        public override string ArmorSetName => "EskimoArmorSet";
+
+        public override float CriticalTemperatureChange => 2f;
+    }
+
+    public class PinkEskimoSetBonus : SetBonusChange {
+        public override int HelmetPieceID => ItemID.PinkEskimoHood;
+
+        public override int ChestPieceID => ItemID.PinkEskimoCoat;
+
+        public override int LegPieceID => ItemID.PinkEskimoPants;
+
+        public override string ArmorSetName => "PinkEskimoArmorSet";
+
+        public override float CriticalTemperatureChange => 2f;
+    }
 }
