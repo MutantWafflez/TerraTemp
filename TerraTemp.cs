@@ -16,6 +16,7 @@ namespace TerraTemp {
         public static List<EvilTempBiome> evilTempBiomes;
 
         public static List<ItemChange> itemChanges;
+        public static List<SetBonusChange> setBonusChanges;
 
         public static float? dailyTemperatureDeviation = 1f;
 
@@ -39,12 +40,19 @@ namespace TerraTemp {
             foreach (Type type in itemChangeTypes) {
                 itemChanges.Add((ItemChange)Activator.CreateInstance(type));
             }
+
+            List<Type> setBonusChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.BaseType == typeof(SetBonusChange)).ToList();
+            setBonusChanges = new List<SetBonusChange>();
+            foreach (Type type in setBonusChangeTypes) {
+                setBonusChanges.Add((SetBonusChange)Activator.CreateInstance(type));
+            }
         }
 
         public override void Unload() {
             tempBiomes = null;
             evilTempBiomes = null;
             itemChanges = null;
+            setBonusChanges = null;
             dailyTemperatureDeviation = null;
         }
 
