@@ -1,5 +1,4 @@
 ﻿using System;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using TerraTemp.Content.Items.Accessories;

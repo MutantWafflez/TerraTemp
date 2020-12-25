@@ -1,5 +1,4 @@
-﻿using System;
-using TerraTemp.Utilities;
+﻿using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes {
 

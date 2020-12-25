@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTemp.Content.Buffs.TempEffects;
