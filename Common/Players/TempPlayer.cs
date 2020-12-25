@@ -6,6 +6,8 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
+using TerraTemp.Content.Items.Accessories;
+using TerraTemp.Utilities;
 
 namespace TerraTemp {
 
@@ -188,9 +190,9 @@ namespace TerraTemp {
                 }
                 //Death
                 if (currentTemperature > comfortableHigh + criticalRangeMaximum) {
-                    PlayerDeathReason deathReason = new PlayerDeathReason {
-                        SourceCustomReason = player.name + " " + Language.GetTextValue("Mods.TerraTemp.DeathMessage.Heat." + Main.rand.Next(0, 11))
-                    };
+                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Heat." + Main.rand.Next(0, 11)));
+                    //For the Volatile Themometer effect to properly take place
+                    deathReason.SourceItemType = ModContent.ItemType<VolatileThermometer>();
                     player.KillMe(deathReason, 9999, 0);
                 }
             }
@@ -204,9 +206,9 @@ namespace TerraTemp {
                 }
                 //Death
                 if (currentTemperature < comfortableLow - criticalRangeMaximum) {
-                    PlayerDeathReason deathReason = new PlayerDeathReason {
-                        SourceCustomReason = player.name + " " + Language.GetTextValue("Mods.TerraTemp.DeathMessage.Cold." + Main.rand.Next(0, 11))
-                    };
+                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Cold." + Main.rand.Next(0, 11)));
+                    //For the Volatile Themometer effect to properly take place
+                    deathReason.SourceItemType = ModContent.ItemType<VolatileThermometer>();
                     player.KillMe(deathReason, 9999, 0);
                 }
             }

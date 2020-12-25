@@ -1,5 +1,8 @@
 ﻿using System;
+using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
+using TerraTemp.Content.Items.Accessories;
 
 namespace TerraTemp.Common.Players {
 
@@ -9,10 +12,12 @@ namespace TerraTemp.Common.Players {
     public class AccessoryPlayer : ModPlayer {
         public bool flameRune;
         public bool frostRune;
+        public bool volatileThermometer;
 
         public override void ResetEffects() {
             flameRune = false;
             frostRune = false;
+            volatileThermometer = false;
         }
 
         public override void PostUpdateEquips() {
@@ -31,6 +36,12 @@ namespace TerraTemp.Common.Players {
                     player.statDefense = (int)Math.Round(player.statDefense * (1f + (0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature))));
                     player.endurance += 0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature);
                 }
+            }
+        }
+
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
+            if (volatileThermometer && damageSource.SourceItemType == ModContent.ItemType<VolatileThermometer>()) {
+                //TODO: Explosion Code
             }
         }
     }
