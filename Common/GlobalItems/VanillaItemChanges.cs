@@ -11,8 +11,10 @@ namespace TerraTemp.Common.GlobalItems {
     /// GlobalItem class that handles all vanilla item changes for the mod.
     /// </summary>
     public class VanillaItemChanges : GlobalItem {
-
         //Vanilla Accessories/Armor, when equipped, give additional changes here
+
+        #region Additional Armor/Accessory Effects
+
         public override void UpdateEquip(Item item, Player player) {
             foreach (ItemChange change in TerraTemp.itemChanges) {
                 if (item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) {
@@ -45,6 +47,12 @@ namespace TerraTemp.Common.GlobalItems {
             }
         }
 
+        #endregion
+
+        //Vanilla Armor can have additional set bonus effects, handled here
+
+        #region Additional Set Bonus Effects
+
         public override string IsArmorSet(Item head, Item body, Item legs) {
             foreach (SetBonusChange change in TerraTemp.setBonusChanges) {
                 if (change.HelmetPieceID == head.type && change.ChestPieceID == body.type && change.LegPieceID == legs.type) {
@@ -69,5 +77,7 @@ namespace TerraTemp.Common.GlobalItems {
                 }
             }
         }
+
+        #endregion
     }
 }
