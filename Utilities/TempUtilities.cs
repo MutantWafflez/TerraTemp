@@ -31,12 +31,12 @@ namespace TerraTemp.Utilities {
         /// If the given localization text has a argument, this is where that can be input.
         /// </param>
         /// <returns> The given string value attached to input key, if it exists. </returns>
-        public static string GetTerraTempTextValue(string key, object arg0 = null) {
+        public static string GetTerraTempTextValue(string key, object arg0 = null, bool addEndingLineBreak = false) {
             if (arg0 != null) {
-                return Language.GetTextValue("Mods.TerraTemp." + key, arg0);
+                return Language.GetTextValue("Mods.TerraTemp." + key, arg0) + (addEndingLineBreak ? "\n" : "");
             }
             else {
-                return Language.GetTextValue("Mods.TerraTemp." + key);
+                return Language.GetTextValue("Mods.TerraTemp." + key) + (addEndingLineBreak ? "\n" : "");
             }
         }
     }

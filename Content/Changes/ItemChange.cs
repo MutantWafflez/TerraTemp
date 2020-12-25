@@ -54,45 +54,45 @@ namespace TerraTemp.Content.Changes {
                 string fullLine = "";
 
                 //Global Change Check
-                if (heatChange == coldChange && heatChange != 0f) {
+                if (HeatComfortabilityChange * -1 == ColdComfortabilityChange && heatChange != 0f) {
                     if (HeatComfortabilityChange > 0f) {
-                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedGlobalComfortability" + "\n", heatChange);
+                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedGlobalComfortability", heatChange, true);
                     }
                     else if (HeatComfortabilityChange < 0f) {
-                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedGlobalComfortability" + "\n", heatChange);
+                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedGlobalComfortability", heatChange, true);
                     }
                 }
                 //Heat/Cold Change Check
                 else {
                     if (HeatComfortabilityChange > 0f) {
-                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedHeatComfortability" + "\n", heatChange);
+                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedHeatComfortability", heatChange, true);
                     }
                     else if (HeatComfortabilityChange < 0f) {
-                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedHeatComfortability" + "\n", heatChange);
+                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedHeatComfortability", heatChange, true);
                     }
 
                     if (ColdComfortabilityChange < 0f) {
-                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedColdComfortability" + "\n", coldChange);
+                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedColdComfortability", coldChange, true);
                     }
                     else if (ColdComfortabilityChange > 0f) {
-                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedColdComfortability" + "\n", coldChange);
+                        fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedColdComfortability", coldChange, true);
                     }
                 }
 
                 //Temperature Resistance Change Check
                 if (TemperatureResistanceChange > 0f) {
-                    fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedTempResistance" + "\n", tempResistChange);
+                    fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedTempResistance", tempResistChange, true);
                 }
                 else if (TemperatureResistanceChange < 0f) {
-                    fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedTempResistance" + "\n", tempResistChange);
+                    fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedTempResistance", tempResistChange, true);
                 }
 
                 //Critical Temperature Change Check
                 if (CriticalTemperatureChange > 0f) {
-                    fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange" + "\n", criticalChange);
+                    fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange", criticalChange, true);
                 }
                 else if (CriticalTemperatureChange < 0f) {
-                    fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange" + "\n", criticalChange);
+                    fullLine += TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange", criticalChange, true);
                 }
 
                 return fullLine == "" ? null : fullLine;

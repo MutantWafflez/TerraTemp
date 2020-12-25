@@ -11,7 +11,5 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
         };
 
         public override float HeatComfortabilityChange => 5f;
-
-        public override string AdditionalTooltip => "5 degree increased heat comfortability range";
     }
 }
