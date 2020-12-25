@@ -23,25 +23,25 @@ namespace TerraTemp {
         #region Loading Overrides
 
         public override void PostSetupContent() {
-            List<Type> tempBiomeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.BaseType == typeof(TempBiome)).ToList();
+            List<Type> tempBiomeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(TempBiome)) && !type.IsAbstract).ToList();
             tempBiomes = new List<TempBiome>();
             foreach (Type type in tempBiomeTypes) {
                 tempBiomes.Add((TempBiome)Activator.CreateInstance(type));
             }
 
-            List<Type> evilTempBiomeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.BaseType == typeof(EvilTempBiome)).ToList();
+            List<Type> evilTempBiomeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(EvilTempBiome)) && !type.IsAbstract).ToList();
             evilTempBiomes = new List<EvilTempBiome>();
             foreach (Type type in evilTempBiomeTypes) {
                 evilTempBiomes.Add((EvilTempBiome)Activator.CreateInstance(type));
             }
 
-            List<Type> itemChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.BaseType == typeof(ItemChange)).ToList();
+            List<Type> itemChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(ItemChange)) && !type.IsAbstract).ToList();
             itemChanges = new List<ItemChange>();
             foreach (Type type in itemChangeTypes) {
                 itemChanges.Add((ItemChange)Activator.CreateInstance(type));
             }
 
-            List<Type> setBonusChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.BaseType == typeof(SetBonusChange)).ToList();
+            List<Type> setBonusChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(SetBonusChange)) && !type.IsAbstract).ToList();
             setBonusChanges = new List<SetBonusChange>();
             foreach (Type type in setBonusChangeTypes) {
                 setBonusChanges.Add((SetBonusChange)Activator.CreateInstance(type));
