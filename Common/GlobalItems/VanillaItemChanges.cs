@@ -32,9 +32,17 @@ namespace TerraTemp.Common.GlobalItems {
             foreach (ItemChange change in TerraTemp.itemChanges) {
                 if ((item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) && change.AdditionalTooltip != null) {
                     TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", change.AdditionalTooltip);
+
+                    //All of these checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
+                    //For example, having lines below the Set Bonus text when that never occurs in Vanilla is something we want to avoid.
                     TooltipLine materialLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Material");
                     TooltipLine setBonusLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "SetBonus");
-                    if (setBonusLine != null) {
+                    TooltipLine buffDurationline = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "BuffTime");
+
+                    if (buffDurationline != null) {
+                        tooltips.Insert(tooltips.IndexOf(buffDurationline), newLine);
+                    }
+                    else if (setBonusLine != null) {
                         tooltips.Insert(tooltips.IndexOf(setBonusLine), newLine);
                     }
                     else if (materialLine != null && materialLine == tooltips.Last()) {
