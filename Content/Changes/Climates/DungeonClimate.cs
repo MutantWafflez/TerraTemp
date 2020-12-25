@@ -2,7 +2,7 @@
 
 namespace TerraTemp.Content.Changes.TempBiomes {
 
-    public class Dungeon : TempBiome {
+    public class DungeonClimate : Climate {
         public override float TemperatureModification => -15f;
 
         public override bool PlayerZoneBool(Player player) => player.ZoneDungeon;

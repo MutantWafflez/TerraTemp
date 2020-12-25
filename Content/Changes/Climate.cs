@@ -5,7 +5,7 @@ namespace TerraTemp.Content.Changes {
     /// <summary>
     /// Class that is instantiated for each biome in the game that affects temperature
     /// </summary>
-    public abstract class TempBiome {
+    public abstract class Climate {
 
         /// <summary>
         /// How much this biome will change the enivronment temperature.
@@ -27,7 +27,7 @@ namespace TerraTemp.Content.Changes {
     /// Class that is instantiated for each evil biome (including the Hallow) that affects
     /// temperature. Exists so the evil biomes can affect temperature on top of the normal biome effects.
     /// </summary>
-    public abstract class EvilTempBiome {
+    public abstract class EvilClimate {
 
         /// <summary>
         /// How much this evil biome will change the enivronment temperature.

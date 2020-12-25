@@ -2,7 +2,7 @@
 
 namespace TerraTemp.Content.Changes.EvilTempBiomes {
 
-    public class Crimson : EvilTempBiome {
+    public class CrimsonClimate : EvilClimate {
         public override float TemperatureModification => 7.5f;
 
         public override float TemperatureResistanceModification => -0.1f;

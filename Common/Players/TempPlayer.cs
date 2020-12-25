@@ -55,13 +55,13 @@ namespace TerraTemp {
         /// <summary>
         /// The player's current biome, influencing the current environment temperature.
         /// </summary>
-        public TempBiome currentBiome;
+        public Climate currentBiome;
 
         /// <summary>
         /// The player's current evil biome, influencing the current environment temperature on top
         /// of the current biome.
         /// </summary>
-        public EvilTempBiome currentEvilBiome;
+        public EvilClimate currentEvilBiome;
 
         public override void ResetEffects() {
             desiredTemperature = NormalTemperature;
@@ -80,26 +80,26 @@ namespace TerraTemp {
 
         public override void PostUpdateMiscEffects() {
             //Updating the player's current biome
-            foreach (TempBiome biome in TerraTemp.tempBiomes) {
+            foreach (Climate biome in TerraTemp.climates) {
                 if (biome.PlayerZoneBool(player)) {
                     currentBiome = biome;
                     break;
                 }
                 //Current biome being null means the player is in Forest, the default biome
-                if (!biome.PlayerZoneBool(player) && biome == TerraTemp.tempBiomes.Last()) {
+                if (!biome.PlayerZoneBool(player) && biome == TerraTemp.climates.Last()) {
                     currentBiome = null;
                     break;
                 }
             }
 
             //Updating the player's current evil biome
-            foreach (EvilTempBiome biome in TerraTemp.evilTempBiomes) {
+            foreach (EvilClimate biome in TerraTemp.evilClimates) {
                 if (biome.EvilZoneBool(player)) {
                     currentEvilBiome = biome;
                     break;
                 }
                 //Current evil biome being null means the player is not in any evil biome, thus no change
-                if (!biome.EvilZoneBool(player) && biome == TerraTemp.evilTempBiomes.Last()) {
+                if (!biome.EvilZoneBool(player) && biome == TerraTemp.evilClimates.Last()) {
                     currentEvilBiome = null;
                     break;
                 }

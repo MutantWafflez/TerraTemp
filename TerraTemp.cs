@@ -12,8 +12,8 @@ using TerraTemp.ID;
 namespace TerraTemp {
 
     public class TerraTemp : Mod {
-        public static List<TempBiome> tempBiomes;
-        public static List<EvilTempBiome> evilTempBiomes;
+        public static List<Climate> climates;
+        public static List<EvilClimate> evilClimates;
 
         public static List<ItemChange> itemChanges;
         public static List<SetBonusChange> setBonusChanges;
@@ -24,16 +24,16 @@ namespace TerraTemp {
         #region Loading Overrides
 
         public override void PostSetupContent() {
-            List<Type> tempBiomeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(TempBiome)) && !type.IsAbstract).ToList();
-            tempBiomes = new List<TempBiome>();
-            foreach (Type type in tempBiomeTypes) {
-                tempBiomes.Add((TempBiome)Activator.CreateInstance(type));
+            List<Type> climateTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(Climate)) && !type.IsAbstract).ToList();
+            climates = new List<Climate>();
+            foreach (Type type in climateTypes) {
+                climates.Add((Climate)Activator.CreateInstance(type));
             }
 
-            List<Type> evilTempBiomeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(EvilTempBiome)) && !type.IsAbstract).ToList();
-            evilTempBiomes = new List<EvilTempBiome>();
-            foreach (Type type in evilTempBiomeTypes) {
-                evilTempBiomes.Add((EvilTempBiome)Activator.CreateInstance(type));
+            List<Type> evilClimateTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(EvilClimate)) && !type.IsAbstract).ToList();
+            evilClimates = new List<EvilClimate>();
+            foreach (Type type in evilClimateTypes) {
+                evilClimates.Add((EvilClimate)Activator.CreateInstance(type));
             }
 
             List<Type> itemChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(ItemChange)) && !type.IsAbstract).ToList();
@@ -56,8 +56,8 @@ namespace TerraTemp {
         }
 
         public override void Unload() {
-            tempBiomes = null;
-            evilTempBiomes = null;
+            climates = null;
+            evilClimates = null;
             itemChanges = null;
             setBonusChanges = null;
             buffChanges = null;

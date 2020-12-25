@@ -2,7 +2,7 @@
 
 namespace TerraTemp.Content.Changes.TempBiomes {
 
-    public class Snow : TempBiome {
+    public class SnowClimate : Climate {
 
         public override float TemperatureModification {
             get {
