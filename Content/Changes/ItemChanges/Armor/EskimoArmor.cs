@@ -35,7 +35,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor {
     }
 
     public class EskimoSetBonus : SetBonusChange {
-        public override int HelmetPieceID => ItemID.EskimoHood;
+
+        public override List<int> HelmetPieceID => new List<int>() {
+            ItemID.EskimoHood
+        };
 
         public override int ChestPieceID => ItemID.EskimoCoat;
 
@@ -47,7 +50,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor {
     }
 
     public class PinkEskimoSetBonus : SetBonusChange {
-        public override int HelmetPieceID => ItemID.PinkEskimoHood;
+
+        public override List<int> HelmetPieceID => new List<int>() {
+            ItemID.PinkEskimoHood
+        };
 
         public override int ChestPieceID => ItemID.PinkEskimoCoat;
 

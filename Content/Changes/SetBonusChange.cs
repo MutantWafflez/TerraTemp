@@ -1,13 +1,15 @@
-﻿using TerraTemp.Utilities;
+﻿using System.Collections.Generic;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes {
 
     public abstract class SetBonusChange {
 
         /// <summary>
-        /// The ID of the helmet piece item of the armor set.
+        /// The ID of the helmet piece(s) item of the armor set. Is a list for armor sets that have
+        /// different head pieces, such as the Hardmode ore armors.
         /// </summary>
-        public virtual int HelmetPieceID => -1;
+        public virtual List<int> HelmetPieceID => new List<int>();
 
         /// <summary>
         /// The ID of the chest piece item of the armor set.

@@ -58,7 +58,7 @@ namespace TerraTemp.Common.GlobalItems {
 
         public override string IsArmorSet(Item head, Item body, Item legs) {
             foreach (SetBonusChange change in TerraTemp.setBonusChanges) {
-                if (change.HelmetPieceID == head.type && change.ChestPieceID == body.type && change.LegPieceID == legs.type) {
+                if (change.HelmetPieceID.Contains(head.type) && change.ChestPieceID == body.type && change.LegPieceID == legs.type) {
                     if (change.ArmorSetName == null) {
                         throw new ArgumentNullException("ArmorSetName in change named " + change.ToString() + " is null, and cannot be null.");
                     }
