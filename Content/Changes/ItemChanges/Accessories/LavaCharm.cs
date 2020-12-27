@@ -4,9 +4,9 @@ using Terraria.ID;
 namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
     public class LavaCharm : ItemChange {
-        public override int AppliedItemID => ItemID.LavaCharm;
 
-        public override List<int> AlternativeIDs => new List<int> {
+        public override List<int> AppliedItemIDs => new List<int> {
+            ItemID.LavaCharm,
             ItemID.LavaWaders
         };
 

@@ -4,9 +4,9 @@ using Terraria.ID;
 namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
     public class Capes : ItemChange {
-        public override int AppliedItemID => ItemID.CrimsonCloak;
 
-        public override List<int> AlternativeIDs => new List<int> {
+        public override List<int> AppliedItemIDs => new List<int> {
+            ItemID.CrimsonCloak,
             ItemID.MysteriousCape,
             ItemID.RedCape,
             ItemID.WinterCape

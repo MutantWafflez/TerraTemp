@@ -6,16 +6,11 @@ namespace TerraTemp.Content.Changes {
     public abstract class ItemChange {
 
         /// <summary>
-        /// The ID of the item to be modified.
+        /// List of Item IDs that this change pertains to. The reason this is a list is for if the
+        /// base item is a material (such as the Lava charm), and its effects are carried over into
+        /// the new accessory (Lava Waders, with the example of the Lava Charm)
         /// </summary>
-        public virtual int AppliedItemID => -1;
-
-        /// <summary>
-        /// List that returns what item's IDs have the given item as a material in any part of the
-        /// crafting tree or is an alternative to the item. For example, for the Lava Charm, this
-        /// would include the Lava Waders, since the Lava Charm is a material in the crafting tree.
-        /// </summary>
-        public virtual List<int> AlternativeIDs => new List<int>();
+        public virtual List<int> AppliedItemIDs => new List<int>();
 
         /// <summary>
         /// By how much this given item will change the player's Heat Comfortability Range.
