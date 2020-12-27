@@ -25,34 +25,37 @@ namespace TerraTemp {
 
         public override void PostSetupContent() {
             List<Type> climateTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(Climate)) && !type.IsAbstract).ToList();
-            climates = new List<Climate>();
             foreach (Type type in climateTypes) {
                 climates.Add((Climate)Activator.CreateInstance(type));
             }
 
             List<Type> evilClimateTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(EvilClimate)) && !type.IsAbstract).ToList();
-            evilClimates = new List<EvilClimate>();
             foreach (Type type in evilClimateTypes) {
                 evilClimates.Add((EvilClimate)Activator.CreateInstance(type));
             }
 
             List<Type> itemChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(ItemChange)) && !type.IsAbstract).ToList();
-            itemChanges = new List<ItemChange>();
             foreach (Type type in itemChangeTypes) {
                 itemChanges.Add((ItemChange)Activator.CreateInstance(type));
             }
 
             List<Type> setBonusChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(SetBonusChange)) && !type.IsAbstract).ToList();
-            setBonusChanges = new List<SetBonusChange>();
             foreach (Type type in setBonusChangeTypes) {
                 setBonusChanges.Add((SetBonusChange)Activator.CreateInstance(type));
             }
 
             List<Type> buffChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(BuffChange)) && !type.IsAbstract).ToList();
-            buffChanges = new List<BuffChange>();
             foreach (Type type in buffChangeTypes) {
                 buffChanges.Add((BuffChange)Activator.CreateInstance(type));
             }
+        }
+
+        public override void Load() {
+            climates = new List<Climate>();
+            evilClimates = new List<EvilClimate>();
+            itemChanges = new List<ItemChange>();
+            setBonusChanges = new List<SetBonusChange>();
+            buffChanges = new List<BuffChange>();
         }
 
         public override void Unload() {
