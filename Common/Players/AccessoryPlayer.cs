@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
+using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Items.Accessories;
+using TerraTemp.Content.Projectiles;
 
 namespace TerraTemp.Common.Players {
 
@@ -40,7 +44,8 @@ namespace TerraTemp.Common.Players {
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
             if (volatileThermometer && damageSource.SourceItemType == ModContent.ItemType<VolatileThermometer>()) {
-                //TODO: Explosion Code
+                Projectile.NewProjectile(player.Center, Vector2.Zero, ModContent.ProjectileType<ThermometerExplosion>(), 1000, 4f, player.whoAmI);
+                Main.PlaySound(SoundID.Item100, player.Center);
             }
         }
     }
