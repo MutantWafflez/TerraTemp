@@ -30,7 +30,7 @@ namespace TerraTemp.Common.GlobalItems {
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             foreach (ItemChange change in TerraTemp.itemChanges) {
-                if ((item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) && change.AdditionalTooltip != null) {
+                if ((item.type == change.AppliedItemID || change.AlternativeIDs.Contains(item.type)) && !item.social && change.AdditionalTooltip != null) {
                     TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", change.AdditionalTooltip);
 
                     //These checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
