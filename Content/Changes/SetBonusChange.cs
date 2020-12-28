@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes {
@@ -52,5 +53,13 @@ namespace TerraTemp.Content.Changes {
         /// line on top of this, use base.AdditionalSetBonusText + "your string here"
         /// </summary>
         public virtual string AdditionalSetBonusText => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange);
+
+        /// <summary>
+        /// If the set bonus has an additional effect on the player, overriding this method can
+        /// assist with whatever change. This hook is called in the UpdateArmorSet() hook in the
+        /// VanillaItemChange GlobalItem.
+        /// </summary>
+        /// <param name="player"> </param>
+        public virtual void AdditionalSetBonusEffect(Player player) { }
     }
 }

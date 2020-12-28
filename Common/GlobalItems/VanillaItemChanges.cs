@@ -77,6 +77,8 @@ namespace TerraTemp.Common.GlobalItems {
                     temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;
                     temperaturePlayer.criticalRangeMaximum += change.CriticalTemperatureChange;
                     player.setBonus += player.setBonus == "" ? change.AdditionalSetBonusText : "\n" + change.AdditionalSetBonusText;
+
+                    change.AdditionalSetBonusEffect(player);
                 }
             }
         }
