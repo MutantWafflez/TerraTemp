@@ -27,9 +27,16 @@ namespace TerraTemp {
         public float currentTemperature;
 
         /// <summary>
-        /// The temperature that the player's body temperature will move towards.
+        /// The base temperature that the body will move towards, affected by biomes and debuffs and
+        /// many other things. Not used for most calculations, see desiredWetTemperature for that.
         /// </summary>
         public float desiredTemperature = NormalTemperature;
+
+        /// <summary>
+        /// The temperature that the player's body temperature will ACTUALLY move towards. This is
+        /// simply desiredTemperature with relative humidity taken into account.
+        /// </summary>
+        public float desiredWetTemperature;
 
         /// <summary>
         /// Value that modifies how fast the player's body temperature will move towards the desired temperature.
@@ -73,6 +80,7 @@ namespace TerraTemp {
 
         public override void ResetEffects() {
             desiredTemperature = NormalTemperature;
+            desiredWetTemperature = desiredTemperature;
             temperatureChangeResist = 0f;
             comfortableHigh = 30f;
             comfortableLow = 10f;
@@ -157,12 +165,14 @@ namespace TerraTemp {
             if (player.lavaWet && player.lavaTime <= 0 && !player.lavaRose && !player.lavaImmune) {
                 desiredTemperature = 1125f;
             }
+
+            desiredWetTemperature = TempUtilities.EnvironmentTemperatureWithHumidity(desiredTemperature, relativeHumidity);
         }
 
         public override void PostUpdate() {
-            //Body temperature will change at a rate equivalent to the difference between the body temperature and desired temperature
+            //Body temperature will change at a rate equivalent to the difference between the body temperature and desired wet temperature
             // multiplied by the player's temperature change resistance.
-            float difference = desiredTemperature - currentTemperature;
+            float difference = desiredWetTemperature - currentTemperature;
             currentTemperature += difference / 60f / 45f * (1f - temperatureChangeResist);
             CheckForTemperatureEffects();
         }
