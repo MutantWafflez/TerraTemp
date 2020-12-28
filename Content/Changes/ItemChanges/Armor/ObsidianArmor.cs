@@ -4,6 +4,33 @@ using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor {
 
+    public class ObsidianHelmet : ItemChange {
+
+        public override List<int> AppliedItemIDs => new List<int> {
+            ItemID.ObsidianHelm
+        };
+
+        public override float HeatComfortabilityChange => 3f;
+    }
+
+    public class ObsidianChestpiece : ItemChange {
+
+        public override List<int> AppliedItemIDs => new List<int> {
+            ItemID.ObsidianShirt
+        };
+
+        public override float HeatComfortabilityChange => 4f;
+    }
+
+    public class ObsidianLegs : ItemChange {
+
+        public override List<int> AppliedItemIDs => new List<int> {
+            ItemID.ObsidianPants
+        };
+
+        public override float HeatComfortabilityChange => 3f;
+    }
+
     public class ObsidianArmor : SetBonusChange {
 
         public override List<int> HelmetPieceID => new List<int> {
