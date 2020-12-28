@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor {
@@ -16,5 +17,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor {
         public override string ArmorSetName => "ObsidianArmor";
 
         public override string AdditionalSetBonusText => "Grants the effect of the Obsidian Rose";
+
+        public override void AdditionalSetBonusEffect(Player player) {
+            player.lavaRose = true;
+        }
     }
 }
