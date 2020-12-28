@@ -62,7 +62,7 @@ namespace TerraTemp.Utilities {
         public static string CreateNewLineBasedOnStats(float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange) {
             float heatChange = Math.Abs(heatComfortabilityChange);
             float coldChange = Math.Abs(coldComfortabilityChange);
-            float tempResistChange = Math.Abs(temperatureResistanceChange);
+            float tempResistChange = Math.Abs(temperatureResistanceChange) * 100f; //Times 100 because its a percentage
             float criticalChange = Math.Abs(criticalRangeChange);
 
             string fullLine = "";
