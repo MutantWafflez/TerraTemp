@@ -18,6 +18,11 @@ namespace TerraTemp.Content.Changes {
         public virtual float TemperatureResistanceModification => 0f;
 
         /// <summary>
+        /// How much this biome will change the humidity of the environment.
+        /// </summary>
+        public virtual float HumidityModification => 0f;
+
+        /// <summary>
         /// Zone bool that relates to this biome.
         /// </summary>
         public virtual bool PlayerZoneBool(Player player) => false;
@@ -38,6 +43,11 @@ namespace TerraTemp.Content.Changes {
         /// How much this evil biome will change the player's temperature resistance.
         /// </summary>
         public virtual float TemperatureResistanceModification => 0f;
+
+        /// <summary>
+        /// How much this evil biome will change the humidity of the environment.
+        /// </summary>
+        public virtual float HumidityModification => 0f;
 
         /// <summary>
         /// Zone bool that relates to this evil biome.

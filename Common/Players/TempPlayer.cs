@@ -47,6 +47,13 @@ namespace TerraTemp {
         public float comfortableLow; //Default 10f
 
         /// <summary>
+        /// The relative humidity of the player (or rather, the environment around them). Increases
+        /// the rate of body temperature increase at higher temperatures, similar to real life
+        /// humditidy's effect on humans. Cannot exceed 100% (1f)
+        /// </summary>
+        public float relativeHumidity; //Default 0f
+
+        /// <summary>
         /// Absolute maximum value above/below the player's comfortable range before the player
         /// dies. For example, if this value is 10 degrees and the comfortable ranges are their
         /// defaults, the player will die at 0 and 40 degrees respectively.
@@ -69,6 +76,7 @@ namespace TerraTemp {
             temperatureChangeResist = 0f;
             comfortableHigh = 30f;
             comfortableLow = 10f;
+            relativeHumidity = 0f;
             criticalRangeMaximum = 10f;
         }
 
@@ -110,11 +118,13 @@ namespace TerraTemp {
             if (currentBiome != null) {
                 desiredTemperature += currentBiome.TemperatureModification;
                 temperatureChangeResist += currentBiome.TemperatureResistanceModification;
+                relativeHumidity += currentBiome.HumidityModification;
             }
             //Change desired temp & temperature resistance depending on the current evil biome, if applicable
             if (currentEvilBiome != null) {
                 desiredTemperature += currentEvilBiome.TemperatureModification;
                 temperatureChangeResist += currentEvilBiome.TemperatureResistanceModification;
+                relativeHumidity += currentEvilBiome.HumidityModification;
             }
 
             //Change desired temp based on what time of day it is and the daily temperature devation
