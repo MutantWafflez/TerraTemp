@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
@@ -158,6 +159,17 @@ namespace TerraTemp {
                 }
             }
 
+            //Simply adding the Daily Humidity Deviation to player values.
+            relativeHumidity += TerraTemp.dailyHumidityDeviation;
+
+            //Generally speaking, when it rains (or about to) it is much more humid by nature of how rain works.
+            //Essentially, clouds reaching a saturated point unto which they cannot hold any more water causes condensation and thus rain;
+            //since Relative Humidity is a measure of how much water vapor is in a given area, it raining must mean there is a lot of water vapor in the
+            //air and furthmore that is is very humid.
+            if (Main.raining & !player.ZoneSkyHeight) {
+                relativeHumidity += 1f;
+            }
+
             //Increase desired temperature if player is adjacent to lava without an obsidian rose or obsidian skin effect
             if (player.adjLava && !player.lavaWet && !player.lavaRose && !player.lavaImmune) {
                 baseDesiredTemperature += 12.5f;
@@ -167,6 +179,9 @@ namespace TerraTemp {
             if (player.lavaWet && player.lavaTime <= 0 && !player.lavaRose && !player.lavaImmune) {
                 baseDesiredTemperature = 1125f;
             }
+
+            //Relative Humidity cannot exceed 100%, since that is impossible in real life and wouldn't make sense in game.
+            relativeHumidity = MathHelper.Clamp(relativeHumidity, 0f, 1f);
 
             //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
             modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, Math.Abs(Main.windSpeed * 100f) * 0.44704f);

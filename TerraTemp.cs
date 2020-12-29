@@ -20,6 +20,7 @@ namespace TerraTemp {
         public static List<BuffChange> buffChanges;
 
         public static float? dailyTemperatureDeviation = 1f;
+        public static float dailyHumidityDeviation = 0f;
 
         #region Loading Overrides
 
@@ -72,19 +73,8 @@ namespace TerraTemp {
         #region Temperature Deviation
 
         public override void MidUpdateDustTime() {
-            if (Main.netMode == NetmodeID.Server) {
-                if (Main.time >= 32400.0 && !Main.dayTime && !Main.gameMenu) {
-                    dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
-                    ModPacket packet = GetPacket();
-                    packet.Write((byte)PacketID.DailyTemperatureDeviation);
-                    packet.Write((float)dailyTemperatureDeviation);
-                    packet.Send();
-                }
-            }
-            else if (Main.netMode == NetmodeID.SinglePlayer) {
-                if (Main.time >= 32400.0 && !Main.dayTime && !Main.gameMenu) {
-                    dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
-                }
+            if (Main.time >= 32400.0 && !Main.dayTime && !Main.gameMenu) {
+                NewDayStarted();
             }
         }
 
@@ -99,6 +89,10 @@ namespace TerraTemp {
                     dailyTemperatureDeviation = reader.ReadSingle();
                     break;
 
+                case PacketID.DailyHumidityDeviation:
+                    dailyHumidityDeviation = reader.ReadSingle();
+                    break;
+
                 default:
                     Logger.Error($"Message of ID type {packetMessage} not found!");
                     break;
@@ -106,5 +100,29 @@ namespace TerraTemp {
         }
 
         #endregion Packet Handling
+
+        #region Custom Methods
+
+        public void NewDayStarted() {
+            if (Main.netMode == NetmodeID.Server) {
+                dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
+                ModPacket packet = GetPacket();
+                packet.Write((byte)PacketID.DailyTemperatureDeviation);
+                packet.Write((float)dailyTemperatureDeviation);
+                packet.Send();
+
+                dailyHumidityDeviation = Main.rand.NextFloat(-0.25f, 0.75f);
+                packet = GetPacket();
+                packet.Write((byte)PacketID.DailyHumidityDeviation);
+                packet.Write(dailyHumidityDeviation);
+                packet.Send();
+            }
+            else if (Main.netMode == NetmodeID.SinglePlayer) {
+                dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
+                dailyHumidityDeviation = Main.rand.NextFloat(-0.25f, 0.75f);
+            }
+        }
+
+        #endregion
     }
 }

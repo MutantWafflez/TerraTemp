@@ -2,5 +2,6 @@
 
     public enum PacketID : byte {
         DailyTemperatureDeviation,
+        DailyHumidityDeviation
     }
 }
