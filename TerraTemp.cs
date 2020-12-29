@@ -111,7 +111,7 @@ namespace TerraTemp {
                 packet.Write((float)dailyTemperatureDeviation);
                 packet.Send();
 
-                dailyHumidityDeviation = Main.rand.NextFloat(-0.25f, 0.75f);
+                dailyHumidityDeviation = Main.rand.NextFloat(-0.1f, 0.75f);
                 packet = GetPacket();
                 packet.Write((byte)PacketID.DailyHumidityDeviation);
                 packet.Write(dailyHumidityDeviation);
@@ -119,7 +119,7 @@ namespace TerraTemp {
             }
             else if (Main.netMode == NetmodeID.SinglePlayer) {
                 dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
-                dailyHumidityDeviation = Main.rand.NextFloat(-0.25f, 0.75f);
+                dailyHumidityDeviation = Main.rand.NextFloat(-0.1f, 0.75f);
             }
         }
 
