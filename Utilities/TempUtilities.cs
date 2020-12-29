@@ -26,6 +26,28 @@ namespace TerraTemp.Utilities {
         }
 
         /// <summary>
+        /// Simple method that expresses the effects that the current status of the clouds has on
+        /// the temperature increase imposed by the sun. For example, if it's noon and Overcast, the
+        /// increase in temperature won't be as potent since the Sun will be "blocked" by clouds for
+        /// the most part.
+        /// </summary>
+        /// <returns> Value from 0f to 1f. </returns>
+        public static float GetCloudEffectsOnSunTemperature() {
+            if (Main.cloudBGActive > 0f) { //Equivalent to "Overcast"
+                return 0.5f;
+            }
+            else if (Main.numClouds > 120) { //Equivalent to "Mostly Cloudy"
+                return 0.75f;
+            }
+            else if (Main.numClouds > 80) { //Equivalent to "Cloudy"
+                return 0.85f;
+            }
+            else { //Equivalent to "Clear" or "Partly Cloudy"
+                return 1f;
+            }
+        }
+
+        /// <summary>
         /// Real life formula that calculates the Apparent temperature at any given time, applying
         /// factors of the environment temperature, relative humidity, and wind speed. https://en.wikipedia.org/wiki/Wind_chill#Australian_apparent_temperature
         /// </summary>

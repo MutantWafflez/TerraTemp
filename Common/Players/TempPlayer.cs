@@ -143,18 +143,18 @@ namespace TerraTemp {
             if (player.ZoneOverworldHeight) {
                 if (Main.dayTime) {
                     if (Main.time <= 27000 /* Noon */) {
-                        baseDesiredTemperature += ((float)Main.time / 60f / 50f) * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature += ((float)Main.time / 60f / 50f * (float)TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
                     }
                     else {
-                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f) * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f * (float)TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
                     }
                 }
                 else {
                     if (Main.time <= 16200 /* Midnight */) {
-                        baseDesiredTemperature -= ((float)Main.time / 60f / 30f) * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature -= (float)Main.time / 60f / 30f * (float)TerraTemp.dailyTemperatureDeviation;
                     }
                     else {
-                        baseDesiredTemperature -= ((32400f - (float)Main.time) / 60f / 30f) * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature -= (32400f - (float)Main.time) / 60f / 30f * (float)TerraTemp.dailyTemperatureDeviation;
                     }
                 }
             }

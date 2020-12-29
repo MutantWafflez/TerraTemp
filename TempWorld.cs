@@ -9,12 +9,14 @@ namespace TerraTemp {
 
         public override TagCompound Save() {
             return new TagCompound {
-                {"temperatureDeviation", TerraTemp.dailyTemperatureDeviation }
+                {"temperatureDeviation", TerraTemp.dailyTemperatureDeviation },
+                {"humidityDeviation", TerraTemp.dailyHumidityDeviation }
             };
         }
 
         public override void Load(TagCompound tag) {
             TerraTemp.dailyTemperatureDeviation = tag.GetFloat("temperatureDeviation");
+            TerraTemp.dailyHumidityDeviation = tag.GetFloat("humidityDeviation");
         }
 
         #endregion I/O
