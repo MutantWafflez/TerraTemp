@@ -26,19 +26,19 @@ namespace TerraTemp.Content.Items {
             float desiredTemp = tempPlayer.desiredTemperature;
             float desiredWetTemp = tempPlayer.desiredWetTemperature;
             float currentTemp = tempPlayer.currentTemperature;
-            float playerLow = tempPlayer.comfortableLow;
-            float playerHigh = tempPlayer.comfortableHigh;
-            float playerCriticalZone = tempPlayer.criticalRangeMaximum;
-            float resistChange = tempPlayer.temperatureChangeResist;
+            float comfortableLow = tempPlayer.comfortableLow;
+            float comfortableHigh = tempPlayer.comfortableHigh;
+            float criticalRangeMaximum = tempPlayer.criticalRangeMaximum;
+            float tempeResistChange = tempPlayer.temperatureChangeResist;
             float relativeHumidity = tempPlayer.relativeHumidity;
 
             TooltipLine currentLine = new TooltipLine(mod,
             "CurrentTemp",
             "Current Body Temperature: " + Math.Round(currentTemp) + "C (" + TempUtilities.CelsiusToFahrenheit(currentTemp, true) + "F)");
-            if ((currentTemp >= playerHigh && currentTemp <= playerHigh + (playerCriticalZone / 2f)) || (currentTemp <= playerLow && currentTemp >= playerLow - (playerCriticalZone / 2f))) {
+            if ((currentTemp >= comfortableHigh && currentTemp <= comfortableHigh + (criticalRangeMaximum / 2f)) || (currentTemp <= comfortableLow && currentTemp >= comfortableLow - (criticalRangeMaximum / 2f))) {
                 currentLine.overrideColor = new Color(255, 155, 0);
             }
-            else if (currentTemp >= playerHigh + (playerCriticalZone / 2f) || currentTemp <= playerLow - (playerCriticalZone / 2f)) {
+            else if (currentTemp >= comfortableHigh + (criticalRangeMaximum / 2f) || currentTemp <= comfortableLow - (criticalRangeMaximum / 2f)) {
                 currentLine.overrideColor = new Color(255, 0, 0);
             }
             tooltips.Add(currentLine);
@@ -60,12 +60,12 @@ namespace TerraTemp.Content.Items {
 
             TooltipLine resistLine = new TooltipLine(mod,
             "ResistChange",
-            "Temperature Change Resistance: " + Math.Round(resistChange * 100f) + "%");
+            "Temperature Change Resistance: " + Math.Round(tempeResistChange * 100f) + "%");
             tooltips.Add(resistLine);
 
             TooltipLine comfortableLine = new TooltipLine(mod,
             "PlayerComfortability",
-            "Comfortable Range: " + Math.Round(playerLow) + "C - " + Math.Round(playerHigh) + "C");
+            "Comfortable Range: " + Math.Round(comfortableLow) + "C - " + Math.Round(comfortableHigh) + "C");
             tooltips.Add(comfortableLine);
         }
 
