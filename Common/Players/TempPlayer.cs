@@ -27,16 +27,17 @@ namespace TerraTemp {
         public float currentTemperature;
 
         /// <summary>
-        /// The base temperature that the body will move towards, affected by biomes and debuffs and
-        /// many other things. Not used for most calculations, see desiredWetTemperature for that.
+        /// Desired temperature that is modified by biomes and debuffs that is further modified by
+        /// humidity and wind chill, if applicable. AKA "Environmental Temperature"
         /// </summary>
-        public float desiredTemperature = NormalTemperature;
+        public float baseDesiredTemperature = NormalTemperature;
 
         /// <summary>
-        /// The temperature that the player's body temperature will ACTUALLY move towards. This is
-        /// simply desiredTemperature with relative humidity taken into account.
+        /// The temperature that the player's body temperature will ACTUALLY move towards. This
+        /// value is modified based on factors outside of buffs/biomes/etc. including humidity and
+        /// wind speed.
         /// </summary>
-        public float desiredWetTemperature;
+        public float modifiedDesiredTemperature;
 
         /// <summary>
         /// Value that modifies how fast the player's body temperature will move towards the desired temperature.
@@ -79,8 +80,8 @@ namespace TerraTemp {
         public EvilClimate currentEvilBiome;
 
         public override void ResetEffects() {
-            desiredTemperature = NormalTemperature;
-            desiredWetTemperature = desiredTemperature;
+            baseDesiredTemperature = NormalTemperature;
+            modifiedDesiredTemperature = baseDesiredTemperature;
             temperatureChangeResist = 0f;
             comfortableHigh = 30f;
             comfortableLow = 10f;
@@ -124,13 +125,13 @@ namespace TerraTemp {
 
             //Change desired temp & temperature resistance depending on the current biome, if applicable
             if (currentBiome != null) {
-                desiredTemperature += currentBiome.TemperatureModification;
+                baseDesiredTemperature += currentBiome.TemperatureModification;
                 temperatureChangeResist += currentBiome.TemperatureResistanceModification;
                 relativeHumidity += currentBiome.HumidityModification;
             }
             //Change desired temp & temperature resistance depending on the current evil biome, if applicable
             if (currentEvilBiome != null) {
-                desiredTemperature += currentEvilBiome.TemperatureModification;
+                baseDesiredTemperature += currentEvilBiome.TemperatureModification;
                 temperatureChangeResist += currentEvilBiome.TemperatureResistanceModification;
                 relativeHumidity += currentEvilBiome.HumidityModification;
             }
@@ -140,39 +141,43 @@ namespace TerraTemp {
             if (player.ZoneOverworldHeight) {
                 if (Main.dayTime) {
                     if (Main.time <= 27000 /* Noon */) {
-                        desiredTemperature += ((float)Main.time / 60f / 50f) * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature += ((float)Main.time / 60f / 50f) * (float)TerraTemp.dailyTemperatureDeviation;
                     }
                     else {
-                        desiredTemperature += ((54000f - (float)Main.time) / 60f / 50f) * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f) * (float)TerraTemp.dailyTemperatureDeviation;
                     }
                 }
                 else {
                     if (Main.time <= 16200 /* Midnight */) {
-                        desiredTemperature -= ((float)Main.time / 60f / 30f) * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature -= ((float)Main.time / 60f / 30f) * (float)TerraTemp.dailyTemperatureDeviation;
                     }
                     else {
-                        desiredTemperature -= ((32400f - (float)Main.time) / 60f / 30f) * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature -= ((32400f - (float)Main.time) / 60f / 30f) * (float)TerraTemp.dailyTemperatureDeviation;
                     }
                 }
             }
 
             //Increase desired temperature if player is adjacent to lava without an obsidian rose or obsidian skin effect
             if (player.adjLava && !player.lavaWet && !player.lavaRose && !player.lavaImmune) {
-                desiredTemperature += 12.5f;
+                baseDesiredTemperature += 12.5f;
             }
 
             //Set desired temperature to the average temperature of lava in the real world if the player enters it without an active lava charm or obsidian rose
             if (player.lavaWet && player.lavaTime <= 0 && !player.lavaRose && !player.lavaImmune) {
-                desiredTemperature = 1125f;
+                baseDesiredTemperature = 1125f;
             }
 
-            desiredWetTemperature = TempUtilities.EnvironmentTemperatureWithHumidity(desiredTemperature, relativeHumidity);
+            //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human being by taking humidity into account.
+            //However, this model being used, the "heat-index" model, only properly calculates the value above 27C, so we will just use a custom made method for when the values are below that.
+            //The reason we need our own formula is that even though it is well known that cold, damp air "feels" colder than cold, dry air, there hasn't been any formula found/created to explain it.
+            //Check out the method below to see what the IRL formula is as well as our custom (and frankly, simpler) formula for colder temperatures
+            modifiedDesiredTemperature = TempUtilities.EnvironmentTemperatureWithHumidity(baseDesiredTemperature, relativeHumidity);
         }
 
         public override void PostUpdate() {
             //Body temperature will change at a rate equivalent to the difference between the body temperature and desired wet temperature
             // multiplied by the player's temperature change resistance.
-            float difference = desiredWetTemperature - currentTemperature;
+            float difference = modifiedDesiredTemperature - currentTemperature;
             currentTemperature += difference / 60f / 45f * (1f - temperatureChangeResist);
             CheckForTemperatureEffects();
         }

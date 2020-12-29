@@ -23,8 +23,8 @@ namespace TerraTemp.Content.Items {
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
             TempPlayer tempPlayer = Main.player[item.owner].GetModPlayer<TempPlayer>();
-            float desiredTemp = tempPlayer.desiredTemperature;
-            float desiredWetTemp = tempPlayer.desiredWetTemperature;
+            float baseDesiredTemp = tempPlayer.baseDesiredTemperature;
+            float modifiedDesiredTemp = tempPlayer.modifiedDesiredTemperature;
             float currentTemp = tempPlayer.currentTemperature;
             float comfortableLow = tempPlayer.comfortableLow;
             float comfortableHigh = tempPlayer.comfortableHigh;
@@ -43,15 +43,15 @@ namespace TerraTemp.Content.Items {
             }
             tooltips.Add(currentLine);
 
-            TooltipLine desiredLine = new TooltipLine(mod,
-            "DesiredTemp",
-            "Environment Temperature: " + Math.Round(desiredTemp) + "C (" + TempUtilities.CelsiusToFahrenheit(desiredTemp, true) + "F)");
-            tooltips.Add(desiredLine);
+            TooltipLine baseDesiredLine = new TooltipLine(mod,
+            "BaseDesiredTemp",
+            "Environment Temperature: " + Math.Round(baseDesiredTemp) + "C (" + TempUtilities.CelsiusToFahrenheit(baseDesiredTemp, true) + "F)");
+            tooltips.Add(baseDesiredLine);
 
-            TooltipLine desiredWetLine = new TooltipLine(mod,
-            "DesiredWetTemp",
-            "Feels Like: " + Math.Round(desiredWetTemp) + "C (" + TempUtilities.CelsiusToFahrenheit(desiredWetTemp, true) + "F)");
-            tooltips.Add(desiredWetLine);
+            TooltipLine moddedDesiredLine = new TooltipLine(mod,
+            "ModifiedDesiredTemp",
+            "Feels Like: " + Math.Round(modifiedDesiredTemp) + "C (" + TempUtilities.CelsiusToFahrenheit(modifiedDesiredTemp, true) + "F)");
+            tooltips.Add(moddedDesiredLine);
 
             TooltipLine humidityLine = new TooltipLine(mod,
             "RelativeHumidity",

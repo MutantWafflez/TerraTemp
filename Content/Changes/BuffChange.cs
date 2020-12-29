@@ -10,7 +10,7 @@ namespace TerraTemp.Content.Changes {
         public virtual int AppliedBuffID => -1;
 
         /// <summary>
-        /// By how much this given buff will change the player's Desired (Environmental) Temperature.
+        /// By how much this given buff will change the player's Base Desired (Environmental) Temperature.
         /// </summary>
         public virtual float DesiredTemperatureChange => 0f;
 

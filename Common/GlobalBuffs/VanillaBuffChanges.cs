@@ -11,7 +11,7 @@ namespace TerraTemp.Common.GlobalBuffs {
             foreach (BuffChange change in TerraTemp.buffChanges) {
                 if (type == change.AppliedBuffID) {
                     TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
-                    temperaturePlayer.desiredTemperature += change.DesiredTemperatureChange;
+                    temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
                     temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
                     temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;

@@ -28,39 +28,48 @@ namespace TerraTemp.Utilities {
         /// <summary>
         /// Calculates what the environment temperature would feel like to someone with humidity
         /// taken into account. Uses the formula to calculate the heat-index with the temperature in
-        /// celsius. https://en.wikipedia.org/wiki/Heat_index#Formula
+        /// celsius above 27C. https://en.wikipedia.org/wiki/Heat_index#Formula For below 27C, we
+        /// use our own custom "formula" since a real life formula hasn't been found/created to
+        /// explain why cold, humid air is colder than cold, dry air.
         /// </summary>
         /// <param name="environmentTemperature"> The environment's temperature, in Celsius. </param>
         /// <param name="relativeHumidity">
         /// The current relative humditidy, as a value from 0f to 1f.
         /// </param>
-        /// <returns> An increased evironment temperature with humidity taken into account. </returns>
+        /// <returns>
+        /// An increased/decreased evironment temperature with humidity taken into account.
+        /// </returns>
         public static float EnvironmentTemperatureWithHumidity(float environmentTemperature, float relativeHumidity) {
-            float constantOne = -8.78469475556f;
-            float constantTwo = 1.61139411f;
-            float constantThree = 2.33854883889f;
-            float constantFour = -0.14611605f;
-            float constantFive = -0.012308094f;
-            float constantSix = -0.0164248277778f;
-            float constantSeven = 0.002211732f;
-            float constantEight = 0.00072546f;
-            float constantNine = -0.000003582f;
+            if (environmentTemperature >= 27f) {
+                float constantOne = -8.78469475556f;
+                float constantTwo = 1.61139411f;
+                float constantThree = 2.33854883889f;
+                float constantFour = -0.14611605f;
+                float constantFive = -0.012308094f;
+                float constantSix = -0.0164248277778f;
+                float constantSeven = 0.002211732f;
+                float constantEight = 0.00072546f;
+                float constantNine = -0.000003582f;
 
-            relativeHumidity *= 100f;
+                relativeHumidity *= 100f;
 
-            float heatIndexedTemperature = 0f;
+                float heatIndexedTemperature = 0f;
 
-            heatIndexedTemperature += constantOne;
-            heatIndexedTemperature += constantTwo * environmentTemperature;
-            heatIndexedTemperature += constantThree * relativeHumidity;
-            heatIndexedTemperature += constantFour * environmentTemperature * relativeHumidity;
-            heatIndexedTemperature += constantFive * (float)Math.Pow(environmentTemperature, 2f);
-            heatIndexedTemperature += constantSix * (float)Math.Pow(relativeHumidity, 2f);
-            heatIndexedTemperature += constantSeven * (float)Math.Pow(environmentTemperature, 2f) * relativeHumidity;
-            heatIndexedTemperature += constantEight * environmentTemperature * (float)Math.Pow(relativeHumidity, 2f);
-            heatIndexedTemperature += constantNine * (float)Math.Pow(environmentTemperature, 2f) * (float)Math.Pow(relativeHumidity, 2f);
+                heatIndexedTemperature += constantOne;
+                heatIndexedTemperature += constantTwo * environmentTemperature;
+                heatIndexedTemperature += constantThree * relativeHumidity;
+                heatIndexedTemperature += constantFour * environmentTemperature * relativeHumidity;
+                heatIndexedTemperature += constantFive * (float)Math.Pow(environmentTemperature, 2f);
+                heatIndexedTemperature += constantSix * (float)Math.Pow(relativeHumidity, 2f);
+                heatIndexedTemperature += constantSeven * (float)Math.Pow(environmentTemperature, 2f) * relativeHumidity;
+                heatIndexedTemperature += constantEight * environmentTemperature * (float)Math.Pow(relativeHumidity, 2f);
+                heatIndexedTemperature += constantNine * (float)Math.Pow(environmentTemperature, 2f) * (float)Math.Pow(relativeHumidity, 2f);
 
-            return heatIndexedTemperature;
+                return heatIndexedTemperature;
+            }
+            else {
+                return environmentTemperature - (8f * relativeHumidity);
+            }
         }
 
         /// <summary>
