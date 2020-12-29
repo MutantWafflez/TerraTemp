@@ -8,12 +8,14 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
 using TerraTemp.ID;
+using TerraTemp.Utilities;
 
 namespace TerraTemp {
 
     public class TerraTemp : Mod {
         public static List<Climate> climates;
         public static List<EvilClimate> evilClimates;
+        public static List<EventChange> eventChanges;
 
         public static List<ItemChange> itemChanges;
         public static List<SetBonusChange> setBonusChanges;
@@ -25,28 +27,27 @@ namespace TerraTemp {
         #region Loading Overrides
 
         public override void PostSetupContent() {
-            List<Type> climateTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(Climate)) && !type.IsAbstract).ToList();
-            foreach (Type type in climateTypes) {
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<Climate>()) {
                 climates.Add((Climate)Activator.CreateInstance(type));
             }
 
-            List<Type> evilClimateTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(EvilClimate)) && !type.IsAbstract).ToList();
-            foreach (Type type in evilClimateTypes) {
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<EvilClimate>()) {
                 evilClimates.Add((EvilClimate)Activator.CreateInstance(type));
             }
 
-            List<Type> itemChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(ItemChange)) && !type.IsAbstract).ToList();
-            foreach (Type type in itemChangeTypes) {
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<EventChange>()) {
+                eventChanges.Add((EventChange)Activator.CreateInstance(type));
+            }
+
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<ItemChange>()) {
                 itemChanges.Add((ItemChange)Activator.CreateInstance(type));
             }
 
-            List<Type> setBonusChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(SetBonusChange)) && !type.IsAbstract).ToList();
-            foreach (Type type in setBonusChangeTypes) {
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<SetBonusChange>()) {
                 setBonusChanges.Add((SetBonusChange)Activator.CreateInstance(type));
             }
 
-            List<Type> buffChangeTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(BuffChange)) && !type.IsAbstract).ToList();
-            foreach (Type type in buffChangeTypes) {
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<BuffChange>()) {
                 buffChanges.Add((BuffChange)Activator.CreateInstance(type));
             }
         }
@@ -54,6 +55,7 @@ namespace TerraTemp {
         public override void Load() {
             climates = new List<Climate>();
             evilClimates = new List<EvilClimate>();
+            eventChanges = new List<EventChange>();
             itemChanges = new List<ItemChange>();
             setBonusChanges = new List<SetBonusChange>();
             buffChanges = new List<BuffChange>();
@@ -62,6 +64,7 @@ namespace TerraTemp {
         public override void Unload() {
             climates = null;
             evilClimates = null;
+            eventChanges = null;
             itemChanges = null;
             setBonusChanges = null;
             buffChanges = null;
