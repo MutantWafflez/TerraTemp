@@ -125,6 +125,18 @@ namespace TerraTemp {
                 }
             }
 
+            //Apply Event changes on player
+            foreach (EventChange change in TerraTemp.eventChanges) {
+                if (change.EventBoolean) {
+                    baseDesiredTemperature += change.DesiredTemperatureChange;
+                    comfortableHigh += change.HeatComfortabilityChange;
+                    comfortableLow += change.ColdComfortabilityChange;
+                    relativeHumidity += change.HumidityChange;
+                    temperatureChangeResist += change.TemperatureResistanceChange;
+                    criticalRangeMaximum += change.CriticalTemperatureChange;
+                }
+            }
+
             //Change desired temp & temperature resistance depending on the current biome, if applicable
             if (currentBiome != null) {
                 baseDesiredTemperature += currentBiome.TemperatureModification;
@@ -141,7 +153,7 @@ namespace TerraTemp {
             //Change desired temp based on what time of day it is and the daily temperature devation
             //Day will be hottest at Noon, the night will be coldest at Midnight
             if (player.ZoneOverworldHeight) {
-                if (Main.dayTime) {
+                if (Main.dayTime && !Main.eclipse) {
                     if (Main.time <= 27000 /* Noon */) {
                         baseDesiredTemperature += ((float)Main.time / 60f / 50f * (float)TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
                     }
@@ -161,14 +173,6 @@ namespace TerraTemp {
 
             //Simply adding the Daily Humidity Deviation to player values.
             relativeHumidity += TerraTemp.dailyHumidityDeviation;
-
-            //Generally speaking, when it rains (or about to) it is much more humid by nature of how rain works.
-            //Essentially, clouds reaching a saturated point unto which they cannot hold any more water causes condensation and thus rain;
-            //since Relative Humidity is a measure of how much water vapor is in a given area, it raining must mean there is a lot of water vapor in the
-            //air and furthmore that is is very humid.
-            if (Main.raining & !player.ZoneSkyHeight) {
-                relativeHumidity += 1f;
-            }
 
             //Increase desired temperature if player is adjacent to lava without an obsidian rose or obsidian skin effect
             if (player.adjLava && !player.lavaWet && !player.lavaRose && !player.lavaImmune) {
