@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -167,11 +168,8 @@ namespace TerraTemp {
                 baseDesiredTemperature = 1125f;
             }
 
-            //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human being by taking humidity into account.
-            //However, this model being used, the "heat-index" model, only properly calculates the value above 27C, so we will just use a custom made method for when the values are below that.
-            //The reason we need our own formula is that even though it is well known that cold, damp air "feels" colder than cold, dry air, there hasn't been any formula found/created to explain it.
-            //Check out the method below to see what the IRL formula is as well as our custom (and frankly, simpler) formula for colder temperatures
-            modifiedDesiredTemperature = TempUtilities.EnvironmentTemperatureWithHumidity(baseDesiredTemperature, relativeHumidity);
+            //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
+            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, Math.Abs(Main.windSpeed * 100f) * 0.44704f);
         }
 
         public override void PostUpdate() {

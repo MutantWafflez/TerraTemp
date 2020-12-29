@@ -26,50 +26,23 @@ namespace TerraTemp.Utilities {
         }
 
         /// <summary>
-        /// Calculates what the environment temperature would feel like to someone with humidity
-        /// taken into account. Uses the formula to calculate the heat-index with the temperature in
-        /// celsius above 27C. https://en.wikipedia.org/wiki/Heat_index#Formula For below 27C, we
-        /// use our own custom "formula" since a real life formula hasn't been found/created to
-        /// explain why cold, humid air is colder than cold, dry air.
+        /// Real life formula that calculates the Apparent temperature at any given time, applying
+        /// factors of the environment temperature, relative humidity, and wind speed. https://en.wikipedia.org/wiki/Wind_chill#Australian_apparent_temperature
         /// </summary>
-        /// <param name="environmentTemperature"> The environment's temperature, in Celsius. </param>
-        /// <param name="relativeHumidity">
-        /// The current relative humditidy, as a value from 0f to 1f.
+        /// <param name="environmentTemperature">
+        /// The base temperature of the environment, in Celsius.
         /// </param>
-        /// <returns>
-        /// An increased/decreased evironment temperature with humidity taken into account.
-        /// </returns>
-        public static float EnvironmentTemperatureWithHumidity(float environmentTemperature, float relativeHumidity) {
-            if (environmentTemperature >= 27f) {
-                float constantOne = -8.78469475556f;
-                float constantTwo = 1.61139411f;
-                float constantThree = 2.33854883889f;
-                float constantFour = -0.14611605f;
-                float constantFive = -0.012308094f;
-                float constantSix = -0.0164248277778f;
-                float constantSeven = 0.002211732f;
-                float constantEight = 0.00072546f;
-                float constantNine = -0.000003582f;
+        /// <param name="relativeHumidity">
+        /// The relative humidity of the environment, a value from 0f to 1f.
+        /// </param>
+        /// <param name="windSpeed"> The wind speed, in m/s. </param>
+        /// <returns> </returns>
+        public static float CalculateApparentTemperature(float environmentTemperature, float relativeHumidity, float windSpeed) {
+            float waterVapourPressure = relativeHumidity * 6.105f * (float)Math.Pow(Math.E, 17.27f * environmentTemperature / (237.7f + environmentTemperature));
 
-                relativeHumidity *= 100f;
+            float apparentTemperature = environmentTemperature + 0.33f * waterVapourPressure - 0.7f * windSpeed - 4f;
 
-                float heatIndexedTemperature = 0f;
-
-                heatIndexedTemperature += constantOne;
-                heatIndexedTemperature += constantTwo * environmentTemperature;
-                heatIndexedTemperature += constantThree * relativeHumidity;
-                heatIndexedTemperature += constantFour * environmentTemperature * relativeHumidity;
-                heatIndexedTemperature += constantFive * (float)Math.Pow(environmentTemperature, 2f);
-                heatIndexedTemperature += constantSix * (float)Math.Pow(relativeHumidity, 2f);
-                heatIndexedTemperature += constantSeven * (float)Math.Pow(environmentTemperature, 2f) * relativeHumidity;
-                heatIndexedTemperature += constantEight * environmentTemperature * (float)Math.Pow(relativeHumidity, 2f);
-                heatIndexedTemperature += constantNine * (float)Math.Pow(environmentTemperature, 2f) * (float)Math.Pow(relativeHumidity, 2f);
-
-                return heatIndexedTemperature;
-            }
-            else {
-                return environmentTemperature - (8f * relativeHumidity);
-            }
+            return apparentTemperature;
         }
 
         /// <summary>
