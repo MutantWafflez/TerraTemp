@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using Terraria.ID;
-using TerraTemp.Utilities;
+using TerraTemp.Content.Changes.BuffChanges.Buffs;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Potions {
 
     public class WarmthPotion : ItemChange {
+        private readonly WarmthBuff warmthChange = new WarmthBuff();
 
         public override List<int> AppliedItemIDs => new List<int> {
             ItemID.WarmthPotion
         };
 
-        public override string AdditionalTooltip => TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedColdComfortability", 8f);
+        public override float ColdComfortabilityChange => warmthChange.ColdComfortabilityChange;
     }
 }
