@@ -28,6 +28,11 @@ namespace TerraTemp.Content.Changes {
         public virtual string ArmorSetName => null;
 
         /// <summary>
+        /// By how much this given set bonus will change the player's Base Desired (Environmental) Temperature.
+        /// </summary>
+        public virtual float DesiredTemperatureChange => 0f;
+
+        /// <summary>
         /// By how much this given set bonus will change the player's Heat Comfortability Range.
         /// </summary>
         public virtual float HeatComfortabilityChange => 0f;
@@ -52,7 +57,7 @@ namespace TerraTemp.Content.Changes {
         /// automatically based on how each property is changed, if you wish to add an additional
         /// line on top of this, use base.AdditionalSetBonusText + "your string here"
         /// </summary>
-        public virtual string AdditionalSetBonusText => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange);
+        public virtual string AdditionalSetBonusText => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
 
         /// <summary>
         /// If the set bonus has an additional effect on the player, overriding this method can

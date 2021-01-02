@@ -25,6 +25,9 @@ DeathMessage.Cold.9=became a snowperson.
 DeathMessage.Cold.10=celebrated Christmas too hard.
 
 #Global Tooltips
+GlobalTooltip.IncreasedDesiredTemp={0} degree increased body temperature
+GlobalTooltip.DecreasedDesiredTemp={0} degree decreased body temperature
+
 GlobalTooltip.IncreasedColdComfortability={0} degree increased cold comfortability range
 GlobalTooltip.DecreasedColdComfortability={0} degree decreased cold comfortability range
 

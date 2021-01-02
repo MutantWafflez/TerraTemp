@@ -13,6 +13,11 @@ namespace TerraTemp.Content.Changes {
         public virtual List<int> AppliedItemIDs => new List<int>();
 
         /// <summary>
+        /// By how much this given item will change the player's Base Desired (Environmental) Temperature.
+        /// </summary>
+        public virtual float DesiredTemperatureChange => 0f;
+
+        /// <summary>
         /// By how much this given item will change the player's Heat Comfortability Range.
         /// </summary>
         public virtual float HeatComfortabilityChange => 0f;
@@ -37,6 +42,6 @@ namespace TerraTemp.Content.Changes {
         /// automatically based on how each property is changed, if you wish to add an additional
         /// line on top of this, use base.AdditionalTooltip + "your string here"
         /// </summary>
-        public virtual string AdditionalTooltip => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange);
+        public virtual string AdditionalTooltip => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
     }
 }

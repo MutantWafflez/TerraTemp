@@ -102,12 +102,17 @@ namespace TerraTemp.Utilities {
         /// <param name="criticalRangeChange">
         /// How much this change will modify the player's critical range.
         /// </param>
+        /// ///
+        /// <param name="desiredTempChange">
+        /// How much this will change the player's desired temperature, AKA the "environment" temperature.
+        /// </param>
         /// <returns> Localized lines(s) that say what the change has done to player's stats. </returns>
-        public static string CreateNewLineBasedOnStats(float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange) {
+        public static string CreateNewLineBasedOnStats(float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange, float desiredTempChange) {
             float heatChange = Math.Abs(heatComfortabilityChange);
             float coldChange = Math.Abs(coldComfortabilityChange);
             float tempResistChange = Math.Abs(temperatureResistanceChange) * 100f; //Times 100 because its a percentage
             float criticalChange = Math.Abs(criticalRangeChange);
+            float desiredChange = Math.Abs(desiredTempChange);
 
             string fullLine = "";
             List<string> stringsToAdd = new List<string>();
@@ -152,6 +157,14 @@ namespace TerraTemp.Utilities {
             }
             else if (criticalRangeChange < 0f) {
                 stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange", criticalChange));
+            }
+
+            //Desired Temperature Change Check
+            if (desiredTempChange > 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedDesiredTemp", desiredChange));
+            }
+            else if (desiredTempChange < 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedDesiredTemp", desiredChange));
             }
 
             if (stringsToAdd.Any()) {
