@@ -20,6 +20,7 @@ namespace TerraTemp.Common.GlobalItems {
             foreach (ItemChange change in TerraTemp.itemChanges) {
                 if (change.AppliedItemIDs.Contains(item.type)) {
                     TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
+                    temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
                     temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
                     temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;
@@ -73,6 +74,7 @@ namespace TerraTemp.Common.GlobalItems {
             foreach (SetBonusChange change in TerraTemp.setBonusChanges) {
                 if (change.ArmorSetName == set) {
                     TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
+                    temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
                     temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
                     temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;
