@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 
-namespace TerraTemp.Content.Changes.ItemChanges.Armor {
+namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class ObsidianHelmet : ItemChange {
 

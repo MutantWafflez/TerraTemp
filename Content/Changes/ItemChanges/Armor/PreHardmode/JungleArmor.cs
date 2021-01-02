@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using TerraTemp.Content.Changes.TempBiomes;
 
-namespace TerraTemp.Content.Changes.ItemChanges.Armor {
+namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class JungleHat : ItemChange {
 
