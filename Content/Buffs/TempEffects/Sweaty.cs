@@ -14,7 +14,6 @@ namespace TerraTemp.Content.Buffs.TempEffects {
         }
 
         public override void Update(Player player, ref int buffIndex) {
-            player.dripping = true;
             player.statLifeMax2 = (int)(player.statLifeMax2 * 0.9f);
             player.statDefense = (int)(player.statDefense * 0.9f);
             player.moveSpeed *= 0.85f;

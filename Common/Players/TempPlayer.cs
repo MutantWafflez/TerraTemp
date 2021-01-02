@@ -203,6 +203,48 @@ namespace TerraTemp {
 
         #endregion Update Overrides
 
+        #region Draw Overrides
+
+        public override void DrawEffects(PlayerDrawInfo drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright) {
+            //Heat visuals
+            if (player.HasBuff(ModContent.BuffType<Sweaty>())) {
+                r = 1f;
+                g = 189f / 255f;
+                b = 189 / 255f;
+
+                if (Main.rand.NextFloat() < 0.15f) {
+                    //Adapted Vanilla Code for Dripping water
+                    bool largerDroplets = Main.rand.NextBool();
+                    Vector2 modifiedPosition = new Vector2(drawInfo.position.X - 2f, drawInfo.position.Y - 2f);
+                    Dust water = Dust.NewDustDirect(modifiedPosition, largerDroplets ? player.width + 8 : player.width + 4, largerDroplets ? player.height + 8 : player.height + 2, 211, 0f, 0f, 50, default, largerDroplets ? 1.1f : 0.8f);
+                    water.alpha += 25 * Main.rand.Next(0, 3);
+                    water.noLight = true;
+                    water.velocity.Y += largerDroplets ? 1f : 0.2f;
+                    water.velocity += player.velocity;
+                    water.velocity *= 0.05f;
+                    Main.playerDrawDust.Add(water.dustIndex);
+                }
+            }
+            if (player.HasBuff(ModContent.BuffType<HeatStroke>())) {
+                r = 1f;
+                g = 150f / 255f;
+                b = 150f / 255f;
+            }
+            //Cold visuals
+            if (player.HasBuff(ModContent.BuffType<Shivering>())) {
+                r = 190f / 255f;
+                g = 1f;
+                b = 1f;
+            }
+            if (player.HasBuff(ModContent.BuffType<Hypothermia>())) {
+                r = 160f / 255f;
+                g = 1f;
+                b = 1f;
+            }
+        }
+
+        #endregion
+
         #region I/O
 
         //Saving/Loading Temperature
