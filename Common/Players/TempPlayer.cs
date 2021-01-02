@@ -186,6 +186,8 @@ namespace TerraTemp {
 
             //Relative Humidity cannot exceed 100%, since that is impossible in real life and wouldn't make sense in game.
             relativeHumidity = MathHelper.Clamp(relativeHumidity, 0f, 1f);
+            //Temperatue Change resistance cannot exceed 100% (due to that causing the value to go backwards), and won't go below -100% for balancing purposes.
+            temperatureChangeResist = MathHelper.Clamp(temperatureChangeResist, -1f, 1f);
 
             //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
             modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, player.ZoneOverworldHeight ? Math.Abs(Main.windSpeed * 100f) * 0.44704f : 0f);
