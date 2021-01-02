@@ -188,7 +188,7 @@ namespace TerraTemp {
             relativeHumidity = MathHelper.Clamp(relativeHumidity, 0f, 1f);
 
             //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
-            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, Math.Abs(Main.windSpeed * 100f) * 0.44704f);
+            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, player.ZoneOverworldHeight ? Math.Abs(Main.windSpeed * 100f) * 0.44704f : 0f);
         }
 
         public override void PostUpdate() {
