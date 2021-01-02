@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
 
@@ -58,7 +59,7 @@ namespace TerraTemp.Common.GlobalItems {
 
         public override string IsArmorSet(Item head, Item body, Item legs) {
             foreach (SetBonusChange change in TerraTemp.setBonusChanges) {
-                if (change.HelmetPieceID.Contains(head.type) && change.ChestPieceID == body.type && change.LegPieceID == legs.type) {
+                if (change.HelmetPieceID.Contains(head.type) && change.ChestPieceID == body.type && (change.LegPieceID == legs.type || (change.LegPieceID == -1 && legs.type == ItemID.None)) /* this check is for the possible armor sets with no leggings */) {
                     if (change.ArmorSetName == null) {
                         throw new ArgumentNullException("ArmorSetName in change named " + change.ToString() + " is null, and cannot be null.");
                     }
