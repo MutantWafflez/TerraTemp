@@ -34,7 +34,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
         public override float ColdComfortabilityChange => -2f;
     }
 
-    public class EskimoSetBonus : SetBonusChange {
+    public class EskimoArmor : SetBonusChange {
 
         public override List<int> HelmetPieceID => new List<int>() {
             ItemID.EskimoHood
@@ -44,12 +44,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int LegPieceID => ItemID.EskimoPants;
 
-        public override string ArmorSetName => "EskimoArmorSet";
-
         public override float CriticalTemperatureChange => 2f;
     }
 
-    public class PinkEskimoSetBonus : SetBonusChange {
+    public class PinkEskimoArmor : SetBonusChange {
 
         public override List<int> HelmetPieceID => new List<int>() {
             ItemID.PinkEskimoHood
@@ -58,8 +56,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
         public override int ChestPieceID => ItemID.PinkEskimoCoat;
 
         public override int LegPieceID => ItemID.PinkEskimoPants;
-
-        public override string ArmorSetName => "PinkEskimoArmorSet";
 
         public override float CriticalTemperatureChange => 2f;
     }

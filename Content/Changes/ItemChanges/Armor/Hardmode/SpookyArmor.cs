@@ -40,8 +40,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override int LegPieceID => ItemID.SpookyLeggings;
 
-        public override string ArmorSetName => "SpookyArmor";
-
         public override float TemperatureResistanceChange => -0.4f;
 
         public override float CriticalTemperatureChange => 10f;

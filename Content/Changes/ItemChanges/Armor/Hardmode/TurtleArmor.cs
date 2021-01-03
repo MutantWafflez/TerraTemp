@@ -47,8 +47,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override int LegPieceID => ItemID.TurtleLeggings;
 
-        public override string ArmorSetName => "TurtleArmor";
-
         public override string AdditionalSetBonusText => "Gain up to 80% increased temperature change resistance as life lowers";
 
         public override void AdditionalSetBonusEffect(Player player) {

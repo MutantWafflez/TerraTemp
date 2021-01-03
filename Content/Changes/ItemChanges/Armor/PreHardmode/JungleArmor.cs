@@ -33,7 +33,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     }
 
     public class JungleArmor : SetBonusChange {
-        private JungleClimate jungleClimateHumidity = new JungleClimate();
+        private readonly JungleClimate jungleClimateHumidity = new JungleClimate();
 
         public override List<int> HelmetPieceID => new List<int> {
             ItemID.JungleHat
@@ -42,8 +42,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
         public override int ChestPieceID => ItemID.JungleShirt;
 
         public override int LegPieceID => ItemID.JunglePants;
-
-        public override string ArmorSetName => "JungleArmor";
 
         public override string AdditionalSetBonusText => "Negates the humidity of the Jungle";
 

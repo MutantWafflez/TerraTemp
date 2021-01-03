@@ -41,8 +41,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int LegPieceID => ItemID.ObsidianPants;
 
-        public override string ArmorSetName => "ObsidianArmor";
-
         public override string AdditionalSetBonusText => "Grants the effect of the Obsidian Rose";
 
         public override void AdditionalSetBonusEffect(Player player) {

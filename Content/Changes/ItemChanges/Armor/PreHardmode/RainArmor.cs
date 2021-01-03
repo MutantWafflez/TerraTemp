@@ -32,8 +32,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int ChestPieceID => ItemID.RainCoat;
 
-        public override string ArmorSetName => "RainArmor";
-
         public override string AdditionalSetBonusText => TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange", rainCriticalRangeChange) + " while raining";
 
         public override void AdditionalSetBonusEffect(Player player) {
