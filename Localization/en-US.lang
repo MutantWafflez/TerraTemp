@@ -58,6 +58,7 @@ ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme h
 
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
 GlobalSetBonus.RainArmor=5 degree increase critical range while raining
+GlobalSetBonus.PumpkinArmor=5 degree increased cold comfortability range while Well Fed
 GlobalSetBonus.AnglerArmor=33% of your fishing power is converted to temperature change resistance
 GlobalSetBonus.CactusArmor=25% decreased heat of the Desert
 GlobalSetBonus.NinjaArmor=25% increased temperature change resistance during the night
