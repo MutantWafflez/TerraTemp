@@ -26,7 +26,7 @@ namespace TerraTemp.Content.Changes {
         /// Name of the armor set so the Global Item can identify it properly and apply the effects.
         /// Defaults to the class name.
         /// </summary>
-        public virtual string ArmorSetName => GetType().Name;
+        public string ArmorSetName => GetType().Name;
 
         /// <summary>
         /// By how much this given set bonus will change the player's Base Desired (Environmental) Temperature.
