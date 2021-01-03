@@ -33,7 +33,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (Main.raining) {
-                player.GetModPlayer<TempPlayer>().criticalRangeMaximum += 5f;
+                player.GetTempPlayer().criticalRangeMaximum += 5f;
             }
         }
     }

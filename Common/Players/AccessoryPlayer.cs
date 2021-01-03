@@ -6,6 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Items.Accessories;
 using TerraTemp.Content.Projectiles;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Common.Players {
 
@@ -24,7 +25,7 @@ namespace TerraTemp.Common.Players {
         }
 
         public override void PostUpdateEquips() {
-            TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
+            TempPlayer temperaturePlayer = player.GetTempPlayer();
             if (flameRune) {
                 if (temperaturePlayer.currentTemperature > TempPlayer.NormalTemperature) {
                     player.allDamageMult += 0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature);

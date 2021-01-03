@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -51,7 +52,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.statMana < player.statManaMax2) {
-                player.GetModPlayer<TempPlayer>().temperatureChangeResist += 0.8f * (1f - ((float)player.statMana / (float)player.statManaMax2));
+                player.GetTempPlayer().temperatureChangeResist += 0.8f * (1f - ((float)player.statMana / (float)player.statManaMax2));
             }
         }
     }

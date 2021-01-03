@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Common.GlobalBuffs {
 
@@ -10,7 +11,7 @@ namespace TerraTemp.Common.GlobalBuffs {
         public override void Update(int type, Player player, ref int buffIndex) {
             foreach (BuffChange change in TerraTemp.buffChanges) {
                 if (type == change.AppliedBuffID) {
-                    TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
+                    TempPlayer temperaturePlayer = player.GetTempPlayer();
                     temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
                     temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;

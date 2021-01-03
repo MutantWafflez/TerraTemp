@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -46,7 +47,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int LegPieceID => ItemID.ShroomiteLeggings;
 
         public override void AdditionalSetBonusEffect(Player player) {
-            player.GetModPlayer<TempPlayer>().temperatureChangeResist += 0.8f * (1f - player.stealth);
+            player.GetTempPlayer().temperatureChangeResist += 0.8f * (1f - player.stealth);
         }
     }
 }

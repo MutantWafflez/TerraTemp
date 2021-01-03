@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using TerraTemp.Content.Changes.TempBiomes;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
@@ -45,7 +46,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneSkyHeight) {
-                player.GetModPlayer<TempPlayer>().baseDesiredTemperature -= spaceColdChange.TemperatureModification;
+                player.GetTempPlayer().baseDesiredTemperature -= spaceColdChange.TemperatureModification;
             }
         }
     }

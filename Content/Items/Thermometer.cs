@@ -22,7 +22,7 @@ namespace TerraTemp.Content.Items {
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            TempPlayer tempPlayer = Main.player[item.owner].GetModPlayer<TempPlayer>();
+            TempPlayer tempPlayer = Main.player[item.owner].GetTempPlayer();
             float baseDesiredTemp = tempPlayer.baseDesiredTemperature;
             float modifiedDesiredTemp = tempPlayer.modifiedDesiredTemperature;
             float currentTemp = tempPlayer.currentTemperature;

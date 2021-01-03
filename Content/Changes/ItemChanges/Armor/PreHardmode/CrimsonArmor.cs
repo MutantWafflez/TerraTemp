@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using TerraTemp.Content.Changes.EvilTempBiomes;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
@@ -45,7 +46,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneCrimson) {
-                player.GetModPlayer<TempPlayer>().relativeHumidity -= crimsonHumidityChange.HumidityModification;
+                player.GetTempPlayer().relativeHumidity -= crimsonHumidityChange.HumidityModification;
             }
         }
     }

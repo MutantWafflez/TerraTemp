@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using TerraTemp.Content.Changes.TempBiomes;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
@@ -45,7 +46,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneJungle) {
-                player.GetModPlayer<TempPlayer>().relativeHumidity -= jungleClimateHumidity.HumidityModification;
+                player.GetTempPlayer().relativeHumidity -= jungleClimateHumidity.HumidityModification;
             }
         }
     }

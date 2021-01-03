@@ -7,8 +7,16 @@ using Terraria.Localization;
 
 namespace TerraTemp.Utilities {
 
-    public class TempUtilities {
+    public static class TempUtilities {
 
+        #region Calculation Methods
+
+        /// <summary>
+        /// Converted a Celsius Temperature to Fahrenheit.
+        /// </summary>
+        /// <param name="Celsius"> Temperatue value, in celsius. </param>
+        /// <param name="Round"> Whether or not to round the final value. </param>
+        /// <returns> </returns>
         public static float CelsiusToFahrenheit(float Celsius, bool Round = false) {
             if (!Round) {
                 return (Celsius * (9f / 5f)) + 32f;
@@ -18,6 +26,12 @@ namespace TerraTemp.Utilities {
             }
         }
 
+        /// <summary>
+        /// Converted a Celsius Temperature to Fahrenheit.
+        /// </summary>
+        /// <param name="Celsius"> Temperatue value, in celsius. </param>
+        /// <param name="Round"> Whether or not to round the final value. </param>
+        /// <returns> </returns>
         public static float CelsiusToFahrenheit(double Celsius, bool Round = false) {
             if (!Round) {
                 return (float)(Celsius * (9f / 5f)) + 32f;
@@ -68,6 +82,10 @@ namespace TerraTemp.Utilities {
 
             return apparentTemperature;
         }
+
+        #endregion
+
+        #region Localization Methods
 
         /// <summary>
         /// Shorthand method that will get the Localization text for the given key in the TerraTemp mod.
@@ -176,6 +194,19 @@ namespace TerraTemp.Utilities {
             return fullLine == "" ? null : fullLine;
         }
 
+        #endregion
+
+        #region Extension Methods
+
+        /// <summary>
+        /// Shorthand method that returns the given player's TempPlayer ModPlayer.
+        /// </summary>
+        public static TempPlayer GetTempPlayer(this Player player) => player.GetModPlayer<TempPlayer>();
+
+        #endregion
+
+        #region Miscellaneous Methods
+
         /// <summary>
         /// Returns a List of Types that aren't abstract that extend the class T.
         /// </summary>
@@ -183,5 +214,7 @@ namespace TerraTemp.Utilities {
         public static List<Type> GetAllChildrenOfClass<T>() {
             return Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(T)) && !type.IsAbstract).ToList();
         }
+
+        #endregion
     }
 }

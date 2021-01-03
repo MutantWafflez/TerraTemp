@@ -47,7 +47,7 @@ namespace TerraTemp.Content.Items {
         }
 
         public override void UpdateEquip(Player player) {
-            TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
+            TempPlayer temperaturePlayer = player.GetTempPlayer();
             temperaturePlayer.baseDesiredTemperature += DesiredTemperatureChange;
             temperaturePlayer.comfortableHigh += HeatComfortabilityChange;
             temperaturePlayer.comfortableLow += ColdComfortabilityChange;

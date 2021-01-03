@@ -13,7 +13,7 @@ namespace TerraTemp.Content.Buffs.PotionEffects {
         }
 
         public override void Update(Player player, ref int buffIndex) {
-            player.GetModPlayer<TempPlayer>().comfortableHigh += heatComfortabilityIncrease;
+            player.GetTempPlayer().comfortableHigh += heatComfortabilityIncrease;
         }
     }
 }

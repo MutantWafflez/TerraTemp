@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Common.GlobalItems {
 
@@ -19,7 +20,7 @@ namespace TerraTemp.Common.GlobalItems {
         public override void UpdateEquip(Item item, Player player) {
             foreach (ItemChange change in TerraTemp.itemChanges) {
                 if (change.AppliedItemIDs.Contains(item.type)) {
-                    TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
+                    TempPlayer temperaturePlayer = player.GetTempPlayer();
                     temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
                     temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
@@ -73,7 +74,7 @@ namespace TerraTemp.Common.GlobalItems {
         public override void UpdateArmorSet(Player player, string set) {
             foreach (SetBonusChange change in TerraTemp.setBonusChanges) {
                 if (change.ArmorSetName == set) {
-                    TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
+                    TempPlayer temperaturePlayer = player.GetTempPlayer();
                     temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
                     temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
