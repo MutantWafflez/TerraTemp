@@ -1,5 +1,4 @@
 displayName = TerraTemp
 author = MutantWafflez
 version = 0.1
-hideCode = true
 buildIgnore = *.csproj, *.sln, *.user, obj\*, bin\*, .vs\*, .git\*, *.gitignore, LICENSE, README.md
