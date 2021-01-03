@@ -7,11 +7,6 @@ namespace TerraTemp.Content.Items.Accessories {
 
     public class VolatileThermometer : ModItem {
 
-        public override void SetStaticDefaults() {
-            DisplayName.SetDefault("Volatile Thermometer");
-            Tooltip.SetDefault("Relases a large explosion from either extreme heat or cold upon death");
-        }
-
         public override void SetDefaults() {
             item.width = 30;
             item.height = 40;

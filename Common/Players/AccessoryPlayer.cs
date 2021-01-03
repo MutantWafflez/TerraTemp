@@ -26,7 +26,6 @@ namespace TerraTemp.Common.Players {
         public override void PostUpdateEquips() {
             TempPlayer temperaturePlayer = player.GetModPlayer<TempPlayer>();
             if (flameRune) {
-                temperaturePlayer.comfortableLow += 5f;
                 if (temperaturePlayer.currentTemperature > TempPlayer.NormalTemperature) {
                     player.allDamageMult += 0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature);
                     player.moveSpeed *= 1 + (0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature));
@@ -34,7 +33,6 @@ namespace TerraTemp.Common.Players {
             }
 
             if (frostRune) {
-                temperaturePlayer.comfortableHigh -= 5f;
                 if (temperaturePlayer.currentTemperature < TempPlayer.NormalTemperature) {
                     player.statDefense = (int)Math.Round(player.statDefense * (1f + (0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature))));
                     player.endurance += 0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature);

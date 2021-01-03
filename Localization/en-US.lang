@@ -42,3 +42,16 @@ GlobalTooltip.DecreasedTempResistance={0}% decreased temperature change resistan
 
 GlobalTooltip.IncreasedCriticalRange={0} degree increased critical range
 GlobalTooltip.DecreasedCriticalRange={0} degree decreased critical range
+
+#TerraTemp Accessory Names/Tooltips
+ItemName.FlameRune=Flame Rune
+ItemTooltip.FlameRune=2% increased damage and movement speed for each degree above normal body temperature
+
+ItemName.FrostRune=Frost Rune
+ItemTooltip.FrostRune=2% increased defense and damage reduction for each degree below normal body temperature
+
+ItemName.HeterostaticRune=Heterostatic Rune
+ItemTooltip.HeterostaticRune=2% increased damage and movement speed for each degree above normal body temperature\n2% increased defense and damage reduction for each degree below normal body temperature
+
+ItemName.VolatileThermometer=Volatile Thermometer
+ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme heat or cold upon death

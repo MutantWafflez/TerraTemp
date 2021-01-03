@@ -2,17 +2,11 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Common.Players;
-using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Items.Accessories {
 
-    public class FlameRune : ModItem {
-
-        public override void SetStaticDefaults() {
-            DisplayName.SetDefault("Flame Rune");
-            Tooltip.SetDefault("2% increased damage and movement speed for each degree above normal body temperature"
-                + "\n" + TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedColdComfortability", 5));
-        }
+    public class FlameRune : TempEquipment {
+        public override float ColdComfortabilityChange => 5f;
 
         public override void SetDefaults() {
             item.accessory = true;

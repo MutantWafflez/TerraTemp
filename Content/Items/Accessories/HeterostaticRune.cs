@@ -2,18 +2,13 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Common.Players;
-using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Items.Accessories {
 
-    public class HeterostaticRune : ModItem {
+    public class HeterostaticRune : TempEquipment {
+        public override float HeatComfortabilityChange => -5f;
 
-        public override void SetStaticDefaults() {
-            DisplayName.SetDefault("Heterostatic Rune");
-            Tooltip.SetDefault("2% increased damage and movement speed for each degree above normal body temperature"
-                + "\n2% increased defense and damage reduction for each degree below normal body temperature"
-                + "\n" + TempUtilities.GetTerraTempTextValue("GlobalTooltip.DecreasedGlobalComfortability", 5));
-        }
+        public override float ColdComfortabilityChange => 5f;
 
         public override void SetDefaults() {
             item.accessory = true;
