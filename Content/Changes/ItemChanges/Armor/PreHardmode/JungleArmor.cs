@@ -9,7 +9,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class JungleHat : ItemChange {
 
         public override List<int> AppliedItemIDs => new List<int> {
-            ItemID.JungleHat
+            ItemID.JungleHat,
+            ItemID.AncientCobaltHelmet
         };
 
         public override float HeatComfortabilityChange => 1f;
@@ -18,7 +19,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class JungleShirt : ItemChange {
 
         public override List<int> AppliedItemIDs => new List<int> {
-            ItemID.JungleShirt
+            ItemID.JungleShirt,
+            ItemID.AncientCobaltBreastplate
         };
 
         public override float HeatComfortabilityChange => 3f;
@@ -27,7 +29,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class JunglePants : ItemChange {
 
         public override List<int> AppliedItemIDs => new List<int> {
-            ItemID.JunglePants
+            ItemID.JunglePants,
+            ItemID.AncientCobaltLeggings
         };
 
         public override float HeatComfortabilityChange => 1f;
@@ -43,6 +46,24 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
         public override int ChestPieceID => ItemID.JungleShirt;
 
         public override int LegPieceID => ItemID.JunglePants;
+
+        public override void AdditionalSetBonusEffect(Player player) {
+            if (player.ZoneJungle) {
+                player.GetTempPlayer().relativeHumidity -= jungleClimateHumidity.HumidityModification;
+            }
+        }
+    }
+
+    public class AncientCobaltArmor : SetBonusChange {
+        private readonly JungleClimate jungleClimateHumidity = new JungleClimate();
+
+        public override List<int> HelmetPieceID => new List<int> {
+            ItemID.AncientCobaltHelmet
+        };
+
+        public override int ChestPieceID => ItemID.AncientCobaltBreastplate;
+
+        public override int LegPieceID => ItemID.AncientCobaltLeggings;
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneJungle) {

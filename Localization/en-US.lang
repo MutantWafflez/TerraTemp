@@ -63,6 +63,7 @@ GlobalSetBonus.ShadowArmor=Negates the temperature change resistance of the Corr
 GlobalSetBonus.AncientShadowArmor={$Mods.TerraTemp.GlobalSetBonus.ShadowArmor}
 GlobalSetBonus.CrimsonArmor=Negates the humidity of the Crimson
 GlobalSetBonus.JungleArmor=Negates the humidity of the Jungle
+GlobalSetBonus.AncientCobaltArmor={$Mods.TerraTemp.GlobalSetBonus.JungleArmor}
 GlobalSetBonus.MeteorArmor=Negates the cold of Space
 
 #Unique Vanilla Set Bonus Tooltips (Hardmode)
