@@ -58,6 +58,7 @@ ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme h
 
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
 GlobalSetBonus.RainArmor=5 degree increase critical range while raining
+GlobalSetBonus.CactusArmor=25% decreased heat of the Desert
 GlobalSetBonus.FossilArmor=Negates the heat of the Desert
 GlobalSetBonus.BeeArmor=50% increased temperature change resistance while under the effects of the Honey buff
 GlobalSetBonus.ObsidianArmor=Grants the effect of the Obsidian Rose
