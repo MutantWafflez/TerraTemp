@@ -58,20 +58,20 @@ ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme h
 
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
 GlobalSetBonus.RainArmor=5 degree increase critical range while raining
-GlobalSetBonus.PumpkinArmor=5 degree increased cold comfortability range while Well Fed
 GlobalSetBonus.AnglerArmor=33% of your fishing power is converted to temperature change resistance
 GlobalSetBonus.CactusArmor=25% decreased heat of the Desert
+GlobalSetBonus.PumpkinArmor=5 degree increased cold comfortability range while Well Fed
 GlobalSetBonus.NinjaArmor=25% increased temperature change resistance during the night
 GlobalSetBonus.FossilArmor=Negates the heat of the Desert
 GlobalSetBonus.BeeArmor=50% increased temperature change resistance while under the effects of the Honey buff
 GlobalSetBonus.ObsidianArmor=Grants the effect of the Obsidian Rose
 GlobalSetBonus.GladiatorArmor=Gain up to 34% increased temperature change resistance as life lowers
+GlobalSetBonus.MeteorArmor=Negates the cold of Space
+GlobalSetBonus.JungleArmor=Negates the humidity of the Jungle
+GlobalSetBonus.AncientCobaltArmor={$Mods.TerraTemp.GlobalSetBonus.JungleArmor}
 GlobalSetBonus.ShadowArmor=Negates the temperature change resistance of the Corruption
 GlobalSetBonus.AncientShadowArmor={$Mods.TerraTemp.GlobalSetBonus.ShadowArmor}
 GlobalSetBonus.CrimsonArmor=Negates the humidity of the Crimson
-GlobalSetBonus.JungleArmor=Negates the humidity of the Jungle
-GlobalSetBonus.AncientCobaltArmor={$Mods.TerraTemp.GlobalSetBonus.JungleArmor}
-GlobalSetBonus.MeteorArmor=Negates the cold of Space
 
 #Unique Vanilla Set Bonus Tooltips (Hardmode)
 GlobalSetBonus.ShroomiteArmor=80% increased temperature change resistance while in stealth
