@@ -65,6 +65,7 @@ GlobalSetBonus.NinjaArmor=25% increased temperature change resistance during the
 GlobalSetBonus.FossilArmor=Negates the heat of the Desert
 GlobalSetBonus.BeeArmor=50% increased temperature change resistance while under the effects of the Honey buff
 GlobalSetBonus.ObsidianArmor=Grants the effect of the Obsidian Rose
+GlobalSetBonus.GladiatorArmor=Gain up to 34% increased temperature change resistance as life lowers
 GlobalSetBonus.ShadowArmor=Negates the temperature change resistance of the Corruption
 GlobalSetBonus.AncientShadowArmor={$Mods.TerraTemp.GlobalSetBonus.ShadowArmor}
 GlobalSetBonus.CrimsonArmor=Negates the humidity of the Crimson
