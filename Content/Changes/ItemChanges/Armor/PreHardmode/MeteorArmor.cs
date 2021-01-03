@@ -43,8 +43,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int LegPieceID => ItemID.MeteorLeggings;
 
-        public override string AdditionalSetBonusText => "Negates the cold of Space";
-
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneSkyHeight) {
                 player.GetModPlayer<TempPlayer>().baseDesiredTemperature -= spaceColdChange.TemperatureModification;

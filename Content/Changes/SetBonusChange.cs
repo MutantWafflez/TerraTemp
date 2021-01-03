@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Terraria;
+using Terraria.Localization;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes {
@@ -58,7 +59,23 @@ namespace TerraTemp.Content.Changes {
         /// automatically based on how each property is changed, if you wish to add an additional
         /// line on top of this, use base.AdditionalSetBonusText + "your string here"
         /// </summary>
-        public virtual string AdditionalSetBonusText => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
+        public virtual string AdditionalSetBonusText {
+            get {
+                string statLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
+                if (statLine != null) {
+                    if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
+                        return statLine + "\n" + TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName);
+                    }
+                    return statLine;
+                }
+                else {
+                    if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
+                        return TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName);
+                    }
+                    return null;
+                }
+            }
+        }
 
         /// <summary>
         /// If the set bonus has an additional effect on the player, overriding this method can

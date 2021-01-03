@@ -55,3 +55,8 @@ ItemTooltip.HeterostaticRune=2% increased damage and movement speed for each deg
 
 ItemName.VolatileThermometer=Volatile Thermometer
 ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme heat or cold upon death
+
+#Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
+GlobalSetBonus.MeteorArmor=Negates the cold of Space
+
+#Unique Vanilla Set Bonus Tooltips (Hardmode)
