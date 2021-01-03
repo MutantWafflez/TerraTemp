@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {

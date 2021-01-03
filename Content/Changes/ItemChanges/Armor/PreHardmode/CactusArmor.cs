@@ -1,7 +1,7 @@
-﻿using Terraria.ID;
-using System.Collections.Generic;
-using TerraTemp.Content.Changes.TempBiomes;
+﻿using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
+using TerraTemp.Content.Changes.TempBiomes;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
