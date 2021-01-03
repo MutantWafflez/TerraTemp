@@ -56,8 +56,9 @@ namespace TerraTemp.Content.Changes {
 
         /// <summary>
         /// Additional tooltip line(s) to be added to the end of the set bonus text. Done
-        /// automatically based on how each property is changed, if you wish to add an additional
-        /// line on top of this, use base.AdditionalSetBonusText + "your string here"
+        /// automatically based on how each property is changed. If there is a unique effect other
+        /// than changing stats, unless you want it to not be localized, the tooltip is
+        /// automatically localized if there is a key for it.
         /// </summary>
         public virtual string AdditionalSetBonusText {
             get {

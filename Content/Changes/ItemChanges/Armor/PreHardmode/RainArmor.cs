@@ -24,7 +24,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     }
 
     public class RainArmor : SetBonusChange {
-        private float rainCriticalRangeChange = 5f;
 
         public override List<int> HelmetPieceID => new List<int>() {
             ItemID.RainHat
@@ -32,11 +31,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int ChestPieceID => ItemID.RainCoat;
 
-        public override string AdditionalSetBonusText => TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange", rainCriticalRangeChange) + " while raining";
-
         public override void AdditionalSetBonusEffect(Player player) {
             if (Main.raining) {
-                player.GetModPlayer<TempPlayer>().criticalRangeMaximum += rainCriticalRangeChange;
+                player.GetModPlayer<TempPlayer>().criticalRangeMaximum += 5f;
             }
         }
     }

@@ -43,8 +43,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int LegPieceID => ItemID.CrimsonGreaves;
 
-        public override string AdditionalSetBonusText => "Negates the humidity of the Crimson";
-
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneCrimson) {
                 player.GetModPlayer<TempPlayer>().relativeHumidity -= crimsonHumidityChange.HumidityModification;

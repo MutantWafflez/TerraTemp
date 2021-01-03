@@ -41,7 +41,5 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
         public override int LegPieceID => ItemID.MoltenGreaves;
 
         public override float ColdComfortabilityChange => -8f;
-
-        public override string AdditionalSetBonusText => base.AdditionalSetBonusText;
     }
 }

@@ -43,8 +43,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int LegPieceID => ItemID.JunglePants;
 
-        public override string AdditionalSetBonusText => "Negates the humidity of the Jungle";
-
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneJungle) {
                 player.GetModPlayer<TempPlayer>().relativeHumidity -= jungleClimateHumidity.HumidityModification;

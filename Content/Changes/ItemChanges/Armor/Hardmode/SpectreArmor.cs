@@ -49,8 +49,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override int LegPieceID => ItemID.SpectrePants;
 
-        public override string AdditionalSetBonusText => "Gain up to 80% increased temperature change resistance as mana decreases";
-
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.statMana < player.statManaMax2) {
                 player.GetModPlayer<TempPlayer>().temperatureChangeResist += 0.8f * (1f - ((float)player.statMana / (float)player.statManaMax2));

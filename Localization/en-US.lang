@@ -57,6 +57,13 @@ ItemName.VolatileThermometer=Volatile Thermometer
 ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme heat or cold upon death
 
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
+GlobalSetBonus.RainArmor=5 degree increase critical range while raining
+GlobalSetBonus.ObsidianArmor=Grants the effect of the Obsidian Rose
+GlobalSetBonus.CrimsonArmor=Negates the humidity of the Crimson
+GlobalSetBonus.JungleArmor=Negates the humidity of the Jungle
 GlobalSetBonus.MeteorArmor=Negates the cold of Space
 
 #Unique Vanilla Set Bonus Tooltips (Hardmode)
+GlobalSetBonus.ShroomiteArmor=80% increased temperature change resistance while in stealth
+GlobalSetBonus.SpectreArmor=Gain up to 80% increased temperature change resistance as mana decreases
+GlobalSetBonus.TurtleArmor=Gain up to 80% increased temperature change resistance as life lowers
