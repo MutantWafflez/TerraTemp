@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using TerraTemp.Utilities;
+using TerraTemp.Common.Players;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -49,6 +50,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int LegPieceID => ItemID.SpiderGreaves;
 
         public override void AdditionalSetBonusEffect(Player player) {
+            player.GetModPlayer<SetBonusPlayer>().spiderSetBonus = true;
         }
     }
 }
