@@ -1,5 +1,7 @@
 ﻿using Terraria.ID;
 using System.Collections.Generic;
+using Terraria;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -8,6 +10,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override List<int> AppliedItemIDs => new List<int>() {
             ItemID.SpiderMask
         };
+
+        public override float HeatComfortabilityChange => 2f;
+
+        public override float ColdComfortabilityChange => 1f;
     }
 
     public class SpiderChestplate : ItemChange {
@@ -15,6 +21,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override List<int> AppliedItemIDs => new List<int>() {
             ItemID.SpiderBreastplate
         };
+
+        public override float HeatComfortabilityChange => 2f;
+
+        public override float ColdComfortabilityChange => 2f;
     }
 
     public class SpiderLeggings : ItemChange {
@@ -22,6 +32,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override List<int> AppliedItemIDs => new List<int>() {
             ItemID.SpiderGreaves
         };
+
+        public override float HeatComfortabilityChange => 2f;
+
+        public override float ColdComfortabilityChange => 1f;
     }
 
     public class SpiderArmor : SetBonusChange {
@@ -33,5 +47,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int ChestPieceID => ItemID.SpiderBreastplate;
 
         public override int LegPieceID => ItemID.SpiderGreaves;
+
+        public override void AdditionalSetBonusEffect(Player player) {
+        }
     }
 }
