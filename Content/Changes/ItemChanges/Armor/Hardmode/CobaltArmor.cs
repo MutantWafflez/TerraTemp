@@ -1,5 +1,7 @@
 ﻿using Terraria.ID;
 using System.Collections.Generic;
+using Terraria;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -10,6 +12,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.CobaltMask,
             ItemID.CobaltHat
         };
+
+        public override float CriticalTemperatureChange => 1.5f;
+
+        public override float ColdComfortabilityChange => 2f;
     }
 
     public class CobaltChestplate : ItemChange {
@@ -17,6 +23,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override List<int> AppliedItemIDs => new List<int>() {
             ItemID.CobaltBreastplate
         };
+
+        public override float CriticalTemperatureChange => 1.5f;
+
+        public override float ColdComfortabilityChange => 2f;
     }
 
     public class CobaltLeggings : ItemChange {
@@ -24,6 +34,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override List<int> AppliedItemIDs => new List<int>() {
             ItemID.CobaltLeggings
         };
+
+        public override float CriticalTemperatureChange => 1f;
+
+        public override float ColdComfortabilityChange => 2f;
     }
 
     public class CobaltArmor : SetBonusChange {
@@ -37,5 +51,12 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int ChestPieceID => ItemID.CobaltBreastplate;
 
         public override int LegPieceID => ItemID.CobaltLeggings;
+
+        public override void AdditionalSetBonusEffect(Player player) {
+            TempPlayer tempPlayer = player.GetTempPlayer();
+            if (tempPlayer.currentTemperature > tempPlayer.comfortableHigh) {
+                player.allDamageMult += 0.03f * (tempPlayer.currentTemperature - tempPlayer.comfortableHigh);
+            }
+        }
     }
 }
