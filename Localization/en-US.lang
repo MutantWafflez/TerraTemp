@@ -81,3 +81,4 @@ GlobalSetBonus.OrichalcumArmor=1 degree increased critical range for each active
 GlobalSetBonus.ShroomiteArmor=80% increased temperature change resistance while in stealth
 GlobalSetBonus.SpectreArmor=Gain up to 80% increased temperature change resistance as mana decreases
 GlobalSetBonus.TurtleArmor=Gain up to 80% increased temperature change resistance as life lowers
+GlobalSetBonus.SolarFlareArmor=5% increased life regeneration for each degree above your heat comfortability range\nGrants immunity to Sweaty & Heat Stroke
