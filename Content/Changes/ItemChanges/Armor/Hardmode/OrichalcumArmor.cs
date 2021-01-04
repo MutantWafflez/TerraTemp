@@ -1,5 +1,7 @@
 ﻿using Terraria.ID;
 using System.Collections.Generic;
+using Terraria;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -10,6 +12,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.OrichalcumMask,
             ItemID.OrichalcumHeadgear
         };
+
+        public override float TemperatureResistanceChange => -0.05f;
     }
 
     public class OrichalcumChestplate : ItemChange {
@@ -17,6 +21,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override List<int> AppliedItemIDs => new List<int>() {
             ItemID.OrichalcumBreastplate
         };
+
+        public override float TemperatureResistanceChange => -0.05f;
     }
 
     public class OrichalcumLeggings : ItemChange {
@@ -24,6 +30,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override List<int> AppliedItemIDs => new List<int>() {
             ItemID.OrichalcumLeggings
         };
+
+        public override float TemperatureResistanceChange => -0.05f;
     }
 
     public class OrichalcumArmor : SetBonusChange {
@@ -37,5 +45,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int ChestPieceID => ItemID.OrichalcumBreastplate;
 
         public override int LegPieceID => ItemID.OrichalcumLeggings;
+
+        public override void AdditionalSetBonusEffect(Player player) {
+            player.GetTempPlayer().criticalRangeMaximum += player.CountBuffs();
+        }
     }
 }
