@@ -82,4 +82,5 @@ GlobalSetBonus.ShroomiteArmor=80% increased temperature change resistance while 
 GlobalSetBonus.SpectreArmor=Gain up to 80% increased temperature change resistance as mana decreases
 GlobalSetBonus.TurtleArmor=Gain up to 80% increased temperature change resistance as life lowers
 GlobalSetBonus.SolarFlareArmor=5% increased life regeneration for each degree above your heat comfortability range\nGrants immunity to Sweaty & Heat Stroke
+GlobalSetBonus.VortexArmor=95% increased temperature change resistance while in stealth
 GlobalSetBonus.NebulaArmor=2 defense increase for each degree below your cold comfortability range\nGrants immunity to Shivering & Hypothermia
