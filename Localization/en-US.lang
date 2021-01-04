@@ -75,6 +75,7 @@ GlobalSetBonus.CrimsonArmor=Negates the humidity of the Crimson
 
 #Unique Vanilla Set Bonus Tooltips (Hardmode)
 GlobalSetBonus.SpiderArmor=All attacks inflict Venom while body temperature is above your heat comfortability range
+GlobalSetBonus.PalladiumArmor=12 degree increased global comfortability range while under the effects of the Rapid Healing buff
 GlobalSetBonus.ShroomiteArmor=80% increased temperature change resistance while in stealth
 GlobalSetBonus.SpectreArmor=Gain up to 80% increased temperature change resistance as mana decreases
 GlobalSetBonus.TurtleArmor=Gain up to 80% increased temperature change resistance as life lowers
