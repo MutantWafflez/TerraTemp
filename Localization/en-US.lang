@@ -77,6 +77,7 @@ GlobalSetBonus.CrimsonArmor=Negates the humidity of the Crimson
 GlobalSetBonus.SpiderArmor=All attacks inflict Venom while body temperature is above your heat comfortability range
 GlobalSetBonus.CobaltArmor=3% increased damage for each degree above your heat comfortability range
 GlobalSetBonus.PalladiumArmor=12 degree increased global comfortability range while under the effects of the Rapid Healing buff
+GlobalSetBonus.MythrilArmor=Taking damage temporarily increases your temperature change resistance by 40%
 GlobalSetBonus.OrichalcumArmor=1 degree increased critical range for each active buff or debuff
 GlobalSetBonus.ChlorophyteArmor=Your highest crit chance is converted into temperature change resistance
 GlobalSetBonus.ShroomiteArmor=80% increased temperature change resistance while in stealth

@@ -1,5 +1,7 @@
 ﻿using Terraria.ID;
 using System.Collections.Generic;
+using Terraria;
+using TerraTemp.Common.Players;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -10,6 +12,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.MythrilHat,
             ItemID.MythrilHood
         };
+
+        public override float CriticalTemperatureChange => -1f;
     }
 
     public class MythrilChestplate : ItemChange {
@@ -17,6 +21,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override List<int> AppliedItemIDs => new List<int>() {
             ItemID.MythrilChainmail
         };
+
+        public override float CriticalTemperatureChange => -1f;
     }
 
     public class MythrilLeggings : ItemChange {
@@ -24,6 +30,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override List<int> AppliedItemIDs => new List<int>() {
             ItemID.MythrilGreaves
         };
+
+        public override float CriticalTemperatureChange => -1f;
     }
 
     public class MythrilArmor : SetBonusChange {
@@ -37,5 +45,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int ChestPieceID => ItemID.MythrilChainmail;
 
         public override int LegPieceID => ItemID.MythrilGreaves;
+
+        public override void AdditionalSetBonusEffect(Player player) {
+            player.GetModPlayer<SetBonusPlayer>().mythrilSetBonus = true;
+        }
     }
 }

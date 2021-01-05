@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTemp.Content.Buffs.MiscEffects;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Common.Players {
@@ -12,6 +13,8 @@ namespace TerraTemp.Common.Players {
 
         //Set bonus bools
         public bool spiderSetBonus;
+
+        public bool mythrilSetBonus;
 
         public override void ResetEffects() {
             spiderSetBonus = false;
@@ -27,6 +30,13 @@ namespace TerraTemp.Common.Players {
                 else if (victim is Player) {
                     (victim as Player).AddBuff(BuffID.Venom, 60 * 5);
                 }
+            }
+        }
+
+        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit) {
+            //Mythril Set Bonus
+            if (mythrilSetBonus) {
+                player.AddBuff(ModContent.BuffType<TempResistBuff>(), 60 * 5);
             }
         }
     }
