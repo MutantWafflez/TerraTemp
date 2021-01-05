@@ -65,13 +65,13 @@ namespace TerraTemp.Content.Changes {
                 string statLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
                 if (statLine != null) {
                     if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
-                        return statLine + "\n" + TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName);
+                        return statLine + "\n" + TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);
                     }
                     return statLine;
                 }
                 else {
                     if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
-                        return TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName);
+                        return TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);
                     }
                     return null;
                 }
