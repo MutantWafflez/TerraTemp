@@ -5,7 +5,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class TitaniumHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.TitaniumHelmet,
             ItemID.TitaniumMask,
             ItemID.TitaniumHeadgear
@@ -14,21 +14,21 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class TitaniumChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.TitaniumBreastplate
         };
     }
 
     public class TitaniumLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.TitaniumLeggings
         };
     }
 
     public class TitaniumArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.TitaniumHelmet,
             ItemID.TitaniumMask,
             ItemID.TitaniumHeadgear

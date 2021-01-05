@@ -5,7 +5,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
     public class ObsidianRose : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.ObsidianRose
         };
 

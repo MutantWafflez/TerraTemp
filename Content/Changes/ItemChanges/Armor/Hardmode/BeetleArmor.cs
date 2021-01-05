@@ -5,14 +5,14 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class BeetleHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.BeetleHelmet
         };
     }
 
     public class BeetleChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.BeetleScaleMail,
             ItemID.BeetleShell
         };
@@ -20,14 +20,14 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class BeetleLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.BeetleLeggings
         };
     }
 
     public class BeetleDefenseArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.BeetleHelmet,
         };
 
@@ -38,7 +38,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class BeetleOffenseArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.BeetleHelmet,
         };
 

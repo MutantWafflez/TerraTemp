@@ -8,7 +8,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class CactusHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.CactusHelmet
         };
 
@@ -17,7 +17,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class CactusChesplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.CactusBreastplate
         };
 
@@ -26,7 +26,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class CactusLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.CactusLeggings
         };
 
@@ -36,7 +36,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class CactusArmor : SetBonusChange {
         private readonly DesertClimate desertClimate = new DesertClimate();
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.CactusHelmet
         };
 

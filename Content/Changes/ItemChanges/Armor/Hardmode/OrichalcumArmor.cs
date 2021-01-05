@@ -7,7 +7,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class OrichalcumHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.OrichalcumHelmet,
             ItemID.OrichalcumMask,
             ItemID.OrichalcumHeadgear
@@ -18,7 +18,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class OrichalcumChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.OrichalcumBreastplate
         };
 
@@ -27,7 +27,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class OrichalcumLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.OrichalcumLeggings
         };
 
@@ -36,7 +36,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class OrichalcumArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.OrichalcumHelmet,
             ItemID.OrichalcumMask,
             ItemID.OrichalcumHeadgear

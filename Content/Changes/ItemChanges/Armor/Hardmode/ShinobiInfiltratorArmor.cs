@@ -5,28 +5,28 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class ShinobiInfiltratorHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.MonkAltHead
         };
     }
 
     public class ShinobiInfiltratorChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.MonkAltShirt
         };
     }
 
     public class ShinobiInfiltratorLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.MonkAltPants
         };
     }
 
     public class ShinobiInfiltratorArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.MonkAltHead
         };
 

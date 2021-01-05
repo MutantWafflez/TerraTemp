@@ -7,7 +7,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class TurtleHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.TurtleHelmet
         };
 
@@ -18,7 +18,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class TurtleChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.TurtleScaleMail
         };
 
@@ -29,7 +29,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class TurtleLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.TurtleLeggings
         };
 
@@ -40,7 +40,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class TurtleArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.TurtleHelmet
         };
 

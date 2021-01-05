@@ -7,7 +7,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class PumpkinHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.PumpkinHelmet
         };
 
@@ -18,7 +18,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class PumpkinChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.PumpkinBreastplate
         };
 
@@ -29,7 +29,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class PumpkinLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.PumpkinLeggings
         };
 
@@ -40,7 +40,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class PumpkinArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.PumpkinHelmet
         };
 

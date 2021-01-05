@@ -5,28 +5,28 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class RedRidingHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.HuntressAltHead
         };
     }
 
     public class RedRidingChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.HuntressAltShirt
         };
     }
 
     public class RedRidingLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.HuntressAltPants
         };
     }
 
     public class RedRidingArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.HuntressAltHead
         };
 

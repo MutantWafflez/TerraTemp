@@ -5,7 +5,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class TierTwoMetalHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.SilverHelmet,
             ItemID.TungstenHelmet
         };
@@ -17,7 +17,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class TierTwoMetalChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.SilverChainmail,
             ItemID.TungstenChainmail
         };
@@ -29,7 +29,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class TierTwoMetalLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.SilverGreaves,
             ItemID.TungstenGreaves
         };

@@ -5,7 +5,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class NecroHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.NecroHelmet,
             ItemID.AncientNecroHelmet
         };
@@ -15,7 +15,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class NecroChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.NecroBreastplate
         };
 
@@ -24,7 +24,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class NecroLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.NecroGreaves
         };
 
@@ -33,7 +33,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class NecroArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.NecroHelmet,
             ItemID.AncientNecroHelmet
         };

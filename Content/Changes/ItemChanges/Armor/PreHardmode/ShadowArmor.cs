@@ -8,7 +8,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class ShadowHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ShadowHelmet,
             ItemID.AncientShadowHelmet
         };
@@ -18,7 +18,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class ShadowChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ShadowScalemail,
             ItemID.AncientShadowScalemail
         };
@@ -28,7 +28,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class ShadowLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ShadowGreaves,
             ItemID.AncientShadowGreaves
         };
@@ -39,7 +39,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class ShadowArmor : SetBonusChange {
         private readonly CorruptionClimate corruptionClimate = new CorruptionClimate();
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.ShadowHelmet
         };
 
@@ -57,7 +57,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class AncientShadowArmor : SetBonusChange {
         private readonly CorruptionClimate corruptionClimate = new CorruptionClimate();
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.AncientShadowHelmet
         };
 

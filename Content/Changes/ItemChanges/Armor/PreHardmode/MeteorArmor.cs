@@ -8,7 +8,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class MeteorHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.MeteorHelmet
         };
 
@@ -17,7 +17,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class MeteorChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.MeteorSuit
         };
 
@@ -26,7 +26,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class MeteorLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.MeteorLeggings
         };
 
@@ -36,7 +36,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class MeteorArmor : SetBonusChange {
         private readonly SpaceClimate spaceColdChange = new SpaceClimate();
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.MeteorHelmet
         };
 

@@ -5,7 +5,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class HallowedArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int> {
+        public override HashSet<int> HelmetPieceID => new HashSet<int> {
             ItemID.HallowedHelmet,
             ItemID.HallowedMask,
             ItemID.HallowedHeadgear

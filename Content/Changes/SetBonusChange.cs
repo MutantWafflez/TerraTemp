@@ -11,7 +11,7 @@ namespace TerraTemp.Content.Changes {
         /// The ID of the helmet piece(s) item of the armor set. Is a list for armor sets that have
         /// different head pieces, such as the Hardmode ore armors.
         /// </summary>
-        public virtual List<int> HelmetPieceID => new List<int>();
+        public virtual HashSet<int> HelmetPieceID => new HashSet<int>();
 
         /// <summary>
         /// The ID of the chest piece item of the armor set.

@@ -8,7 +8,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class CrimsonHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.CrimsonHelmet
         };
 
@@ -17,7 +17,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class CrimsonChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.CrimsonScalemail
         };
 
@@ -26,7 +26,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class CrimsonLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.CrimsonGreaves
         };
 
@@ -36,7 +36,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class CrimsonArmor : SetBonusChange {
         private readonly CrimsonClimate crimsonHumidityChange = new CrimsonClimate();
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.CrimsonHelmet
         };
 

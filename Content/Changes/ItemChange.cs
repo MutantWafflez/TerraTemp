@@ -10,7 +10,7 @@ namespace TerraTemp.Content.Changes {
         /// base item is a material (such as the Lava charm), and its effects are carried over into
         /// the new accessory (Lava Waders, with the example of the Lava Charm)
         /// </summary>
-        public virtual List<int> AppliedItemIDs => new List<int>();
+        public virtual HashSet<int> AppliedItemIDs => new HashSet<int>();
 
         /// <summary>
         /// By how much this given item will change the player's Base Desired (Environmental) Temperature.

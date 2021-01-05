@@ -7,7 +7,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Potions {
     public class WarmthPotion : ItemChange {
         private readonly WarmthBuff warmthChange = new WarmthBuff();
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.WarmthPotion
         };
 

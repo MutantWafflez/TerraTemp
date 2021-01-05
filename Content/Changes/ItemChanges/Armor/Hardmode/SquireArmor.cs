@@ -5,28 +5,28 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class SquireHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.SquireGreatHelm
         };
     }
 
     public class SquireChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.SquirePlating
         };
     }
 
     public class SquireLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.SquireGreaves
         };
     }
 
     public class SquireArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.SquireGreatHelm
         };
 

@@ -6,7 +6,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class ObsidianHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.ObsidianHelm
         };
 
@@ -15,7 +15,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class ObsidianChestpiece : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.ObsidianShirt
         };
 
@@ -24,7 +24,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class ObsidianLegs : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.ObsidianPants
         };
 
@@ -33,7 +33,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class ObsidianArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int> {
+        public override HashSet<int> HelmetPieceID => new HashSet<int> {
             ItemID.ObsidianHelm
         };
 

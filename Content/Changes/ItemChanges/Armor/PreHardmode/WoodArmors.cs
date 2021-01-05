@@ -5,7 +5,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class WoodHelmets : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.WoodHelmet,
             ItemID.BorealWoodHelmet,
             ItemID.PalmWoodHelmet,
@@ -22,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class WoodChestplates : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.WoodBreastplate,
             ItemID.BorealWoodBreastplate,
             ItemID.PalmWoodBreastplate,
@@ -39,7 +39,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class WoodLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.WoodGreaves,
             ItemID.BorealWoodGreaves,
             ItemID.PalmWoodGreaves,

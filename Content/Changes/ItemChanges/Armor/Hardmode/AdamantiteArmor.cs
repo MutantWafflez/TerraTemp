@@ -5,7 +5,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class AdamantiteHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.AdamantiteHelmet,
             ItemID.AdamantiteMask,
             ItemID.AdamantiteHeadgear
@@ -14,21 +14,21 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class AdamantiteChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.AdamantiteBreastplate
         };
     }
 
     public class AdamantiteLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.AdamantiteLeggings
         };
     }
 
     public class AdamantiteArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.AdamantiteHelmet,
             ItemID.AdamantiteMask,
             ItemID.AdamantiteHeadgear

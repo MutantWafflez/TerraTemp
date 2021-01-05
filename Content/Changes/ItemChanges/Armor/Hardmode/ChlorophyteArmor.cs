@@ -8,7 +8,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class ChlorophyteHelmet : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ChlorophyteHelmet,
             ItemID.ChlorophyteMask,
             ItemID.ChlorophyteHeadgear
@@ -21,7 +21,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class ChlorophyteChestplate : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ChlorophytePlateMail
         };
 
@@ -32,7 +32,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class ChlorophyteLeggings : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int>() {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ChlorophyteGreaves
         };
 
@@ -43,7 +43,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
     public class ChlorophyteArmor : SetBonusChange {
 
-        public override List<int> HelmetPieceID => new List<int>() {
+        public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.ChlorophyteHelmet,
             ItemID.ChlorophyteMask,
             ItemID.ChlorophyteHeadgear
@@ -54,7 +54,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int LegPieceID => ItemID.ChlorophyteGreaves;
 
         public override void AdditionalSetBonusEffect(Player player) {
-            List<int> listofCrits = new List<int>() {
+            HashSet<int> listofCrits = new HashSet<int>() {
                 player.magicCrit,
                 player.meleeCrit,
                 player.rangedCrit,

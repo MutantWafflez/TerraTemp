@@ -8,7 +8,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class JungleHat : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.JungleHat,
             ItemID.AncientCobaltHelmet
         };
@@ -18,7 +18,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class JungleShirt : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.JungleShirt,
             ItemID.AncientCobaltBreastplate
         };
@@ -28,7 +28,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
     public class JunglePants : ItemChange {
 
-        public override List<int> AppliedItemIDs => new List<int> {
+        public override HashSet<int> AppliedItemIDs => new HashSet<int> {
             ItemID.JunglePants,
             ItemID.AncientCobaltLeggings
         };
@@ -39,7 +39,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class JungleArmor : SetBonusChange {
         private readonly JungleClimate jungleClimateHumidity = new JungleClimate();
 
-        public override List<int> HelmetPieceID => new List<int> {
+        public override HashSet<int> HelmetPieceID => new HashSet<int> {
             ItemID.JungleHat
         };
 
@@ -57,7 +57,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
     public class AncientCobaltArmor : SetBonusChange {
         private readonly JungleClimate jungleClimateHumidity = new JungleClimate();
 
-        public override List<int> HelmetPieceID => new List<int> {
+        public override HashSet<int> HelmetPieceID => new HashSet<int> {
             ItemID.AncientCobaltHelmet
         };
 
