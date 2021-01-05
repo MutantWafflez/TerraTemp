@@ -15,7 +15,7 @@ namespace TerraTemp.Content.Buffs.TempEffects {
         }
 
         public override void Update(Player player, ref int buffIndex) {
-            player.statLifeMax2 = (int)(player.statLifeMax2 * 0.9f);
+            player.lifeRegen = 0;
             player.statDefense = (int)(player.statDefense * 0.9f);
             player.moveSpeed *= 0.85f;
         }
