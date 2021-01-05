@@ -18,6 +18,7 @@ namespace TerraTemp.Content.Projectiles {
             projectile.width = 16 * 32; //32 blocks across
             projectile.height = 16 * 32; //32 blocks high
             projectile.ignoreWater = true;
+            projectile.tileCollide = false;
             projectile.penetrate = 999;
             projectile.velocity = Vector2.Zero;
             projectile.timeLeft = 10;
