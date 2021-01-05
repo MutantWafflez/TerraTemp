@@ -1,9 +1,9 @@
-﻿using Terraria.ID;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using TerraTemp.Utilities;
-using Microsoft.Xna.Framework;
-using System;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 

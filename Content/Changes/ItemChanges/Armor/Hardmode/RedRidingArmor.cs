@@ -1,7 +1,7 @@
-﻿using Terraria.ID;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Events;
+using Terraria.ID;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {

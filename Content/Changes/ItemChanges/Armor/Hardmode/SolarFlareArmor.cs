@@ -1,6 +1,6 @@
-﻿using Terraria.ID;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Utilities;
