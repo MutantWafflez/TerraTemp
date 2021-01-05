@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
 
@@ -94,13 +95,46 @@ namespace TerraTemp.Utilities {
         /// <param name="arg0">
         /// If the given localization text has a argument, this is where that can be input.
         /// </param>
+        /// <param name="useRegexSearch">
+        /// Whether or not to use Regex to search for potential keys within the original key return.
+        /// </param>
         /// <returns> The given string value attached to input key, if it exists. </returns>
-        public static string GetTerraTempTextValue(string key, object arg0 = null) {
+        public static string GetTerraTempTextValue(string key, object arg0 = null, bool useRegexSearch = false) {
             if (arg0 != null) {
-                return Language.GetTextValue("Mods.TerraTemp." + key, arg0);
+                string returnedValue = Language.GetTextValue("Mods.TerraTemp." + key, arg0);
+                if (useRegexSearch) {
+                    return DoRegexSearch(returnedValue);
+                }
+                return returnedValue;
             }
             else {
-                return Language.GetTextValue("Mods.TerraTemp." + key);
+                string returnedValue = Language.GetTextValue("Mods.TerraTemp." + key);
+                if (useRegexSearch) {
+                    return DoRegexSearch(returnedValue);
+                }
+                return returnedValue;
+            }
+
+            string DoRegexSearch(string stringToSearch) {
+                MatchCollection bracketsExist = Regex.Matches(stringToSearch, @"\{(.*?)\}");
+                if (bracketsExist.Count > 0) {
+                    string newString = "";
+                    for (int i = 0; i < bracketsExist.Count; i++) {
+                        MatchCollection regMatches = Regex.Matches(stringToSearch, @"(\[(?:\[??[^\[]*?\]))|(\((?:\(??[^\[]*?\)))");
+                        if (regMatches.Count % 2 == 0 && regMatches.Count != 0) {
+                            for (int x = 0; x < regMatches.Count; x += 2) {
+                                if (regMatches[x].Value.Contains("[") && regMatches[x + 1].Value.Contains("(")) {
+                                    string newKey = regMatches[x].Value.Trim(new char[] { '[', ']' });
+                                    string newarg0 = regMatches[x + 1].Value.Trim(new char[] { '(', ')' });
+
+                                    newString = stringToSearch.Replace(bracketsExist[i].Value, Language.GetTextValue(newKey, newarg0));
+                                }
+                            }
+                        }
+                    }
+                    return newString;
+                }
+                return stringToSearch;
             }
         }
 
