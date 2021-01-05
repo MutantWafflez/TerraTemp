@@ -85,6 +85,7 @@ GlobalSetBonus.ChlorophyteArmor=Your highest crit chance is converted into tempe
 GlobalSetBonus.ShroomiteArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (80)} while in stealth
 GlobalSetBonus.SpectreArmor=Gain up to {[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (80)} as mana decreases
 GlobalSetBonus.TurtleArmor=Gain up to {[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (80)} as life lowers
+GlobalSetBonus.TikiArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (7.5)} for each active minion
 GlobalSetBonus.BeetleDefenseArmor=50% of your defense is added to your temperature change resistance
 GlobalSetBonus.BeetleOffenseArmor=50% of your melee critical strike chance is added to your temperature change resistance
 GlobalSetBonus.SolarFlareArmor=5% increased life regeneration for each degree above your heat comfortability range\nGrants immunity to Sweaty & Heat Stroke
