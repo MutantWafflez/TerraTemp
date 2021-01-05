@@ -5,6 +5,9 @@ using TerraTemp.Utilities;
 
 namespace TerraTemp.Common.GlobalBuffs {
 
+    /// <summary>
+    /// GlobalBuff class that handles all the changes for vanilla buffs in the mod.
+    /// </summary>
     public class VanillaBuffChanges : GlobalBuff {
 
         //Aditional effects on player based on the changes of a given buff

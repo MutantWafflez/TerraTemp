@@ -2,6 +2,10 @@
 
 namespace TerraTemp.Content.Changes {
 
+    /// <summary>
+    /// Abstract class that can be inherited and its fields overriden to give temperature related
+    /// changes to any pre-existing buffs.
+    /// </summary>
     public abstract class BuffChange {
 
         /// <summary>

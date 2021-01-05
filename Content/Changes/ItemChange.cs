@@ -3,6 +3,10 @@ using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes {
 
+    /// <summary>
+    /// Abstract class that can be inherited and its fields overriden for any potential change to
+    /// ANY given item.
+    /// </summary>
     public abstract class ItemChange {
 
         /// <summary>

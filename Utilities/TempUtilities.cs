@@ -8,6 +8,9 @@ using Terraria.Localization;
 
 namespace TerraTemp.Utilities {
 
+    /// <summary>
+    /// Class that has several important helper methods for this mod to make things a bit easier.
+    /// </summary>
     public static class TempUtilities {
 
         #region Calculation Methods

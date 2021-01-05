@@ -5,6 +5,9 @@ using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes {
 
+    /// <summary>
+    /// Abstract class that can be inherited and its fields overriden to add to ANY Armor Set bonus.
+    /// </summary>
     public abstract class SetBonusChange {
 
         /// <summary>

@@ -6,6 +6,10 @@ using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Items {
 
+    /// <summary>
+    /// Abstract class that extends ModItem that has built in functionality adding Equipment that
+    /// changes temperature statistics.
+    /// </summary>
     public abstract class TempEquipment : ModItem {
 
         /// <summary>

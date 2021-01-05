@@ -11,15 +11,53 @@ using TerraTemp.Utilities;
 namespace TerraTemp {
 
     public class TerraTemp : Mod {
+
+        /// <summary>
+        /// A list of ALL newly added Climates. If you wish to add or otherwise remove a given
+        /// Climate, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
         public static List<Climate> climates;
+
+        /// <summary>
+        /// A list of ALL newly added Evil Climates. If you wish to add or otherwise remove a given
+        /// Evil Climate, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
         public static List<EvilClimate> evilClimates;
+
+        /// <summary>
+        /// A list of ALL newly added Event Changes. If you wish to add or otherwise remove a given
+        /// Event Change, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
         public static List<EventChange> eventChanges;
 
+        /// <summary>
+        /// A list of ALL newly added Item Changes. If you wish to add or otherwise remove a given
+        /// Item Change, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
         public static List<ItemChange> itemChanges;
+
+        /// <summary>
+        /// A list of ALL newly added Set Bonus Changes. If you wish to add or otherwise remove a
+        /// given Set Bonus Change, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
         public static List<SetBonusChange> setBonusChanges;
+
+        /// <summary>
+        /// A list of ALL newly added Buff Changes. If you wish to add or otherwise remove a given
+        /// Buff Change, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
         public static List<BuffChange> buffChanges;
 
+        /// <summary>
+        /// A value that is randomized daily that determines how hot it will get during the day and
+        /// how cold it will get during the night.
+        /// </summary>
         public static float? dailyTemperatureDeviation = 1f;
+
+        /// <summary>
+        /// A value that is randomized daily that adds (or potentially removes) Relative Humidity to
+        /// the entire world for that day.
+        /// </summary>
         public static float dailyHumidityDeviation = 0f;
 
         #region Loading Overrides

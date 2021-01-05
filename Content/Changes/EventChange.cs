@@ -2,6 +2,10 @@
 
 namespace TerraTemp.Content.Changes {
 
+    /// <summary>
+    /// Abstract class that can inherited and its fields overriden to change temperature related
+    /// values during a given game event.
+    /// </summary>
     public abstract class EventChange {
 
         /// <summary>
