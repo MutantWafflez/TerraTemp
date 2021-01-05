@@ -1,5 +1,8 @@
 ﻿using Terraria.ID;
 using System.Collections.Generic;
+using Terraria.GameContent.Events;
+using Terraria;
+using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -8,6 +11,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.MonkBrows
         };
+
+        public override float TemperatureResistanceChange => -0.075f;
     }
 
     public class MonkChestplate : ItemChange {
@@ -15,6 +20,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.MonkShirt
         };
+
+        public override float TemperatureResistanceChange => -0.075f;
     }
 
     public class MonkLeggings : ItemChange {
@@ -22,6 +29,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.MonkPants
         };
+
+        public override float TemperatureResistanceChange => -0.075f;
     }
 
     public class MonkArmor : SetBonusChange {
@@ -33,5 +42,11 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int ChestPieceID => ItemID.MonkShirt;
 
         public override int LegPieceID => ItemID.MonkPants;
+
+        public override void AdditionalSetBonusEffect(Player player) {
+            if (DD2Event.Ongoing) {
+                player.GetTempPlayer().temperatureChangeResist += 0.67f;
+            }
+        }
     }
 }
