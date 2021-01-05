@@ -79,6 +79,7 @@ GlobalSetBonus.CobaltArmor=3% increased damage for each degree above your heat c
 GlobalSetBonus.PalladiumArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedGlobalComfortability] (12)} while under the effects of the Rapid Healing buff
 GlobalSetBonus.MythrilArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (40)} for a short time after taking damage
 GlobalSetBonus.OrichalcumArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedCriticalRange] (1)} for each active buff or debuff
+GlobalSetBonus.TitaniumArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedColdComfortability] (8)} while under the effects of the Shadow Dodge buff
 GlobalSetBonus.ChlorophyteArmor=Your highest crit chance is converted into temperature change resistance
 GlobalSetBonus.ShroomiteArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (80)} while in stealth
 GlobalSetBonus.SpectreArmor=Gain up to {[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (80)} as mana decreases
