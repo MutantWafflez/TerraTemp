@@ -1,8 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using TerraTemp.Utilities;
-
-namespace TerraTemp.Content.Buffs.MiscEffects {
+﻿namespace TerraTemp.Content.Buffs.MiscEffects {
 
     public class TempResistBuff : TemperatureBuff {
         public override float TemperatureResistanceChange => 0.4f;
