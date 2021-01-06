@@ -49,6 +49,12 @@ namespace TerraTemp {
         public static List<BuffChange> buffChanges;
 
         /// <summary>
+        /// A list of ALL newly added Loot Changes. If you wish to add or otherwise remove a given
+        /// Loot Change, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
+        public static List<NPCLootChange> lootChanges;
+
+        /// <summary>
         /// A value that is randomized daily that determines how hot it will get during the day and
         /// how cold it will get during the night.
         /// </summary>
@@ -86,6 +92,10 @@ namespace TerraTemp {
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<BuffChange>()) {
                 buffChanges.Add((BuffChange)Activator.CreateInstance(type));
             }
+
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<NPCLootChange>()) {
+                lootChanges.Add((NPCLootChange)Activator.CreateInstance(type));
+            }
         }
 
         public override void Load() {
@@ -95,6 +105,7 @@ namespace TerraTemp {
             itemChanges = new List<ItemChange>();
             setBonusChanges = new List<SetBonusChange>();
             buffChanges = new List<BuffChange>();
+            lootChanges = new List<NPCLootChange>();
         }
 
         public override void Unload() {
@@ -104,6 +115,7 @@ namespace TerraTemp {
             itemChanges = null;
             setBonusChanges = null;
             buffChanges = null;
+            lootChanges = null;
         }
 
         #endregion Loading Overrides
