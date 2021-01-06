@@ -111,7 +111,7 @@ namespace TerraTemp {
         #region Temperature Deviation
 
         public override void MidUpdateDustTime() {
-            if (Main.time >= 32400.0 && !Main.dayTime && !Main.gameMenu) {
+            if (Main.time >= 32400.0 && !Main.dayTime && (!Main.gameMenu || Main.netMode == NetmodeID.Server)) {
                 NewDayStarted();
             }
         }
@@ -163,21 +163,18 @@ namespace TerraTemp {
         #region Custom Methods
 
         public void NewDayStarted() {
-            Logger.Debug("New Day!");
             if (Main.netMode == NetmodeID.Server) {
                 dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
                 ModPacket packet = GetPacket();
                 packet.Write((byte)PacketID.DailyTemperatureDeviation);
                 packet.Write(dailyTemperatureDeviation);
                 packet.Send();
-                Logger.Debug("Packet Sent! Daily Temperature Deviation value of:" + dailyTemperatureDeviation);
 
                 dailyHumidityDeviation = Main.rand.NextFloat(-0.1f, 0.75f);
                 packet = GetPacket();
                 packet.Write((byte)PacketID.DailyHumidityDeviation);
                 packet.Write(dailyHumidityDeviation);
                 packet.Send();
-                Logger.Debug("Packet Sent! Daily Humidity Deviation value of:" + dailyHumidityDeviation);
             }
             else if (Main.netMode == NetmodeID.SinglePlayer) {
                 dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
