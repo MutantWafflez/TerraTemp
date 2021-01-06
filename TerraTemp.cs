@@ -52,7 +52,7 @@ namespace TerraTemp {
         /// A value that is randomized daily that determines how hot it will get during the day and
         /// how cold it will get during the night.
         /// </summary>
-        public static float? dailyTemperatureDeviation = 1f;
+        public static float dailyTemperatureDeviation = 1f;
 
         /// <summary>
         /// A value that is randomized daily that adds (or potentially removes) Relative Humidity to
@@ -104,7 +104,6 @@ namespace TerraTemp {
             itemChanges = null;
             setBonusChanges = null;
             buffChanges = null;
-            dailyTemperatureDeviation = null;
         }
 
         #endregion Loading Overrides
@@ -125,11 +124,32 @@ namespace TerraTemp {
             PacketID packetMessage = (PacketID)reader.ReadByte();
             switch (packetMessage) {
                 case PacketID.DailyTemperatureDeviation:
-                    dailyTemperatureDeviation = reader.ReadSingle();
+                    if (Main.netMode == NetmodeID.MultiplayerClient) {
+                        dailyTemperatureDeviation = reader.ReadSingle();
+                    }
                     break;
 
                 case PacketID.DailyHumidityDeviation:
-                    dailyHumidityDeviation = reader.ReadSingle();
+                    if (Main.netMode == NetmodeID.MultiplayerClient) {
+                        dailyHumidityDeviation = reader.ReadSingle();
+                    }
+                    break;
+
+                case PacketID.RequestServerTemperatureValues:
+                    if (Main.netMode == NetmodeID.Server) {
+                        ModPacket packet = GetPacket();
+                        packet.Write((byte)PacketID.ReceiveServerTemperatureValues);
+                        packet.Write(dailyTemperatureDeviation);
+                        packet.Write(dailyHumidityDeviation);
+                        packet.Send(whoAmI);
+                    }
+                    break;
+
+                case PacketID.ReceiveServerTemperatureValues:
+                    if (Main.netMode == NetmodeID.MultiplayerClient) {
+                        dailyTemperatureDeviation = reader.ReadSingle();
+                        dailyHumidityDeviation = reader.ReadSingle();
+                    }
                     break;
 
                 default:
@@ -143,18 +163,21 @@ namespace TerraTemp {
         #region Custom Methods
 
         public void NewDayStarted() {
+            Logger.Debug("New Day!");
             if (Main.netMode == NetmodeID.Server) {
                 dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
                 ModPacket packet = GetPacket();
                 packet.Write((byte)PacketID.DailyTemperatureDeviation);
-                packet.Write((float)dailyTemperatureDeviation);
+                packet.Write(dailyTemperatureDeviation);
                 packet.Send();
+                Logger.Debug("Packet Sent! Daily Temperature Deviation value of:" + dailyTemperatureDeviation);
 
                 dailyHumidityDeviation = Main.rand.NextFloat(-0.1f, 0.75f);
                 packet = GetPacket();
                 packet.Write((byte)PacketID.DailyHumidityDeviation);
                 packet.Write(dailyHumidityDeviation);
                 packet.Send();
+                Logger.Debug("Packet Sent! Daily Humidity Deviation value of:" + dailyHumidityDeviation);
             }
             else if (Main.netMode == NetmodeID.SinglePlayer) {
                 dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);

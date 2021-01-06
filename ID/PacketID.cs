@@ -5,6 +5,8 @@
     /// </summary>
     public enum PacketID : byte {
         DailyTemperatureDeviation,
-        DailyHumidityDeviation
+        DailyHumidityDeviation,
+        RequestServerTemperatureValues,
+        ReceiveServerTemperatureValues
     }
 }

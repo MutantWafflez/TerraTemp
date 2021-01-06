@@ -8,6 +8,7 @@ using Terraria.ModLoader.IO;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
 using TerraTemp.Content.Items.Accessories;
+using TerraTemp.ID;
 using TerraTemp.Utilities;
 
 namespace TerraTemp {
@@ -26,7 +27,7 @@ namespace TerraTemp {
         /// <summary>
         /// Player's current body temperature.
         /// </summary>
-        public float currentTemperature;
+        public float currentTemperature = NormalTemperature;
 
         /// <summary>
         /// Desired temperature that is modified by biomes and debuffs that is further modified by
@@ -155,18 +156,18 @@ namespace TerraTemp {
             if (player.ZoneOverworldHeight) {
                 if (Main.dayTime && !Main.eclipse) {
                     if (Main.time <= 27000 /* Noon */) {
-                        baseDesiredTemperature += ((float)Main.time / 60f / 50f * (float)TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
+                        baseDesiredTemperature += ((float)Main.time / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
                     }
                     else {
-                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f * (float)TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
+                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
                     }
                 }
                 else {
                     if (Main.time <= 16200 /* Midnight */) {
-                        baseDesiredTemperature -= (float)Main.time / 60f / 30f * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature -= (float)Main.time / 60f / 30f * TerraTemp.dailyTemperatureDeviation;
                     }
                     else {
-                        baseDesiredTemperature -= (32400f - (float)Main.time) / 60f / 30f * (float)TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature -= (32400f - (float)Main.time) / 60f / 30f * TerraTemp.dailyTemperatureDeviation;
                     }
                 }
             }
@@ -259,6 +260,18 @@ namespace TerraTemp {
         }
 
         #endregion I/O
+
+        #region Multiplayer Syncing
+
+        public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
+            if (newPlayer) {
+                ModPacket packet = mod.GetPacket();
+                packet.Write((byte)PacketID.RequestServerTemperatureValues);
+                packet.Send();
+            }
+        }
+
+        #endregion
 
         #region Custom Methods
 
