@@ -55,6 +55,12 @@ namespace TerraTemp {
         public static List<NPCLootChange> lootChanges;
 
         /// <summary>
+        /// A list of ALL newly added Bag Changes. If you wish to add or otherwise remove a given
+        /// Bag Change, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
+        public static List<BagChange> bagChanges;
+
+        /// <summary>
         /// A value that is randomized daily that determines how hot it will get during the day and
         /// how cold it will get during the night.
         /// </summary>
@@ -96,6 +102,10 @@ namespace TerraTemp {
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<NPCLootChange>()) {
                 lootChanges.Add((NPCLootChange)Activator.CreateInstance(type));
             }
+
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<BagChange>()) {
+                bagChanges.Add((BagChange)Activator.CreateInstance(type));
+            }
         }
 
         public override void Load() {
@@ -106,6 +116,7 @@ namespace TerraTemp {
             setBonusChanges = new List<SetBonusChange>();
             buffChanges = new List<BuffChange>();
             lootChanges = new List<NPCLootChange>();
+            bagChanges = new List<BagChange>();
         }
 
         public override void Unload() {

@@ -1,13 +1,12 @@
 ﻿using System;
-using Terraria;
 
 namespace TerraTemp.Utilities {
 
     /// <summary>
-    /// Struct that handles a specific drop for an NPC. Has several different components that allows
-    /// for customization, including dropCount and the canDrop delegate.
+    /// Struct that handles a specific drop in any given context (NPC, bag, etc.). Has several
+    /// different components that allows for customization, including dropCount and the canDrop delegate.
     /// </summary>
-    public struct NPCDrop {
+    public struct ItemDrop {
 
         /// <summary>
         /// Item ID of the dropped item.
@@ -23,7 +22,7 @@ namespace TerraTemp.Utilities {
         /// </summary>
         public Tuple<int, int> dropCount;
 
-        public delegate bool CanDrop(NPC npc);
+        public delegate bool CanDrop();
 
         /// <summary>
         /// The method that is supposed to return whether or not this given item will drop, given
@@ -32,11 +31,11 @@ namespace TerraTemp.Utilities {
         /// </summary>
         public CanDrop canDropMethod;
 
-        public NPCDrop(int itemID, Tuple<int, int> amount, CanDrop canDropDelegate = null) {
+        public ItemDrop(int itemID, Tuple<int, int> amount, CanDrop canDropDelegate = null) {
             dropID = itemID;
             dropCount = amount;
             if (canDropDelegate == null) {
-                canDropMethod = delegate (NPC npc) {
+                canDropMethod = delegate () {
                     return true;
                 };
             }

@@ -10,6 +10,6 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         public virtual int AppliedNPCID => -1;
 
-        public virtual List<NPCDrop> ItemsToDrop => new List<NPCDrop>();
+        public virtual List<ItemDrop> ItemsToDrop => new List<ItemDrop>();
     }
 }

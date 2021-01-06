@@ -13,8 +13,8 @@ namespace TerraTemp.Common.GlobalNPCs {
         public override void NPCLoot(NPC npc) {
             foreach (NPCLootChange lootChange in TerraTemp.lootChanges) {
                 if (npc.type == lootChange.AppliedNPCID) {
-                    foreach (NPCDrop drop in lootChange.ItemsToDrop) {
-                        if (drop.canDropMethod(npc)) {
+                    foreach (ItemDrop drop in lootChange.ItemsToDrop) {
+                        if (drop.canDropMethod()) {
                             int dropCount = drop.dropCount.Item1 == drop.dropCount.Item2 ? drop.dropCount.Item1 : Main.rand.Next(drop.dropCount.Item1, drop.dropCount.Item2);
 
                             Item.NewItem(npc.getRect(), drop.dropID, dropCount);
