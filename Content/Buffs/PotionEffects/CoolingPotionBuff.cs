@@ -4,14 +4,11 @@ using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Buffs.PotionEffects {
 
-    public class CoolingPotionBuff : ModBuff {
+    public class CoolingPotionBuff : TemperatureBuff {
+        public override float HeatComfortabilityChange => 8f;
 
         public override void SetDefaults() {
             canBeCleared = true;
-        }
-
-        public override void Update(Player player, ref int buffIndex) {
-            player.GetTempPlayer().comfortableHigh += 8f;
         }
     }
 }

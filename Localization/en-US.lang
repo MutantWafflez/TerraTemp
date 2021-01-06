@@ -58,10 +58,8 @@ ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme h
 
 #TerraTemp Buff Names/Tooltips
 BuffName.CoolingPotionBuff=Cooled
-BuffDescription.CoolingPotionBuff={[Mods.TerraTemp.GlobalTooltip.IncreasedHeatComfortability] (8)}
 
 BuffName.TempResistBuff=Temperature Resistance
-BuffDescription.TempResistBuff={[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (40)}
 
 BuffName.Sweaty=Sweaty
 BuffDescription.Sweaty=The heat drenches your clothing
