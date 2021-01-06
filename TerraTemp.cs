@@ -108,7 +108,7 @@ namespace TerraTemp {
 
         #endregion Loading Overrides
 
-        #region Temperature Deviation
+        #region Update Overrides
 
         public override void MidUpdateDustTime() {
             if (Main.time >= 32400.0 && !Main.dayTime && (!Main.gameMenu || Main.netMode == NetmodeID.Server)) {
@@ -116,7 +116,7 @@ namespace TerraTemp {
             }
         }
 
-        #endregion Temperature Deviation
+        #endregion
 
         #region Packet Handling
 
@@ -163,6 +163,7 @@ namespace TerraTemp {
         #region Custom Methods
 
         public void NewDayStarted() {
+            //Temperature/Humidity Deviation
             if (Main.netMode == NetmodeID.Server) {
                 dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
                 ModPacket packet = GetPacket();

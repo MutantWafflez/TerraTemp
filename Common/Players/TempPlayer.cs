@@ -264,6 +264,7 @@ namespace TerraTemp {
         #region Multiplayer Syncing
 
         public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
+            //Upon a new player joining the server, they'll need to have their "Deviation" values synced to match with the server. That is handled here:
             if (newPlayer) {
                 ModPacket packet = mod.GetPacket();
                 packet.Write((byte)PacketID.RequestServerTemperatureValues);
