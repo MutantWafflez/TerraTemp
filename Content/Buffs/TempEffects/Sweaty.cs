@@ -6,8 +6,6 @@ namespace TerraTemp.Content.Buffs.TempEffects {
     public class Sweaty : ModBuff {
 
         public override void SetDefaults() {
-            DisplayName.SetDefault("Sweaty");
-            Description.SetDefault("The heat drenches your clothing");
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
             canBeCleared = false;

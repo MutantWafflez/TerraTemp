@@ -56,6 +56,25 @@ ItemTooltip.HeterostaticRune=2% increased damage and movement speed for each deg
 ItemName.VolatileThermometer=Volatile Thermometer
 ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme heat or cold upon death
 
+#TerraTemp Buff Names/Tooltips
+BuffName.CoolingPotionBuff=Cooled
+BuffDescription.CoolingPotionBuff={[Mods.TerraTemp.GlobalTooltip.IncreasedHeatComfortability] (8)}
+
+BuffName.TempResistBuff=Temperature Resistance
+BuffDescription.TempResistBuff={[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (40)}
+
+BuffName.Sweaty=Sweaty
+BuffDescription.Sweaty=The heat drenches your clothing
+
+BuffName.HeatStroke=Heat Stroke
+BuffDescription.HeatStroke=Heat consumes your every nerve, the end is near
+
+BuffName.Shivering=Shivering
+BuffDescription.Shivering=The cold air nips at your skin
+
+BuffName.Hypothermia=Hypothermia
+BuffDescription.Hypothermia=Feeling numb, the end feels near
+
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
 GlobalSetBonus.RainArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedCriticalRange] (5)} while it's raining
 GlobalSetBonus.AnglerArmor=33% of your fishing power is converted to temperature change resistance

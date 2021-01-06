@@ -7,8 +7,6 @@ namespace TerraTemp.Content.Buffs.TempEffects {
     public class Shivering : ModBuff {
 
         public override void SetDefaults() {
-            DisplayName.SetDefault("Shivering");
-            Description.SetDefault("The cold air nips at your skin");
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
             canBeCleared = false;

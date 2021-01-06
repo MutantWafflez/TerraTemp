@@ -6,8 +6,6 @@ namespace TerraTemp.Content.Buffs.TempEffects {
     public class HeatStroke : ModBuff {
 
         public override void SetDefaults() {
-            DisplayName.SetDefault("Heat Stroke");
-            Description.SetDefault("Heat consumes your every nerve, the end is near");
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
             canBeCleared = false;

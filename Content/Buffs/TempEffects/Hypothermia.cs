@@ -6,8 +6,6 @@ namespace TerraTemp.Content.Buffs.TempEffects {
     public class Hypothermia : ModBuff {
 
         public override void SetDefaults() {
-            DisplayName.SetDefault("Hypothermia");
-            Description.SetDefault("Feeling numb, the end feels near");
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
             canBeCleared = false;
