@@ -26,6 +26,7 @@ namespace TerraTemp.Common.GlobalItems {
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
                     temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;
                     temperaturePlayer.criticalRangeMaximum += change.CriticalTemperatureChange;
+                    change.AdditionalItemEquipEffect(player);
                     break;
                 }
             }

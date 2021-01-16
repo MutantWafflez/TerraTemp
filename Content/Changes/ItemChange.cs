@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Changes {
@@ -47,5 +48,13 @@ namespace TerraTemp.Content.Changes {
         /// line on top of this, use base.AdditionalTooltip + "your string here"
         /// </summary>
         public virtual string AdditionalTooltip => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
+
+        /// <summary>
+        /// If the item has an additional effect on the player, overriding this method can assist
+        /// with whatever change. This hook is called in the UpdateEquip() hook in the
+        /// VanillaItemChange GlobalItem.
+        /// </summary>
+        /// <param name="player"> Player that has this item equipped. </param>
+        public virtual void AdditionalItemEquipEffect(Player player) { }
     }
 }
