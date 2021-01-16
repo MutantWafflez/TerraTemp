@@ -76,6 +76,9 @@ BuffDescription.Shivering=The cold air nips at your skin
 BuffName.Hypothermia=Hypothermia
 BuffDescription.Hypothermia=Feeling numb, the end feels near
 
+#Unique Item Change Tooltips
+GlobalItemChange.ObsidianSkull=50% decreased heat of the Underworld
+
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
 GlobalSetBonus.RainArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedCriticalRange] (5)} while it's raining
 GlobalSetBonus.AnglerArmor=33% of your fishing power is converted to temperature change resistance
