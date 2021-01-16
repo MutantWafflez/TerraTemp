@@ -128,7 +128,7 @@ namespace TerraTemp {
 
             //Apply Event changes on player
             foreach (EventChange change in TerraTemp.eventChanges) {
-                if (change.EventBoolean) {
+                if (change.EventBoolean && change.ApplyEventEffects(player)) {
                     baseDesiredTemperature += change.DesiredTemperatureChange;
                     comfortableHigh += change.HeatComfortabilityChange;
                     comfortableLow += change.ColdComfortabilityChange;
