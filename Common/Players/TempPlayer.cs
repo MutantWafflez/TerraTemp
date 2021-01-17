@@ -72,6 +72,12 @@ namespace TerraTemp {
         public float criticalRangeMaximum; //Default 10f
 
         /// <summary>
+        /// How much more or less intense the temperature changes of EVERY biome will be. By
+        /// default, it is 1f (100%, normal).
+        /// </summary>
+        public float climateExtremityValue; //Default 1f
+
+        /// <summary>
         /// The player's current biome, influencing the current environment temperature.
         /// </summary>
         public Climate currentBiome;
@@ -90,6 +96,7 @@ namespace TerraTemp {
             comfortableLow = 10f;
             relativeHumidity = 0f;
             criticalRangeMaximum = 10f;
+            climateExtremityValue = 1f;
         }
 
         #region Update Overrides
@@ -140,13 +147,13 @@ namespace TerraTemp {
 
             //Change desired temp & temperature resistance depending on the current biome, if applicable
             if (currentBiome != null) {
-                baseDesiredTemperature += currentBiome.TemperatureModification;
+                baseDesiredTemperature += currentBiome.TemperatureModification * climateExtremityValue;
                 temperatureChangeResist += currentBiome.TemperatureResistanceModification;
                 relativeHumidity += currentBiome.HumidityModification;
             }
             //Change desired temp & temperature resistance depending on the current evil biome, if applicable
             if (currentEvilBiome != null) {
-                baseDesiredTemperature += currentEvilBiome.TemperatureModification;
+                baseDesiredTemperature += currentEvilBiome.TemperatureModification * climateExtremityValue;
                 temperatureChangeResist += currentEvilBiome.TemperatureResistanceModification;
                 relativeHumidity += currentEvilBiome.HumidityModification;
             }
