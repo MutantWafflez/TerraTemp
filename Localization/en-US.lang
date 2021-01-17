@@ -59,6 +59,9 @@ ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme h
 ItemName.RiskBadge=Risk Badge
 ItemTooltip.RiskBadge=Forcibly sets your temperature change resistance to -100%\n34% increased damage reduction
 
+#TerraTemp Materials Names/Tooltips
+ItemName.BarbFish=Cherry Barb
+
 #TerraTemp Buff Names/Tooltips
 BuffName.CoolingPotionBuff=Cooled
 

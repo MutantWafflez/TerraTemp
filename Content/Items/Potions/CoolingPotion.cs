@@ -1,6 +1,7 @@
 ﻿using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Buffs.PotionEffects;
+using TerraTemp.Content.Items.Materials.Fish;
 using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Items.Potions {
@@ -23,7 +24,7 @@ namespace TerraTemp.Content.Items.Potions {
         public override void AddRecipes() {
             ModRecipe recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemID.BottledWater);
-            recipe.AddIngredient(ItemID.FlarefinKoi);
+            recipe.AddIngredient(ModContent.ItemType<BarbFish>());
             recipe.AddIngredient(ItemID.Fireblossom);
             recipe.AddTile(TileID.Bottles);
             recipe.SetResult(this);
