@@ -43,6 +43,9 @@ GlobalTooltip.DecreasedTempResistance={0}% decreased temperature change resistan
 GlobalTooltip.IncreasedCriticalRange={0} degree increased critical range
 GlobalTooltip.DecreasedCriticalRange={0} degree decreased critical range
 
+GlobalTooltip.IncreasedClimateExtremity={0}% increased climate temperatures
+GlobalTooltip.DecreasedClimateExtremity={0}% decreased climate temperatures
+
 #TerraTemp Accessory Names/Tooltips
 ItemName.FlameRune=Flame Rune
 ItemTooltip.FlameRune=2% increased damage and movement speed for each degree above normal body temperature

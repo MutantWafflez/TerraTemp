@@ -43,11 +43,16 @@ namespace TerraTemp.Content.Changes {
         public virtual float CriticalTemperatureChange => 0f;
 
         /// <summary>
+        /// By how much this given item will change the player's climate extremity value.
+        /// </summary>
+        public virtual float ClimateExtremityChange => 0f;
+
+        /// <summary>
         /// Additional tooltip line(s) to be added to the end of the item's tooltip. Done
         /// automatically based on how each property is changed, if you wish to add an additional
         /// line on top of this, use base.AdditionalTooltip + "your string here"
         /// </summary>
-        public virtual string AdditionalTooltip => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
+        public virtual string AdditionalTooltip => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange);
 
         /// <summary>
         /// If the item has an additional effect on the player, overriding this method can assist

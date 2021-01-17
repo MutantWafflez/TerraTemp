@@ -58,6 +58,11 @@ namespace TerraTemp.Content.Changes {
         public virtual float CriticalTemperatureChange => 0f;
 
         /// <summary>
+        /// By how much this given set bonus will change the player's climate extremity value.
+        /// </summary>
+        public virtual float ClimateExtremityChange => 0f;
+
+        /// <summary>
         /// Additional tooltip line(s) to be added to the end of the set bonus text. Done
         /// automatically based on how each property is changed. If there is a unique effect other
         /// than changing stats, unless you want it to not be localized, the tooltip is
@@ -65,7 +70,7 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         public virtual string AdditionalSetBonusText {
             get {
-                string statLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
+                string statLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange);
                 if (statLine != null) {
                     if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
                         return statLine + "\n" + TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);

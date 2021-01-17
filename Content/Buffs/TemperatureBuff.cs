@@ -36,6 +36,11 @@ namespace TerraTemp.Content.Buffs {
         /// </summary>
         public virtual float CriticalTemperatureChange => 0f;
 
+        /// <summary>
+        /// By how much this given buff will change the player's climate extremity value.
+        /// </summary>
+        public virtual float ClimateExtremityChange => 0f;
+
         public override void Update(Player player, ref int buffIndex) {
             TempPlayer temperaturePlayer = player.GetTempPlayer();
             temperaturePlayer.baseDesiredTemperature += DesiredTemperatureChange;
@@ -43,10 +48,11 @@ namespace TerraTemp.Content.Buffs {
             temperaturePlayer.comfortableLow += ColdComfortabilityChange;
             temperaturePlayer.temperatureChangeResist += TemperatureResistanceChange;
             temperaturePlayer.criticalRangeMaximum += CriticalTemperatureChange;
+            temperaturePlayer.climateExtremityValue += ClimateExtremityChange;
         }
 
         public override void ModifyBuffTip(ref string tip, ref int rare) {
-            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
+            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange);
             if (returnedLine != null) {
                 tip = returnedLine;
             }

@@ -162,12 +162,13 @@ namespace TerraTemp.Utilities {
         /// How much this will change the player's desired temperature, AKA the "environment" temperature.
         /// </param>
         /// <returns> Localized lines(s) that say what the change has done to player's stats. </returns>
-        public static string CreateNewLineBasedOnStats(float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange, float desiredTempChange) {
+        public static string CreateNewLineBasedOnStats(float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange, float desiredTempChange, float climateExtremityChange) {
             float heatChange = Math.Abs(heatComfortabilityChange);
             float coldChange = Math.Abs(coldComfortabilityChange);
             float tempResistChange = Math.Abs(temperatureResistanceChange) * 100f; //Times 100 because its a percentage
             float criticalChange = Math.Abs(criticalRangeChange);
             float desiredChange = Math.Abs(desiredTempChange);
+            float climateExtreme = Math.Abs(climateExtremityChange);
 
             string fullLine = "";
             List<string> stringsToAdd = new List<string>();
@@ -212,6 +213,14 @@ namespace TerraTemp.Utilities {
             }
             else if (criticalRangeChange < 0f) {
                 stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange", criticalChange));
+            }
+
+            //Climate Extremity Change Check
+            if (climateExtremityChange > 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedClimateExtremity", climateExtreme));
+            }
+            else if (climateExtremityChange < 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedClimateExtremity", climateExtreme));
             }
 
             //Desired Temperature Change Check

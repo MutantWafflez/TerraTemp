@@ -37,8 +37,13 @@ namespace TerraTemp.Content.Items {
         /// </summary>
         public virtual float CriticalTemperatureChange => 0f;
 
+        /// <summary>
+        /// By how much this given item will change the player's climate extremity value.
+        /// </summary>
+        public virtual float ClimateExtremityChange => 0f;
+
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange);
+            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange);
             if (returnedLine != null) {
                 TooltipLine modifierLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name.Contains("Prefix"));
                 if (modifierLine != null) {
