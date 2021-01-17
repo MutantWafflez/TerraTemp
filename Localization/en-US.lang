@@ -60,7 +60,7 @@ ItemName.VolatileThermometer=Volatile Thermometer
 ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme heat or cold upon death
 
 ItemName.RiskBadge=Risk Badge
-ItemTooltip.RiskBadge=Forcibly sets your temperature change resistance to -100%\n34% increased damage reduction
+ItemTooltip.RiskBadge=Forcibly sets your temperature change resistance to -100%\n25% increased climate temperatures\n25% increased damage reduction
 
 #TerraTemp Materials Names/Tooltips
 ItemName.BarbFish=Cherry Barb
