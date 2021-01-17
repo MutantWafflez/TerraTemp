@@ -62,6 +62,7 @@ namespace TerraTemp.Content.Items {
             temperaturePlayer.comfortableLow += ColdComfortabilityChange;
             temperaturePlayer.temperatureChangeResist += TemperatureResistanceChange;
             temperaturePlayer.criticalRangeMaximum += CriticalTemperatureChange;
+            temperaturePlayer.climateExtremityValue += ClimateExtremityChange;
         }
     }
 }
