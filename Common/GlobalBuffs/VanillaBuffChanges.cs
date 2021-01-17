@@ -20,6 +20,7 @@ namespace TerraTemp.Common.GlobalBuffs {
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
                     temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;
                     temperaturePlayer.criticalRangeMaximum += change.CriticalTemperatureChange;
+                    temperaturePlayer.climateExtremityValue += change.ClimateExtremityChange;
                     break;
                 }
             }
