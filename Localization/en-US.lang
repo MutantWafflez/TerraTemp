@@ -65,6 +65,10 @@ ItemTooltip.RiskBadge=Forcibly sets your temperature change resistance to -100%\
 #TerraTemp Materials Names/Tooltips
 ItemName.BarbFish=Cherry Barb
 
+#TerraTemp Miscellaneous Items/Tooltips
+ItemName.Thermometer=Thermometer
+ItemTooltip.Thermometer=Displays several temperature related statistics
+
 #TerraTemp Buff Names/Tooltips
 BuffName.CoolingPotionBuff=Cooled
 

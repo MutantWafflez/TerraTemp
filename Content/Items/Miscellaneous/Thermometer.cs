@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,10 +11,6 @@ namespace TerraTemp.Content.Items.Miscellaneous {
 
     public class Thermometer : ModItem {
 
-        public override void SetStaticDefaults() {
-            Tooltip.SetDefault("Displays several temperature related statistics");
-        }
-
         public override void SetDefaults() {
             item.CloneDefaults(ItemID.DepthMeter);
             item.width = 32;
@@ -22,7 +19,10 @@ namespace TerraTemp.Content.Items.Miscellaneous {
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            TempPlayer tempPlayer = Main.player[item.owner].GetTempPlayer();
+            if (!Main.LocalPlayer.inventory.Any(item => item.type == ModContent.ItemType<Thermometer>())) {
+                return;
+            }
+            TempPlayer tempPlayer = Main.LocalPlayer.GetTempPlayer();
             float baseDesiredTemp = tempPlayer.baseDesiredTemperature;
             float modifiedDesiredTemp = tempPlayer.modifiedDesiredTemperature;
             float currentTemp = tempPlayer.currentTemperature;
@@ -31,6 +31,8 @@ namespace TerraTemp.Content.Items.Miscellaneous {
             float criticalRangeMaximum = tempPlayer.criticalRangeMaximum;
             float tempeResistChange = tempPlayer.temperatureChangeResist;
             float relativeHumidity = tempPlayer.relativeHumidity;
+
+            List<TooltipLine> listOfAddedLines = new List<TooltipLine>();
 
             TooltipLine currentLine = new TooltipLine(mod,
             "CurrentTemp",
@@ -41,32 +43,43 @@ namespace TerraTemp.Content.Items.Miscellaneous {
             else if (currentTemp >= comfortableHigh + (criticalRangeMaximum / 2f) || currentTemp <= comfortableLow - (criticalRangeMaximum / 2f)) {
                 currentLine.overrideColor = new Color(255, 0, 0);
             }
-            tooltips.Add(currentLine);
+            listOfAddedLines.Add(currentLine);
 
             TooltipLine baseDesiredLine = new TooltipLine(mod,
             "BaseDesiredTemp",
             "Environment Temperature: " + Math.Round(baseDesiredTemp) + "C (" + TempUtilities.CelsiusToFahrenheit(baseDesiredTemp, true) + "F)");
-            tooltips.Add(baseDesiredLine);
+            listOfAddedLines.Add(baseDesiredLine);
 
             TooltipLine moddedDesiredLine = new TooltipLine(mod,
             "ModifiedDesiredTemp",
             "Feels Like: " + Math.Round(modifiedDesiredTemp) + "C (" + TempUtilities.CelsiusToFahrenheit(modifiedDesiredTemp, true) + "F)");
-            tooltips.Add(moddedDesiredLine);
+            listOfAddedLines.Add(moddedDesiredLine);
 
             TooltipLine humidityLine = new TooltipLine(mod,
             "RelativeHumidity",
             "Relative Humidity: " + Math.Round(relativeHumidity * 100f) + "%");
-            tooltips.Add(humidityLine);
+            listOfAddedLines.Add(humidityLine);
 
             TooltipLine resistLine = new TooltipLine(mod,
             "ResistChange",
             "Temperature Change Resistance: " + Math.Round(tempeResistChange * 100f) + "%");
-            tooltips.Add(resistLine);
+            listOfAddedLines.Add(resistLine);
 
             TooltipLine comfortableLine = new TooltipLine(mod,
             "PlayerComfortability",
             "Comfortable Range: " + Math.Round(comfortableLow) + "C - " + Math.Round(comfortableHigh) + "C");
-            tooltips.Add(comfortableLine);
+            listOfAddedLines.Add(comfortableLine);
+
+            TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name == "Price" || tooltip.Name == "SpecialPrice"));
+
+            foreach (TooltipLine line in listOfAddedLines) {
+                if (sellLine != null) {
+                    tooltips.Insert(tooltips.IndexOf(sellLine), line);
+                }
+                else {
+                    tooltips.Add(line);
+                }
+            }
         }
 
         public override void AddRecipes() {
