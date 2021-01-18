@@ -42,6 +42,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override float TemperatureResistanceChange => -0.4f;
 
-        public override float CriticalTemperatureChange => 10f;
+        public override float CriticalTemperatureChange => 6f;
     }
 }
