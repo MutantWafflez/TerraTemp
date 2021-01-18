@@ -158,13 +158,13 @@ namespace TerraTemp {
 
             //Change desired temp & temperature resistance depending on the current biome, if applicable
             if (currentBiome != null) {
-                baseDesiredTemperature += currentBiome.TemperatureModification * climateExtremityValue;
+                baseDesiredTemperature += (currentBiome.TemperatureModification + currentBiome.WaterTemperature) * climateExtremityValue;
                 temperatureChangeResist += currentBiome.TemperatureResistanceModification;
                 relativeHumidity += currentBiome.HumidityModification;
             }
             //Change desired temp & temperature resistance depending on the current evil biome, if applicable
             if (currentEvilBiome != null) {
-                baseDesiredTemperature += currentEvilBiome.TemperatureModification * climateExtremityValue;
+                baseDesiredTemperature += (currentEvilBiome.TemperatureModification + currentEvilBiome.WaterTemperature) * climateExtremityValue;
                 temperatureChangeResist += currentEvilBiome.TemperatureResistanceModification;
                 relativeHumidity += currentEvilBiome.HumidityModification;
             }

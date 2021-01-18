@@ -23,6 +23,12 @@ namespace TerraTemp.Content.Changes {
         public virtual float HumidityModification => 0f;
 
         /// <summary>
+        /// The typical temperature of the water in this biome. Defaults to reducing temperature by
+        /// 2 degrees.
+        /// </summary>
+        public virtual float WaterTemperature => -2f;
+
+        /// <summary>
         /// Zone bool that relates to this biome.
         /// </summary>
         public virtual bool PlayerZoneBool(Player player) => false;
@@ -48,6 +54,12 @@ namespace TerraTemp.Content.Changes {
         /// How much this evil biome will change the humidity of the environment.
         /// </summary>
         public virtual float HumidityModification => 0f;
+
+        /// <summary>
+        /// The typical temperature of the water in this evil biome. Defaults to reducing
+        /// temperature by 2 degrees.
+        /// </summary>
+        public virtual float WaterTemperature => -2f;
 
         /// <summary>
         /// Zone bool that relates to this evil biome.
