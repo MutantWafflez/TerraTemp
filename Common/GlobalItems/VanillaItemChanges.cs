@@ -41,12 +41,16 @@ namespace TerraTemp.Common.GlobalItems {
                     //These checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
                     TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Tooltip0");
                     TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Defense");
+                    TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name == "Price" || tooltip.Name == "SpecialPrice"));
 
                     if (defenseLine != null) {
                         tooltips.Insert(tooltips.IndexOf(defenseLine) + 1, newLine);
                     }
                     else if (toolTipZero != null) {
                         tooltips.Insert(tooltips.IndexOf(toolTipZero) + 1, newLine);
+                    }
+                    else if (sellLine != null) {
+                        tooltips.Insert(tooltips.IndexOf(sellLine), newLine);
                     }
                     else {
                         tooltips.Add(newLine);
