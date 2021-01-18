@@ -50,7 +50,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.statLife < player.statLifeMax2) {
-                player.GetTempPlayer().temperatureChangeResist += 0.8f * (1f - ((float)player.statLife / (float)player.statLifeMax2));
+                player.GetTempPlayer().temperatureChangeResist += 0.7f * (1f - ((float)player.statLife / (float)player.statLifeMax2));
             }
         }
     }

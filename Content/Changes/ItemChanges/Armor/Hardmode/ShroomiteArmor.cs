@@ -47,7 +47,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int LegPieceID => ItemID.ShroomiteLeggings;
 
         public override void AdditionalSetBonusEffect(Player player) {
-            player.GetTempPlayer().temperatureChangeResist += 0.8f * (1f - player.stealth);
+            player.GetTempPlayer().temperatureChangeResist += 0.7f * (1f - player.stealth);
         }
     }
 }
