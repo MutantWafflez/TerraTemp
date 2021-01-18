@@ -1,6 +1,6 @@
 Terraria, now with Temperature!
 
-Ever wanted to die of heat stroke or hypothermia in Terraria? Now you can! Here is a list of additions & changes for your dying pleasure:
+Ever wanted to die of Heat Stroke or Hypothermia in Terraria? Now you can! Here is a list of additions & changes for your dying pleasure:
 + Temperature, influenced by the biome you're in, time of day, humidity, wind speed, and many other factors
 + New "Thermometer" item that displays several different temperature related statistics (Hint: Might want to make one of these as soon as possible)
 + Entirely new accessories that can twist the temperature toward your advantage
