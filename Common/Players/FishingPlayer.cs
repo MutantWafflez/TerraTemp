@@ -14,7 +14,7 @@ namespace TerraTemp.Common.Players {
                 return;
             }
             //Barb Fish (25% chance per catch on the Jungle Surface in Water/Honey)
-            if (player.ZoneJungle && worldLayer == 1 && liquidType != 1 && Main.rand.Next(4) == 0) {
+            if (player.ZoneJungle && worldLayer == 1 && liquidType != 1 && Main.rand.Next(7) == 0) {
                 caughtType = ModContent.ItemType<BarbFish>();
                 return;
             }
