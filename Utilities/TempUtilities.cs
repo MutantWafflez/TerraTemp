@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace TerraTemp.Utilities {
 
@@ -277,6 +278,38 @@ namespace TerraTemp.Utilities {
         /// <typeparam name="T"> The Class to get the children of. </typeparam>
         public static List<Type> GetAllChildrenOfClass<T>() {
             return Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(T)) && !type.IsAbstract).ToList();
+        }
+
+        /// <summary>
+        /// Does a "deep search" of all currently available recipes, whether it be vanilla or
+        /// modded. Make sure to call this in PostAddRecipes() in the mod class to check for modded
+        /// recipes as well.
+        /// </summary>
+        /// <param name="ingredientID"> The ID of the item to search for. </param>
+        /// <returns>
+        /// A HashSet of IDs for each item that contains the item with the ID of <paramref
+        /// name="ingredientID"/> ANYWHERE in its crafting tree.
+        /// </returns>
+        public static HashSet<int> DeepRecipeSearch(int ingredientID) {
+            HashSet<int> derivedItems = new HashSet<int>();
+
+            void SearchAnotherLayer(int nextSearchIngredient) {
+                RecipeFinder finder = new RecipeFinder();
+                finder.AddIngredient(nextSearchIngredient);
+                foreach (Recipe recipe in finder.SearchRecipes()) {
+                    derivedItems.Add(recipe.createItem.type);
+
+                    RecipeFinder checkForMaterial = new RecipeFinder();
+                    checkForMaterial.AddIngredient(recipe.createItem.type);
+                    if (checkForMaterial.SearchRecipes().Any()) {
+                        SearchAnotherLayer(recipe.createItem.type);
+                    }
+                }
+            }
+
+            SearchAnotherLayer(ingredientID);
+
+            return derivedItems;
         }
 
         #endregion
