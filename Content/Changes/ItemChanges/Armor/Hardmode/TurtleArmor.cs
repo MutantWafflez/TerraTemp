@@ -11,9 +11,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.TurtleHelmet
         };
 
-        public override float HeatComfortabilityChange => 5f;
+        public override float HeatComfortabilityChange => 2f;
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float ColdComfortabilityChange => 1f;
     }
 
     public class TurtleChestplate : ItemChange {
@@ -22,9 +22,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.TurtleScaleMail
         };
 
-        public override float HeatComfortabilityChange => 6f;
+        public override float HeatComfortabilityChange => 2f;
 
-        public override float ColdComfortabilityChange => 4f;
+        public override float ColdComfortabilityChange => 2f;
     }
 
     public class TurtleLeggings : ItemChange {
@@ -33,9 +33,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.TurtleLeggings
         };
 
-        public override float HeatComfortabilityChange => 5f;
+        public override float HeatComfortabilityChange => 3f;
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float ColdComfortabilityChange => 1f;
     }
 
     public class TurtleArmor : SetBonusChange {
