@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Utilities;
 
-namespace TerraTemp.Content.Items {
+namespace TerraTemp.Content.Items.Miscellaneous {
 
     public class Thermometer : ModItem {
 
