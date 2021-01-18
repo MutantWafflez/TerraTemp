@@ -68,6 +68,22 @@ namespace TerraTemp.Utilities {
         }
 
         /// <summary>
+        /// Method that expresses how much the current rain status will affect the current relative
+        /// humidity. The "heavier" the rain, the more humid it will be, and the lighter the rain
+        /// the less humid it will be (but it will still have a large increase on humidity
+        /// regardless). "Heavy" raining is &gt; 0.6, "Normal" raining is &gt;= 0.2, Light raining
+        /// is &gt; 0.
+        /// </summary>
+        public static float GetRainEffectsOnHumidity() {
+            if (Main.maxRaining > 0.6) {
+                return 0.9f;
+            }
+            else {
+                return Main.maxRaining / 0.6f * 0.9f;
+            }
+        }
+
+        /// <summary>
         /// Real life formula that calculates the Apparent temperature at any given time, applying
         /// factors of the environment temperature, relative humidity, and wind speed. https://en.wikipedia.org/wiki/Wind_chill#Australian_apparent_temperature
         /// </summary>
