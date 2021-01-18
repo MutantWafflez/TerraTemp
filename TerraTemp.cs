@@ -4,6 +4,7 @@ using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
 using TerraTemp.ID;
 using TerraTemp.Utilities;
@@ -130,6 +131,17 @@ namespace TerraTemp {
         }
 
         #endregion Loading Overrides
+
+        #region Visual Overrides
+
+        public override void ModifyLightingBrightness(ref float scale) {
+            //Hypothermia/Heat Stroke "Blackout" Effect
+            if (Main.LocalPlayer.HasBuff(ModContent.BuffType<Hypothermia>()) || Main.LocalPlayer.HasBuff(ModContent.BuffType<HeatStroke>())) {
+                scale -= 0.34f;
+            }
+        }
+
+        #endregion
 
         #region Update Overrides
 

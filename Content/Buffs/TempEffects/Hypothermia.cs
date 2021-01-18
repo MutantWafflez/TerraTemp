@@ -17,7 +17,6 @@ namespace TerraTemp.Content.Buffs.TempEffects {
             player.meleeSpeed *= 0.75f;
             player.moveSpeed *= 0.75f;
             player.chilled = true;
-            player.blackout = true;
         }
     }
 }
