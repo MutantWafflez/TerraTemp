@@ -12,7 +12,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CactusHelmet
         };
 
-        public override float DesiredTemperatureChange => 1f;
+        public override float DesiredTemperatureChange => 0.5f;
     }
 
     public class CactusChesplate : ItemChange {
@@ -21,7 +21,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CactusBreastplate
         };
 
-        public override float DesiredTemperatureChange => 2f;
+        public override float DesiredTemperatureChange => 0.75f;
     }
 
     public class CactusLeggings : ItemChange {
@@ -30,7 +30,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CactusLeggings
         };
 
-        public override float DesiredTemperatureChange => 1f;
+        public override float DesiredTemperatureChange => 0.25f;
     }
 
     public class CactusArmor : SetBonusChange {
