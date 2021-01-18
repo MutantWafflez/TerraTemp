@@ -62,6 +62,13 @@ namespace TerraTemp {
         public static List<BagChange> bagChanges;
 
         /// <summary>
+        /// A list of ALL newly added Tile Adjacency Changes. If you wish to add or otherwise remove
+        /// a given Tile Adjacency Change, search through this List with LINQ or any other method
+        /// that is preferred.
+        /// </summary>
+        public static List<AdjacencyChange> adjacencyChanges;
+
+        /// <summary>
         /// A value that is randomized daily that determines how hot it will get during the day and
         /// how cold it will get during the night.
         /// </summary>
@@ -107,6 +114,10 @@ namespace TerraTemp {
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<BagChange>()) {
                 bagChanges.Add((BagChange)Activator.CreateInstance(type));
             }
+
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<AdjacencyChange>()) {
+                adjacencyChanges.Add((AdjacencyChange)Activator.CreateInstance(type));
+            }
         }
 
         public override void Load() {
@@ -118,6 +129,7 @@ namespace TerraTemp {
             buffChanges = new List<BuffChange>();
             lootChanges = new List<NPCLootChange>();
             bagChanges = new List<BagChange>();
+            adjacencyChanges = new List<AdjacencyChange>();
         }
 
         public override void Unload() {
@@ -128,6 +140,8 @@ namespace TerraTemp {
             setBonusChanges = null;
             buffChanges = null;
             lootChanges = null;
+            bagChanges = null;
+            adjacencyChanges = null;
         }
 
         #endregion Loading Overrides
