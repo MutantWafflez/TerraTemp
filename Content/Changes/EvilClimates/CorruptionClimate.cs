@@ -7,6 +7,8 @@ namespace TerraTemp.Content.Changes.EvilTempBiomes {
 
         public override float TemperatureResistanceModification => -0.1f;
 
+        public override float WaterTemperature => -5f;
+
         public override bool EvilZoneBool(Player player) => player.ZoneCorrupt;
     }
 }

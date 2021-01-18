@@ -7,6 +7,8 @@ namespace TerraTemp.Content.Changes.TempBiomes {
 
         public override float HumidityModification => -0.34f;
 
+        public override float WaterTemperature => -3f;
+
         public override bool PlayerZoneBool(Player player) => player.ZoneDesert;
     }
 }
