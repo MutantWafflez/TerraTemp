@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using TerraTemp.Content.Changes;
 
 namespace TerraTemp.Utilities {
 
@@ -181,7 +182,7 @@ namespace TerraTemp.Utilities {
         /// How much this will change the player's climate extremity value.
         /// </param>
         /// <returns> Localized lines(s) that say what the change has done to player's stats. </returns>
-        public static string CreateNewLineBasedOnStats(float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange, float desiredTempChange, float climateExtremityChange) {
+        public static string CreateNewLineBasedOnStats(float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange, float desiredTempChange, float climateExtremityChange, string additionalLine = null) {
             float heatChange = Math.Abs(heatComfortabilityChange);
             float coldChange = Math.Abs(coldComfortabilityChange);
             float tempResistChange = Math.Abs(temperatureResistanceChange) * 100f; //Times 100 because it's a percentage
@@ -250,6 +251,10 @@ namespace TerraTemp.Utilities {
                 stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedDesiredTemp", desiredChange));
             }
 
+            if (additionalLine != null) {
+                stringsToAdd.Add(additionalLine);
+            }
+
             if (stringsToAdd.Any()) {
                 foreach (string line in stringsToAdd) {
                     fullLine += line + (line != stringsToAdd.Last() ? "\n" : "");
@@ -270,15 +275,7 @@ namespace TerraTemp.Utilities {
 
         #endregion
 
-        #region Miscellaneous Methods
-
-        /// <summary>
-        /// Returns a List of Types that aren't abstract that extend the class T.
-        /// </summary>
-        /// <typeparam name="T"> The Class to get the children of. </typeparam>
-        public static List<Type> GetAllChildrenOfClass<T>() {
-            return Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(T)) && !type.IsAbstract).ToList();
-        }
+        #region Derived Item Methods
 
         /// <summary>
         /// Does a "deep search" of all currently available recipes, whether it be vanilla or
@@ -310,6 +307,38 @@ namespace TerraTemp.Utilities {
             SearchAnotherLayer(ingredientID);
 
             return derivedItems;
+        }
+
+        #endregion
+
+        #region Miscellaneous Methods
+
+        /// <summary>
+        /// Returns a List of Types that aren't abstract that extend the class T.
+        /// </summary>
+        /// <typeparam name="T"> The Class to get the children of. </typeparam>
+        public static List<Type> GetAllChildrenOfClass<T>() {
+            return Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(T)) && !type.IsAbstract && type.GetCustomAttribute<IgnoredSubclassAttribute>() == null).ToList();
+        }
+
+        /// <summary>
+        /// A more advanced Contains() method for lists that will check whether or not a given list
+        /// has any values that is contained in another list. To be precise, <paramref
+        /// name="containingList"/> is searched to see if it contains any items from <paramref name="listQuery"/>.
+        /// </summary>
+        /// <typeparam name="T"> Class of both of the lists. </typeparam>
+        /// <param name="containingList"> List to be searched. </param>
+        /// <param name="listQuery">
+        /// List with potential children to be checked in the <paramref name="containingList"/> list.
+        /// </param>
+        /// <returns> </returns>
+        public static bool ContainsList<T>(List<T> containingList, List<T> listQuery) {
+            foreach (T thing in listQuery) {
+                if (containingList.Contains(thing)) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         #endregion

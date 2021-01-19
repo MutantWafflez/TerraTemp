@@ -11,14 +11,11 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ObsidianSkull,
-            ItemID.ObsidianWaterWalkingBoots,
-            ItemID.ObsidianShield,
-            ItemID.AnkhShield
         };
 
-        public override float HeatComfortabilityChange => 2f;
+        public override bool DerivedItemsProvideEffects => true;
 
-        public override string AdditionalTooltip => base.AdditionalTooltip + "\n" + TempUtilities.GetTerraTempTextValue("GlobalItemChange.ObsidianSkull");
+        public override float HeatComfortabilityChange => 2f;
 
         public override void AdditionalItemEquipEffect(Player player) {
             if (player.ZoneUnderworldHeight) {

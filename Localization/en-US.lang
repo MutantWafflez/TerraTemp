@@ -88,6 +88,7 @@ BuffDescription.Hypothermia=Feeling numb, the end feels near
 
 #Unique Item Change Tooltips
 GlobalItemChange.ObsidianSkull=40% decreased heat of the Underworld
+GlobalItemChange.ObsidianRose=Negates the temperature increase of touching and being near lava
 
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
 GlobalSetBonus.RainArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedCriticalRange] (5)} while it's raining

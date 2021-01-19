@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
@@ -88,6 +89,12 @@ namespace TerraTemp {
         /// </summary>
         public EvilClimate currentEvilBiome;
 
+        /// <summary>
+        /// List of all of the currently equipped item changes to prevent the bonuses of accessories
+        /// from stacking.
+        /// </summary>
+        public List<ItemChange> equippedItemChanges;
+
         public override void ResetEffects() {
             baseDesiredTemperature = NormalTemperature;
             modifiedDesiredTemperature = baseDesiredTemperature;
@@ -97,6 +104,8 @@ namespace TerraTemp {
             relativeHumidity = 0f;
             criticalRangeMaximum = 10f;
             climateExtremityValue = 1f;
+
+            equippedItemChanges = new List<ItemChange>();
         }
 
         #region Update Overrides

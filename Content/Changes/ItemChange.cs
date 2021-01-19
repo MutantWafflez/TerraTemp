@@ -18,6 +18,13 @@ namespace TerraTemp.Content.Changes {
         public virtual HashSet<int> AppliedItemIDs => new HashSet<int>();
 
         /// <summary>
+        /// Whether or not the items that are crafting from this item will retain the effects. For
+        /// example, if this is set to true on the Obsidian Skull, all accessories that have the
+        /// Obsidian Skull ANYWHERE in the crafting tree will retain the effects of the Obsidian Skull.
+        /// </summary>
+        public virtual bool DerivedItemsProvideEffects => false;
+
+        /// <summary>
         /// By how much this given item will change the player's Base Desired (Environmental) Temperature.
         /// </summary>
         public virtual float DesiredTemperatureChange => 0f;
@@ -49,10 +56,17 @@ namespace TerraTemp.Content.Changes {
 
         /// <summary>
         /// Additional tooltip line(s) to be added to the end of the item's tooltip. Done
-        /// automatically based on how each property is changed, if you wish to add an additional
-        /// line on top of this, use base.AdditionalTooltip + "your string here"
+        /// automatically based on how each property is changed.
         /// </summary>
-        public virtual string AdditionalTooltip => TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange);
+        public virtual string AdditionalTooltip {
+            get {
+                string additionalLine = TempUtilities.GetTerraTempTextValue("GlobalItemChange." + GetType().Name);
+                if (additionalLine == "Mods.TerraTemp.GlobalItemChange." + GetType().Name) {
+                    additionalLine = null;
+                }
+                return TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange, additionalLine);
+            }
+        }
 
         /// <summary>
         /// If the item has an additional effect on the player, overriding this method can assist

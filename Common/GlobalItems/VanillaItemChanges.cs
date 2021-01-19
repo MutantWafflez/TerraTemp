@@ -19,8 +19,17 @@ namespace TerraTemp.Common.GlobalItems {
 
         public override void UpdateEquip(Item item, Player player) {
             foreach (ItemChange change in TerraTemp.itemChanges) {
-                if (change.AppliedItemIDs.Contains(item.type)) {
+                if (change.AppliedItemIDs.Contains(item.type) &&
+                    !player.GetTempPlayer().equippedItemChanges.Contains(change) &&
+                    (change is DerivedItemChange ? !TempUtilities.ContainsList(player.GetTempPlayer().equippedItemChanges, (change as DerivedItemChange).GetBaseItemChanges()) : true)) {
                     TempPlayer temperaturePlayer = player.GetTempPlayer();
+                    if (change is DerivedItemChange) {
+                        DerivedItemChange changeAsDerived = change as DerivedItemChange;
+                        foreach (ItemChange baseChange in changeAsDerived.GetBaseItemChanges()) {
+                            temperaturePlayer.equippedItemChanges.Add(baseChange);
+                        }
+                    }
+                    temperaturePlayer.equippedItemChanges.Add(change);
                     temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
                     temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
                     temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
@@ -28,7 +37,6 @@ namespace TerraTemp.Common.GlobalItems {
                     temperaturePlayer.criticalRangeMaximum += change.CriticalTemperatureChange;
                     temperaturePlayer.climateExtremityValue += change.ClimateExtremityChange;
                     change.AdditionalItemEquipEffect(player);
-                    break;
                 }
             }
         }

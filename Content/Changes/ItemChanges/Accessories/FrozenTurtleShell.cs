@@ -9,6 +9,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
             ItemID.FrozenTurtleShell
         };
 
+        public override bool DerivedItemsProvideEffects => true;
+
         public override float DesiredTemperatureChange => -3f;
     }
 }

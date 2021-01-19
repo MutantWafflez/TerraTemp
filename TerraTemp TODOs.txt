@@ -5,7 +5,7 @@ Version 1.1 TODOs (Compatability Update):
 -Compatability of Overhaul (Season influence)
 -Compatability of Various Weathers (All of the events!)
 -Compatability of Calamity (Biomes, mostly. NOT doing all the accessories/armor ever? though)
--Make items keep TerraTemp bonuses if anywhere in the crafting tree it uses an item that boosts stats
+-Make items keep TerraTemp bonuses if anywhere in the crafting tree it uses an item that boosts stats (Done)
 -Depth. Influence.
 
 Whenever TODOs:

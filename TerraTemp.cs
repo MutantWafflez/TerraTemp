@@ -82,7 +82,54 @@ namespace TerraTemp {
 
         #region Loading Overrides
 
-        public override void PostSetupContent() {
+        //Handles all of the Accessory Inheritence for automated cross-mod compatability.
+        public override void PostAddRecipes() {
+            //Step 1: Get all items that can be crafted from items that allow inheritence
+            List<DerivedItemChange> placeholderItemChanges = new List<DerivedItemChange>();
+            foreach (ItemChange itemChange in itemChanges) {
+                if (itemChange.DerivedItemsProvideEffects && itemChange.GetType() != typeof(DerivedItemChange)) {
+                    foreach (int itemID in itemChange.AppliedItemIDs) {
+                        HashSet<int> derivedItems = TempUtilities.DeepRecipeSearch(itemID);
+                        foreach (int derivedID in derivedItems) {
+                            placeholderItemChanges.Add(new DerivedItemChange(derivedID, itemChange));
+                        }
+                    }
+                }
+            }
+
+            //Step 2: Take all of the inherited items and merge any duplicates.
+            int mergeCount;
+            do {
+                mergeCount = 0;
+                placeholderItemChanges.Sort((changeOne, changeTwo) => changeOne.appliedItemID.CompareTo(changeTwo.appliedItemID));
+                for (int i = 0; i < placeholderItemChanges.Count; i++) {
+                    if (i + 1 < placeholderItemChanges.Count) {
+                        if (placeholderItemChanges[i].Merge(placeholderItemChanges[i + 1])) {
+                            placeholderItemChanges.RemoveAt(i + 1);
+                            mergeCount++;
+                        }
+                    }
+                }
+            }
+            while (mergeCount != 0);
+
+            //Step 3: Add all new inherited items to the end of the ItemChanges list.
+            foreach (DerivedItemChange derivedItemChange in placeholderItemChanges) {
+                itemChanges.Add(derivedItemChange);
+            }
+        }
+
+        public override void Load() {
+            climates = new List<Climate>();
+            evilClimates = new List<EvilClimate>();
+            eventChanges = new List<EventChange>();
+            itemChanges = new List<ItemChange>();
+            setBonusChanges = new List<SetBonusChange>();
+            buffChanges = new List<BuffChange>();
+            lootChanges = new List<NPCLootChange>();
+            bagChanges = new List<BagChange>();
+            adjacencyChanges = new List<AdjacencyChange>();
+
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<Climate>()) {
                 climates.Add((Climate)Activator.CreateInstance(type));
             }
@@ -118,18 +165,6 @@ namespace TerraTemp {
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<AdjacencyChange>()) {
                 adjacencyChanges.Add((AdjacencyChange)Activator.CreateInstance(type));
             }
-        }
-
-        public override void Load() {
-            climates = new List<Climate>();
-            evilClimates = new List<EvilClimate>();
-            eventChanges = new List<EventChange>();
-            itemChanges = new List<ItemChange>();
-            setBonusChanges = new List<SetBonusChange>();
-            buffChanges = new List<BuffChange>();
-            lootChanges = new List<NPCLootChange>();
-            bagChanges = new List<BagChange>();
-            adjacencyChanges = new List<AdjacencyChange>();
         }
 
         public override void Unload() {

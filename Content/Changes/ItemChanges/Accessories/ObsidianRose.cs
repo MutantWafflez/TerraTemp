@@ -9,6 +9,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
             ItemID.ObsidianRose
         };
 
-        public override string AdditionalTooltip => "Negates the temperature increase of touching and being near lava";
+        public override bool DerivedItemsProvideEffects => true;
     }
 }
