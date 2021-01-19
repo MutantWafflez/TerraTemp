@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using TerraTemp.Content.Changes;
 
 namespace TerraTemp.Utilities {
 
