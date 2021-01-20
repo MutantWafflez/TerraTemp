@@ -1,5 +1,4 @@
-﻿using System;
-using Terraria;
+﻿using Terraria;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Classes.ReflectionMod;
 
