@@ -13,6 +13,8 @@ namespace TerraTemp {
 
     public class TerraTemp : Mod {
 
+        #region Content Lists
+
         /// <summary>
         /// A list of ALL newly added Climates. If you wish to add or otherwise remove a given
         /// Climate, search through this List with LINQ or any other method that is preferred.
@@ -68,6 +70,8 @@ namespace TerraTemp {
         /// </summary>
         public static List<AdjacencyChange> adjacencyChanges;
 
+        #endregion
+
         /// <summary>
         /// A value that is randomized daily that determines how hot it will get during the day and
         /// how cold it will get during the night.
@@ -79,6 +83,18 @@ namespace TerraTemp {
         /// the entire world for that day.
         /// </summary>
         public static float dailyHumidityDeviation = 0f;
+
+        public static TerraTemp TerraTempInstance { get; private set; }
+
+        public TerraTemp() {
+            TerraTempInstance = this;
+
+            Properties = new ModProperties() {
+                Autoload = true,
+                AutoloadGores = true,
+                AutoloadSounds = true
+            };
+        }
 
         #region Loading Overrides
 
@@ -177,6 +193,8 @@ namespace TerraTemp {
             lootChanges = null;
             bagChanges = null;
             adjacencyChanges = null;
+
+            TerraTempInstance = null;
         }
 
         #endregion Loading Overrides
