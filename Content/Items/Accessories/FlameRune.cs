@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Common.Players;
+using TerraTemp.Content.Base.Items;
 
 namespace TerraTemp.Content.Items.Accessories {
 
