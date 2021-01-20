@@ -7,12 +7,12 @@ Version 1.1 TODOs (Compatability Update):
 -Compatibility of Calamity (Biomes, mostly. NOT doing all the accessories/armor ever? though)
 -Being indoors/under some kind of roof or block should lower the intensity of the sun during the day
 -Furnaces should increase temperature slightly when in proximity
+-Make sure to add loadAfter for all of the mods that are officially compatible
 -Depth. Influence.
 
 Done:
--Make items keep TerraTemp bonuses if anywhere in the crafting tree it uses an item that boosts stats (Done)
+-Make items keep TerraTemp bonuses if anywhere in the crafting tree it uses an item that boosts stats
 -Add infrastructure for making easy mod compatibility with Reflection
--Make sure to add loadAfter for all of the mods that are officially compatible
 
 Whenever TODOs:
 -Cold attacks should instantly lower body temperature slightly
