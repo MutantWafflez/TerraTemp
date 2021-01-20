@@ -9,6 +9,7 @@ using Terraria.ModLoader.IO;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
 using TerraTemp.Content.Items.Accessories;
+using TerraTemp.Content.ModChanges;
 using TerraTemp.Custom;
 using TerraTemp.ID;
 
@@ -162,6 +163,18 @@ namespace TerraTemp {
                     relativeHumidity += change.HumidityChange;
                     temperatureChangeResist += change.TemperatureResistanceChange;
                     criticalRangeMaximum += change.CriticalTemperatureChange;
+                }
+            }
+
+            //Apply any possible Modded Event changes on player
+            foreach (ModEvent modEvent in TerraTemp.modEvents) {
+                if (modEvent.ApplyEventEffects(player)) {
+                    baseDesiredTemperature += modEvent.DesiredTemperatureChange;
+                    comfortableHigh += modEvent.HeatComfortabilityChange;
+                    comfortableLow += modEvent.ColdComfortabilityChange;
+                    relativeHumidity += modEvent.HumidityChange;
+                    temperatureChangeResist += modEvent.TemperatureResistanceChange;
+                    criticalRangeMaximum += modEvent.CriticalTemperatureChange;
                 }
             }
 

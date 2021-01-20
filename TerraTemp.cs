@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
+using TerraTemp.Content.ModChanges;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Attributes;
+using TerraTemp.Custom.Classes.ReflectionMod;
 using TerraTemp.ID;
 
 namespace TerraTemp {
@@ -69,6 +74,22 @@ namespace TerraTemp {
         /// that is preferred.
         /// </summary>
         public static List<AdjacencyChange> adjacencyChanges;
+
+        #endregion
+
+        #region Mod Compatability Fields
+
+        /// <summary>
+        /// A list of all of the mods that have official compatability that have been enabled
+        /// alongside TerraTemp.
+        /// </summary>
+        public static List<ReflectionMod> activeCompatibleMods;
+
+        /// <summary>
+        /// A list of ALL compatible mod events. If you wish to add or otherwise remove a given mod
+        /// event, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
+        public static List<ModEvent> modEvents;
 
         #endregion
 
@@ -135,6 +156,36 @@ namespace TerraTemp {
             }
         }
 
+        public override void PostSetupContent() {
+            //Mod Compatability Loading
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<ReflectionMod>()) {
+                string returnedInternalName = type.GetCustomAttribute<InternalModName>().name;
+                if (returnedInternalName != null) {
+                    Mod returnedMod = ModLoader.GetMod(returnedInternalName);
+                    if (returnedMod != null) {
+                        activeCompatibleMods.Add((ReflectionMod)Activator.CreateInstance(type, new object[] { returnedMod }));
+                    }
+                }
+                else {
+                    throw new Exception("Reflection Mod of type " + type.Name + " did not have an InternalModName Attribute that returned a non-null value.");
+                }
+            }
+            foreach (Type modEventType in TempUtilities.GetAllChildrenOfClass<ModEvent>()) {
+                Type returnedType = modEventType.GetCustomAttribute<PertainedMod>().pertainedMod;
+                if (returnedType != null) {
+                    foreach (ReflectionMod reflectionMod in activeCompatibleMods) {
+                        if (reflectionMod.GetType() == returnedType) {
+                            modEvents.Add((ModEvent)Activator.CreateInstance(modEventType, new object[] { reflectionMod }));
+                            break;
+                        }
+                    }
+                }
+                else {
+                    throw new Exception("Mod Event Type " + modEventType.Name + " did not have a PertainedMod Attributed that returned a non-null value.");
+                }
+            }
+        }
+
         public override void Load() {
             climates = new List<Climate>();
             evilClimates = new List<EvilClimate>();
@@ -145,6 +196,9 @@ namespace TerraTemp {
             lootChanges = new List<NPCLootChange>();
             bagChanges = new List<BagChange>();
             adjacencyChanges = new List<AdjacencyChange>();
+
+            activeCompatibleMods = new List<ReflectionMod>();
+            modEvents = new List<ModEvent>();
 
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<Climate>()) {
                 climates.Add((Climate)Activator.CreateInstance(type));
@@ -193,6 +247,9 @@ namespace TerraTemp {
             lootChanges = null;
             bagChanges = null;
             adjacencyChanges = null;
+
+            activeCompatibleMods = null;
+            modEvents = null;
 
             TerraTempInstance = null;
         }
