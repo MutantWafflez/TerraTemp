@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Items.Accessories;
-using TerraTemp.Utilities;
+using TerraTemp.Custom.Structs;
 
 namespace TerraTemp.Content.Changes.BagChanges {
 

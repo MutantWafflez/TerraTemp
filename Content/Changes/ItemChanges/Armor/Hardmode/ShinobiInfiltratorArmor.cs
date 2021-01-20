@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 

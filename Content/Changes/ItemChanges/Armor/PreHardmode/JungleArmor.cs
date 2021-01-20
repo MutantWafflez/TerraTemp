@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using TerraTemp.Content.Changes.TempBiomes;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 

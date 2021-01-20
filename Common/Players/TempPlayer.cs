@@ -9,8 +9,8 @@ using Terraria.ModLoader.IO;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
 using TerraTemp.Content.Items.Accessories;
+using TerraTemp.Custom;
 using TerraTemp.ID;
-using TerraTemp.Utilities;
 
 namespace TerraTemp {
 

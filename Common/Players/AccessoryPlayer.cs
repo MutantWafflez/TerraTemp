@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Items.Accessories;
 using TerraTemp.Content.Projectiles;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Common.Players {
 

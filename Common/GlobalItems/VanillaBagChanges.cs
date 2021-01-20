@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
-using TerraTemp.Utilities;
+using TerraTemp.Custom.Structs;
 
 namespace TerraTemp.Common.GlobalItems {
 

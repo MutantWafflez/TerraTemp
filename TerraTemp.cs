@@ -6,8 +6,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
+using TerraTemp.Custom;
 using TerraTemp.ID;
-using TerraTemp.Utilities;
 
 namespace TerraTemp {
 

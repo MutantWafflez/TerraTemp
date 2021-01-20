@@ -2,7 +2,7 @@
 using Terraria.ModLoader;
 using TerraTemp.Content.Buffs.PotionEffects;
 using TerraTemp.Content.Items.Materials.Fish;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Items.Potions {
 

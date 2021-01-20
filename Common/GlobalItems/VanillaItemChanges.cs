@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Common.GlobalItems {
 
@@ -21,7 +21,7 @@ namespace TerraTemp.Common.GlobalItems {
             foreach (ItemChange change in TerraTemp.itemChanges) {
                 if (change.AppliedItemIDs.Contains(item.type) &&
                     !player.GetTempPlayer().equippedItemChanges.Contains(change) &&
-                    (change is DerivedItemChange ? !TempUtilities.ContainsList(player.GetTempPlayer().equippedItemChanges, (change as DerivedItemChange).GetBaseItemChanges()) : true)) {
+                    (!(change is DerivedItemChange) || !TempUtilities.ContainsList(player.GetTempPlayer().equippedItemChanges, (change as DerivedItemChange).GetBaseItemChanges()))) {
                     TempPlayer temperaturePlayer = player.GetTempPlayer();
                     if (change is DerivedItemChange) {
                         DerivedItemChange changeAsDerived = change as DerivedItemChange;

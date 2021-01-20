@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TerraTemp.Utilities {
+namespace TerraTemp.Custom.Attributes {
 
     /// <summary>
     /// Attribute that is used to ignore this given subclass in the GetAllChildrenOfClass() method

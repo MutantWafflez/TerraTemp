@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Terraria;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
+using TerraTemp.Custom.Attributes;
 
 namespace TerraTemp.Content.Changes {
 

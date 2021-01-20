@@ -6,8 +6,9 @@ using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using TerraTemp.Custom.Attributes;
 
-namespace TerraTemp.Utilities {
+namespace TerraTemp.Custom {
 
     /// <summary>
     /// Class that has several important helper methods for this mod to make things a bit easier.

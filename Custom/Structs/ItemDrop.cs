@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TerraTemp.Utilities {
+namespace TerraTemp.Custom.Structs {
 
     /// <summary>
     /// Struct that handles a specific drop in any given context (NPC, bag, etc.). Has several
@@ -22,8 +22,6 @@ namespace TerraTemp.Utilities {
         /// </summary>
         public Tuple<int, int> dropCount;
 
-        public delegate bool CanDrop();
-
         /// <summary>
         /// The method that is supposed to return whether or not this given item will drop, given
         /// whatever circumstances are present at the time of the item dropping. By default, this is
@@ -43,5 +41,7 @@ namespace TerraTemp.Utilities {
                 canDropMethod = canDropDelegate;
             }
         }
+
+        public delegate bool CanDrop();
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria.ID;
 using TerraTemp.Content.Changes.BuffChanges.Buffs;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Potions {
 
