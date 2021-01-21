@@ -182,16 +182,33 @@ namespace TerraTemp.Custom {
         /// How much this will change the player's climate extremity value.
         /// </param>
         /// <returns> Localized lines(s) that say what the change has done to player's stats. </returns>
-        public static string CreateNewLineBasedOnStats(float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange, float desiredTempChange, float climateExtremityChange, string additionalLine = null) {
+        public static string CreateNewLineBasedOnStats(float desiredTempChange, float humidityChange, float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange, float climateExtremityChange, string additionalLine = null) {
+            float desiredChange = Math.Abs(desiredTempChange);
+            float humidChange = Math.Abs(humidityChange) * 100f; //Times 100 because it's a percentage
             float heatChange = Math.Abs(heatComfortabilityChange);
             float coldChange = Math.Abs(coldComfortabilityChange);
             float tempResistChange = Math.Abs(temperatureResistanceChange) * 100f; //Times 100 because it's a percentage
             float criticalChange = Math.Abs(criticalRangeChange);
-            float desiredChange = Math.Abs(desiredTempChange);
             float climateExtreme = Math.Abs(climateExtremityChange) * 100f; //Times 100 because it's a percentage
 
             string fullLine = "";
             List<string> stringsToAdd = new List<string>();
+
+            //Desired Temperature Change Check
+            if (desiredTempChange > 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedDesiredTemp", desiredChange));
+            }
+            else if (desiredTempChange < 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedDesiredTemp", desiredChange));
+            }
+
+            //Humidity Change Check
+            if (humidChange > 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedHumidity", humidityChange));
+            }
+            else if (humidChange < 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedHumidity", humidityChange));
+            }
 
             //Global Change Check
             if (heatComfortabilityChange * -1 == coldComfortabilityChange && heatChange != 0f) {
@@ -241,14 +258,6 @@ namespace TerraTemp.Custom {
             }
             else if (climateExtremityChange < 0f) {
                 stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedClimateExtremity", climateExtreme));
-            }
-
-            //Desired Temperature Change Check
-            if (desiredTempChange > 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedDesiredTemp", desiredChange));
-            }
-            else if (desiredTempChange < 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedDesiredTemp", desiredChange));
             }
 
             if (additionalLine != null) {

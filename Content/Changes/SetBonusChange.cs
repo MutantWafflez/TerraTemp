@@ -41,7 +41,7 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         public virtual string AdditionalSetBonusText {
             get {
-                string statLine = TempUtilities.CreateNewLineBasedOnStats(GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetDesiredTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
+                string statLine = TempUtilities.CreateNewLineBasedOnStats(GetDesiredTemperatureChange(Main.LocalPlayer), GetHumidityChange(Main.LocalPlayer), GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
                 if (statLine != null) {
                     if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
                         return statLine + "\n" + TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);

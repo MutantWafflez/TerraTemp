@@ -58,7 +58,7 @@ namespace TerraTemp.Content.Buffs {
         }
 
         public override void ModifyBuffTip(ref string tip, ref int rare) {
-            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetDesiredTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
+            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(GetDesiredTemperatureChange(Main.LocalPlayer), GetHumidityChange(Main.LocalPlayer), GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
             if (returnedLine != null) {
                 tip = returnedLine;
             }

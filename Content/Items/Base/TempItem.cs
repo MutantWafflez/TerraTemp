@@ -49,7 +49,7 @@ namespace TerraTemp.Content.Base.Items {
         public virtual float GetClimateExtremityChange(Player player) => 0f;
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetDesiredTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
+            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(GetDesiredTemperatureChange(Main.LocalPlayer), GetHumidityChange(Main.LocalPlayer), GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
             if (returnedLine != null) {
                 TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", returnedLine);
 

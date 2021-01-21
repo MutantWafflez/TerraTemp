@@ -28,6 +28,9 @@ DeathMessage.Cold.10=celebrated Christmas too hard.
 GlobalTooltip.IncreasedDesiredTemp={0} degree increased body temperature
 GlobalTooltip.DecreasedDesiredTemp={0} degree decreased body temperature
 
+GlobalTooltip.IncreasedHumidity={0}% increased relative humidity
+GlobalTooltip.DecreasedHumidity={0}% decreased relative humidity
+
 GlobalTooltip.IncreasedColdComfortability={0} degree increased cold comfortability range
 GlobalTooltip.DecreasedColdComfortability={0} degree decreased cold comfortability range
 

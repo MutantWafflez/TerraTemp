@@ -35,7 +35,7 @@ namespace TerraTemp.Content.Changes {
                 if (additionalLine == "Mods.TerraTemp.GlobalItemChange." + GetType().Name) {
                     additionalLine = null;
                 }
-                return TempUtilities.CreateNewLineBasedOnStats(GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetDesiredTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer), additionalLine);
+                return TempUtilities.CreateNewLineBasedOnStats(GetDesiredTemperatureChange(Main.LocalPlayer), GetHumidityChange(Main.LocalPlayer), GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer), additionalLine);
             }
         }
 
