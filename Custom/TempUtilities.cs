@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Interfaces;
 
@@ -66,6 +67,27 @@ namespace TerraTemp.Custom {
                 return 0.85f;
             }
             else { //Equivalent to "Clear" or "Partly Cloudy"
+                return 1f;
+            }
+        }
+
+        /// <summary>
+        /// Method that expresses the potential effects of any possible "shade" that the player
+        /// might be under on the temperature increase imposed by the sun. Is based on whether or
+        /// not the player is behind a wall and has any tiles 16 or less blocks above them.
+        /// </summary>
+        /// <returns> Value from 0f to 1f. </returns>
+        public static float GetShadeEffectsOnSunTemperature(Player player) {
+            if (player.behindBackWall) {
+                if (!Collision.CanHitLine(new Vector2(player.Center.X + 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X + 8f, player.Top.Y - 16 * 17), 4, 4) &&
+                    !Collision.CanHitLine(new Vector2(player.Center.X - 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X - 8f, player.Top.Y - 16 * 17), 4, 4)) {
+                    return 0.34f;
+                }
+                else {
+                    return 0.75f;
+                }
+            }
+            else {
                 return 1f;
             }
         }

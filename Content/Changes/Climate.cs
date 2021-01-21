@@ -45,9 +45,10 @@ namespace TerraTemp.Content.Changes {
         public virtual float GetCriticalTemperatureChange(Player player) => 0f;
 
         /// <summary>
-        /// By how much this given biome will change the player's climate extremity value.
+        /// Biomes are unable to changes the Climate Extremity value since they are the things being
+        /// modified by the Climate Extremity value in the first place.
         /// </summary>
-        public virtual float GetClimateExtremityChange(Player player) => 0f;
+        public float GetClimateExtremityChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given biome will change the player's sun extremity value (sun

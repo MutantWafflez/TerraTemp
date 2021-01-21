@@ -134,9 +134,17 @@ namespace TerraTemp {
 
             MidEnvironmentUpdateTileAdjacency();
 
+            //Climate Extremity should not exceed 200% (because that would be way too overkill if even possible in the first place) and a floor of 45% so biomes always have SOME kind of effect.
+            climateExtremityValue = MathHelper.Clamp(climateExtremityValue, 0.45f, 2f);
+
             MidEnvironmentUpdateApplyBiomeEffects();
 
             MidEnvironmentUpdateApplyEvilBiomeEffects();
+
+            MidEnvironmentUpdateApplyMiscSunExtremityEffects();
+
+            //Sun Exremity should not exceed 200% (because that would be way too overkill if even possible in the first place) and a floor of 0% so the sun doesn't somehow make it colder.
+            sunExtremityValue = MathHelper.Clamp(sunExtremityValue, 0f, 2f);
 
             MidEnvironmentUpdateApplyTimeEffects();
 
@@ -149,9 +157,6 @@ namespace TerraTemp {
             relativeHumidity = MathHelper.Clamp(relativeHumidity, 0f, 1f);
             //Temperatue Change resistance cannot exceed 100% (due to that causing the value to go backwards), and won't go below -100% for balancing purposes.
             temperatureChangeResist = MathHelper.Clamp(temperatureChangeResist, -1f, 1f);
-            //Climate & Sun Extremity should not exceed 200% (because that would be way too overkill if even possible in the first place) and a floor of 45% so biomes/the sun always have SOME kind of effect.
-            climateExtremityValue = MathHelper.Clamp(climateExtremityValue, 0.45f, 2f);
-            sunExtremityValue = MathHelper.Clamp(sunExtremityValue, 0.45f, 2f);
 
             //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
             modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, player.ZoneOverworldHeight ? Math.Abs(Main.windSpeed * 100f) * 0.44704f : 0f);
@@ -350,7 +355,7 @@ namespace TerraTemp {
         /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the evil biome that the
         /// player is in, if it is all applicable. This task is run immediately after <see
         /// cref="MidEnvironmentUpdateApplyBiomeEffects"/>. For the next task in the process, see
-        /// <see cref="MidEnvironmentUpdateApplyTimeEffects"/>.
+        /// <see cref="MidEnvironmentUpdateApplyMiscSunExtremityEffects"/>.
         /// </summary>
         public void MidEnvironmentUpdateApplyEvilBiomeEffects() {
             //Change desired temp & temperature resistance depending on the current evil biome, if applicable
@@ -365,12 +370,23 @@ namespace TerraTemp {
             }
         }
 
+        /// <summary> Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies external factors that influence the temperature
+        /// increase of the sun (such as Cloud influence & Shade influnece). This task is run
+        /// immediately after <see cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>. For the next
+        /// task in the process, see <see cref="MidEnvironmentUpdateApplyTimeEffects"/>. </summary>
+        public void MidEnvironmentUpdateApplyMiscSunExtremityEffects() {
+            sunExtremityValue *= TerraTemp.dailyTemperatureDeviation;
+            sunExtremityValue *= TempUtilities.GetCloudEffectsOnSunTemperature();
+            sunExtremityValue *= TempUtilities.GetShadeEffectsOnSunTemperature(player);
+        }
+
         /// <summary>
         /// Method in the "Environment Update" process that takes place in <see
         /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the time of day if the
         /// player is on the surface. This task is run immediately after <see
-        /// cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>. For the next task in the process,
-        /// see <see cref="MidEnvironmentUpdateApplyLavaEffects"/>.
+        /// cref="MidEnvironmentUpdateApplyMiscSunExtremityEffects"/>. For the next task in the
+        /// process, see <see cref="MidEnvironmentUpdateApplyLavaEffects"/>.
         /// </summary>
         public void MidEnvironmentUpdateApplyTimeEffects() {
             //Change desired temp based on what time of day it is and the daily temperature devation
@@ -378,10 +394,10 @@ namespace TerraTemp {
             if (player.ZoneOverworldHeight) {
                 if (Main.dayTime && !Main.eclipse) {
                     if (Main.time <= 27000 /* Noon */) {
-                        baseDesiredTemperature += ((float)Main.time / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * sunExtremityValue;
+                        baseDesiredTemperature += ((float)Main.time / 60f / 50f) * sunExtremityValue;
                     }
                     else {
-                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * sunExtremityValue;
+                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f) * sunExtremityValue;
                     }
                 }
                 else {
