@@ -31,13 +31,8 @@ namespace TerraTemp.Common.GlobalItems {
                     }
                     temperaturePlayer.equippedItemChanges.Add(itemChange);
 
-                    temperaturePlayer.baseDesiredTemperature += itemChange.GetDesiredTemperatureChange(player);
-                    temperaturePlayer.relativeHumidity += itemChange.GetHumidityChange(player);
-                    temperaturePlayer.comfortableHigh += itemChange.GetHeatComfortabilityChange(player);
-                    temperaturePlayer.comfortableLow += itemChange.GetColdComfortabilityChange(player);
-                    temperaturePlayer.temperatureChangeResist += itemChange.GetTemperatureResistanceChange(player);
-                    temperaturePlayer.criticalRangeMaximum += itemChange.GetCriticalTemperatureChange(player);
-                    temperaturePlayer.climateExtremityValue += itemChange.GetClimateExtremityChange(player);
+                    TempUtilities.ApplyStatChanges(itemChange, player);
+
                     itemChange.AdditionalItemEquipEffect(player);
                 }
             }
@@ -90,14 +85,8 @@ namespace TerraTemp.Common.GlobalItems {
         public override void UpdateArmorSet(Player player, string set) {
             foreach (SetBonusChange setBonusChange in TerraTemp.setBonusChanges) {
                 if (setBonusChange.ArmorSetName == set) {
-                    TempPlayer temperaturePlayer = player.GetTempPlayer();
-                    temperaturePlayer.baseDesiredTemperature += setBonusChange.GetDesiredTemperatureChange(player);
-                    temperaturePlayer.relativeHumidity += setBonusChange.GetHumidityChange(player);
-                    temperaturePlayer.comfortableHigh += setBonusChange.GetHeatComfortabilityChange(player);
-                    temperaturePlayer.comfortableLow += setBonusChange.GetColdComfortabilityChange(player);
-                    temperaturePlayer.temperatureChangeResist += setBonusChange.GetTemperatureResistanceChange(player);
-                    temperaturePlayer.criticalRangeMaximum += setBonusChange.GetCriticalTemperatureChange(player);
-                    temperaturePlayer.climateExtremityValue += setBonusChange.GetClimateExtremityChange(player);
+                    TempUtilities.ApplyStatChanges(setBonusChange, player);
+
                     player.setBonus += player.setBonus == "" ? setBonusChange.AdditionalSetBonusText : "\n" + setBonusChange.AdditionalSetBonusText;
 
                     setBonusChange.AdditionalSetBonusEffect(player);

@@ -288,13 +288,7 @@ namespace TerraTemp {
             //Apply Event changes on player
             foreach (EventChange eventChange in TerraTemp.eventChanges) {
                 if (eventChange.EventBoolean && eventChange.ApplyEventEffects(player)) {
-                    baseDesiredTemperature += eventChange.GetDesiredTemperatureChange(player);
-                    relativeHumidity += eventChange.GetHumidityChange(player);
-                    comfortableHigh += eventChange.GetHeatComfortabilityChange(player);
-                    comfortableLow += eventChange.GetColdComfortabilityChange(player);
-                    temperatureChangeResist += eventChange.GetTemperatureResistanceChange(player);
-                    criticalRangeMaximum += eventChange.GetCriticalTemperatureChange(player);
-                    climateExtremityValue += eventChange.GetClimateExtremityChange(player);
+                    TempUtilities.ApplyStatChanges(eventChange, player);
                 }
             }
         }
@@ -309,13 +303,7 @@ namespace TerraTemp {
             //Apply any possible Modded Event changes on player
             foreach (ModEvent modEvent in TerraTemp.modEvents) {
                 if (modEvent.ApplyEventEffects(player)) {
-                    baseDesiredTemperature += modEvent.GetDesiredTemperatureChange(player);
-                    relativeHumidity += modEvent.GetHumidityChange(player);
-                    comfortableHigh += modEvent.GetHeatComfortabilityChange(player);
-                    comfortableLow += modEvent.GetColdComfortabilityChange(player);
-                    temperatureChangeResist += modEvent.GetTemperatureResistanceChange(player);
-                    criticalRangeMaximum += modEvent.GetCriticalTemperatureChange(player);
-                    climateExtremityValue += modEvent.GetClimateExtremityChange(player);
+                    TempUtilities.ApplyStatChanges(modEvent, player);
                 }
             }
         }
@@ -330,13 +318,7 @@ namespace TerraTemp {
             //Apply Tile Adjacency changes on player
             foreach (AdjacencyChange adjacencyChange in TerraTemp.adjacencyChanges) {
                 if (adjacencyChange.CheckForAdjacency(player)) {
-                    baseDesiredTemperature += adjacencyChange.GetDesiredTemperatureChange(player);
-                    relativeHumidity += adjacencyChange.GetHumidityChange(player);
-                    comfortableHigh += adjacencyChange.GetHeatComfortabilityChange(player);
-                    comfortableLow += adjacencyChange.GetColdComfortabilityChange(player);
-                    temperatureChangeResist += adjacencyChange.GetTemperatureResistanceChange(player);
-                    criticalRangeMaximum += adjacencyChange.GetCriticalTemperatureChange(player);
-                    climateExtremityValue += adjacencyChange.GetClimateExtremityChange(player);
+                    TempUtilities.ApplyStatChanges(adjacencyChange, player);
                 }
             }
         }

@@ -14,15 +14,7 @@ namespace TerraTemp.Common.GlobalBuffs {
         public override void Update(int type, Player player, ref int buffIndex) {
             foreach (BuffChange buffChange in TerraTemp.buffChanges) {
                 if (type == buffChange.AppliedBuffID) {
-                    TempPlayer temperaturePlayer = player.GetTempPlayer();
-                    temperaturePlayer.baseDesiredTemperature += buffChange.GetDesiredTemperatureChange(player);
-                    temperaturePlayer.relativeHumidity += buffChange.GetHumidityChange(player);
-                    temperaturePlayer.comfortableHigh += buffChange.GetHeatComfortabilityChange(player);
-                    temperaturePlayer.comfortableLow += buffChange.GetColdComfortabilityChange(player);
-                    temperaturePlayer.temperatureChangeResist += buffChange.GetTemperatureResistanceChange(player);
-                    temperaturePlayer.criticalRangeMaximum += buffChange.GetCriticalTemperatureChange(player);
-                    temperaturePlayer.climateExtremityValue += buffChange.GetClimateExtremityChange(player);
-                    break;
+                    TempUtilities.ApplyStatChanges(buffChange, player);
                 }
             }
         }

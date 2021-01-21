@@ -289,38 +289,25 @@ namespace TerraTemp.Custom {
 
         #endregion
 
-        #region Derived Item Methods
+        #region Stat Methods
 
         /// <summary>
-        /// Does a "deep search" of all currently available recipes, whether it be vanilla or
-        /// modded. Make sure to call this in PostAddRecipes() in the mod class to check for modded
-        /// recipes as well.
+        /// Automatically applies the stat changes to the given player for any given change, as long
+        /// as it implements the <see cref="ITempStatChange"/> interface.
         /// </summary>
-        /// <param name="ingredientID"> The ID of the item to search for. </param>
-        /// <returns>
-        /// A HashSet of IDs for each item that contains the item with the ID of <paramref
-        /// name="ingredientID"/> ANYWHERE in its crafting tree.
-        /// </returns>
-        public static HashSet<int> DeepRecipeSearch(int ingredientID) {
-            HashSet<int> derivedItems = new HashSet<int>();
+        /// <param name="statChanges"> The stat changes instance. </param>
+        /// <param name="player"> The player to apply the stat changes to. </param>
+        public static void ApplyStatChanges(ITempStatChange statChanges, Player player) {
+            TempPlayer temperaturePlayer = player.GetTempPlayer();
 
-            void SearchAnotherLayer(int nextSearchIngredient) {
-                RecipeFinder finder = new RecipeFinder();
-                finder.AddIngredient(nextSearchIngredient);
-                foreach (Recipe recipe in finder.SearchRecipes()) {
-                    derivedItems.Add(recipe.createItem.type);
-
-                    RecipeFinder checkForMaterial = new RecipeFinder();
-                    checkForMaterial.AddIngredient(recipe.createItem.type);
-                    if (checkForMaterial.SearchRecipes().Any()) {
-                        SearchAnotherLayer(recipe.createItem.type);
-                    }
-                }
-            }
-
-            SearchAnotherLayer(ingredientID);
-
-            return derivedItems;
+            temperaturePlayer.baseDesiredTemperature += statChanges.GetDesiredTemperatureChange(player);
+            temperaturePlayer.relativeHumidity += statChanges.GetHumidityChange(player);
+            temperaturePlayer.comfortableHigh += statChanges.GetHeatComfortabilityChange(player);
+            temperaturePlayer.comfortableLow += statChanges.GetColdComfortabilityChange(player);
+            temperaturePlayer.temperatureChangeResist += statChanges.GetTemperatureResistanceChange(player);
+            temperaturePlayer.criticalRangeMaximum += statChanges.GetCriticalTemperatureChange(player);
+            temperaturePlayer.climateExtremityValue += statChanges.GetClimateExtremityChange(player);
+            temperaturePlayer.sunExtremityValue += statChanges.GetSunExtremityChange(player);
         }
 
         #endregion
@@ -353,6 +340,38 @@ namespace TerraTemp.Custom {
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// Does a "deep search" of all currently available recipes, whether it be vanilla or
+        /// modded. Make sure to call this in PostAddRecipes() in the mod class to check for modded
+        /// recipes as well.
+        /// </summary>
+        /// <param name="ingredientID"> The ID of the item to search for. </param>
+        /// <returns>
+        /// A HashSet of IDs for each item that contains the item with the ID of <paramref
+        /// name="ingredientID"/> ANYWHERE in its crafting tree.
+        /// </returns>
+        public static HashSet<int> DeepRecipeSearch(int ingredientID) {
+            HashSet<int> derivedItems = new HashSet<int>();
+
+            void SearchAnotherLayer(int nextSearchIngredient) {
+                RecipeFinder finder = new RecipeFinder();
+                finder.AddIngredient(nextSearchIngredient);
+                foreach (Recipe recipe in finder.SearchRecipes()) {
+                    derivedItems.Add(recipe.createItem.type);
+
+                    RecipeFinder checkForMaterial = new RecipeFinder();
+                    checkForMaterial.AddIngredient(recipe.createItem.type);
+                    if (checkForMaterial.SearchRecipes().Any()) {
+                        SearchAnotherLayer(recipe.createItem.type);
+                    }
+                }
+            }
+
+            SearchAnotherLayer(ingredientID);
+
+            return derivedItems;
         }
 
         #endregion
