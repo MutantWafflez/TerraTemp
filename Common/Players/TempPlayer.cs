@@ -117,113 +117,26 @@ namespace TerraTemp {
         }
 
         public override void PostUpdateMiscEffects() {
-            //Updating the player's current biome
-            foreach (Climate biome in TerraTemp.climates) {
-                if (biome.PlayerZoneBool(player)) {
-                    currentBiome = biome;
-                    break;
-                }
-                //Current biome being null means the player is in Forest, the default biome
-                if (!biome.PlayerZoneBool(player) && biome == TerraTemp.climates.Last()) {
-                    currentBiome = null;
-                    break;
-                }
-            }
+            MidEnvironmentUpdateClimate();
 
-            //Updating the player's current evil biome
-            foreach (EvilClimate biome in TerraTemp.evilClimates) {
-                if (biome.EvilZoneBool(player)) {
-                    currentEvilBiome = biome;
-                    break;
-                }
-                //Current evil biome being null means the player is not in any evil biome, thus no change
-                if (!biome.EvilZoneBool(player) && biome == TerraTemp.evilClimates.Last()) {
-                    currentEvilBiome = null;
-                    break;
-                }
-            }
+            MidEnvironmentUpdateEvilClimate();
 
-            //Apply Tile Adjacency changes on player
-            foreach (AdjacencyChange adjacencyChange in TerraTemp.adjacencyChanges) {
-                if (adjacencyChange.CheckForAdjacency(player)) {
-                    baseDesiredTemperature += adjacencyChange.DesiredTemperatureChange;
-                    comfortableHigh += adjacencyChange.HeatComfortabilityChange;
-                    comfortableLow += adjacencyChange.ColdComfortabilityChange;
-                    temperatureChangeResist += adjacencyChange.TemperatureResistanceChange;
-                    criticalRangeMaximum += adjacencyChange.CriticalTemperatureChange;
-                }
-            }
+            MidEnvironmentUpdateEvents();
 
-            //Apply Event changes on player
-            foreach (EventChange change in TerraTemp.eventChanges) {
-                if (change.EventBoolean && change.ApplyEventEffects(player)) {
-                    baseDesiredTemperature += change.DesiredTemperatureChange;
-                    comfortableHigh += change.HeatComfortabilityChange;
-                    comfortableLow += change.ColdComfortabilityChange;
-                    relativeHumidity += change.HumidityChange;
-                    temperatureChangeResist += change.TemperatureResistanceChange;
-                    criticalRangeMaximum += change.CriticalTemperatureChange;
-                }
-            }
+            MidEnvironmentUpdateModEvents();
 
-            //Apply any possible Modded Event changes on player
-            foreach (ModEvent modEvent in TerraTemp.modEvents) {
-                if (modEvent.ApplyEventEffects(player)) {
-                    baseDesiredTemperature += modEvent.DesiredTemperatureChange;
-                    comfortableHigh += modEvent.HeatComfortabilityChange;
-                    comfortableLow += modEvent.ColdComfortabilityChange;
-                    relativeHumidity += modEvent.HumidityChange;
-                    temperatureChangeResist += modEvent.TemperatureResistanceChange;
-                    criticalRangeMaximum += modEvent.CriticalTemperatureChange;
-                }
-            }
+            MidEnvironmentUpdateTileAdjacency();
 
-            //Change desired temp & temperature resistance depending on the current biome, if applicable
-            if (currentBiome != null) {
-                baseDesiredTemperature += (currentBiome.TemperatureModification + (player.wet ? currentBiome.WaterTemperature : 0f)) * climateExtremityValue;
-                temperatureChangeResist += currentBiome.TemperatureResistanceModification;
-                relativeHumidity += currentBiome.HumidityModification;
-            }
-            //Change desired temp & temperature resistance depending on the current evil biome, if applicable
-            if (currentEvilBiome != null) {
-                baseDesiredTemperature += (currentEvilBiome.TemperatureModification + (player.wet ? currentEvilBiome.WaterTemperature : 0f)) * climateExtremityValue;
-                temperatureChangeResist += currentEvilBiome.TemperatureResistanceModification;
-                relativeHumidity += currentEvilBiome.HumidityModification;
-            }
+            MidEnvironmentUpdateApplyBiomeEffects();
 
-            //Change desired temp based on what time of day it is and the daily temperature devation
-            //Day will be hottest at Noon, the night will be coldest at Midnight
-            if (player.ZoneOverworldHeight) {
-                if (Main.dayTime && !Main.eclipse) {
-                    if (Main.time <= 27000 /* Noon */) {
-                        baseDesiredTemperature += ((float)Main.time / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
-                    }
-                    else {
-                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
-                    }
-                }
-                else {
-                    if (Main.time <= 16200 /* Midnight */) {
-                        baseDesiredTemperature -= (float)Main.time / 60f / 30f * TerraTemp.dailyTemperatureDeviation;
-                    }
-                    else {
-                        baseDesiredTemperature -= (32400f - (float)Main.time) / 60f / 30f * TerraTemp.dailyTemperatureDeviation;
-                    }
-                }
-            }
+            MidEnvironmentUpdateApplyEvilBiomeEffects();
+
+            MidEnvironmentUpdateApplyTimeEffects();
+
+            MidEnvironmentUpdateApplyLavaEffects();
 
             //Simply adding the Daily Humidity Deviation to player values.
             relativeHumidity += TerraTemp.dailyHumidityDeviation;
-
-            //Increase desired temperature if player is adjacent to lava without an obsidian rose or obsidian skin effect
-            if (player.adjLava && !player.lavaWet && !player.lavaRose && !player.lavaImmune) {
-                baseDesiredTemperature += 12.5f;
-            }
-
-            //Set desired temperature to the average temperature of lava in the real world if the player enters it without an active lava charm or obsidian rose
-            if (player.lavaWet && player.lavaTime <= 0 && !player.lavaRose && !player.lavaImmune) {
-                baseDesiredTemperature = 1125f;
-            }
 
             //Relative Humidity cannot exceed 100%, since that is impossible in real life and wouldn't make sense in game.
             relativeHumidity = MathHelper.Clamp(relativeHumidity, 0f, 1f);
@@ -314,7 +227,192 @@ namespace TerraTemp {
 
         #endregion
 
-        #region Custom Methods
+        #region Environment Temperature Methods
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Updates the current player's biome, if it is all
+        /// applicable. This is the first task in the Environment Update process. For the next task
+        /// in the process, see <see cref="MidEnvironmentUpdateEvilClimate"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateClimate() {
+            //Updating the player's current biome
+            foreach (Climate biome in TerraTemp.climates) {
+                if (biome.PlayerZoneBool(player)) {
+                    currentBiome = biome;
+                    break;
+                }
+                //Current biome being null means the player is in Forest, the default biome
+                if (!biome.PlayerZoneBool(player) && biome == TerraTemp.climates.Last()) {
+                    currentBiome = null;
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Updates the current player's evil biome, if it is all
+        /// applicable. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateClimate"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateEvents"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateEvilClimate() {
+            //Updating the player's current evil biome
+            foreach (EvilClimate biome in TerraTemp.evilClimates) {
+                if (biome.EvilZoneBool(player)) {
+                    currentEvilBiome = biome;
+                    break;
+                }
+                //Current evil biome being null means the player is not in any evil biome, thus no change
+                if (!biome.EvilZoneBool(player) && biome == TerraTemp.evilClimates.Last()) {
+                    currentEvilBiome = null;
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the effects of any events currently taking
+        /// place, if it is all applicable. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateEvilClimate"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateModEvents"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateEvents() {
+            //Apply Event changes on player
+            foreach (EventChange change in TerraTemp.eventChanges) {
+                if (change.EventBoolean && change.ApplyEventEffects(player)) {
+                    baseDesiredTemperature += change.DesiredTemperatureChange;
+                    comfortableHigh += change.HeatComfortabilityChange;
+                    comfortableLow += change.ColdComfortabilityChange;
+                    relativeHumidity += change.HumidityChange;
+                    temperatureChangeResist += change.TemperatureResistanceChange;
+                    criticalRangeMaximum += change.CriticalTemperatureChange;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the effects of any compatible mod events
+        /// currently taking place, if it is all applicable. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateEvents"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateTileAdjacency"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateModEvents() {
+            //Apply any possible Modded Event changes on player
+            foreach (ModEvent modEvent in TerraTemp.modEvents) {
+                if (modEvent.ApplyEventEffects(player)) {
+                    baseDesiredTemperature += modEvent.DesiredTemperatureChange;
+                    comfortableHigh += modEvent.HeatComfortabilityChange;
+                    comfortableLow += modEvent.ColdComfortabilityChange;
+                    relativeHumidity += modEvent.HumidityChange;
+                    temperatureChangeResist += modEvent.TemperatureResistanceChange;
+                    criticalRangeMaximum += modEvent.CriticalTemperatureChange;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the effects of any tiles that affect
+        /// temperature, if it is all applicable. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateModEvents"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateApplyBiomeEffects"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateTileAdjacency() {
+            //Apply Tile Adjacency changes on player
+            foreach (AdjacencyChange adjacencyChange in TerraTemp.adjacencyChanges) {
+                if (adjacencyChange.CheckForAdjacency(player)) {
+                    baseDesiredTemperature += adjacencyChange.DesiredTemperatureChange;
+                    comfortableHigh += adjacencyChange.HeatComfortabilityChange;
+                    comfortableLow += adjacencyChange.ColdComfortabilityChange;
+                    temperatureChangeResist += adjacencyChange.TemperatureResistanceChange;
+                    criticalRangeMaximum += adjacencyChange.CriticalTemperatureChange;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the biome that the player
+        /// is in, if it is all applicable. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateTileAdjacency"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateApplyBiomeEffects() {
+            //Change desired temp & temperature resistance depending on the current biome, if applicable
+            if (currentBiome != null) {
+                baseDesiredTemperature += (currentBiome.TemperatureModification + (player.wet ? currentBiome.WaterTemperature : 0f)) * climateExtremityValue;
+                temperatureChangeResist += currentBiome.TemperatureResistanceModification;
+                relativeHumidity += currentBiome.HumidityModification;
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the evil biome that the
+        /// player is in, if it is all applicable. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateApplyBiomeEffects"/>. For the next task in the process, see
+        /// <see cref="MidEnvironmentUpdateApplyTimeEffects"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateApplyEvilBiomeEffects() {
+            //Change desired temp & temperature resistance depending on the current evil biome, if applicable
+            if (currentEvilBiome != null) {
+                baseDesiredTemperature += (currentEvilBiome.TemperatureModification + (player.wet ? currentEvilBiome.WaterTemperature : 0f)) * climateExtremityValue;
+                temperatureChangeResist += currentEvilBiome.TemperatureResistanceModification;
+                relativeHumidity += currentEvilBiome.HumidityModification;
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the time of day if the
+        /// player is on the surface. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>. For the next task in the process,
+        /// see <see cref="MidEnvironmentUpdateApplyLavaEffects"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateApplyTimeEffects() {
+            //Change desired temp based on what time of day it is and the daily temperature devation
+            //Day will be hottest at Noon, the night will be coldest at Midnight
+            if (player.ZoneOverworldHeight) {
+                if (Main.dayTime && !Main.eclipse) {
+                    if (Main.time <= 27000 /* Noon */) {
+                        baseDesiredTemperature += ((float)Main.time / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
+                    }
+                    else {
+                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
+                    }
+                }
+                else {
+                    if (Main.time <= 16200 /* Midnight */) {
+                        baseDesiredTemperature -= (float)Main.time / 60f / 30f * TerraTemp.dailyTemperatureDeviation;
+                    }
+                    else {
+                        baseDesiredTemperature -= (32400f - (float)Main.time) / 60f / 30f * TerraTemp.dailyTemperatureDeviation;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the effects of Lava if the player is adjacent to
+        /// it or in it. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateApplyTimeEffects"/>. This is the last task in the "Environment
+        /// Update" process.
+        /// </summary>
+        public void MidEnvironmentUpdateApplyLavaEffects() {
+            //Increase desired temperature if player is adjacent to lava without an obsidian rose or obsidian skin effect
+            if (player.adjLava && !player.lavaWet && !player.lavaRose && !player.lavaImmune) {
+                baseDesiredTemperature += 12.5f;
+            }
+
+            //Set desired temperature to the average temperature of lava in the real world if the player enters it without an active lava charm or obsidian rose
+            if (player.lavaWet && player.lavaTime <= 0 && !player.lavaRose && !player.lavaImmune) {
+                baseDesiredTemperature = 1125f;
+            }
+        }
+
+        #endregion Environment Temperature Methods
+
+        #region Miscellaneous Methods
 
         /// <summary> Method that checks & applies the effects of the player's current Body
         /// Temperature. </summary>
@@ -353,6 +451,6 @@ namespace TerraTemp {
             }
         }
 
-        #endregion Custom Methods
+        #endregion Miscellaneous Methods
     }
 }
