@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -6,7 +7,6 @@ using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Interfaces;
 
