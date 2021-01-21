@@ -34,7 +34,7 @@ namespace TerraTemp.Content.Changes {
                         additionalLine += line + (line != stringsToAdd.Last() ? "\n" : "");
                     }
                 }
-                return TempUtilities.CreateNewLineBasedOnStats(GetDesiredTemperatureChange(Main.LocalPlayer), GetHumidityChange(Main.LocalPlayer), GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer), additionalLine);
+                return TempUtilities.CreateNewLineBasedOnStats(this, additionalLine);
             }
         }
 

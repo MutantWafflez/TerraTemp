@@ -41,7 +41,7 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         public virtual string AdditionalSetBonusText {
             get {
-                string statLine = TempUtilities.CreateNewLineBasedOnStats(GetDesiredTemperatureChange(Main.LocalPlayer), GetHumidityChange(Main.LocalPlayer), GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
+                string statLine = TempUtilities.CreateNewLineBasedOnStats(this);
                 if (statLine != null) {
                     if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
                         return statLine + "\n" + TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);
@@ -91,6 +91,12 @@ namespace TerraTemp.Content.Changes {
         /// By how much this given set bonus will change the player's climate extremity value.
         /// </summary>
         public virtual float GetClimateExtremityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given set bonus will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        public virtual float GetSunExtremityChange(Player player) => 0f;
 
         /// <summary>
         /// If the set bonus has an additional effect on the player, overriding this method can

@@ -47,6 +47,12 @@ namespace TerraTemp.Content.Buffs {
         /// </summary>
         public virtual float GetClimateExtremityChange(Player player) => 0f;
 
+        /// <summary>
+        /// By how much this given buff will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        public virtual float GetSunExtremityChange(Player player) => 0f;
+
         public override void Update(Player player, ref int buffIndex) {
             TempPlayer temperaturePlayer = player.GetTempPlayer();
             temperaturePlayer.baseDesiredTemperature += GetDesiredTemperatureChange(player);
@@ -58,7 +64,7 @@ namespace TerraTemp.Content.Buffs {
         }
 
         public override void ModifyBuffTip(ref string tip, ref int rare) {
-            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(GetDesiredTemperatureChange(Main.LocalPlayer), GetHumidityChange(Main.LocalPlayer), GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
+            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(this);
             if (returnedLine != null) {
                 tip = returnedLine;
             }

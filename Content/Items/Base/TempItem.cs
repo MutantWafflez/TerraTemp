@@ -48,8 +48,14 @@ namespace TerraTemp.Content.Base.Items {
         /// </summary>
         public virtual float GetClimateExtremityChange(Player player) => 0f;
 
+        /// <summary>
+        /// By how much this given item will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        public virtual float GetSunExtremityChange(Player player) => 0f;
+
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(GetDesiredTemperatureChange(Main.LocalPlayer), GetHumidityChange(Main.LocalPlayer), GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
+            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(this);
             if (returnedLine != null) {
                 TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", returnedLine);
 

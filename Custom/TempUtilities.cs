@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using TerraTemp.Custom.Attributes;
+using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Custom {
 
@@ -163,101 +164,105 @@ namespace TerraTemp.Custom {
         /// Method that create new localized line(s) based on what statistics a given change will
         /// modify about a player.
         /// </summary>
-        /// <param name="heatComfortabilityChange">
-        /// How much this change will modify the player's heat comfortability range.
-        /// </param>
-        /// <param name="coldComfortabilityChange">
-        /// How much this change will modify the player's cold comfortability range.
-        /// </param>
-        /// <param name="temperatureResistanceChange">
-        /// How much this change will modify the player's temperature change rate resistance.
-        /// </param>
-        /// <param name="criticalRangeChange">
-        /// How much this change will modify the player's critical range.
-        /// </param>
-        /// <param name="desiredTempChange">
-        /// How much this will change the player's desired temperature, AKA the "environment" temperature.
-        /// </param>
-        /// <param name="climateExtremityChange">
-        /// How much this will change the player's climate extremity value.
-        /// </param>
+        /// <param name="statChanges"> The object that contains all of the stat changing data. </param>
+        /// <param name="additionalLine"> Any additional non-automated line to be added, if necessary. </param>
         /// <returns> Localized lines(s) that say what the change has done to player's stats. </returns>
-        public static string CreateNewLineBasedOnStats(float desiredTempChange, float humidityChange, float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange, float climateExtremityChange, string additionalLine = null) {
-            float desiredChange = Math.Abs(desiredTempChange);
-            float humidChange = Math.Abs(humidityChange) * 100f; //Times 100 because it's a percentage
-            float heatChange = Math.Abs(heatComfortabilityChange);
-            float coldChange = Math.Abs(coldComfortabilityChange);
-            float tempResistChange = Math.Abs(temperatureResistanceChange) * 100f; //Times 100 because it's a percentage
-            float criticalChange = Math.Abs(criticalRangeChange);
-            float climateExtreme = Math.Abs(climateExtremityChange) * 100f; //Times 100 because it's a percentage
+        public static string CreateNewLineBasedOnStats(ITempStatChange statChanges, string additionalLine = null) {
+            Player player = Main.LocalPlayer;
+
+            float desiredTempChange = statChanges.GetDesiredTemperatureChange(player);
+            float humidityChange = statChanges.GetHumidityChange(player);
+            float heatComfortabilityChange = statChanges.GetHeatComfortabilityChange(player);
+            float coldComfortabilityChange = statChanges.GetColdComfortabilityChange(player);
+            float temperatureResistanceChange = statChanges.GetTemperatureResistanceChange(player);
+            float criticalRangeChange = statChanges.GetCriticalTemperatureChange(player);
+            float climateExtremityChange = statChanges.GetClimateExtremityChange(player);
+            float sunExtremityChange = statChanges.GetSunExtremityChange(player);
+
+            float absDesiredTempChange = Math.Abs(desiredTempChange);
+            float absHumidityChange = Math.Abs(humidityChange) * 100f; //Times 100 because it's a percentage
+            float absHeatComfortabilityChange = Math.Abs(heatComfortabilityChange);
+            float absColdComfortabilityChange = Math.Abs(coldComfortabilityChange);
+            float absTemperatureResistanceChange = Math.Abs(temperatureResistanceChange) * 100f; //Times 100 because it's a percentage
+            float absCriticalRangeChange = Math.Abs(criticalRangeChange);
+            float absClimateExtremityChange = Math.Abs(climateExtremityChange) * 100f; //Times 100 because it's a percentage
+            float absSunExtremityChange = Math.Abs(sunExtremityChange) * 100f; //Times 100 because it's a percentage
 
             string fullLine = "";
             List<string> stringsToAdd = new List<string>();
 
             //Desired Temperature Change Check
             if (desiredTempChange > 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedDesiredTemp", desiredChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedDesiredTemp", absDesiredTempChange));
             }
             else if (desiredTempChange < 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedDesiredTemp", desiredChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedDesiredTemp", absDesiredTempChange));
             }
 
             //Humidity Change Check
-            if (humidChange > 0f) {
+            if (absHumidityChange > 0f) {
                 stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedHumidity", humidityChange));
             }
-            else if (humidChange < 0f) {
+            else if (absHumidityChange < 0f) {
                 stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedHumidity", humidityChange));
             }
 
             //Global Change Check
-            if (heatComfortabilityChange * -1 == coldComfortabilityChange && heatChange != 0f) {
+            if (heatComfortabilityChange * -1 == coldComfortabilityChange && absHeatComfortabilityChange != 0f) {
                 if (heatComfortabilityChange > 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedGlobalComfortability", heatChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedGlobalComfortability", absHeatComfortabilityChange));
                 }
                 else if (heatComfortabilityChange < 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedGlobalComfortability", heatChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedGlobalComfortability", absHeatComfortabilityChange));
                 }
             }
             //Heat/Cold Change Check
             else {
                 if (heatComfortabilityChange > 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedHeatComfortability", heatChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedHeatComfortability", absHeatComfortabilityChange));
                 }
                 else if (heatComfortabilityChange < 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedHeatComfortability", heatChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedHeatComfortability", absHeatComfortabilityChange));
                 }
 
                 if (coldComfortabilityChange < 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedColdComfortability", coldChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedColdComfortability", absColdComfortabilityChange));
                 }
                 else if (coldComfortabilityChange > 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedColdComfortability", coldChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedColdComfortability", absColdComfortabilityChange));
                 }
             }
 
             //Temperature Resistance Change Check
             if (temperatureResistanceChange > 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedTempResistance", tempResistChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedTempResistance", absTemperatureResistanceChange));
             }
             else if (temperatureResistanceChange < 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedTempResistance", tempResistChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedTempResistance", absTemperatureResistanceChange));
             }
 
             //Critical Temperature Change Check
             if (criticalRangeChange > 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange", criticalChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange", absCriticalRangeChange));
             }
             else if (criticalRangeChange < 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange", criticalChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange", absCriticalRangeChange));
             }
 
             //Climate Extremity Change Check
             if (climateExtremityChange > 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedClimateExtremity", climateExtreme));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedClimateExtremity", absClimateExtremityChange));
             }
             else if (climateExtremityChange < 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedClimateExtremity", climateExtreme));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedClimateExtremity", absClimateExtremityChange));
+            }
+
+            //Sun Extremity Change Check
+            if (sunExtremityChange > 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedSunExtremity", absSunExtremityChange));
+            }
+            else if (sunExtremityChange < 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedSunExtremity", absSunExtremityChange));
             }
 
             if (additionalLine != null) {

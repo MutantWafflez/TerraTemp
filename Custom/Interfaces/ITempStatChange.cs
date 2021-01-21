@@ -42,5 +42,11 @@ namespace TerraTemp.Custom.Interfaces {
         /// By how much this given change will change the player's climate extremity value.
         /// </summary>
         float GetClimateExtremityChange(Player player);
+
+        /// <summary>
+        /// By how much this given change will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        float GetSunExtremityChange(Player player);
     }
 }

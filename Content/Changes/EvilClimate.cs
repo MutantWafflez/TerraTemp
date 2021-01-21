@@ -51,6 +51,12 @@ namespace TerraTemp.Content.Changes {
         public virtual float GetClimateExtremityChange(Player player) => 0f;
 
         /// <summary>
+        /// By how much this given evil biome will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        public virtual float GetSunExtremityChange(Player player) => 0f;
+
+        /// <summary>
         /// Zone bool that relates to this evil biome.
         /// </summary>
         public virtual bool EvilZoneBool(Player player) => false;

@@ -35,7 +35,7 @@ namespace TerraTemp.Content.Changes {
                 if (additionalLine == "Mods.TerraTemp.GlobalItemChange." + GetType().Name) {
                     additionalLine = null;
                 }
-                return TempUtilities.CreateNewLineBasedOnStats(GetDesiredTemperatureChange(Main.LocalPlayer), GetHumidityChange(Main.LocalPlayer), GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer), additionalLine);
+                return TempUtilities.CreateNewLineBasedOnStats(this, additionalLine);
             }
         }
 
@@ -73,6 +73,12 @@ namespace TerraTemp.Content.Changes {
         /// By how much this given item will change the player's climate extremity value.
         /// </summary>
         public virtual float GetClimateExtremityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        public virtual float GetSunExtremityChange(Player player) => 0f;
 
         /// <summary>
         /// If the item has an additional effect on the player, overriding this method can assist

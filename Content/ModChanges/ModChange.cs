@@ -54,5 +54,11 @@ namespace TerraTemp.Content.ModChanges {
         /// By how much this given mod event will change the player's climate extremity value.
         /// </summary>
         public virtual float GetClimateExtremityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given mod event will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        public virtual float GetSunExtremityChange(Player player) => 0f;
     }
 }

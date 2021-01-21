@@ -51,6 +51,12 @@ namespace TerraTemp.Content.Changes {
         public virtual float GetClimateExtremityChange(Player player) => 0f;
 
         /// <summary>
+        /// By how much this given item will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        public virtual float GetSunExtremityChange(Player player) => 0f;
+
+        /// <summary>
         /// Method that loops through all of the specified tile IDs and returns whether or not the
         /// player is near any of them.
         /// </summary>

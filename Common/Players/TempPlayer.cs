@@ -80,6 +80,12 @@ namespace TerraTemp {
         public float climateExtremityValue; //Default 1f
 
         /// <summary>
+        /// How much more or less intense the temperature influence of the sun will have. By
+        /// default, it is 1f (100%, normal).
+        /// </summary>
+        public float sunExtremityValue; //Default 1f;
+
+        /// <summary>
         /// The player's current biome, influencing the current environment temperature.
         /// </summary>
         public Climate currentBiome;
@@ -105,6 +111,7 @@ namespace TerraTemp {
             relativeHumidity = 0f;
             criticalRangeMaximum = 10f;
             climateExtremityValue = 1f;
+            sunExtremityValue = 1f;
 
             equippedItemChanges = new List<ItemChange>();
         }
@@ -386,10 +393,10 @@ namespace TerraTemp {
             if (player.ZoneOverworldHeight) {
                 if (Main.dayTime && !Main.eclipse) {
                     if (Main.time <= 27000 /* Noon */) {
-                        baseDesiredTemperature += ((float)Main.time / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
+                        baseDesiredTemperature += ((float)Main.time / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * sunExtremityValue;
                     }
                     else {
-                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * TempUtilities.GetCloudEffectsOnSunTemperature();
+                        baseDesiredTemperature += ((54000f - (float)Main.time) / 60f / 50f * TerraTemp.dailyTemperatureDeviation) * sunExtremityValue;
                     }
                 }
                 else {
