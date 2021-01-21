@@ -15,7 +15,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.AdamantiteHeadgear
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class AdamantiteChestplate : ItemChange {
@@ -24,7 +24,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.AdamantiteBreastplate
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class AdamantiteLeggings : ItemChange {
@@ -33,7 +33,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.AdamantiteLeggings
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class AdamantiteArmor : SetBonusChange {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Content.Changes.TempBiomes;
 using TerraTemp.Custom;
 
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CactusHelmet
         };
 
-        public override float DesiredTemperatureChange => 0.5f;
+        public override float GetDesiredTemperatureChange(Player player) => 0.5f;
     }
 
     public class CactusChesplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CactusBreastplate
         };
 
-        public override float DesiredTemperatureChange => 0.75f;
+        public override float GetDesiredTemperatureChange(Player player) => 0.75f;
     }
 
     public class CactusLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CactusLeggings
         };
 
-        public override float DesiredTemperatureChange => 0.25f;
+        public override float GetDesiredTemperatureChange(Player player) => 0.25f;
     }
 
     public class CactusArmor : SetBonusChange {
@@ -46,7 +47,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneDesert) {
-                player.GetTempPlayer().baseDesiredTemperature -= desertClimate.TemperatureModification / 4f;
+                player.GetTempPlayer().baseDesiredTemperature -= desertClimate.GetDesiredTemperatureChange(player) / 4f;
             }
         }
     }

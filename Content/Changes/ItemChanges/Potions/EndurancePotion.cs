@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 using TerraTemp.Content.Changes.BuffChanges.Buffs;
-using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Potions {
 
@@ -12,6 +12,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Potions {
             ItemID.EndurancePotion
         };
 
-        public override string AdditionalTooltip => TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedTempResistance", enduranceBuff.TemperatureResistanceChange * 100f);
+        public override float GetTemperatureResistanceChange(Player player) => enduranceBuff.GetTemperatureResistanceChange(player);
     }
 }

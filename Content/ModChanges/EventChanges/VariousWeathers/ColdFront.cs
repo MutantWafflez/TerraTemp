@@ -6,9 +6,10 @@ namespace TerraTemp.Content.ModChanges.EventChanges.VariousWeathers {
 
     [PertainedMod(typeof(VariousWeathersMod))]
     public class ColdFront : ModEvent {
-        public override float DesiredTemperatureChange => -7f;
 
         public ColdFront(ReflectionMod reflectionModInstance) : base(reflectionModInstance) { }
+
+        public override float GetDesiredTemperatureChange(Player player) => -7f;
 
         public override bool ApplyEventEffects(Player player) => (reflectionModInstance as VariousWeathersMod).IsEventOccuring(VariousWeathersMod.VariousWeatherEventID.ColdFront);
     }

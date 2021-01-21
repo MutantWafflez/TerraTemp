@@ -7,9 +7,10 @@ using TerraTemp.Content.Base.Items;
 namespace TerraTemp.Content.Items.Accessories {
 
     public class HeterostaticRune : TempEquipment {
-        public override float HeatComfortabilityChange => -5f;
 
-        public override float ColdComfortabilityChange => 5f;
+        public override float GetHeatComfortabilityChange(Player player) => -5f;
+
+        public override float GetColdComfortabilityChange(Player player) => 5f;
 
         public override void SetDefaults() {
             item.accessory = true;

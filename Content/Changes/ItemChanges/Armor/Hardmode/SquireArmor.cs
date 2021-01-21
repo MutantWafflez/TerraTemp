@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SquireGreatHelm
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class SquireChestplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SquirePlating
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class SquireLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SquireGreaves
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class SquireArmor : SetBonusChange {

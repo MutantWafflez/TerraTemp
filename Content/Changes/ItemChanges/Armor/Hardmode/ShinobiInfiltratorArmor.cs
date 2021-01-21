@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.MonkAltHead
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class ShinobiInfiltratorChestplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.MonkAltShirt
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class ShinobiInfiltratorLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.MonkAltPants
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class ShinobiInfiltratorArmor : SetBonusChange {

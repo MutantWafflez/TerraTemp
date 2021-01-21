@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -13,7 +14,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.TitaniumHeadgear
         };
 
-        public override float DesiredTemperatureChange => -2f;
+        public override float GetDesiredTemperatureChange(Player player) => -2f;
     }
 
     public class TitaniumChestplate : ItemChange {
@@ -22,7 +23,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.TitaniumBreastplate
         };
 
-        public override float DesiredTemperatureChange => -3f;
+        public override float GetDesiredTemperatureChange(Player player) => -3f;
     }
 
     public class TitaniumLeggings : ItemChange {
@@ -31,7 +32,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.TitaniumLeggings
         };
 
-        public override float DesiredTemperatureChange => -1f;
+        public override float GetDesiredTemperatureChange(Player player) => -1f;
     }
 
     public class TitaniumArmor : SetBonusChange {

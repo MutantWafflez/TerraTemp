@@ -18,25 +18,27 @@ namespace TerraTemp.Common.GlobalItems {
         #region Additional Armor/Accessory Effects
 
         public override void UpdateEquip(Item item, Player player) {
-            foreach (ItemChange change in TerraTemp.itemChanges) {
-                if (change.AppliedItemIDs.Contains(item.type) &&
-                    !player.GetTempPlayer().equippedItemChanges.Contains(change) &&
-                    (!(change is DerivedItemChange) || !TempUtilities.ContainsList(player.GetTempPlayer().equippedItemChanges, (change as DerivedItemChange).GetBaseItemChanges()))) {
+            foreach (ItemChange itemChange in TerraTemp.itemChanges) {
+                if (itemChange.AppliedItemIDs.Contains(item.type) &&
+                    !player.GetTempPlayer().equippedItemChanges.Contains(itemChange) &&
+                    (!(itemChange is DerivedItemChange) || !TempUtilities.ContainsList(player.GetTempPlayer().equippedItemChanges, (itemChange as DerivedItemChange).GetBaseItemChanges()))) {
                     TempPlayer temperaturePlayer = player.GetTempPlayer();
-                    if (change is DerivedItemChange) {
-                        DerivedItemChange changeAsDerived = change as DerivedItemChange;
+                    if (itemChange is DerivedItemChange) {
+                        DerivedItemChange changeAsDerived = itemChange as DerivedItemChange;
                         foreach (ItemChange baseChange in changeAsDerived.GetBaseItemChanges()) {
                             temperaturePlayer.equippedItemChanges.Add(baseChange);
                         }
                     }
-                    temperaturePlayer.equippedItemChanges.Add(change);
-                    temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
-                    temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
-                    temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
-                    temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;
-                    temperaturePlayer.criticalRangeMaximum += change.CriticalTemperatureChange;
-                    temperaturePlayer.climateExtremityValue += change.ClimateExtremityChange;
-                    change.AdditionalItemEquipEffect(player);
+                    temperaturePlayer.equippedItemChanges.Add(itemChange);
+
+                    temperaturePlayer.baseDesiredTemperature += itemChange.GetDesiredTemperatureChange(player);
+                    temperaturePlayer.relativeHumidity += itemChange.GetHumidityChange(player);
+                    temperaturePlayer.comfortableHigh += itemChange.GetHeatComfortabilityChange(player);
+                    temperaturePlayer.comfortableLow += itemChange.GetColdComfortabilityChange(player);
+                    temperaturePlayer.temperatureChangeResist += itemChange.GetTemperatureResistanceChange(player);
+                    temperaturePlayer.criticalRangeMaximum += itemChange.GetCriticalTemperatureChange(player);
+                    temperaturePlayer.climateExtremityValue += itemChange.GetClimateExtremityChange(player);
+                    itemChange.AdditionalItemEquipEffect(player);
                 }
             }
         }
@@ -86,18 +88,19 @@ namespace TerraTemp.Common.GlobalItems {
         }
 
         public override void UpdateArmorSet(Player player, string set) {
-            foreach (SetBonusChange change in TerraTemp.setBonusChanges) {
-                if (change.ArmorSetName == set) {
+            foreach (SetBonusChange setBonusChange in TerraTemp.setBonusChanges) {
+                if (setBonusChange.ArmorSetName == set) {
                     TempPlayer temperaturePlayer = player.GetTempPlayer();
-                    temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
-                    temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
-                    temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
-                    temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;
-                    temperaturePlayer.criticalRangeMaximum += change.CriticalTemperatureChange;
-                    temperaturePlayer.climateExtremityValue += change.ClimateExtremityChange;
-                    player.setBonus += player.setBonus == "" ? change.AdditionalSetBonusText : "\n" + change.AdditionalSetBonusText;
+                    temperaturePlayer.baseDesiredTemperature += setBonusChange.GetDesiredTemperatureChange(player);
+                    temperaturePlayer.relativeHumidity += setBonusChange.GetHumidityChange(player);
+                    temperaturePlayer.comfortableHigh += setBonusChange.GetHeatComfortabilityChange(player);
+                    temperaturePlayer.comfortableLow += setBonusChange.GetColdComfortabilityChange(player);
+                    temperaturePlayer.temperatureChangeResist += setBonusChange.GetTemperatureResistanceChange(player);
+                    temperaturePlayer.criticalRangeMaximum += setBonusChange.GetCriticalTemperatureChange(player);
+                    temperaturePlayer.climateExtremityValue += setBonusChange.GetClimateExtremityChange(player);
+                    player.setBonus += player.setBonus == "" ? setBonusChange.AdditionalSetBonusText : "\n" + setBonusChange.AdditionalSetBonusText;
 
-                    change.AdditionalSetBonusEffect(player);
+                    setBonusChange.AdditionalSetBonusEffect(player);
                 }
             }
         }

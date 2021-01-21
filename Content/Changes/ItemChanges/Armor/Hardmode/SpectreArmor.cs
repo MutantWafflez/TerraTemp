@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -12,9 +13,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SpectreMask
         };
 
-        public override float ColdComfortabilityChange => -4f;
+        public override float GetColdComfortabilityChange(Player player) => -4f;
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class SpectreChestplate : ItemChange {
@@ -23,9 +24,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SpectreRobe
         };
 
-        public override float ColdComfortabilityChange => -6f;
+        public override float GetColdComfortabilityChange(Player player) => -6f;
 
-        public override float HeatComfortabilityChange => -4f;
+        public override float GetHeatComfortabilityChange(Player player) => -4f;
     }
 
     public class SpectreLeggings : ItemChange {
@@ -34,9 +35,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SpectrePants
         };
 
-        public override float ColdComfortabilityChange => -4f;
+        public override float GetColdComfortabilityChange(Player player) => -4f;
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class SpectreArmor : SetBonusChange {

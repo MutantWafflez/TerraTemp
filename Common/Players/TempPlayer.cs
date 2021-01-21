@@ -258,13 +258,13 @@ namespace TerraTemp {
         /// </summary>
         public void MidEnvironmentUpdateEvilClimate() {
             //Updating the player's current evil biome
-            foreach (EvilClimate biome in TerraTemp.evilClimates) {
-                if (biome.EvilZoneBool(player)) {
-                    currentEvilBiome = biome;
+            foreach (EvilClimate evilBiome in TerraTemp.evilClimates) {
+                if (evilBiome.EvilZoneBool(player)) {
+                    currentEvilBiome = evilBiome;
                     break;
                 }
                 //Current evil biome being null means the player is not in any evil biome, thus no change
-                if (!biome.EvilZoneBool(player) && biome == TerraTemp.evilClimates.Last()) {
+                if (!evilBiome.EvilZoneBool(player) && evilBiome == TerraTemp.evilClimates.Last()) {
                     currentEvilBiome = null;
                     break;
                 }
@@ -279,14 +279,15 @@ namespace TerraTemp {
         /// </summary>
         public void MidEnvironmentUpdateEvents() {
             //Apply Event changes on player
-            foreach (EventChange change in TerraTemp.eventChanges) {
-                if (change.EventBoolean && change.ApplyEventEffects(player)) {
-                    baseDesiredTemperature += change.DesiredTemperatureChange;
-                    comfortableHigh += change.HeatComfortabilityChange;
-                    comfortableLow += change.ColdComfortabilityChange;
-                    relativeHumidity += change.HumidityChange;
-                    temperatureChangeResist += change.TemperatureResistanceChange;
-                    criticalRangeMaximum += change.CriticalTemperatureChange;
+            foreach (EventChange eventChange in TerraTemp.eventChanges) {
+                if (eventChange.EventBoolean && eventChange.ApplyEventEffects(player)) {
+                    baseDesiredTemperature += eventChange.GetDesiredTemperatureChange(player);
+                    relativeHumidity += eventChange.GetHumidityChange(player);
+                    comfortableHigh += eventChange.GetHeatComfortabilityChange(player);
+                    comfortableLow += eventChange.GetColdComfortabilityChange(player);
+                    temperatureChangeResist += eventChange.GetTemperatureResistanceChange(player);
+                    criticalRangeMaximum += eventChange.GetCriticalTemperatureChange(player);
+                    climateExtremityValue += eventChange.GetClimateExtremityChange(player);
                 }
             }
         }
@@ -301,12 +302,13 @@ namespace TerraTemp {
             //Apply any possible Modded Event changes on player
             foreach (ModEvent modEvent in TerraTemp.modEvents) {
                 if (modEvent.ApplyEventEffects(player)) {
-                    baseDesiredTemperature += modEvent.DesiredTemperatureChange;
-                    comfortableHigh += modEvent.HeatComfortabilityChange;
-                    comfortableLow += modEvent.ColdComfortabilityChange;
-                    relativeHumidity += modEvent.HumidityChange;
-                    temperatureChangeResist += modEvent.TemperatureResistanceChange;
-                    criticalRangeMaximum += modEvent.CriticalTemperatureChange;
+                    baseDesiredTemperature += modEvent.GetDesiredTemperatureChange(player);
+                    relativeHumidity += modEvent.GetHumidityChange(player);
+                    comfortableHigh += modEvent.GetHeatComfortabilityChange(player);
+                    comfortableLow += modEvent.GetColdComfortabilityChange(player);
+                    temperatureChangeResist += modEvent.GetTemperatureResistanceChange(player);
+                    criticalRangeMaximum += modEvent.GetCriticalTemperatureChange(player);
+                    climateExtremityValue += modEvent.GetClimateExtremityChange(player);
                 }
             }
         }
@@ -321,11 +323,13 @@ namespace TerraTemp {
             //Apply Tile Adjacency changes on player
             foreach (AdjacencyChange adjacencyChange in TerraTemp.adjacencyChanges) {
                 if (adjacencyChange.CheckForAdjacency(player)) {
-                    baseDesiredTemperature += adjacencyChange.DesiredTemperatureChange;
-                    comfortableHigh += adjacencyChange.HeatComfortabilityChange;
-                    comfortableLow += adjacencyChange.ColdComfortabilityChange;
-                    temperatureChangeResist += adjacencyChange.TemperatureResistanceChange;
-                    criticalRangeMaximum += adjacencyChange.CriticalTemperatureChange;
+                    baseDesiredTemperature += adjacencyChange.GetDesiredTemperatureChange(player);
+                    relativeHumidity += adjacencyChange.GetHumidityChange(player);
+                    comfortableHigh += adjacencyChange.GetHeatComfortabilityChange(player);
+                    comfortableLow += adjacencyChange.GetColdComfortabilityChange(player);
+                    temperatureChangeResist += adjacencyChange.GetTemperatureResistanceChange(player);
+                    criticalRangeMaximum += adjacencyChange.GetCriticalTemperatureChange(player);
+                    climateExtremityValue += adjacencyChange.GetClimateExtremityChange(player);
                 }
             }
         }
@@ -339,9 +343,13 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateApplyBiomeEffects() {
             //Change desired temp & temperature resistance depending on the current biome, if applicable
             if (currentBiome != null) {
-                baseDesiredTemperature += (currentBiome.TemperatureModification + (player.wet ? currentBiome.WaterTemperature : 0f)) * climateExtremityValue;
-                temperatureChangeResist += currentBiome.TemperatureResistanceModification;
-                relativeHumidity += currentBiome.HumidityModification;
+                baseDesiredTemperature += (currentBiome.GetDesiredTemperatureChange(player) + (player.wet ? currentBiome.WaterTemperature : 0f)) * climateExtremityValue;
+                relativeHumidity += currentBiome.GetHumidityChange(player);
+                comfortableHigh += currentBiome.GetHeatComfortabilityChange(player);
+                comfortableLow += currentBiome.GetColdComfortabilityChange(player);
+                temperatureChangeResist += currentBiome.GetTemperatureResistanceChange(player);
+                criticalRangeMaximum += currentBiome.GetCriticalTemperatureChange(player);
+                climateExtremityValue += currentBiome.GetClimateExtremityChange(player);
             }
         }
 
@@ -355,9 +363,13 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateApplyEvilBiomeEffects() {
             //Change desired temp & temperature resistance depending on the current evil biome, if applicable
             if (currentEvilBiome != null) {
-                baseDesiredTemperature += (currentEvilBiome.TemperatureModification + (player.wet ? currentEvilBiome.WaterTemperature : 0f)) * climateExtremityValue;
-                temperatureChangeResist += currentEvilBiome.TemperatureResistanceModification;
-                relativeHumidity += currentEvilBiome.HumidityModification;
+                baseDesiredTemperature += (currentEvilBiome.GetDesiredTemperatureChange(player) + (player.wet ? currentEvilBiome.WaterTemperature : 0f)) * climateExtremityValue;
+                relativeHumidity += currentEvilBiome.GetHumidityChange(player);
+                comfortableHigh += currentEvilBiome.GetHeatComfortabilityChange(player);
+                comfortableLow += currentEvilBiome.GetColdComfortabilityChange(player);
+                temperatureChangeResist += currentEvilBiome.GetTemperatureResistanceChange(player);
+                criticalRangeMaximum += currentEvilBiome.GetCriticalTemperatureChange(player);
+                climateExtremityValue += currentEvilBiome.GetClimateExtremityChange(player);
             }
         }
 

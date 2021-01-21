@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -11,9 +12,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.VortexHelmet
         };
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class VortexChestplate : ItemChange {
@@ -22,9 +23,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.VortexBreastplate
         };
 
-        public override float ColdComfortabilityChange => 3f;
+        public override float GetColdComfortabilityChange(Player player) => 3f;
 
-        public override float HeatComfortabilityChange => -3f;
+        public override float GetHeatComfortabilityChange(Player player) => -3f;
     }
 
     public class VortexLeggings : ItemChange {
@@ -33,9 +34,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.VortexLeggings
         };
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class VortexArmor : SetBonusChange {

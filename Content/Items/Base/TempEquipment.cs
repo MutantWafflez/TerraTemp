@@ -11,12 +11,12 @@ namespace TerraTemp.Content.Base.Items {
 
         public override void UpdateEquip(Player player) {
             TempPlayer temperaturePlayer = player.GetTempPlayer();
-            temperaturePlayer.baseDesiredTemperature += DesiredTemperatureChange;
-            temperaturePlayer.comfortableHigh += HeatComfortabilityChange;
-            temperaturePlayer.comfortableLow += ColdComfortabilityChange;
-            temperaturePlayer.temperatureChangeResist += TemperatureResistanceChange;
-            temperaturePlayer.criticalRangeMaximum += CriticalTemperatureChange;
-            temperaturePlayer.climateExtremityValue += ClimateExtremityChange;
+            temperaturePlayer.baseDesiredTemperature += GetDesiredTemperatureChange(player);
+            temperaturePlayer.comfortableHigh += GetHeatComfortabilityChange(player);
+            temperaturePlayer.comfortableLow += GetColdComfortabilityChange(player);
+            temperaturePlayer.temperatureChangeResist += GetTemperatureResistanceChange(player);
+            temperaturePlayer.criticalRangeMaximum += GetCriticalTemperatureChange(player);
+            temperaturePlayer.climateExtremityValue += GetClimateExtremityChange(player);
         }
     }
 }

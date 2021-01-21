@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Content.Changes.TempBiomes;
 using TerraTemp.Custom;
 
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.FossilHelm
         };
 
-        public override float DesiredTemperatureChange => 2f;
+        public override float GetDesiredTemperatureChange(Player player) => 2f;
     }
 
     public class FossilChesplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.FossilShirt
         };
 
-        public override float DesiredTemperatureChange => 2f;
+        public override float GetDesiredTemperatureChange(Player player) => 2f;
     }
 
     public class FossilLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.FossilPants
         };
 
-        public override float DesiredTemperatureChange => 2f;
+        public override float GetDesiredTemperatureChange(Player player) => 2f;
     }
 
     public class FossilArmor : SetBonusChange {
@@ -46,7 +47,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneDesert) {
-                player.GetTempPlayer().baseDesiredTemperature -= desertClimate.TemperatureModification;
+                player.GetTempPlayer().baseDesiredTemperature -= desertClimate.GetDesiredTemperatureChange(player);
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Changes {
 
@@ -8,7 +9,7 @@ namespace TerraTemp.Content.Changes {
     /// Abstract class that can be inherited and its fields overriden for any potential change to
     /// ANY given item.
     /// </summary>
-    public abstract class ItemChange {
+    public abstract class ItemChange : ITempStatChange {
 
         /// <summary>
         /// List of Item IDs that this change pertains to. The reason this is a list is for if the
@@ -25,36 +26,6 @@ namespace TerraTemp.Content.Changes {
         public virtual bool DerivedItemsProvideEffects => false;
 
         /// <summary>
-        /// By how much this given item will change the player's Base Desired (Environmental) Temperature.
-        /// </summary>
-        public virtual float DesiredTemperatureChange => 0f;
-
-        /// <summary>
-        /// By how much this given item will change the player's Heat Comfortability Range.
-        /// </summary>
-        public virtual float HeatComfortabilityChange => 0f;
-
-        /// <summary>
-        /// By how much this given item will change the player's Cold Comfortability Range.
-        /// </summary>
-        public virtual float ColdComfortabilityChange => 0f;
-
-        /// <summary>
-        /// By how much this given item will change the player's Temperature Resistance.
-        /// </summary>
-        public virtual float TemperatureResistanceChange => 0f;
-
-        /// <summary>
-        /// By how much this given item will change the player's critical temperature range.
-        /// </summary>
-        public virtual float CriticalTemperatureChange => 0f;
-
-        /// <summary>
-        /// By how much this given item will change the player's climate extremity value.
-        /// </summary>
-        public virtual float ClimateExtremityChange => 0f;
-
-        /// <summary>
         /// Additional tooltip line(s) to be added to the end of the item's tooltip. Done
         /// automatically based on how each property is changed.
         /// </summary>
@@ -64,9 +35,44 @@ namespace TerraTemp.Content.Changes {
                 if (additionalLine == "Mods.TerraTemp.GlobalItemChange." + GetType().Name) {
                     additionalLine = null;
                 }
-                return TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange, additionalLine);
+                return TempUtilities.CreateNewLineBasedOnStats(GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetDesiredTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer), additionalLine);
             }
         }
+
+        /// <summary>
+        /// By how much this given item will change the player's Base Desired (Environmental) Temperature.
+        /// </summary>
+        public virtual float GetDesiredTemperatureChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's Relative Humidity.
+        /// </summary>
+        public virtual float GetHumidityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's Heat Comfortability Range.
+        /// </summary>
+        public virtual float GetHeatComfortabilityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's Cold Comfortability Range.
+        /// </summary>
+        public virtual float GetColdComfortabilityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's Temperature Resistance.
+        /// </summary>
+        public virtual float GetTemperatureResistanceChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's critical temperature range.
+        /// </summary>
+        public virtual float GetCriticalTemperatureChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's climate extremity value.
+        /// </summary>
+        public virtual float GetClimateExtremityChange(Player player) => 0f;
 
         /// <summary>
         /// If the item has an additional effect on the player, overriding this method can assist

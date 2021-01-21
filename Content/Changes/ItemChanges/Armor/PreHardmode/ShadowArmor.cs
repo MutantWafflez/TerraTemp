@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Content.Changes.EvilTempBiomes;
 using TerraTemp.Custom;
 
@@ -13,7 +14,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AncientShadowHelmet
         };
 
-        public override float TemperatureResistanceChange => 0.0125f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.0125f;
     }
 
     public class ShadowChestplate : ItemChange {
@@ -23,7 +24,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AncientShadowScalemail
         };
 
-        public override float TemperatureResistanceChange => 0.025f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.025f;
     }
 
     public class ShadowLeggings : ItemChange {
@@ -33,7 +34,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AncientShadowGreaves
         };
 
-        public override float TemperatureResistanceChange => 0.0125f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.0125f;
     }
 
     public class ShadowArmor : SetBonusChange {
@@ -49,7 +50,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneCorrupt) {
-                player.GetTempPlayer().temperatureChangeResist -= corruptionClimate.TemperatureResistanceModification;
+                player.GetTempPlayer().temperatureChangeResist -= corruptionClimate.GetTemperatureResistanceChange(player);
             }
         }
     }
@@ -67,7 +68,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneCorrupt) {
-                player.GetTempPlayer().temperatureChangeResist -= corruptionClimate.TemperatureResistanceModification;
+                player.GetTempPlayer().temperatureChangeResist -= corruptionClimate.GetTemperatureResistanceChange(player);
             }
         }
     }

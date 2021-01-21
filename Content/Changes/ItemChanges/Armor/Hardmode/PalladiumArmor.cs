@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -13,9 +14,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.PalladiumMask
         };
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
     }
 
     public class PalladiumChestplate : ItemChange {
@@ -24,9 +25,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.PalladiumBreastplate
         };
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
     }
 
     public class PalladiumLeggings : ItemChange {
@@ -35,9 +36,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.PalladiumLeggings
         };
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
     }
 
     public class PalladiumArmor : SetBonusChange {

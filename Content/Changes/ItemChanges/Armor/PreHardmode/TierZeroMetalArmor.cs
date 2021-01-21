@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
@@ -10,9 +11,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CopperHelmet
         };
 
-        public override float ColdComfortabilityChange => -1f;
+        public override float GetColdComfortabilityChange(Player player) => -1f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 
     public class TierZeroMetalChestplate : ItemChange {
@@ -22,9 +23,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CopperChainmail
         };
 
-        public override float ColdComfortabilityChange => -2f;
+        public override float GetColdComfortabilityChange(Player player) => -2f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 
     public class TierZeroMetalLeggings : ItemChange {
@@ -34,8 +35,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CopperGreaves
         };
 
-        public override float ColdComfortabilityChange => -1f;
+        public override float GetColdComfortabilityChange(Player player) => -1f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 }

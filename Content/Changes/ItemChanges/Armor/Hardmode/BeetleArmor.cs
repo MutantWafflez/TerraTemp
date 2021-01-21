@@ -11,7 +11,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.BeetleHelmet
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class BeetleChestplate : ItemChange {
@@ -21,7 +21,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.BeetleShell
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class BeetleLeggings : ItemChange {
@@ -30,7 +30,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.BeetleLeggings
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class BeetleDefenseArmor : SetBonusChange {

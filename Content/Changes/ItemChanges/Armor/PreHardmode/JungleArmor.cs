@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Content.Changes.TempBiomes;
 using TerraTemp.Custom;
 
@@ -13,7 +14,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AncientCobaltHelmet
         };
 
-        public override float HeatComfortabilityChange => 1f;
+        public override float GetHeatComfortabilityChange(Player player) => 1f;
     }
 
     public class JungleShirt : ItemChange {
@@ -23,7 +24,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AncientCobaltBreastplate
         };
 
-        public override float HeatComfortabilityChange => 3f;
+        public override float GetHeatComfortabilityChange(Player player) => 3f;
     }
 
     public class JunglePants : ItemChange {
@@ -33,7 +34,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AncientCobaltLeggings
         };
 
-        public override float HeatComfortabilityChange => 1f;
+        public override float GetHeatComfortabilityChange(Player player) => 1f;
     }
 
     public class JungleArmor : SetBonusChange {
@@ -49,7 +50,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneJungle) {
-                player.GetTempPlayer().relativeHumidity -= jungleClimateHumidity.HumidityModification;
+                player.GetTempPlayer().relativeHumidity -= jungleClimateHumidity.GetHumidityChange(player);
             }
         }
     }
@@ -67,7 +68,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneJungle) {
-                player.GetTempPlayer().relativeHumidity -= jungleClimateHumidity.HumidityModification;
+                player.GetTempPlayer().relativeHumidity -= jungleClimateHumidity.GetHumidityChange(player);
             }
         }
     }

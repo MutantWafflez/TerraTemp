@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Content.Changes.EvilTempBiomes;
 using TerraTemp.Custom;
 
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CrimsonHelmet
         };
 
-        public override float TemperatureResistanceChange => 0.0125f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.0125f;
     }
 
     public class CrimsonChestplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CrimsonScalemail
         };
 
-        public override float TemperatureResistanceChange => 0.025f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.025f;
     }
 
     public class CrimsonLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.CrimsonGreaves
         };
 
-        public override float TemperatureResistanceChange => 0.0125f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.0125f;
     }
 
     public class CrimsonArmor : SetBonusChange {
@@ -46,7 +47,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneCrimson) {
-                player.GetTempPlayer().relativeHumidity -= crimsonHumidityChange.HumidityModification;
+                player.GetTempPlayer().relativeHumidity -= crimsonHumidityChange.GetDesiredTemperatureChange(player);
             }
         }
     }

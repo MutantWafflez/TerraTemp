@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
@@ -9,11 +10,11 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.MiningHelmet
         };
 
-        public override float HeatComfortabilityChange => 0.5f;
+        public override float GetHeatComfortabilityChange(Player player) => 0.5f;
 
-        public override float ColdComfortabilityChange => -0.5f;
+        public override float GetColdComfortabilityChange(Player player) => -0.5f;
 
-        public override float TemperatureResistanceChange => 0.0025f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.0025f;
     }
 
     public class MiningChestplate : ItemChange {
@@ -22,11 +23,11 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.MiningShirt
         };
 
-        public override float HeatComfortabilityChange => 1f;
+        public override float GetHeatComfortabilityChange(Player player) => 1f;
 
-        public override float ColdComfortabilityChange => -1f;
+        public override float GetColdComfortabilityChange(Player player) => -1f;
 
-        public override float TemperatureResistanceChange => 0.005f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.005f;
     }
 
     public class MiningLeggings : ItemChange {
@@ -35,10 +36,10 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.MiningPants
         };
 
-        public override float HeatComfortabilityChange => 0.5f;
+        public override float GetHeatComfortabilityChange(Player player) => 0.5f;
 
-        public override float ColdComfortabilityChange => -0.5f;
+        public override float GetColdComfortabilityChange(Player player) => -0.5f;
 
-        public override float TemperatureResistanceChange => 0.0025f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.0025f;
     }
 }

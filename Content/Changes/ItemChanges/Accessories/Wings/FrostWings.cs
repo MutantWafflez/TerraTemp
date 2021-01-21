@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Accessories.Wings {
@@ -9,6 +10,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories.Wings {
             ItemID.FrozenWings
         };
 
-        public override float ColdComfortabilityChange => -2f;
+        public override float GetColdComfortabilityChange(Player player) => -2f;
     }
 }

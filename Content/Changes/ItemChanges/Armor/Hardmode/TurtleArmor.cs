@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -11,9 +12,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.TurtleHelmet
         };
 
-        public override float HeatComfortabilityChange => 2f;
+        public override float GetHeatComfortabilityChange(Player player) => 2f;
 
-        public override float ColdComfortabilityChange => 1f;
+        public override float GetColdComfortabilityChange(Player player) => 1f;
     }
 
     public class TurtleChestplate : ItemChange {
@@ -22,9 +23,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.TurtleScaleMail
         };
 
-        public override float HeatComfortabilityChange => 2f;
+        public override float GetHeatComfortabilityChange(Player player) => 2f;
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
     }
 
     public class TurtleLeggings : ItemChange {
@@ -33,9 +34,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.TurtleLeggings
         };
 
-        public override float HeatComfortabilityChange => 3f;
+        public override float GetHeatComfortabilityChange(Player player) => 3f;
 
-        public override float ColdComfortabilityChange => 1f;
+        public override float GetColdComfortabilityChange(Player player) => 1f;
     }
 
     public class TurtleArmor : SetBonusChange {

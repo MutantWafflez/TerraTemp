@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using Terraria.ModLoader;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Custom;
@@ -13,7 +14,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SolarFlareHelmet
         };
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
     }
 
     public class SolarFlareChestplate : ItemChange {
@@ -22,7 +23,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SolarFlareBreastplate
         };
 
-        public override float ColdComfortabilityChange => 3f;
+        public override float GetColdComfortabilityChange(Player player) => 3f;
     }
 
     public class SolarFlareLeggings : ItemChange {
@@ -31,7 +32,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SolarFlareLeggings
         };
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
     }
 
     public class SolarFlareArmor : SetBonusChange {

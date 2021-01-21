@@ -15,11 +15,11 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
         public override bool DerivedItemsProvideEffects => true;
 
-        public override float HeatComfortabilityChange => 2f;
+        public override float GetHeatComfortabilityChange(Player player) => 2f;
 
         public override void AdditionalItemEquipEffect(Player player) {
             if (player.ZoneUnderworldHeight) {
-                player.GetTempPlayer().baseDesiredTemperature -= underworldClimate.TemperatureModification * 0.4f;
+                player.GetTempPlayer().baseDesiredTemperature -= underworldClimate.GetDesiredTemperatureChange(player) * 0.4f;
             }
         }
     }

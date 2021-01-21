@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
@@ -11,7 +12,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AnglerHat
         };
 
-        public override float HeatComfortabilityChange => 1f;
+        public override float GetHeatComfortabilityChange(Player player) => 1f;
     }
 
     public class AnglerChestplate : ItemChange {
@@ -20,7 +21,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AnglerVest
         };
 
-        public override float HeatComfortabilityChange => 2f;
+        public override float GetHeatComfortabilityChange(Player player) => 2f;
     }
 
     public class AnglerLeggings : ItemChange {
@@ -29,7 +30,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AnglerPants
         };
 
-        public override float HeatComfortabilityChange => 1f;
+        public override float GetHeatComfortabilityChange(Player player) => 1f;
     }
 
     public class AnglerArmor : SetBonusChange {

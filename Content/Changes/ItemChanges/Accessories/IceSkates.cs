@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
@@ -11,6 +12,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
         public override bool DerivedItemsProvideEffects => true;
 
-        public override float ColdComfortabilityChange => -3f;
+        public override float GetColdComfortabilityChange(Player player) => -3f;
     }
 }

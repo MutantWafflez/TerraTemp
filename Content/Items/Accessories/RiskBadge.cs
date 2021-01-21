@@ -9,9 +9,9 @@ namespace TerraTemp.Content.Items.Accessories {
     public class RiskBadge : TempEquipment {
 
         //TODO: Get better sprite than what is currently here
-        public override float TemperatureResistanceChange => -10f;
+        public override float GetTemperatureResistanceChange(Player player) => -10f;
 
-        public override float ClimateExtremityChange => 0.3f;
+        public override float GetClimateExtremityChange(Player player) => 0.3f;
 
         public override void SetDefaults() {
             item.width = 32;

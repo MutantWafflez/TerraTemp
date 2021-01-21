@@ -14,9 +14,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.ChlorophyteHeadgear
         };
 
-        public override float ColdComfortabilityChange => 1f;
+        public override float GetColdComfortabilityChange(Player player) => 1f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 
     public class ChlorophyteChestplate : ItemChange {
@@ -25,9 +25,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.ChlorophytePlateMail
         };
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class ChlorophyteLeggings : ItemChange {
@@ -36,9 +36,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.ChlorophyteGreaves
         };
 
-        public override float ColdComfortabilityChange => 1f;
+        public override float GetColdComfortabilityChange(Player player) => 1f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 
     public class ChlorophyteArmor : SetBonusChange {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -15,6 +16,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override int LegPieceID => ItemID.HallowedGreaves;
 
-        public override float TemperatureResistanceChange => 0.5f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.5f;
     }
 }

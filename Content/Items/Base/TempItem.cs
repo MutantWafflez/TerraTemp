@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Base.Items {
 
@@ -9,40 +11,45 @@ namespace TerraTemp.Content.Base.Items {
     /// Abstract class for any item that can affect a given player's temperature stats in ANY given
     /// way. Tooltip is automatically handled, no matter the change.
     /// </summary>
-    public abstract class TempItem : ModItem {
+    public abstract class TempItem : ModItem, ITempStatChange {
 
         /// <summary>
         /// By how much this given item will change the player's Base Desired (Environmental) Temperature.
         /// </summary>
-        public virtual float DesiredTemperatureChange => 0f;
+        public virtual float GetDesiredTemperatureChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's Relative Humidity.
+        /// </summary>
+        public virtual float GetHumidityChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given item will change the player's Heat Comfortability Range.
         /// </summary>
-        public virtual float HeatComfortabilityChange => 0f;
+        public virtual float GetHeatComfortabilityChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given item will change the player's Cold Comfortability Range.
         /// </summary>
-        public virtual float ColdComfortabilityChange => 0f;
+        public virtual float GetColdComfortabilityChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given item will change the player's Temperature Resistance.
         /// </summary>
-        public virtual float TemperatureResistanceChange => 0f;
+        public virtual float GetTemperatureResistanceChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given item will change the player's critical temperature range.
         /// </summary>
-        public virtual float CriticalTemperatureChange => 0f;
+        public virtual float GetCriticalTemperatureChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given item will change the player's climate extremity value.
         /// </summary>
-        public virtual float ClimateExtremityChange => 0f;
+        public virtual float GetClimateExtremityChange(Player player) => 0f;
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange);
+            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetDesiredTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer));
             if (returnedLine != null) {
                 TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", returnedLine);
 

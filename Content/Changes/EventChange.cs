@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Changes {
 
@@ -6,7 +7,7 @@ namespace TerraTemp.Content.Changes {
     /// Abstract class that can inherited and its fields overriden to change temperature related
     /// values during a given game event.
     /// </summary>
-    public abstract class EventChange {
+    public abstract class EventChange : ITempStatChange {
 
         /// <summary>
         /// The boolean in Main that handles whether this even is taking place. For example, for
@@ -17,32 +18,37 @@ namespace TerraTemp.Content.Changes {
         /// <summary>
         /// By how much this given event will change the player's Base Desired (Environmental) Temperature.
         /// </summary>
-        public virtual float DesiredTemperatureChange => 0f;
+        public virtual float GetDesiredTemperatureChange(Player player) => 0f;
 
         /// <summary>
-        /// By how much this given event will change the environment's relative humidity.
+        /// By how much this given event will change the player's Relative Humidity.
         /// </summary>
-        public virtual float HumidityChange => 0f;
+        public virtual float GetHumidityChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given event will change the player's Heat Comfortability Range.
         /// </summary>
-        public virtual float HeatComfortabilityChange => 0f;
+        public virtual float GetHeatComfortabilityChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given event will change the player's Cold Comfortability Range.
         /// </summary>
-        public virtual float ColdComfortabilityChange => 0f;
+        public virtual float GetColdComfortabilityChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given event will change the player's Temperature Resistance.
         /// </summary>
-        public virtual float TemperatureResistanceChange => 0f;
+        public virtual float GetTemperatureResistanceChange(Player player) => 0f;
 
         /// <summary>
         /// By how much this given event will change the player's critical temperature range.
         /// </summary>
-        public virtual float CriticalTemperatureChange => 0f;
+        public virtual float GetCriticalTemperatureChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given event will change the player's climate extremity value.
+        /// </summary>
+        public virtual float GetClimateExtremityChange(Player player) => 0f;
 
         /// <summary>
         /// Whether or not, based on player position/bools/etc, the event's effects should be

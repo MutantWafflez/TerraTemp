@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
@@ -9,7 +10,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.MoltenHelmet
         };
 
-        public override float DesiredTemperatureChange => 2f;
+        public override float GetDesiredTemperatureChange(Player player) => 2f;
     }
 
     public class MoltenChestplate : ItemChange {
@@ -18,7 +19,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.MoltenBreastplate
         };
 
-        public override float DesiredTemperatureChange => 4f;
+        public override float GetDesiredTemperatureChange(Player player) => 4f;
     }
 
     public class MoltenLeggings : ItemChange {
@@ -27,7 +28,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.MoltenGreaves
         };
 
-        public override float DesiredTemperatureChange => 2f;
+        public override float GetDesiredTemperatureChange(Player player) => 2f;
     }
 
     public class MoltenArmor : SetBonusChange {
@@ -40,6 +41,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int LegPieceID => ItemID.MoltenGreaves;
 
-        public override float ColdComfortabilityChange => -8f;
+        public override float GetColdComfortabilityChange(Player player) => -8f;
     }
 }

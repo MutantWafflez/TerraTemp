@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SquireAltHead
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class ValhallaKnightChestplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SquireAltShirt
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class ValhallaKnightLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SquireAltPants
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class ValhallaKnightArmor : SetBonusChange {

@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
+
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.MonkBrows
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class MonkChestplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.MonkShirt
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class MonkLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.MonkPants
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class MonkArmor : SetBonusChange {

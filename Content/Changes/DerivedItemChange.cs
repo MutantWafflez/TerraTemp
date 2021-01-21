@@ -12,71 +12,11 @@ namespace TerraTemp.Content.Changes {
     [IgnoredSubclass]
     public class DerivedItemChange : ItemChange {
         public readonly int appliedItemID;
-        private List<ItemChange> baseChanges = new List<ItemChange>();
+        private readonly List<ItemChange> baseChanges = new List<ItemChange>();
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             appliedItemID
         };
-
-        public override float ClimateExtremityChange {
-            get {
-                float finalValue = 0f;
-                foreach (ItemChange item in baseChanges) {
-                    finalValue += item.ClimateExtremityChange;
-                }
-                return finalValue;
-            }
-        }
-
-        public override float ColdComfortabilityChange {
-            get {
-                float finalValue = 0f;
-                foreach (ItemChange item in baseChanges) {
-                    finalValue += item.ColdComfortabilityChange;
-                }
-                return finalValue;
-            }
-        }
-
-        public override float CriticalTemperatureChange {
-            get {
-                float finalValue = 0f;
-                foreach (ItemChange item in baseChanges) {
-                    finalValue += item.CriticalTemperatureChange;
-                }
-                return finalValue;
-            }
-        }
-
-        public override float DesiredTemperatureChange {
-            get {
-                float finalValue = 0f;
-                foreach (ItemChange item in baseChanges) {
-                    finalValue += item.DesiredTemperatureChange;
-                }
-                return finalValue;
-            }
-        }
-
-        public override float HeatComfortabilityChange {
-            get {
-                float finalValue = 0f;
-                foreach (ItemChange item in baseChanges) {
-                    finalValue += item.HeatComfortabilityChange;
-                }
-                return finalValue;
-            }
-        }
-
-        public override float TemperatureResistanceChange {
-            get {
-                float finalValue = 0f;
-                foreach (ItemChange item in baseChanges) {
-                    finalValue += item.TemperatureResistanceChange;
-                }
-                return finalValue;
-            }
-        }
 
         public override string AdditionalTooltip {
             get {
@@ -94,13 +34,69 @@ namespace TerraTemp.Content.Changes {
                         additionalLine += line + (line != stringsToAdd.Last() ? "\n" : "");
                     }
                 }
-                return TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange, additionalLine);
+                return TempUtilities.CreateNewLineBasedOnStats(GetHeatComfortabilityChange(Main.LocalPlayer), GetColdComfortabilityChange(Main.LocalPlayer), GetTemperatureResistanceChange(Main.LocalPlayer), GetCriticalTemperatureChange(Main.LocalPlayer), GetDesiredTemperatureChange(Main.LocalPlayer), GetClimateExtremityChange(Main.LocalPlayer), additionalLine);
             }
         }
 
         public DerivedItemChange(int appliedItem, ItemChange baseChange) {
             appliedItemID = appliedItem;
             baseChanges.Add(baseChange);
+        }
+
+        public override float GetDesiredTemperatureChange(Player player) {
+            float finalValue = 0f;
+            foreach (ItemChange item in baseChanges) {
+                finalValue += item.GetDesiredTemperatureChange(player);
+            }
+            return finalValue;
+        }
+
+        public override float GetHumidityChange(Player player) {
+            float finalValue = 0f;
+            foreach (ItemChange item in baseChanges) {
+                finalValue += item.GetHumidityChange(player);
+            }
+            return finalValue;
+        }
+
+        public override float GetHeatComfortabilityChange(Player player) {
+            float finalValue = 0f;
+            foreach (ItemChange item in baseChanges) {
+                finalValue += item.GetHeatComfortabilityChange(player);
+            }
+            return finalValue;
+        }
+
+        public override float GetColdComfortabilityChange(Player player) {
+            float finalValue = 0f;
+            foreach (ItemChange item in baseChanges) {
+                finalValue += item.GetColdComfortabilityChange(player);
+            }
+            return finalValue;
+        }
+
+        public override float GetTemperatureResistanceChange(Player player) {
+            float finalValue = 0f;
+            foreach (ItemChange item in baseChanges) {
+                finalValue += item.GetTemperatureResistanceChange(player);
+            }
+            return finalValue;
+        }
+
+        public override float GetCriticalTemperatureChange(Player player) {
+            float finalValue = 0f;
+            foreach (ItemChange item in baseChanges) {
+                finalValue += item.GetCriticalTemperatureChange(player);
+            }
+            return finalValue;
+        }
+
+        public override float GetClimateExtremityChange(Player player) {
+            float finalValue = 0f;
+            foreach (ItemChange item in baseChanges) {
+                finalValue += item.GetClimateExtremityChange(player);
+            }
+            return finalValue;
         }
 
         public override void AdditionalItemEquipEffect(Player player) {
