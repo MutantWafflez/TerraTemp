@@ -54,13 +54,7 @@ namespace TerraTemp.Content.Buffs {
         public virtual float GetSunExtremityChange(Player player) => 0f;
 
         public override void Update(Player player, ref int buffIndex) {
-            TempPlayer temperaturePlayer = player.GetTempPlayer();
-            temperaturePlayer.baseDesiredTemperature += GetDesiredTemperatureChange(player);
-            temperaturePlayer.comfortableHigh += GetHeatComfortabilityChange(player);
-            temperaturePlayer.comfortableLow += GetColdComfortabilityChange(player);
-            temperaturePlayer.temperatureChangeResist += GetTemperatureResistanceChange(player);
-            temperaturePlayer.criticalRangeMaximum += GetCriticalTemperatureChange(player);
-            temperaturePlayer.climateExtremityValue += GetClimateExtremityChange(player);
+            TempUtilities.ApplyStatChanges(this, player);
         }
 
         public override void ModifyBuffTip(ref string tip, ref int rare) {
