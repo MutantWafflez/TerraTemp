@@ -64,6 +64,7 @@ ItemTooltip.RiskBadge=Forcibly sets your temperature change resistance to -100%\
 
 #TerraTemp Materials Names/Tooltips
 ItemName.BarbFish=Cherry Barb
+ItemTooltip.BarbFish='A bright, tropical fish that likes to spend its time on the Jungle surface'
 
 #TerraTemp Miscellaneous Items/Tooltips
 ItemName.Thermometer=Thermometer
