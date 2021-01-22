@@ -47,6 +47,13 @@ namespace TerraTemp {
         public static List<ItemChange> itemChanges;
 
         /// <summary>
+        /// A list of ALL newly added Item Holdout Changes. If you wish to add or otherwise remove a
+        /// given Item Holdout Change, search through this List with LINQ or any other method that
+        /// is preferred.
+        /// </summary>
+        public static List<ItemHoldoutChange> itemHoldoutChanges;
+
+        /// <summary>
         /// A list of ALL newly added Set Bonus Changes. If you wish to add or otherwise remove a
         /// given Set Bonus Change, search through this List with LINQ or any other method that is preferred.
         /// </summary>
@@ -205,6 +212,7 @@ namespace TerraTemp {
             evilClimates = new List<EvilClimate>();
             eventChanges = new List<EventChange>();
             itemChanges = new List<ItemChange>();
+            itemHoldoutChanges = new List<ItemHoldoutChange>();
             setBonusChanges = new List<SetBonusChange>();
             buffChanges = new List<BuffChange>();
             lootChanges = new List<NPCLootChange>();
@@ -228,6 +236,10 @@ namespace TerraTemp {
 
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<ItemChange>()) {
                 itemChanges.Add((ItemChange)Activator.CreateInstance(type));
+            }
+
+            foreach (Type type in TempUtilities.GetAllChildrenOfClass<ItemHoldoutChange>()) {
+                itemHoldoutChanges.Add((ItemHoldoutChange)Activator.CreateInstance(type));
             }
 
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<SetBonusChange>()) {
@@ -269,6 +281,7 @@ namespace TerraTemp {
             evilClimates = null;
             eventChanges = null;
             itemChanges = null;
+            itemHoldoutChanges = null;
             setBonusChanges = null;
             buffChanges = null;
             lootChanges = null;

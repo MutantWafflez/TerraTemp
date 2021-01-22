@@ -134,6 +134,8 @@ namespace TerraTemp {
 
             MidEnvironmentUpdateTileAdjacency();
 
+            MidEnvironmentUpdateItemHoldoutChanges();
+
             //Climate Extremity should not exceed 200% (because that would be way too overkill if even possible in the first place) and a floor of 45% so biomes always have SOME kind of effect.
             climateExtremityValue = MathHelper.Clamp(climateExtremityValue, 0.45f, 2f);
 
@@ -141,7 +143,7 @@ namespace TerraTemp {
 
             MidEnvironmentUpdateApplyEvilBiomeEffects();
 
-            MidEnvironmentUpdateApplyMiscSunExtremityEffects();
+            MidEnvironmentUpdateApplySunExtremityEffects();
 
             //Sun Exremity should not exceed 200% (because that would be way too overkill if even possible in the first place) and a floor of 0% so the sun doesn't somehow make it colder.
             sunExtremityValue = MathHelper.Clamp(sunExtremityValue, 0f, 2f);
@@ -320,7 +322,7 @@ namespace TerraTemp {
         /// Method in the "Environment Update" process that takes place in <see
         /// cref="PostUpdateMiscEffects"/>. Applies the effects of any tiles that affect
         /// temperature, if it is all applicable. This task is run immediately after <see
-        /// cref="MidEnvironmentUpdateModEvents"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateApplyBiomeEffects"/>.
+        /// cref="MidEnvironmentUpdateModEvents"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateItemHoldoutChanges"/>.
         /// </summary>
         public void MidEnvironmentUpdateTileAdjacency() {
             //Apply Tile Adjacency changes on player
@@ -333,9 +335,26 @@ namespace TerraTemp {
 
         /// <summary>
         /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the effects of any potential items that have an
+        /// effect when holding them in the player's hand. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateTileAdjacency"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateItemHoldoutChanges() {
+            //This item holdout change must be handled here since the HeldItem() method in Global Items are called too late in the update process.
+            foreach (ItemHoldoutChange itemHoldoutChange in TerraTemp.itemHoldoutChanges) {
+                if (itemHoldoutChange.AppliedItemIDs.Contains(player.HeldItem.type)) {
+                    TempUtilities.ApplyStatChanges(itemHoldoutChange, player);
+                    itemHoldoutChange.AdditionalItemHoldoutEffect(player);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
         /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the biome that the player
         /// is in, if it is all applicable. This task is run immediately after <see
-        /// cref="MidEnvironmentUpdateTileAdjacency"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>.
+        /// cref="MidEnvironmentUpdateItemHoldoutChanges"/>. For the next task in the process, see
+        /// <see cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>.
         /// </summary>
         public void MidEnvironmentUpdateApplyBiomeEffects() {
             //Change desired temp & temperature resistance depending on the current biome, if applicable
@@ -355,7 +374,7 @@ namespace TerraTemp {
         /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the evil biome that the
         /// player is in, if it is all applicable. This task is run immediately after <see
         /// cref="MidEnvironmentUpdateApplyBiomeEffects"/>. For the next task in the process, see
-        /// <see cref="MidEnvironmentUpdateApplyMiscSunExtremityEffects"/>.
+        /// <see cref="MidEnvironmentUpdateApplySunExtremityEffects"/>.
         /// </summary>
         public void MidEnvironmentUpdateApplyEvilBiomeEffects() {
             //Change desired temp & temperature resistance depending on the current evil biome, if applicable
@@ -375,7 +394,7 @@ namespace TerraTemp {
         /// increase of the sun (such as Cloud influence & Shade influnece). This task is run
         /// immediately after <see cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>. For the next
         /// task in the process, see <see cref="MidEnvironmentUpdateApplyTimeEffects"/>. </summary>
-        public void MidEnvironmentUpdateApplyMiscSunExtremityEffects() {
+        public void MidEnvironmentUpdateApplySunExtremityEffects() {
             sunExtremityValue *= TerraTemp.dailyTemperatureDeviation;
             sunExtremityValue *= TempUtilities.GetCloudEffectsOnSunTemperature();
             sunExtremityValue *= TempUtilities.GetShadeEffectsOnSunTemperature(player);
@@ -385,8 +404,8 @@ namespace TerraTemp {
         /// Method in the "Environment Update" process that takes place in <see
         /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the time of day if the
         /// player is on the surface. This task is run immediately after <see
-        /// cref="MidEnvironmentUpdateApplyMiscSunExtremityEffects"/>. For the next task in the
-        /// process, see <see cref="MidEnvironmentUpdateApplyLavaEffects"/>.
+        /// cref="MidEnvironmentUpdateApplySunExtremityEffects"/>. For the next task in the process,
+        /// see <see cref="MidEnvironmentUpdateApplyLavaEffects"/>.
         /// </summary>
         public void MidEnvironmentUpdateApplyTimeEffects() {
             //Change desired temp based on what time of day it is and the daily temperature devation
