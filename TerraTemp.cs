@@ -1,13 +1,18 @@
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.UI;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
+using TerraTemp.Content.Items.Miscellaneous;
 using TerraTemp.Content.ModChanges;
+using TerraTemp.Content.UI;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Classes.ReflectionMod;
@@ -89,6 +94,15 @@ namespace TerraTemp {
         /// event, search through this List with LINQ or any other method that is preferred.
         /// </summary>
         public static List<ModEvent> modEvents;
+
+        #endregion
+
+        #region UI Fields
+
+        internal GameTime lastGameTime;
+
+        internal ThermometerState thermometerUI;
+        internal UserInterface thermometerInterface;
 
         #endregion
 
@@ -186,6 +200,9 @@ namespace TerraTemp {
         }
 
         public override void Load() {
+
+            #region List Initialization
+
             climates = new List<Climate>();
             evilClimates = new List<EvilClimate>();
             eventChanges = new List<EventChange>();
@@ -234,6 +251,19 @@ namespace TerraTemp {
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<AdjacencyChange>()) {
                 adjacencyChanges.Add((AdjacencyChange)Activator.CreateInstance(type));
             }
+
+            #endregion
+
+            #region UI Initialization
+
+            if (Main.netMode != NetmodeID.Server) {
+                thermometerUI = new ThermometerState();
+                thermometerUI.Activate();
+                thermometerInterface = new UserInterface();
+                thermometerInterface.SetState(thermometerUI);
+            }
+
+            #endregion
         }
 
         public override void Unload() {
@@ -317,6 +347,31 @@ namespace TerraTemp {
         }
 
         #endregion Packet Handling
+
+        #region UI Handling
+
+        public override void UpdateUI(GameTime gameTime) {
+            lastGameTime = gameTime;
+            thermometerUI?.Update(gameTime);
+        }
+
+        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
+            int resourceBarIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Resource Bars"));
+            if (resourceBarIndex != -1) {
+                layers.Insert(resourceBarIndex, new LegacyGameInterfaceLayer(
+                    $"{nameof(TerraTemp)}: Thermometer Display",
+                    delegate {
+                        if (lastGameTime != null) {
+                            thermometerInterface.Draw(Main.spriteBatch, lastGameTime);
+                        }
+                        return true;
+                    },
+                    InterfaceScaleType.UI)
+                );
+            }
+        }
+
+        #endregion UI Handling
 
         #region Custom Methods
 

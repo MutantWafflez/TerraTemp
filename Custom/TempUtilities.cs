@@ -17,6 +17,11 @@ namespace TerraTemp.Custom {
     /// </summary>
     public static class TempUtilities {
 
+        /// <summary>
+        /// The string of the directory for all of the miscellaneous textures for TerraTemp.
+        /// </summary>
+        public const string TEXTURE_DIRECTORY = nameof(TerraTemp) + "/Content/Textures/";
+
         #region Calculation Methods
 
         /// <summary>
