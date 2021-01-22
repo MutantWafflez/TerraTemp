@@ -5,13 +5,14 @@ Version 1.1 TODOs (Compatability Update):
 -Compatibility of Overhaul (Season influence)
 -Compatibility of Various Weathers (All of the events!)
 -Compatibility of Calamity (Biomes, mostly. NOT doing all the accessories/armor ever? though)
--Furnaces should increase temperature slightly when in proximity
 -Make sure to add loadAfter for all of the mods that are officially compatible
 -Depth. Influence.
 
 Done:
 -Make items keep TerraTemp bonuses if anywhere in the crafting tree it uses an item that boosts stats
 -Add infrastructure for making easy mod compatibility with Reflection
+-Furnaces should increase temperature slightly when in proximity
+-Holding out Umbrellas now lower the intensity of the sun
 -Streamlined lots of internal code
 -Add "Shade" Influence to help protect against the sun
 -Thermometer now displays a proper UI
