@@ -12,7 +12,8 @@ namespace TerraTemp.Content.Items.Miscellaneous {
     public class Thermometer : ModItem {
 
         public override void SetDefaults() {
-            item.CloneDefaults(ItemID.DepthMeter);
+            item.rare = ItemRarityID.Blue;
+            item.value = Item.sellPrice(silver: 1);
             item.width = 32;
             item.height = 32;
             item.accessory = false;
