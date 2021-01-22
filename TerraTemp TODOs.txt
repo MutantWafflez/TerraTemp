@@ -5,7 +5,6 @@ Version 1.1 TODOs (Compatability Update):
 -Compatibility of Overhaul (Season influence)
 -Compatibility of Various Weathers (All of the events!)
 -Compatibility of Calamity (Biomes, mostly. NOT doing all the accessories/armor ever? though)
--Being indoors/under some kind of roof or block should lower the intensity of the sun during the day
 -Furnaces should increase temperature slightly when in proximity
 -Make sure to add loadAfter for all of the mods that are officially compatible
 -Depth. Influence.
@@ -15,6 +14,7 @@ Done:
 -Add infrastructure for making easy mod compatibility with Reflection
 -Streamlined lots of internal code
 -Add "Shade" Influence to help protect against the sun
+-Thermometer now displays a proper UI
 
 Whenever TODOs:
 -Cold attacks should instantly lower body temperature slightly
