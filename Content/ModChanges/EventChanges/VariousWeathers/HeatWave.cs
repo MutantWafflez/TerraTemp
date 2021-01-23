@@ -11,6 +11,11 @@ namespace TerraTemp.Content.ModChanges.EventChanges.VariousWeathers {
 
         public override float GetDesiredTemperatureChange(Player player) => 7f;
 
-        public override bool ApplyEventEffects(Player player) => (reflectionModInstance as VariousWeathersMod).IsEventOccuring(VariousWeathersMod.VariousWeatherEventID.HeatWave);
+        public override bool ApplyEventEffects(Player player) {
+            //Various Weathers mod applies a "Heat Stroke" debuff on the player, and that will cause additional pain then what is necessary (since we increase temperature here)
+            //Thus, player becomes immune to it while the Heat Wave is going on.
+            player.buffImmune[reflectionModInstance.ModInstance.BuffType("Heatstroke")] = true;
+            return player.ZoneOverworldHeight && (reflectionModInstance as VariousWeathersMod).IsEventOccuring(VariousWeathersMod.VariousWeatherEventID.HeatWave);
+        }
     }
 }

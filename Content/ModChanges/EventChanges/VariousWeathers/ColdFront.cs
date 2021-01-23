@@ -11,6 +11,6 @@ namespace TerraTemp.Content.ModChanges.EventChanges.VariousWeathers {
 
         public override float GetDesiredTemperatureChange(Player player) => -7f;
 
-        public override bool ApplyEventEffects(Player player) => (reflectionModInstance as VariousWeathersMod).IsEventOccuring(VariousWeathersMod.VariousWeatherEventID.ColdFront);
+        public override bool ApplyEventEffects(Player player) => player.ZoneOverworldHeight && (reflectionModInstance as VariousWeathersMod).IsEventOccuring(VariousWeathersMod.VariousWeatherEventID.ColdFront);
     }
 }
