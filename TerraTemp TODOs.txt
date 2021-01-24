@@ -3,8 +3,10 @@ Legend: ? = Potential change, on the fence about it
 Version 1.1 TODOs (Compatability Update):
 
 -Compatibility of Overhaul (Season influence)
--Compatibility of Various Weathers (All of the events!)
 -Compatibility of Calamity (Biomes, mostly. NOT doing all the accessories/armor ever? though)
+-Change how water changes the temperature of the player (like just globally cooling people down)
+-Lower extreme temperatures of Jungle/Ice?
+-Holding/being near a torch will increase your temperature *ever* so slightly
 -Make sure to add loadAfter for all of the mods that are officially compatible
 -Depth. Influence.
 
@@ -14,6 +16,7 @@ Done:
 -Furnaces should increase temperature slightly when in proximity
 -Holding out Umbrellas now lower the intensity of the sun
 -Streamlined lots of internal code
+-Compatibility of Various Weathers (All of the events!)
 -Add "Shade" Influence to help protect against the sun
 -Thermometer now displays a proper UI
 
