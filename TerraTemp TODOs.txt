@@ -11,6 +11,7 @@ Done:
 -Compatibility of Overhaul (Season influence)
 -Compatibility of Calamity (Biomes, mostly. NOT doing all the accessories/armor ever? though)
 -Compatibility of Various Weathers (All of the events!)
+-Wind no longer affects the player when both under a roof and in front of a wall
 -Holding/being near a torch will increase your temperature *ever* so slightly
 -Make items keep TerraTemp bonuses if anywhere in the crafting tree it uses an item that boosts stats
 -Add infrastructure for making easy mod compatibility with Reflection

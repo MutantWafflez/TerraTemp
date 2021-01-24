@@ -169,16 +169,18 @@ namespace TerraTemp {
             relativeHumidity = MathHelper.Clamp(relativeHumidity, 0f, 1f);
             //Temperatue Change resistance cannot exceed 100% (due to that causing the value to go backwards), and won't go below -100% for balancing purposes.
             temperatureChangeResist = MathHelper.Clamp(temperatureChangeResist, -1f, 1f);
-
-            //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
-            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, player.ZoneOverworldHeight ? Math.Abs(Main.windSpeed * 100f) * 0.44704f : 0f);
         }
 
         public override void PostUpdate() {
+            bool isAffectedByWind = player.ZoneOverworldHeight && !(player.IsUnderRoof() && player.behindBackWall);
+            //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
+            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, isAffectedByWind ? Math.Abs(Main.windSpeed * 100f) * 0.44704f : 0f);
+
             //Body temperature will change at a rate equivalent to the difference between the body temperature and desired wet temperature
             // multiplied by the player's temperature change resistance.
             float difference = modifiedDesiredTemperature - currentTemperature;
             currentTemperature += difference / 60f / 45f * (1f - temperatureChangeResist);
+
             CheckForTemperatureEffects();
         }
 
