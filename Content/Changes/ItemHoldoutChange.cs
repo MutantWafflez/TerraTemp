@@ -70,8 +70,8 @@ namespace TerraTemp.Content.Changes {
 
         /// <summary>
         /// If holding the item has an additional effect on the player, overriding this method can
-        /// assist with whatever change. This hook is called in the HoldItem() hook in the
-        /// VanillaItemChange GlobalItem.
+        /// assist with whatever change. This hook is called in the
+        /// MidEnvironmentUpdateItemHoldoutChanges() Method in TempPlayer.
         /// </summary>
         /// <param name="player"> Player that has this item equipped. </param>
         public virtual void AdditionalItemHoldoutEffect(Player player) { }
