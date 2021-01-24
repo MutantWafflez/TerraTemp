@@ -84,8 +84,7 @@ namespace TerraTemp.Custom {
         /// <returns> Value from 0f to 1f. </returns>
         public static float GetShadeEffectsOnSunTemperature(Player player) {
             if (player.behindBackWall) {
-                if (!Collision.CanHitLine(new Vector2(player.Center.X + 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X + 8f, player.Top.Y - 16 * 17), 4, 4) &&
-                    !Collision.CanHitLine(new Vector2(player.Center.X - 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X - 8f, player.Top.Y - 16 * 17), 4, 4)) {
+                if (player.IsUnderRoof()) {
                     return 0.34f;
                 }
                 else {
@@ -313,6 +312,14 @@ namespace TerraTemp.Custom {
         /// Shorthand method that returns the given player's TempPlayer ModPlayer.
         /// </summary>
         public static TempPlayer GetTempPlayer(this Player player) => player.GetModPlayer<TempPlayer>();
+
+        /// <summary>
+        /// Returns whether or not this given player is under a roof. Being "under a roof"
+        /// constitutes that there are two blocks somewhere at least 16 blocks above the player.
+        /// </summary>
+        public static bool IsUnderRoof(this Player player) {
+            return !Collision.CanHitLine(new Vector2(player.Center.X + 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X + 8f, player.Top.Y - 16 * 17), 4, 4) && !Collision.CanHitLine(new Vector2(player.Center.X - 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X - 8f, player.Top.Y - 16 * 17), 4, 4);
+        }
 
         #endregion
 
