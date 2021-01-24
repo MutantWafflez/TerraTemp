@@ -3,6 +3,7 @@ Legend: ? = Potential change, on the fence about it
 Version 1.1 TODOs (Compatability Update):
 
 -Change how water changes the temperature of the player (like just globally cooling people down)
+-Either rework how wind works, or make it so wind is 0 or super low on the first day
 -Lower extreme temperatures of Jungle/Ice?
 -Make sure to add loadAfter for all of the mods that are officially compatible
 -Depth. Influence.
