@@ -10,7 +10,6 @@ namespace TerraTemp.Content.ModChanges.EventChanges.Calamity {
         public CalamityTemperature(ReflectionMod reflectionModInstance) : base(reflectionModInstance) { }
 
         public override bool ApplyEventEffects(Player player) {
-            //TODO: Fix Cold Resistance protecting against "Chilled"
             (reflectionModInstance as CalamityMod).RemoveDeathModeTemperatureSystem(player);
             return base.ApplyEventEffects(player);
         }

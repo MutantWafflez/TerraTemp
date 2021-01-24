@@ -97,6 +97,12 @@ namespace TerraTemp {
         public EvilClimate currentEvilBiome;
 
         /// <summary>
+        /// The player's current mod biome, if available at all. Takes priority over any vanilla
+        /// biome or evil biomes, as far as I know.
+        /// </summary>
+        public ModClimate currentModBiome;
+
+        /// <summary>
         /// List of all of the currently equipped item changes to prevent the bonuses of accessories
         /// from stacking.
         /// </summary>
@@ -128,6 +134,8 @@ namespace TerraTemp {
 
             MidEnvironmentUpdateEvilClimate();
 
+            MidEnvironmentUpdateModClimate();
+
             MidEnvironmentUpdateEvents();
 
             MidEnvironmentUpdateModEvents();
@@ -142,6 +150,8 @@ namespace TerraTemp {
             MidEnvironmentUpdateApplyBiomeEffects();
 
             MidEnvironmentUpdateApplyEvilBiomeEffects();
+
+            MidEnvironmentUpdateApplyModBiomeEffects();
 
             MidEnvironmentUpdateApplySunExtremityEffects();
 
@@ -271,7 +281,7 @@ namespace TerraTemp {
         /// Method in the "Environment Update" process that takes place in <see
         /// cref="PostUpdateMiscEffects"/>. Updates the current player's evil biome, if it is all
         /// applicable. This task is run immediately after <see
-        /// cref="MidEnvironmentUpdateClimate"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateEvents"/>.
+        /// cref="MidEnvironmentUpdateClimate"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateModClimate"/>.
         /// </summary>
         public void MidEnvironmentUpdateEvilClimate() {
             //Updating the player's current evil biome
@@ -290,9 +300,29 @@ namespace TerraTemp {
 
         /// <summary>
         /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Updates the current player's mod biome, if it is all
+        /// applicable. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateEvilClimate"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateEvents"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateModClimate() {
+            //Updating the player's current modded biome
+            foreach (ModClimate modClimate in TerraTemp.modClimates) {
+                if (modClimate.IsPlayerInBiome(player)) {
+                    currentModBiome = modClimate;
+                    break;
+                }
+                //Current mod biome being null means the player is not in any mod biome, thus no change
+                if (!modClimate.IsPlayerInBiome(player) && modClimate == TerraTemp.modClimates.Last()) {
+                    currentModBiome = null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
         /// cref="PostUpdateMiscEffects"/>. Applies the effects of any events currently taking
         /// place, if it is all applicable. This task is run immediately after <see
-        /// cref="MidEnvironmentUpdateEvilClimate"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateModEvents"/>.
+        /// cref="MidEnvironmentUpdateModClimate"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateModEvents"/>.
         /// </summary>
         public void MidEnvironmentUpdateEvents() {
             //Apply Event changes on player
@@ -337,7 +367,7 @@ namespace TerraTemp {
         /// Method in the "Environment Update" process that takes place in <see
         /// cref="PostUpdateMiscEffects"/>. Applies the effects of any potential items that have an
         /// effect when holding them in the player's hand. This task is run immediately after <see
-        /// cref="MidEnvironmentUpdateTileAdjacency"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>.
+        /// cref="MidEnvironmentUpdateTileAdjacency"/>. For the next task in the process, see <see cref="MidEnvironmentUpdateApplyBiomeEffects"/>.
         /// </summary>
         public void MidEnvironmentUpdateItemHoldoutChanges() {
             //This item holdout change must be handled here since the HeldItem() method in Global Items are called too late in the update process.
@@ -374,7 +404,7 @@ namespace TerraTemp {
         /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the evil biome that the
         /// player is in, if it is all applicable. This task is run immediately after <see
         /// cref="MidEnvironmentUpdateApplyBiomeEffects"/>. For the next task in the process, see
-        /// <see cref="MidEnvironmentUpdateApplySunExtremityEffects"/>.
+        /// <see cref="MidEnvironmentUpdateApplyModBiomeEffects"/>.
         /// </summary>
         public void MidEnvironmentUpdateApplyEvilBiomeEffects() {
             //Change desired temp & temperature resistance depending on the current evil biome, if applicable
@@ -389,10 +419,30 @@ namespace TerraTemp {
             }
         }
 
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the mod biome that the
+        /// player is in, if it is all applicable. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>. For the next task in the process,
+        /// see <see cref="MidEnvironmentUpdateApplySunExtremityEffects"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateApplyModBiomeEffects() {
+            //Change desired temp & temperature resistance depending on the current mod biome, if applicable
+            if (currentModBiome != null) {
+                baseDesiredTemperature += currentModBiome.GetDesiredTemperatureChange(player) * climateExtremityValue;
+                relativeHumidity += currentModBiome.GetHumidityChange(player);
+                comfortableHigh += currentModBiome.GetHeatComfortabilityChange(player);
+                comfortableLow += currentModBiome.GetColdComfortabilityChange(player);
+                temperatureChangeResist += currentModBiome.GetTemperatureResistanceChange(player);
+                criticalRangeMaximum += currentModBiome.GetCriticalTemperatureChange(player);
+                climateExtremityValue += currentModBiome.GetClimateExtremityChange(player);
+            }
+        }
+
         /// <summary> Method in the "Environment Update" process that takes place in <see
         /// cref="PostUpdateMiscEffects"/>. Applies external factors that influence the temperature
         /// increase of the sun (such as Cloud influence & Shade influnece). This task is run
-        /// immediately after <see cref="MidEnvironmentUpdateApplyEvilBiomeEffects"/>. For the next
+        /// immediately after <see cref="MidEnvironmentUpdateApplyModBiomeEffects"/>. For the next
         /// task in the process, see <see cref="MidEnvironmentUpdateApplyTimeEffects"/>. </summary>
         public void MidEnvironmentUpdateApplySunExtremityEffects() {
             sunExtremityValue *= TerraTemp.dailyTemperatureDeviation;

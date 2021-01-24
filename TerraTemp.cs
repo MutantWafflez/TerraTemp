@@ -100,6 +100,12 @@ namespace TerraTemp {
         /// </summary>
         public static List<ModEvent> modEvents;
 
+        /// <summary>
+        /// A list of ALL compatible mod climates (biomes). If you wish to add or otherwise remove a
+        /// given mod climate, search through this List with LINQ or any other method that is preferred.
+        /// </summary>
+        public static List<ModClimate> modClimates;
+
         #endregion
 
         #region UI Fields
@@ -188,6 +194,7 @@ namespace TerraTemp {
                     throw new Exception("Reflection Mod of type " + type.Name + " did not have an InternalModName Attribute that returned a non-null value.");
                 }
             }
+
             foreach (Type modEventType in TempUtilities.GetAllChildrenOfClass<ModEvent>()) {
                 Type returnedType = modEventType.GetCustomAttribute<PertainedMod>().pertainedMod;
                 if (returnedType != null) {
@@ -200,6 +207,21 @@ namespace TerraTemp {
                 }
                 else {
                     throw new Exception("Mod Event Type " + modEventType.Name + " did not have a PertainedMod Attributed that returned a non-null value.");
+                }
+            }
+
+            foreach (Type modClimateType in TempUtilities.GetAllChildrenOfClass<ModClimate>()) {
+                Type returnedType = modClimateType.GetCustomAttribute<PertainedMod>().pertainedMod;
+                if (returnedType != null) {
+                    foreach (ReflectionMod reflectionMod in activeCompatibleMods) {
+                        if (reflectionMod.GetType() == returnedType) {
+                            modClimates.Add((ModClimate)Activator.CreateInstance(modClimateType, new object[] { reflectionMod }));
+                            break;
+                        }
+                    }
+                }
+                else {
+                    throw new Exception("Mod Climate Type " + modClimateType.Name + " did not have a PertainedMod Attributed that returned a non-null value.");
                 }
             }
         }
@@ -221,6 +243,7 @@ namespace TerraTemp {
 
             activeCompatibleMods = new List<ReflectionMod>();
             modEvents = new List<ModEvent>();
+            modClimates = new List<ModClimate>();
 
             foreach (Type type in TempUtilities.GetAllChildrenOfClass<Climate>()) {
                 climates.Add((Climate)Activator.CreateInstance(type));
@@ -290,6 +313,7 @@ namespace TerraTemp {
 
             activeCompatibleMods = null;
             modEvents = null;
+            modClimates = null;
 
             TerraTempInstance = null;
         }

@@ -17,5 +17,13 @@ namespace TerraTemp.Custom.Classes.ReflectionMod {
             ModInstance.Call("MakeColdImmune", player);
             ModInstance.Call("MakeHeatImmune", player);
         }
+
+        /// <summary>
+        /// Whether or not a given player is within one of Calamity's Biomes.
+        /// </summary>
+        /// <param name="player"> The player to check the biome of. </param>
+        public bool IsPlayerInBiome(Player player, string biomeName) {
+            return (bool)ModInstance.Call("GetInZone", player, biomeName);
+        }
     }
 }
