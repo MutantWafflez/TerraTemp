@@ -21,6 +21,8 @@ namespace TerraTemp {
     public class TempPlayer : ModPlayer {
         //ALL Temperature in this mod USES CELSIUS!
 
+        #region Temperature Fields
+
         /// <summary>
         /// Normal temperature, or completely average.
         /// </summary>
@@ -108,6 +110,10 @@ namespace TerraTemp {
         /// </summary>
         public List<ItemChange> equippedItemChanges;
 
+        #endregion
+
+        #region Update Overrides
+
         public override void ResetEffects() {
             baseDesiredTemperature = NormalTemperature;
             modifiedDesiredTemperature = baseDesiredTemperature;
@@ -120,13 +126,6 @@ namespace TerraTemp {
             sunExtremityValue = 1f;
 
             equippedItemChanges = new List<ItemChange>();
-        }
-
-        #region Update Overrides
-
-        //Reset Temperature upon death
-        public override void UpdateDead() {
-            currentTemperature = NormalTemperature;
         }
 
         public override void PostUpdateMiscEffects() {
@@ -184,6 +183,11 @@ namespace TerraTemp {
             currentTemperature += difference / 60f / 45f * (1f - temperatureChangeResist);
 
             CheckForTemperatureEffects();
+        }
+
+        //Reset Temperature upon death
+        public override void UpdateDead() {
+            currentTemperature = NormalTemperature;
         }
 
         #endregion Update Overrides

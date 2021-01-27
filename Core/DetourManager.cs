@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ID;
-
-namespace TerraTemp.Core {
+﻿namespace TerraTemp.Core {
 
     public static class DetourManager {
 
