@@ -3,7 +3,7 @@
 namespace TerraTemp.Content.Changes.TempBiomes {
 
     public class JungleClimate : Climate {
-        public override float WaterTemperature => 2f;
+        public override float WaterTemperature => -3f;
 
         public override float GetDesiredTemperatureChange(Player player) => 10.5f;
 
