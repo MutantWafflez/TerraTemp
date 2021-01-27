@@ -160,6 +160,8 @@ namespace TerraTemp {
 
             MidEnvironmentUpdateApplyTimeEffects();
 
+            MidEnvironmentUpdateApplyDepthEffects();
+
             MidEnvironmentUpdateApplyLavaEffects();
 
             //Simply adding the Daily Humidity Deviation to player values.
@@ -457,7 +459,7 @@ namespace TerraTemp {
         /// cref="PostUpdateMiscEffects"/>. Applies the current effects of the time of day if the
         /// player is on the surface. This task is run immediately after <see
         /// cref="MidEnvironmentUpdateApplySunExtremityEffects"/>. For the next task in the process,
-        /// see <see cref="MidEnvironmentUpdateApplyLavaEffects"/>.
+        /// see <see cref="MidEnvironmentUpdateApplyDepthEffects"/>.
         /// </summary>
         public void MidEnvironmentUpdateApplyTimeEffects() {
             //Change desired temp based on what time of day it is and the daily temperature devation
@@ -484,10 +486,29 @@ namespace TerraTemp {
 
         /// <summary>
         /// Method in the "Environment Update" process that takes place in <see
+        /// cref="PostUpdateMiscEffects"/>. Applies the effects of the player's depth if they are
+        /// underground. This task is run immediately after <see
+        /// cref="MidEnvironmentUpdateApplyTimeEffects"/>. For the next task in the process, see
+        /// <see cref="MidEnvironmentUpdateApplyLavaEffects"/>.
+        /// </summary>
+        public void MidEnvironmentUpdateApplyDepthEffects() {
+            //If player is not within the bottom third of the map and not in the underworld, apply depth influence.
+            if (player.Center.ToTileCoordinates().Y < Main.maxTilesY - (Main.maxTilesY / 3f) && !player.ZoneUnderworldHeight) {
+                if (player.ZoneDirtLayerHeight) {
+                    baseDesiredTemperature -= 3f;
+                }
+                else if (player.ZoneRockLayerHeight) {
+                    baseDesiredTemperature -= 5f;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method in the "Environment Update" process that takes place in <see
         /// cref="PostUpdateMiscEffects"/>. Applies the effects of Lava if the player is adjacent to
         /// it or in it. This task is run immediately after <see
-        /// cref="MidEnvironmentUpdateApplyTimeEffects"/>. This is the last task in the "Environment
-        /// Update" process.
+        /// cref="MidEnvironmentUpdateApplyDepthEffects"/>. This is the last task in the
+        /// "Environment Update" process.
         /// </summary>
         public void MidEnvironmentUpdateApplyLavaEffects() {
             //Increase desired temperature if player is adjacent to lava without an obsidian rose or obsidian skin effect

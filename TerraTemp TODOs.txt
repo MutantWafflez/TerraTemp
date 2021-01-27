@@ -1,9 +1,5 @@
 Legend: ? = Potential change, on the fence about it
 
-Version 1.1 TODOs (Compatability Update):
-
--Depth. Influence.
-
 Done:
 -Compatibility of Overhaul (Season influence)
 -Compatibility of Calamity (Biomes, mostly. NOT doing all the accessories/armor ever? though)
@@ -19,6 +15,7 @@ Done:
 -Add "Shade" Influence to help protect against the sun
 -Thermometer now displays a proper UI
 -Change how water changes the temperature of the player (like just globally cooling people down)
+-Depth. Influence.
 
 Whenever TODOs:
 -Cold attacks should instantly lower body temperature slightly
