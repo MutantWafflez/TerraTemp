@@ -1,12 +1,13 @@
-﻿using Terraria.ID;
+﻿using Terraria;
+using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.BuffChanges.Debuffs {
 
     public class FrostburnDebuff : BuffChange {
         public override int AppliedBuffID => BuffID.Frostburn;
 
-        public override float DesiredTemperatureChange => -8f;
+        public override float GetDesiredTemperatureChange(Player player) => -8f;
 
-        public override float TemperatureResistanceChange => -0.2f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.2f;
     }
 }

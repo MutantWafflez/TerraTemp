@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -12,7 +12,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.ApprenticeHat
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class ApprenticeChestplate : ItemChange {
@@ -21,7 +21,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.ApprenticeRobe
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class ApprenticeLeggings : ItemChange {
@@ -30,7 +30,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.ApprenticeTrousers
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class ApprenticeArmor : SetBonusChange {

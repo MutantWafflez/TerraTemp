@@ -2,7 +2,8 @@
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
-using TerraTemp.Utilities;
+
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.HuntressAltHead
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class RedRidingChestplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.HuntressAltShirt
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class RedRidingLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.HuntressAltPants
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class RedRidingArmor : SetBonusChange {

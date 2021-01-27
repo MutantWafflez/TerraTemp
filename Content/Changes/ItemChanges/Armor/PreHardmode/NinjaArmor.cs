@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using TerraTemp.Utilities;
+
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
@@ -11,7 +12,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.NinjaHood
         };
 
-        public override float ColdComfortabilityChange => -1f;
+        public override float GetColdComfortabilityChange(Player player) => -1f;
     }
 
     public class NinjaChestplate : ItemChange {
@@ -20,7 +21,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.NinjaShirt
         };
 
-        public override float ColdComfortabilityChange => -1f;
+        public override float GetColdComfortabilityChange(Player player) => -1f;
     }
 
     public class NinjaLeggings : ItemChange {
@@ -29,7 +30,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.NinjaPants
         };
 
-        public override float ColdComfortabilityChange => -1f;
+        public override float GetColdComfortabilityChange(Player player) => -1f;
     }
 
     public class NinjaArmor : SetBonusChange {

@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Common.GlobalItems {
 
@@ -13,26 +13,30 @@ namespace TerraTemp.Common.GlobalItems {
     /// GlobalItem class that handles all vanilla item changes for the mod.
     /// </summary>
     public class VanillaItemChanges : GlobalItem {
+
         //Vanilla Accessories/Armor, when equipped, give additional changes here
-
-        #region Additional Armor/Accessory Effects
-
         public override void UpdateEquip(Item item, Player player) {
-            foreach (ItemChange change in TerraTemp.itemChanges) {
-                if (change.AppliedItemIDs.Contains(item.type)) {
+            foreach (ItemChange itemChange in TerraTemp.itemChanges) {
+                if (itemChange.AppliedItemIDs.Contains(item.type) &&
+                    !player.GetTempPlayer().equippedItemChanges.Contains(itemChange) &&
+                    (!(itemChange is DerivedItemChange) || !TempUtilities.ContainsList(player.GetTempPlayer().equippedItemChanges, (itemChange as DerivedItemChange).GetBaseItemChanges()))) {
                     TempPlayer temperaturePlayer = player.GetTempPlayer();
-                    temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
-                    temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
-                    temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
-                    temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;
-                    temperaturePlayer.criticalRangeMaximum += change.CriticalTemperatureChange;
-                    temperaturePlayer.climateExtremityValue += change.ClimateExtremityChange;
-                    change.AdditionalItemEquipEffect(player);
-                    break;
+                    if (itemChange is DerivedItemChange) {
+                        DerivedItemChange changeAsDerived = itemChange as DerivedItemChange;
+                        foreach (ItemChange baseChange in changeAsDerived.GetBaseItemChanges()) {
+                            temperaturePlayer.equippedItemChanges.Add(baseChange);
+                        }
+                    }
+                    temperaturePlayer.equippedItemChanges.Add(itemChange);
+
+                    TempUtilities.ApplyStatChanges(itemChange, player);
+
+                    itemChange.AdditionalItemEquipEffect(player);
                 }
             }
         }
 
+        //Tooltip updating dealt here:
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             foreach (ItemChange change in TerraTemp.itemChanges) {
                 if (change.AppliedItemIDs.Contains(item.type) && !item.social && change.AdditionalTooltip != null) {
@@ -57,9 +61,30 @@ namespace TerraTemp.Common.GlobalItems {
                     }
                 }
             }
-        }
+            foreach (ItemHoldoutChange itemHoldoutChange in TerraTemp.itemHoldoutChanges) {
+                if (itemHoldoutChange.AppliedItemIDs.Contains(item.type) && !item.social && itemHoldoutChange.AdditionalTooltip != null) {
+                    TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", itemHoldoutChange.AdditionalTooltip);
 
-        #endregion
+                    //These checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
+                    TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Tooltip0");
+                    TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Defense");
+                    TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name == "Price" || tooltip.Name == "SpecialPrice"));
+
+                    if (defenseLine != null) {
+                        tooltips.Insert(tooltips.IndexOf(defenseLine) + 1, newLine);
+                    }
+                    else if (toolTipZero != null) {
+                        tooltips.Insert(tooltips.IndexOf(toolTipZero) + 1, newLine);
+                    }
+                    else if (sellLine != null) {
+                        tooltips.Insert(tooltips.IndexOf(sellLine), newLine);
+                    }
+                    else {
+                        tooltips.Add(newLine);
+                    }
+                }
+            }
+        }
 
         //Vanilla Armor can have additional set bonus effects, handled here
 
@@ -78,18 +103,13 @@ namespace TerraTemp.Common.GlobalItems {
         }
 
         public override void UpdateArmorSet(Player player, string set) {
-            foreach (SetBonusChange change in TerraTemp.setBonusChanges) {
-                if (change.ArmorSetName == set) {
-                    TempPlayer temperaturePlayer = player.GetTempPlayer();
-                    temperaturePlayer.baseDesiredTemperature += change.DesiredTemperatureChange;
-                    temperaturePlayer.comfortableHigh += change.HeatComfortabilityChange;
-                    temperaturePlayer.comfortableLow += change.ColdComfortabilityChange;
-                    temperaturePlayer.temperatureChangeResist += change.TemperatureResistanceChange;
-                    temperaturePlayer.criticalRangeMaximum += change.CriticalTemperatureChange;
-                    temperaturePlayer.climateExtremityValue += change.ClimateExtremityChange;
-                    player.setBonus += player.setBonus == "" ? change.AdditionalSetBonusText : "\n" + change.AdditionalSetBonusText;
+            foreach (SetBonusChange setBonusChange in TerraTemp.setBonusChanges) {
+                if (setBonusChange.ArmorSetName == set) {
+                    TempUtilities.ApplyStatChanges(setBonusChange, player);
 
-                    change.AdditionalSetBonusEffect(player);
+                    player.setBonus += player.setBonus == "" ? setBonusChange.AdditionalSetBonusText : "\n" + setBonusChange.AdditionalSetBonusText;
+
+                    setBonusChange.AdditionalSetBonusEffect(player);
                 }
             }
         }

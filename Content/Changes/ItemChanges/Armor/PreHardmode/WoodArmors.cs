@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
@@ -15,9 +16,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PearlwoodHelmet
         };
 
-        public override float HeatComfortabilityChange => 0.5f;
+        public override float GetHeatComfortabilityChange(Player player) => 0.5f;
 
-        public override float ColdComfortabilityChange => -0.5f;
+        public override float GetColdComfortabilityChange(Player player) => -0.5f;
     }
 
     public class WoodChestplates : ItemChange {
@@ -32,9 +33,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PearlwoodBreastplate
         };
 
-        public override float HeatComfortabilityChange => 1f;
+        public override float GetHeatComfortabilityChange(Player player) => 1f;
 
-        public override float ColdComfortabilityChange => -1f;
+        public override float GetColdComfortabilityChange(Player player) => -1f;
     }
 
     public class WoodLeggings : ItemChange {
@@ -49,8 +50,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PearlwoodGreaves
         };
 
-        public override float HeatComfortabilityChange => 0.5f;
+        public override float GetHeatComfortabilityChange(Player player) => 0.5f;
 
-        public override float ColdComfortabilityChange => -0.5f;
+        public override float GetColdComfortabilityChange(Player player) => -0.5f;
     }
 }

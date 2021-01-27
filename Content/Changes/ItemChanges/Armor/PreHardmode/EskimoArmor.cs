@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
@@ -10,7 +11,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PinkEskimoHood
         };
 
-        public override float ColdComfortabilityChange => -2f;
+        public override float GetColdComfortabilityChange(Player player) => -2f;
     }
 
     public class EskimoShirt : ItemChange {
@@ -20,7 +21,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PinkEskimoCoat
         };
 
-        public override float ColdComfortabilityChange => -3f;
+        public override float GetColdComfortabilityChange(Player player) => -3f;
     }
 
     public class EskimoPants : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PinkEskimoPants
         };
 
-        public override float ColdComfortabilityChange => -2f;
+        public override float GetColdComfortabilityChange(Player player) => -2f;
     }
 
     public class EskimoArmor : SetBonusChange {
@@ -43,7 +44,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int LegPieceID => ItemID.EskimoPants;
 
-        public override float CriticalTemperatureChange => 2f;
+        public override float GetCriticalTemperatureChange(Player player) => 2f;
     }
 
     public class PinkEskimoArmor : SetBonusChange {
@@ -56,6 +57,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int LegPieceID => ItemID.PinkEskimoPants;
 
-        public override float CriticalTemperatureChange => 2f;
+        public override float GetCriticalTemperatureChange(Player player) => 2f;
     }
 }

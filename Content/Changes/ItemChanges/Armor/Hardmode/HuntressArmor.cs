@@ -2,7 +2,8 @@
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
-using TerraTemp.Utilities;
+
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.HuntressWig
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class HuntressChestplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.HuntressJerkin
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class HuntressLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.HuntressPants
         };
 
-        public override float TemperatureResistanceChange => -0.075f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.075f;
     }
 
     public class HuntressArmor : SetBonusChange {

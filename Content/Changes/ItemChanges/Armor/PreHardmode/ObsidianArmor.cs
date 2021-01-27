@@ -10,7 +10,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.ObsidianHelm
         };
 
-        public override float HeatComfortabilityChange => 3f;
+        public override float GetHeatComfortabilityChange(Player player) => 3f;
     }
 
     public class ObsidianChestpiece : ItemChange {
@@ -19,7 +19,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.ObsidianShirt
         };
 
-        public override float HeatComfortabilityChange => 4f;
+        public override float GetHeatComfortabilityChange(Player player) => 4f;
     }
 
     public class ObsidianLegs : ItemChange {
@@ -28,7 +28,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.ObsidianPants
         };
 
-        public override float HeatComfortabilityChange => 3f;
+        public override float GetHeatComfortabilityChange(Player player) => 3f;
     }
 
     public class ObsidianArmor : SetBonusChange {

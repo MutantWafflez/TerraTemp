@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Terraria;
-using TerraTemp.Utilities;
+using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Changes {
 
     /// <summary>
     /// Class that handles if something will change based on a given players adjacency to any given tile.
     /// </summary>
-    public abstract class AdjacencyChange {
+    public abstract class AdjacencyChange : ITempStatChange {
 
         /// <summary>
         /// The ID(s) of the tile(s) that will have the changes applied when the player is adjacent
@@ -20,34 +16,45 @@ namespace TerraTemp.Content.Changes {
         public virtual List<int> AppliedTileIDs => new List<int>();
 
         /// <summary>
-        /// By how much this given tile will change the player's Base Desired (Environmental) Temperature.
+        /// By how much this given item will change the player's Base Desired (Environmental) Temperature.
         /// </summary>
-        public virtual float DesiredTemperatureChange => 0f;
+        public virtual float GetDesiredTemperatureChange(Player player) => 0f;
 
         /// <summary>
-        /// By how much this given tile will change the player's Heat Comfortability Range.
+        /// By how much this given item will change the player's Relative Humidity.
         /// </summary>
-        public virtual float HeatComfortabilityChange => 0f;
+        public virtual float GetHumidityChange(Player player) => 0f;
 
         /// <summary>
-        /// By how much this given tile will change the player's Cold Comfortability Range.
+        /// By how much this given item will change the player's Heat Comfortability Range.
         /// </summary>
-        public virtual float ColdComfortabilityChange => 0f;
+        public virtual float GetHeatComfortabilityChange(Player player) => 0f;
 
         /// <summary>
-        /// By how much this given tile will change the player's Temperature Resistance.
+        /// By how much this given item will change the player's Cold Comfortability Range.
         /// </summary>
-        public virtual float TemperatureResistanceChange => 0f;
+        public virtual float GetColdComfortabilityChange(Player player) => 0f;
 
         /// <summary>
-        /// By how much this given tile will change the player's critical temperature range.
+        /// By how much this given item will change the player's Temperature Resistance.
         /// </summary>
-        public virtual float CriticalTemperatureChange => 0f;
+        public virtual float GetTemperatureResistanceChange(Player player) => 0f;
 
         /// <summary>
-        /// By how much this given tile will change the player's climate extremity value.
+        /// By how much this given item will change the player's critical temperature range.
         /// </summary>
-        public virtual float ClimateExtremityChange => 0f;
+        public virtual float GetCriticalTemperatureChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's climate extremity value.
+        /// </summary>
+        public virtual float GetClimateExtremityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given item will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        public virtual float GetSunExtremityChange(Player player) => 0f;
 
         /// <summary>
         /// Method that loops through all of the specified tile IDs and returns whether or not the

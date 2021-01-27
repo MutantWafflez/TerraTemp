@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Accessories.Wings {
@@ -9,6 +10,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories.Wings {
             ItemID.FlameWings
         };
 
-        public override float HeatComfortabilityChange => 2f;
+        public override float GetHeatComfortabilityChange(Player player) => 2f;
     }
 }

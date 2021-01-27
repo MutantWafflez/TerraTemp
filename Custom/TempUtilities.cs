@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -6,13 +7,20 @@ using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using TerraTemp.Custom.Attributes;
+using TerraTemp.Custom.Interfaces;
 
-namespace TerraTemp.Utilities {
+namespace TerraTemp.Custom {
 
     /// <summary>
     /// Class that has several important helper methods for this mod to make things a bit easier.
     /// </summary>
     public static class TempUtilities {
+
+        /// <summary>
+        /// The string of the directory for all of the miscellaneous textures for TerraTemp.
+        /// </summary>
+        public const string TEXTURE_DIRECTORY = nameof(TerraTemp) + "/Content/Textures/";
 
         #region Calculation Methods
 
@@ -64,6 +72,26 @@ namespace TerraTemp.Utilities {
                 return 0.85f;
             }
             else { //Equivalent to "Clear" or "Partly Cloudy"
+                return 1f;
+            }
+        }
+
+        /// <summary>
+        /// Method that expresses the potential effects of any possible "shade" that the player
+        /// might be under on the temperature increase imposed by the sun. Is based on whether or
+        /// not the player is behind a wall and has any tiles 16 or less blocks above them.
+        /// </summary>
+        /// <returns> Value from 0f to 1f. </returns>
+        public static float GetShadeEffectsOnSunTemperature(Player player) {
+            if (player.behindBackWall) {
+                if (player.IsUnderRoof()) {
+                    return 0.34f;
+                }
+                else {
+                    return 0.75f;
+                }
+            }
+            else {
                 return 1f;
             }
         }
@@ -162,92 +190,109 @@ namespace TerraTemp.Utilities {
         /// Method that create new localized line(s) based on what statistics a given change will
         /// modify about a player.
         /// </summary>
-        /// <param name="heatComfortabilityChange">
-        /// How much this change will modify the player's heat comfortability range.
-        /// </param>
-        /// <param name="coldComfortabilityChange">
-        /// How much this change will modify the player's cold comfortability range.
-        /// </param>
-        /// <param name="temperatureResistanceChange">
-        /// How much this change will modify the player's temperature change rate resistance.
-        /// </param>
-        /// <param name="criticalRangeChange">
-        /// How much this change will modify the player's critical range.
-        /// </param>
-        /// <param name="desiredTempChange">
-        /// How much this will change the player's desired temperature, AKA the "environment" temperature.
-        /// </param>
-        /// <param name="climateExtremityChange">
-        /// How much this will change the player's climate extremity value.
-        /// </param>
+        /// <param name="statChanges"> The object that contains all of the stat changing data. </param>
+        /// <param name="additionalLine"> Any additional non-automated line to be added, if necessary. </param>
         /// <returns> Localized lines(s) that say what the change has done to player's stats. </returns>
-        public static string CreateNewLineBasedOnStats(float heatComfortabilityChange, float coldComfortabilityChange, float temperatureResistanceChange, float criticalRangeChange, float desiredTempChange, float climateExtremityChange) {
-            float heatChange = Math.Abs(heatComfortabilityChange);
-            float coldChange = Math.Abs(coldComfortabilityChange);
-            float tempResistChange = Math.Abs(temperatureResistanceChange) * 100f; //Times 100 because it's a percentage
-            float criticalChange = Math.Abs(criticalRangeChange);
-            float desiredChange = Math.Abs(desiredTempChange);
-            float climateExtreme = Math.Abs(climateExtremityChange) * 100f; //Times 100 because it's a percentage
+        public static string CreateNewLineBasedOnStats(ITempStatChange statChanges, string additionalLine = null) {
+            Player player = Main.LocalPlayer;
+
+            float desiredTempChange = statChanges.GetDesiredTemperatureChange(player);
+            float humidityChange = statChanges.GetHumidityChange(player);
+            float heatComfortabilityChange = statChanges.GetHeatComfortabilityChange(player);
+            float coldComfortabilityChange = statChanges.GetColdComfortabilityChange(player);
+            float temperatureResistanceChange = statChanges.GetTemperatureResistanceChange(player);
+            float criticalRangeChange = statChanges.GetCriticalTemperatureChange(player);
+            float climateExtremityChange = statChanges.GetClimateExtremityChange(player);
+            float sunExtremityChange = statChanges.GetSunExtremityChange(player);
+
+            float absDesiredTempChange = Math.Abs(desiredTempChange);
+            float absHumidityChange = Math.Abs(humidityChange) * 100f; //Times 100 because it's a percentage
+            float absHeatComfortabilityChange = Math.Abs(heatComfortabilityChange);
+            float absColdComfortabilityChange = Math.Abs(coldComfortabilityChange);
+            float absTemperatureResistanceChange = Math.Abs(temperatureResistanceChange) * 100f; //Times 100 because it's a percentage
+            float absCriticalRangeChange = Math.Abs(criticalRangeChange);
+            float absClimateExtremityChange = Math.Abs(climateExtremityChange) * 100f; //Times 100 because it's a percentage
+            float absSunExtremityChange = Math.Abs(sunExtremityChange) * 100f; //Times 100 because it's a percentage
 
             string fullLine = "";
             List<string> stringsToAdd = new List<string>();
 
+            //Desired Temperature Change Check
+            if (desiredTempChange > 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedDesiredTemp", absDesiredTempChange));
+            }
+            else if (desiredTempChange < 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedDesiredTemp", absDesiredTempChange));
+            }
+
+            //Humidity Change Check
+            if (absHumidityChange > 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedHumidity", humidityChange));
+            }
+            else if (absHumidityChange < 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedHumidity", humidityChange));
+            }
+
             //Global Change Check
-            if (heatComfortabilityChange * -1 == coldComfortabilityChange && heatChange != 0f) {
+            if (heatComfortabilityChange * -1 == coldComfortabilityChange && absHeatComfortabilityChange != 0f) {
                 if (heatComfortabilityChange > 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedGlobalComfortability", heatChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedGlobalComfortability", absHeatComfortabilityChange));
                 }
                 else if (heatComfortabilityChange < 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedGlobalComfortability", heatChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedGlobalComfortability", absHeatComfortabilityChange));
                 }
             }
             //Heat/Cold Change Check
             else {
                 if (heatComfortabilityChange > 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedHeatComfortability", heatChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedHeatComfortability", absHeatComfortabilityChange));
                 }
                 else if (heatComfortabilityChange < 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedHeatComfortability", heatChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedHeatComfortability", absHeatComfortabilityChange));
                 }
 
                 if (coldComfortabilityChange < 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedColdComfortability", coldChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedColdComfortability", absColdComfortabilityChange));
                 }
                 else if (coldComfortabilityChange > 0f) {
-                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedColdComfortability", coldChange));
+                    stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedColdComfortability", absColdComfortabilityChange));
                 }
             }
 
             //Temperature Resistance Change Check
             if (temperatureResistanceChange > 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedTempResistance", tempResistChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedTempResistance", absTemperatureResistanceChange));
             }
             else if (temperatureResistanceChange < 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedTempResistance", tempResistChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedTempResistance", absTemperatureResistanceChange));
             }
 
             //Critical Temperature Change Check
             if (criticalRangeChange > 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange", criticalChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedCriticalRange", absCriticalRangeChange));
             }
             else if (criticalRangeChange < 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange", criticalChange));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedCriticalRange", absCriticalRangeChange));
             }
 
             //Climate Extremity Change Check
             if (climateExtremityChange > 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedClimateExtremity", climateExtreme));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedClimateExtremity", absClimateExtremityChange));
             }
             else if (climateExtremityChange < 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedClimateExtremity", climateExtreme));
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedClimateExtremity", absClimateExtremityChange));
             }
 
-            //Desired Temperature Change Check
-            if (desiredTempChange > 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedDesiredTemp", desiredChange));
+            //Sun Extremity Change Check
+            if (sunExtremityChange > 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.IncreasedSunExtremity", absSunExtremityChange));
             }
-            else if (desiredTempChange < 0f) {
-                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedDesiredTemp", desiredChange));
+            else if (sunExtremityChange < 0f) {
+                stringsToAdd.Add(GetTerraTempTextValue("GlobalTooltip.DecreasedSunExtremity", absSunExtremityChange));
+            }
+
+            if (additionalLine != null) {
+                stringsToAdd.Add(additionalLine);
             }
 
             if (stringsToAdd.Any()) {
@@ -268,6 +313,37 @@ namespace TerraTemp.Utilities {
         /// </summary>
         public static TempPlayer GetTempPlayer(this Player player) => player.GetModPlayer<TempPlayer>();
 
+        /// <summary>
+        /// Returns whether or not this given player is under a roof. Being "under a roof"
+        /// constitutes that there are two blocks somewhere at least 16 blocks above the player.
+        /// </summary>
+        public static bool IsUnderRoof(this Player player) {
+            return !Collision.CanHitLine(new Vector2(player.Center.X + 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X + 8f, player.Top.Y - 16 * 17), 4, 4) && !Collision.CanHitLine(new Vector2(player.Center.X - 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X - 8f, player.Top.Y - 16 * 17), 4, 4);
+        }
+
+        #endregion
+
+        #region Stat Methods
+
+        /// <summary>
+        /// Automatically applies the stat changes to the given player for any given change, as long
+        /// as it implements the <see cref="ITempStatChange"/> interface.
+        /// </summary>
+        /// <param name="statChanges"> The stat changes instance. </param>
+        /// <param name="player"> The player to apply the stat changes to. </param>
+        public static void ApplyStatChanges(ITempStatChange statChanges, Player player) {
+            TempPlayer temperaturePlayer = player.GetTempPlayer();
+
+            temperaturePlayer.baseDesiredTemperature += statChanges.GetDesiredTemperatureChange(player);
+            temperaturePlayer.relativeHumidity += statChanges.GetHumidityChange(player);
+            temperaturePlayer.comfortableHigh += statChanges.GetHeatComfortabilityChange(player);
+            temperaturePlayer.comfortableLow += statChanges.GetColdComfortabilityChange(player);
+            temperaturePlayer.temperatureChangeResist += statChanges.GetTemperatureResistanceChange(player);
+            temperaturePlayer.criticalRangeMaximum += statChanges.GetCriticalTemperatureChange(player);
+            temperaturePlayer.climateExtremityValue += statChanges.GetClimateExtremityChange(player);
+            temperaturePlayer.sunExtremityValue += statChanges.GetSunExtremityChange(player);
+        }
+
         #endregion
 
         #region Miscellaneous Methods
@@ -277,7 +353,27 @@ namespace TerraTemp.Utilities {
         /// </summary>
         /// <typeparam name="T"> The Class to get the children of. </typeparam>
         public static List<Type> GetAllChildrenOfClass<T>() {
-            return Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(T)) && !type.IsAbstract).ToList();
+            return Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(T)) && !type.IsAbstract && type.GetCustomAttribute<IgnoredSubclassAttribute>() == null).ToList();
+        }
+
+        /// <summary>
+        /// A more advanced Contains() method for lists that will check whether or not a given list
+        /// has any values that is contained in another list. To be precise, <paramref
+        /// name="containingList"/> is searched to see if it contains any items from <paramref name="listQuery"/>.
+        /// </summary>
+        /// <typeparam name="T"> Class of both of the lists. </typeparam>
+        /// <param name="containingList"> List to be searched. </param>
+        /// <param name="listQuery">
+        /// List with potential children to be checked in the <paramref name="containingList"/> list.
+        /// </param>
+        /// <returns> </returns>
+        public static bool ContainsList<T>(List<T> containingList, List<T> listQuery) {
+            foreach (T thing in listQuery) {
+                if (containingList.Contains(thing)) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>

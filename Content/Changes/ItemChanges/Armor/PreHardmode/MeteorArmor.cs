@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Content.Changes.TempBiomes;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
@@ -12,7 +13,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.MeteorHelmet
         };
 
-        public override float ColdComfortabilityChange => -2f;
+        public override float GetColdComfortabilityChange(Player player) => -2f;
     }
 
     public class MeteorChestplate : ItemChange {
@@ -21,7 +22,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.MeteorSuit
         };
 
-        public override float ColdComfortabilityChange => -3f;
+        public override float GetColdComfortabilityChange(Player player) => -3f;
     }
 
     public class MeteorLeggings : ItemChange {
@@ -30,7 +31,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.MeteorLeggings
         };
 
-        public override float ColdComfortabilityChange => -2f;
+        public override float GetColdComfortabilityChange(Player player) => -2f;
     }
 
     public class MeteorArmor : SetBonusChange {
@@ -46,7 +47,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             if (player.ZoneSkyHeight) {
-                player.GetTempPlayer().baseDesiredTemperature -= spaceColdChange.TemperatureModification;
+                player.GetTempPlayer().baseDesiredTemperature -= spaceColdChange.GetDesiredTemperatureChange(player);
             }
         }
     }

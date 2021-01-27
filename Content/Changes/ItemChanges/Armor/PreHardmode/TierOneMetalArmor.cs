@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
@@ -11,9 +12,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.LeadHelmet
         };
 
-        public override float ColdComfortabilityChange => -1.25f;
+        public override float GetColdComfortabilityChange(Player player) => -1.25f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 
     public class TierOneMetalChestplate : ItemChange {
@@ -23,9 +24,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.LeadChainmail
         };
 
-        public override float ColdComfortabilityChange => -2.25f;
+        public override float GetColdComfortabilityChange(Player player) => -2.25f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 
     public class TierOneMetalLeggings : ItemChange {
@@ -35,8 +36,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.LeadGreaves
         };
 
-        public override float ColdComfortabilityChange => -1.25f;
+        public override float GetColdComfortabilityChange(Player player) => -1.25f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 }

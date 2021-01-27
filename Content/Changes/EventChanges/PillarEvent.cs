@@ -5,7 +5,7 @@ namespace TerraTemp.Content.Changes.EventChanges {
     public class SolarPillar : EventChange {
         public override bool EventBoolean => true;
 
-        public override float DesiredTemperatureChange => 6f;
+        public override float GetDesiredTemperatureChange(Player player) => 6f;
 
         public override bool ApplyEventEffects(Player player) => player.ZoneTowerSolar;
     }
@@ -13,7 +13,7 @@ namespace TerraTemp.Content.Changes.EventChanges {
     public class VortexPillar : EventChange {
         public override bool EventBoolean => true;
 
-        public override float DesiredTemperatureChange => -6f;
+        public override float GetDesiredTemperatureChange(Player player) => -6f;
 
         public override bool ApplyEventEffects(Player player) => player.ZoneTowerVortex;
     }
@@ -21,7 +21,7 @@ namespace TerraTemp.Content.Changes.EventChanges {
     public class NebulaPillar : EventChange {
         public override bool EventBoolean => true;
 
-        public override float HumidityChange => 0.75f;
+        public override float GetHumidityChange(Player player) => 0.75f;
 
         public override bool ApplyEventEffects(Player player) => player.ZoneTowerNebula;
     }
@@ -29,7 +29,7 @@ namespace TerraTemp.Content.Changes.EventChanges {
     public class StardustPillar : EventChange {
         public override bool EventBoolean => true;
 
-        public override float TemperatureResistanceChange => -0.75f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.75f;
 
         public override bool ApplyEventEffects(Player player) => player.ZoneTowerStardust;
     }

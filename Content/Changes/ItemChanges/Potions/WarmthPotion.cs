@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 using TerraTemp.Content.Changes.BuffChanges.Buffs;
 
@@ -11,6 +12,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Potions {
             ItemID.WarmthPotion
         };
 
-        public override float ColdComfortabilityChange => warmthChange.ColdComfortabilityChange;
+        public override float GetColdComfortabilityChange(Player player) => warmthChange.GetColdComfortabilityChange(player);
     }
 }

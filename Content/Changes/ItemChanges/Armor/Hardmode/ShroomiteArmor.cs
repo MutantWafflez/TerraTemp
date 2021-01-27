@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using TerraTemp.Utilities;
+
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -13,7 +14,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.ShroomiteMask
         };
 
-        public override float TemperatureResistanceChange => 0.025f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.025f;
     }
 
     public class ShroomiteChestplate : ItemChange {
@@ -22,7 +23,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.ShroomiteBreastplate
         };
 
-        public override float TemperatureResistanceChange => 0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.05f;
     }
 
     public class ShroomiteLeggings : ItemChange {
@@ -31,7 +32,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.ShroomiteLeggings
         };
 
-        public override float TemperatureResistanceChange => 0.025f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.025f;
     }
 
     public class ShroomiteArmor : SetBonusChange {

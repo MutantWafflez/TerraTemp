@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TerraTemp.Utilities;
+using TerraTemp.Custom.Structs;
 
 namespace TerraTemp.Content.Changes {
 

@@ -1,19 +1,17 @@
-﻿using Terraria.ID;
+﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTemp.Content.Base.Items;
 using TerraTemp.Content.Buffs.PotionEffects;
 using TerraTemp.Content.Items.Materials.Fish;
-using TerraTemp.Utilities;
 
 namespace TerraTemp.Content.Items.Potions {
 
-    public class CoolingPotion : ModItem {
+    public class CoolingPotion : TempItem {
+
+        public override float GetHeatComfortabilityChange(Player player) => 8f;
 
         //Carbon copy opposite of Warmth Potion
-        public override void SetStaticDefaults() {
-            DisplayName.SetDefault("Cooling Potion");
-            Tooltip.SetDefault(TempUtilities.GetTerraTempTextValue("GlobalTooltip.IncreasedHeatComfortability", 8f));
-        }
-
         public override void SetDefaults() {
             item.CloneDefaults(ItemID.WarmthPotion);
             item.width = 32;

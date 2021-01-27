@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using TerraTemp.Utilities;
+
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
@@ -11,9 +12,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.BeeHeadgear
         };
 
-        public override float ColdComfortabilityChange => 1f;
+        public override float GetColdComfortabilityChange(Player player) => 1f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 
     public class BeeChestplate : ItemChange {
@@ -22,9 +23,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.BeeBreastplate
         };
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class BeeLeggings : ItemChange {
@@ -33,9 +34,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.BeeGreaves
         };
 
-        public override float ColdComfortabilityChange => 1f;
+        public override float GetColdComfortabilityChange(Player player) => 1f;
 
-        public override float HeatComfortabilityChange => -1f;
+        public override float GetHeatComfortabilityChange(Player player) => -1f;
     }
 
     public class BeeArmor : SetBonusChange {

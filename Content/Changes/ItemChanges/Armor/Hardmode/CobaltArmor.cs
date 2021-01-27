@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -13,9 +13,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.CobaltHat
         };
 
-        public override float CriticalTemperatureChange => 1.5f;
+        public override float GetCriticalTemperatureChange(Player player) => 1.5f;
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
     }
 
     public class CobaltChestplate : ItemChange {
@@ -24,9 +24,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.CobaltBreastplate
         };
 
-        public override float CriticalTemperatureChange => 1.5f;
+        public override float GetCriticalTemperatureChange(Player player) => 1.5f;
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
     }
 
     public class CobaltLeggings : ItemChange {
@@ -35,9 +35,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.CobaltLeggings
         };
 
-        public override float CriticalTemperatureChange => 1f;
+        public override float GetCriticalTemperatureChange(Player player) => 1f;
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
     }
 
     public class CobaltArmor : SetBonusChange {

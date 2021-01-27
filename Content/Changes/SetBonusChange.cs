@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.Localization;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
+using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Changes {
 
     /// <summary>
     /// Abstract class that can be inherited and its fields overriden to add to ANY Armor Set bonus.
     /// </summary>
-    public abstract class SetBonusChange {
+    public abstract class SetBonusChange : ITempStatChange {
 
         /// <summary>
         /// The ID of the helmet piece(s) item of the armor set. Is a list for armor sets that have
@@ -33,36 +34,6 @@ namespace TerraTemp.Content.Changes {
         public string ArmorSetName => GetType().Name;
 
         /// <summary>
-        /// By how much this given set bonus will change the player's Base Desired (Environmental) Temperature.
-        /// </summary>
-        public virtual float DesiredTemperatureChange => 0f;
-
-        /// <summary>
-        /// By how much this given set bonus will change the player's Heat Comfortability Range.
-        /// </summary>
-        public virtual float HeatComfortabilityChange => 0f;
-
-        /// <summary>
-        /// By how much this given set bonus will change the player's Cold Comfortability Range.
-        /// </summary>
-        public virtual float ColdComfortabilityChange => 0f;
-
-        /// <summary>
-        /// By how much this given set bonus will change the player's Temperature Resistance.
-        /// </summary>
-        public virtual float TemperatureResistanceChange => 0f;
-
-        /// <summary>
-        /// By how much this given set bonus will change the player's critical temperature range.
-        /// </summary>
-        public virtual float CriticalTemperatureChange => 0f;
-
-        /// <summary>
-        /// By how much this given set bonus will change the player's climate extremity value.
-        /// </summary>
-        public virtual float ClimateExtremityChange => 0f;
-
-        /// <summary>
         /// Additional tooltip line(s) to be added to the end of the set bonus text. Done
         /// automatically based on how each property is changed. If there is a unique effect other
         /// than changing stats, unless you want it to not be localized, the tooltip is
@@ -70,7 +41,7 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         public virtual string AdditionalSetBonusText {
             get {
-                string statLine = TempUtilities.CreateNewLineBasedOnStats(HeatComfortabilityChange, ColdComfortabilityChange, TemperatureResistanceChange, CriticalTemperatureChange, DesiredTemperatureChange, ClimateExtremityChange);
+                string statLine = TempUtilities.CreateNewLineBasedOnStats(this);
                 if (statLine != null) {
                     if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
                         return statLine + "\n" + TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);
@@ -85,6 +56,47 @@ namespace TerraTemp.Content.Changes {
                 }
             }
         }
+
+        /// <summary>
+        /// By how much this given set bonus will change the player's Base Desired (Environmental) Temperature.
+        /// </summary>
+        public virtual float GetDesiredTemperatureChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given set bonus will change the player's Relative Humidity.
+        /// </summary>
+        public virtual float GetHumidityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given set bonus will change the player's Heat Comfortability Range.
+        /// </summary>
+        public virtual float GetHeatComfortabilityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given set bonus will change the player's Cold Comfortability Range.
+        /// </summary>
+        public virtual float GetColdComfortabilityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given set bonus will change the player's Temperature Resistance.
+        /// </summary>
+        public virtual float GetTemperatureResistanceChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given set bonus will change the player's critical temperature range.
+        /// </summary>
+        public virtual float GetCriticalTemperatureChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given set bonus will change the player's climate extremity value.
+        /// </summary>
+        public virtual float GetClimateExtremityChange(Player player) => 0f;
+
+        /// <summary>
+        /// By how much this given set bonus will change the player's sun extremity value (sun
+        /// protection, essentially).
+        /// </summary>
+        public virtual float GetSunExtremityChange(Player player) => 0f;
 
         /// <summary>
         /// If the set bonus has an additional effect on the player, overriding this method can

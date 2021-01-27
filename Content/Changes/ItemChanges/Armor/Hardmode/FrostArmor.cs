@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Common.Players;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -11,9 +12,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.FrostHelmet
         };
 
-        public override float ColdComfortabilityChange => -4f;
+        public override float GetColdComfortabilityChange(Player player) => -4f;
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class FrostChestplate : ItemChange {
@@ -22,9 +23,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.FrostBreastplate
         };
 
-        public override float ColdComfortabilityChange => -4f;
+        public override float GetColdComfortabilityChange(Player player) => -4f;
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class FrostLeggings : ItemChange {
@@ -33,9 +34,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.FrostLeggings
         };
 
-        public override float ColdComfortabilityChange => -4f;
+        public override float GetColdComfortabilityChange(Player player) => -4f;
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class FrostArmor : SetBonusChange {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
@@ -9,6 +10,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
             ItemID.SunStone
         };
 
-        public override float HeatComfortabilityChange => 3f;
+        public override bool DerivedItemsProvideEffects => true;
+
+        public override float GetHeatComfortabilityChange(Player player) => 3f;
     }
 }

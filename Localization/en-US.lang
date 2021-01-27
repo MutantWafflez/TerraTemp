@@ -28,6 +28,9 @@ DeathMessage.Cold.10=celebrated Christmas too hard.
 GlobalTooltip.IncreasedDesiredTemp={0} degree increased body temperature
 GlobalTooltip.DecreasedDesiredTemp={0} degree decreased body temperature
 
+GlobalTooltip.IncreasedHumidity={0}% increased relative humidity
+GlobalTooltip.DecreasedHumidity={0}% decreased relative humidity
+
 GlobalTooltip.IncreasedColdComfortability={0} degree increased cold comfortability range
 GlobalTooltip.DecreasedColdComfortability={0} degree decreased cold comfortability range
 
@@ -45,6 +48,11 @@ GlobalTooltip.DecreasedCriticalRange={0} degree decreased critical range
 
 GlobalTooltip.IncreasedClimateExtremity={0}% increased climate temperatures
 GlobalTooltip.DecreasedClimateExtremity={0}% decreased climate temperatures
+
+GlobalTooltip.IncreasedSunExtremity={0}% decreased protection against the sun
+GlobalTooltip.DecreasedSunExtremity={0}% increased protection against the sun
+
+GlobalTooltip.WhileHeld=While holding this,
 
 #TerraTemp Accessory Names/Tooltips
 ItemName.FlameRune=Flame Rune
@@ -64,10 +72,14 @@ ItemTooltip.RiskBadge=Forcibly sets your temperature change resistance to -100%\
 
 #TerraTemp Materials Names/Tooltips
 ItemName.BarbFish=Cherry Barb
+ItemTooltip.BarbFish='A bright, tropical fish that likes to spend its time on the Jungle surface'
 
 #TerraTemp Miscellaneous Items/Tooltips
 ItemName.Thermometer=Thermometer
 ItemTooltip.Thermometer=Displays several temperature related statistics
+
+#TerraTemp Potion Items/Tooltips
+ItemName.CoolingPotion=Cooling Potion
 
 #TerraTemp Buff Names/Tooltips
 BuffName.CoolingPotionBuff=Cooled
@@ -88,6 +100,10 @@ BuffDescription.Hypothermia=Feeling numb, the end feels near
 
 #Unique Item Change Tooltips
 GlobalItemChange.ObsidianSkull=40% decreased heat of the Underworld
+GlobalItemChange.ObsidianRose=Negates the temperature increase of touching and being near lava
+
+#Unique Item Holdout Change Tooltips
+
 
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
 GlobalSetBonus.RainArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedCriticalRange] (5)} while it's raining

@@ -2,11 +2,13 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Common.Players;
+using TerraTemp.Content.Base.Items;
 
 namespace TerraTemp.Content.Items.Accessories {
 
     public class FlameRune : TempEquipment {
-        public override float ColdComfortabilityChange => 5f;
+
+        public override float GetColdComfortabilityChange(Player player) => 5f;
 
         public override void SetDefaults() {
             item.accessory = true;

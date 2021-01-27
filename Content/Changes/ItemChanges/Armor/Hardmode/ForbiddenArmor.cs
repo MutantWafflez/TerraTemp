@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using TerraTemp.Common.Players;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -11,9 +12,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.AncientBattleArmorHat
         };
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
 
-        public override float HeatComfortabilityChange => 4f;
+        public override float GetHeatComfortabilityChange(Player player) => 4f;
     }
 
     public class ForbiddenChestplate : ItemChange {
@@ -22,9 +23,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.AncientBattleArmorShirt
         };
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
 
-        public override float HeatComfortabilityChange => 4f;
+        public override float GetHeatComfortabilityChange(Player player) => 4f;
     }
 
     public class ForbiddenLeggings : ItemChange {
@@ -33,9 +34,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.AncientBattleArmorPants
         };
 
-        public override float ColdComfortabilityChange => 2f;
+        public override float GetColdComfortabilityChange(Player player) => 2f;
 
-        public override float HeatComfortabilityChange => 4f;
+        public override float GetHeatComfortabilityChange(Player player) => 4f;
     }
 
     public class ForbiddenArmor : SetBonusChange {

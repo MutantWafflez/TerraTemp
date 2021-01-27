@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using TerraTemp.Utilities;
+
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
@@ -11,9 +12,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PumpkinHelmet
         };
 
-        public override float HeatComfortabilityChange => 0.75f;
+        public override float GetHeatComfortabilityChange(Player player) => 0.75f;
 
-        public override float ColdComfortabilityChange => -0.75f;
+        public override float GetColdComfortabilityChange(Player player) => -0.75f;
     }
 
     public class PumpkinChestplate : ItemChange {
@@ -22,9 +23,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PumpkinBreastplate
         };
 
-        public override float HeatComfortabilityChange => 1.5f;
+        public override float GetHeatComfortabilityChange(Player player) => 1.5f;
 
-        public override float ColdComfortabilityChange => -1.5f;
+        public override float GetColdComfortabilityChange(Player player) => -1.5f;
     }
 
     public class PumpkinLeggings : ItemChange {
@@ -33,9 +34,9 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PumpkinLeggings
         };
 
-        public override float HeatComfortabilityChange => 0.75f;
+        public override float GetHeatComfortabilityChange(Player player) => 0.75f;
 
-        public override float ColdComfortabilityChange => -0.75f;
+        public override float GetColdComfortabilityChange(Player player) => -0.75f;
     }
 
     public class PumpkinArmor : SetBonusChange {

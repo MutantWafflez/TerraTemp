@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
@@ -9,7 +10,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PharaohsMask
         };
 
-        public override float HeatComfortabilityChange => 0.5f;
+        public override float GetHeatComfortabilityChange(Player player) => 0.5f;
     }
 
     public class PharaohChestplate : ItemChange {
@@ -18,7 +19,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.PharaohsRobe
         };
 
-        public override float HeatComfortabilityChange => 0.5f;
+        public override float GetHeatComfortabilityChange(Player player) => 0.5f;
     }
 
     public class PharaohArmor : SetBonusChange {
@@ -29,6 +30,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int ChestPieceID => ItemID.PharaohsRobe;
 
-        public override float HeatComfortabilityChange => 2f;
+        public override float GetHeatComfortabilityChange(Player player) => 2f;
     }
 }

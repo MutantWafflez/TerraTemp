@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -9,7 +10,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SpookyHelmet
         };
 
-        public override float TemperatureResistanceChange => -0.025f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.025f;
     }
 
     public class SpookyChestplate : ItemChange {
@@ -18,7 +19,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SpookyBreastplate
         };
 
-        public override float TemperatureResistanceChange => -0.05f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.05f;
     }
 
     public class SpookyLeggings : ItemChange {
@@ -27,7 +28,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.SpookyLeggings
         };
 
-        public override float TemperatureResistanceChange => -0.025f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.025f;
     }
 
     public class SpookyArmor : SetBonusChange {
@@ -40,8 +41,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override int LegPieceID => ItemID.SpookyLeggings;
 
-        public override float TemperatureResistanceChange => -0.4f;
+        public override float GetTemperatureResistanceChange(Player player) => -0.4f;
 
-        public override float CriticalTemperatureChange => 6f;
+        public override float GetCriticalTemperatureChange(Player player) => 6f;
     }
 }

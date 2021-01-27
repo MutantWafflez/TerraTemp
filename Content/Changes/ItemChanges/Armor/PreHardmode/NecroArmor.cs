@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
@@ -10,7 +11,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.AncientNecroHelmet
         };
 
-        public override float CriticalTemperatureChange => 1f;
+        public override float GetCriticalTemperatureChange(Player player) => 1f;
     }
 
     public class NecroChestplate : ItemChange {
@@ -19,7 +20,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.NecroBreastplate
         };
 
-        public override float CriticalTemperatureChange => 1f;
+        public override float GetCriticalTemperatureChange(Player player) => 1f;
     }
 
     public class NecroLeggings : ItemChange {
@@ -28,7 +29,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
             ItemID.NecroGreaves
         };
 
-        public override float CriticalTemperatureChange => 1f;
+        public override float GetCriticalTemperatureChange(Player player) => 1f;
     }
 
     public class NecroArmor : SetBonusChange {
@@ -42,6 +43,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 
         public override int LegPieceID => ItemID.NecroGreaves;
 
-        public override float CriticalTemperatureChange => 2f;
+        public override float GetCriticalTemperatureChange(Player player) => 2f;
     }
 }

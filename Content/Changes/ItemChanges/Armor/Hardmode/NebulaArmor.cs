@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+
 using Terraria.ModLoader;
 using TerraTemp.Content.Buffs.TempEffects;
-using TerraTemp.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
@@ -13,7 +14,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.NebulaHelmet
         };
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class NebulaChestplate : ItemChange {
@@ -22,7 +23,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.NebulaBreastplate
         };
 
-        public override float HeatComfortabilityChange => -3f;
+        public override float GetHeatComfortabilityChange(Player player) => -3f;
     }
 
     public class NebulaLeggings : ItemChange {
@@ -31,7 +32,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
             ItemID.NebulaLeggings
         };
 
-        public override float HeatComfortabilityChange => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
     }
 
     public class NebulaArmor : SetBonusChange {

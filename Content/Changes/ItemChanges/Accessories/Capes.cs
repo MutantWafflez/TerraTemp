@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
@@ -12,6 +13,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
             ItemID.WinterCape
         };
 
-        public override float ColdComfortabilityChange => -5f;
+        public override float GetColdComfortabilityChange(Player player) => -5f;
     }
 }

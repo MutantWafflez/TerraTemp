@@ -6,15 +6,13 @@ namespace TerraTemp {
 
     public class TempWorld : ModWorld {
 
-        #region World Creation
-
-        //We want randomized values with temperature/humidity deviation when a world is first generated. Also, to avoid any extreme winds, we set Main.windSpeed to 0f;
+        //Wind speeds should be completely reset on world gen. Don't want potentially hurricane level winds on day 1!
         public override void PostWorldGen() {
-            ModContent.GetInstance<TerraTemp>().NewDayStarted();
+            Main.windSpeedSet = 0f;
             Main.windSpeed = 0f;
+            Main.windSpeedSpeed = 0f;
+            Main.windSpeedTemp = 0f;
         }
-
-        #endregion
 
         #region I/O
 

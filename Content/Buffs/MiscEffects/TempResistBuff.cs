@@ -1,7 +1,10 @@
-﻿namespace TerraTemp.Content.Buffs.MiscEffects {
+﻿using Terraria;
+
+namespace TerraTemp.Content.Buffs.MiscEffects {
 
     public class TempResistBuff : TemperatureBuff {
-        public override float TemperatureResistanceChange => 0.4f;
+
+        public override float GetTemperatureResistanceChange(Player player) => 0.4f;
 
         public override void SetDefaults() {
             canBeCleared = true;
