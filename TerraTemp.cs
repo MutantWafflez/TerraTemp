@@ -11,10 +11,11 @@ using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
 using TerraTemp.Content.ModChanges;
 using TerraTemp.Content.UI;
+using TerraTemp.Core;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Classes.ReflectionMod;
-using TerraTemp.ID;
+using TerraTemp.Custom.Enums;
 
 namespace TerraTemp {
 
@@ -295,6 +296,12 @@ namespace TerraTemp {
                 thermometerInterface = new UserInterface();
                 thermometerInterface.SetState(thermometerUI);
             }
+
+            #endregion
+
+            #region IL/Detours
+
+            DetourManager.Load();
 
             #endregion
         }

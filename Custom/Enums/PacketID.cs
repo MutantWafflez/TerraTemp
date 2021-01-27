@@ -1,4 +1,4 @@
-﻿namespace TerraTemp.ID {
+﻿namespace TerraTemp.Custom.Enums {
 
     /// <summary>
     /// Enum containing all the possible different packets used by this mod.

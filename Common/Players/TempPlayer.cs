@@ -11,7 +11,7 @@ using TerraTemp.Content.Changes;
 using TerraTemp.Content.Items.Accessories;
 using TerraTemp.Content.ModChanges;
 using TerraTemp.Custom;
-using TerraTemp.ID;
+using TerraTemp.Custom.Enums;
 
 namespace TerraTemp {
 
