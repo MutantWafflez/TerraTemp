@@ -1,3 +1,4 @@
+using log4net;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -129,6 +130,11 @@ namespace TerraTemp {
         /// the entire world for that day.
         /// </summary>
         public static float dailyHumidityDeviation = 0f;
+
+        /// <summary>
+        /// Logger class for TerraTemp.
+        /// </summary>
+        internal static ILog TTLogging = LogManager.GetLogger("TerraTemp");
 
         public static TerraTemp TerraTempInstance { get; private set; }
 

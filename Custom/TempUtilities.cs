@@ -394,6 +394,7 @@ namespace TerraTemp.Custom {
                 finder.AddIngredient(nextSearchIngredient);
                 foreach (Recipe recipe in finder.SearchRecipes()) {
                     derivedItems.Add(recipe.createItem.type);
+                    TerraTemp.TTLogging.Info("Item " + recipe.createItem.Name + " found with containing the ingredient with the ID of " + ingredientID);
 
                     RecipeFinder checkForMaterial = new RecipeFinder();
                     checkForMaterial.AddIngredient(recipe.createItem.type);
