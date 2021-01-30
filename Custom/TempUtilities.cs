@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using TerraTemp.Custom.Attributes;
+using TerraTemp.Custom.Classes;
 using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Custom {
@@ -392,13 +393,18 @@ namespace TerraTemp.Custom {
             void SearchAnotherLayer(int nextSearchIngredient) {
                 RecipeFinder finder = new RecipeFinder();
                 finder.AddIngredient(nextSearchIngredient);
-                foreach (Recipe recipe in finder.SearchRecipes()) {
+                List<Recipe> searchedRecipes = finder.SearchRecipes().Distinct(new RecipeProductComparer()).ToList();
+                foreach (Recipe recipe in searchedRecipes) {
+                    if (derivedItems.Contains(recipe.createItem.type)) {
+                        continue;
+                    }
                     derivedItems.Add(recipe.createItem.type);
                     TerraTemp.TTLogging.Info("Item " + recipe.createItem.Name + " found with containing the ingredient with the ID of " + ingredientID);
 
                     RecipeFinder checkForMaterial = new RecipeFinder();
                     checkForMaterial.AddIngredient(recipe.createItem.type);
-                    if (checkForMaterial.SearchRecipes().Any()) {
+                    List<Recipe> materialRecipes = checkForMaterial.SearchRecipes();
+                    if (materialRecipes.Any()) {
                         SearchAnotherLayer(recipe.createItem.type);
                     }
                 }
