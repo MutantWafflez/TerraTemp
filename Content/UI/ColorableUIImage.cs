@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Drawing;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent.UI.Elements;
+using Color = Microsoft.Xna.Framework.Color;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace TerraTemp.Content.UI {
 
@@ -17,7 +19,10 @@ namespace TerraTemp.Content.UI {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(imageTexture, GetDimensions().ToRectangle(), textureColor);
+            Rectangle dimensions = GetDimensions().ToRectangle();
+            dimensions.Width = (int)(dimensions.Width * ImageScale);
+            dimensions.Height = (int)(dimensions.Height * ImageScale);
+            spriteBatch.Draw(imageTexture, dimensions, textureColor);
         }
     }
 }

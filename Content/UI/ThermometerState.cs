@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
 using Terraria.UI;
+using TerraTemp.Common.Configs;
 using TerraTemp.Content.Items.Miscellaneous;
 using TerraTemp.Custom;
 
@@ -21,7 +22,9 @@ namespace TerraTemp.Content.UI {
         public ColorableUIImage thermometerLiquid;
 
         public override void OnInitialize() {
-            thermometerFrame = new UIImage(ModContent.GetTexture(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerFrame"));
+            thermometerFrame = new UIImage(ModContent.GetTexture(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerFrame")) {
+                ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize
+            };
 
             draggableElement = new ThermometerDraggableElement();
             draggableElement.Width.Set(thermometerFrame.Width.Pixels, 0f);
@@ -31,18 +34,15 @@ namespace TerraTemp.Content.UI {
             draggableElement.Append(thermometerFrame);
 
             thermometerLiquid = new ColorableUIImage(ModContent.GetTexture(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerLiquid"));
+            thermometerLiquid.ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize;
             draggableElement.Append(thermometerLiquid);
 
             temperatureReading = new UIText("50\u00B0C");
-            temperatureReading.Left.Set(0, 0.3f);
+            temperatureReading.Left.Set(0, 0.25f);
             temperatureReading.Top.Set(0, 0.675f);
             draggableElement.Append(temperatureReading);
 
             Append(draggableElement);
-        }
-
-        public override void Update(GameTime gameTime) {
-            base.Update(gameTime);
         }
 
         protected override void DrawChildren(SpriteBatch spriteBatch) {
@@ -54,6 +54,28 @@ namespace TerraTemp.Content.UI {
             base.DrawChildren(spriteBatch);
 
             TempPlayer temperaturePlayer = Main.LocalPlayer.GetTempPlayer();
+
+            //Check/Apply for potential Image Scale change
+            float uiSize = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize;
+            thermometerLiquid.ImageScale = uiSize;
+            switch (uiSize) {
+                case 1f:
+                    thermometerLiquid.Left.Set(0, 0f);
+                    thermometerLiquid.Top.Set(0, 0f);
+                    temperatureReading.Top.Set(0, 0.675f);
+                    break;
+                case 0.75f:
+                    thermometerLiquid.Left.Set(0, 0.15f);
+                    thermometerLiquid.Top.Set(0, 0.15f);
+                    temperatureReading.Top.Set(0, 0.625f);
+                    break;
+                case 0.5f:
+                    thermometerLiquid.Left.Set(0, 0.25f);
+                    thermometerLiquid.Top.Set(0, 0.25f);
+                    temperatureReading.Top.Set(0, 0.6f);
+                    break;
+            }
+            
 
             //Update temperature reading
             temperatureReading.SetText((float)Math.Round(temperaturePlayer.currentTemperature) + "\u00B0C");

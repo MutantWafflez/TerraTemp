@@ -15,7 +15,6 @@ namespace TerraTemp.Content.Changes.ItemHoldoutChanges.Tools {
             ItemID.RedTorch,
             ItemID.OrangeTorch,
             ItemID.WhiteTorch,
-            ItemID.IceTorch,
             ItemID.PinkTorch,
             ItemID.BoneTorch
         };
