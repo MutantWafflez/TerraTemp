@@ -2,7 +2,7 @@
 DeathMessage.Heat.0=overheated.
 DeathMessage.Heat.1=now knows what the Sun feels like.
 DeathMessage.Heat.2=was baconized.
-DeathMessage.Heat.3=was overwhelmed by extremely warm air molecules.
+DeathMessage.Heat.3=left the stove on at home.
 DeathMessage.Heat.4=suntanned for too long.
 DeathMessage.Heat.5=got sunbleached.
 DeathMessage.Heat.6=underwent incineration.
@@ -10,6 +10,15 @@ DeathMessage.Heat.7=got a bit too warm and cozy.
 DeathMessage.Heat.8=became a baked potato.
 DeathMessage.Heat.9=was fried.
 DeathMessage.Heat.10=did not achieve homeostasis.
+DeathMessage.Heat.11=took a bath in boiling water.
+DeathMessage.Heat.12=had too much of a burning passion.
+DeathMessage.Heat.13=was vaporized.
+DeathMessage.Heat.14=was cooked medium-rare.
+DeathMessage.Heat.15=is now being served with BBQ sauce.
+DeathMessage.Heat.16=is now in a much hotter place.
+DeathMessage.Heat.17=failed to cool down.
+DeathMessage.Heat.18=failed to apply cold water to burned area.
+DeathMessage.Heat.19=experienced hell on earth.
 
 #Cold Death Messages
 DeathMessage.Cold.0=froze to death.
@@ -23,6 +32,15 @@ DeathMessage.Cold.7=succumbed to the Hypothermia.
 DeathMessage.Cold.8=attempted amateur cryogenics.
 DeathMessage.Cold.9=became a snowperson.
 DeathMessage.Cold.10=celebrated Christmas too hard.
+DeathMessage.Cold.11=took a swim in the Atlantic.
+DeathMessage.Cold.12=took a trip to Antarctica.
+DeathMessage.Cold.13=tried to fight Russia in the winter.
+DeathMessage.Cold.14=mistook Greenland as being warm.
+DeathMessage.Cold.15=felt the wrath of winter.
+DeathMessage.Cold.16=took an ice bath for too long.
+DeathMessage.Cold.17=left the fridge door open for too long.
+DeathMessage.Cold.18=contracted a much deadlier version of the Common Cold.
+DeathMessage.Cold.19=ingested copious amounts of snow.
 
 #Global Tooltips
 GlobalTooltip.IncreasedDesiredTemp={0} degree increased body temperature

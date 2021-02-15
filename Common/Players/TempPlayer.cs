@@ -543,7 +543,7 @@ namespace TerraTemp {
                 }
                 //Death
                 if (currentTemperature > comfortableHigh + criticalRangeMaximum) {
-                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Heat." + Main.rand.Next(0, 11)));
+                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Heat." + Main.rand.Next(0, 20)));
                     //For the Volatile Themometer effect to properly take place
                     deathReason.SourceItemType = ModContent.ItemType<VolatileThermometer>();
                     player.KillMe(deathReason, 9999, 0);
@@ -559,7 +559,7 @@ namespace TerraTemp {
                 }
                 //Death
                 if (currentTemperature < comfortableLow - criticalRangeMaximum) {
-                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Cold." + Main.rand.Next(0, 11)));
+                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Cold." + Main.rand.Next(0, 20)));
                     //For the Volatile Themometer effect to properly take place
                     deathReason.SourceItemType = ModContent.ItemType<VolatileThermometer>();
                     player.KillMe(deathReason, 9999, 0);
