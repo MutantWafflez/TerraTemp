@@ -33,8 +33,9 @@ namespace TerraTemp.Content.UI {
             draggableElement.Top.Set(-thermometerFrame.Height.Pixels, 1f);
             draggableElement.Append(thermometerFrame);
 
-            thermometerLiquid = new ColorableUIImage(ModContent.GetTexture(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerLiquid"));
-            thermometerLiquid.ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize;
+            thermometerLiquid = new ColorableUIImage(ModContent.GetTexture(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerLiquid")) {
+                ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize
+            };
             draggableElement.Append(thermometerLiquid);
 
             temperatureReading = new UIText("50\u00B0C");
@@ -46,8 +47,8 @@ namespace TerraTemp.Content.UI {
         }
 
         protected override void DrawChildren(SpriteBatch spriteBatch) {
-            //Don't draw without the Thermometer Item within the inventory
-            if (!Main.LocalPlayer.inventory.Any(item => item.type == ModContent.ItemType<Thermometer>())) {
+            //Don't draw without the Thermometer Item within the inventory/piggy bank
+            if (!Main.LocalPlayer.inventory.Any(item => item.type == ModContent.ItemType<Thermometer>()) && !Main.LocalPlayer.bank.item.Any(item => item.type == ModContent.ItemType<Thermometer>())) {
                 return;
             }
 
@@ -57,25 +58,12 @@ namespace TerraTemp.Content.UI {
 
             //Check/Apply for potential Image Scale change
             float uiSize = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize;
+            float recalculatedLiquidPosition = (1f - uiSize) / 2f;
+            float recalculatedReadingPosition = 0.675f - (1f - uiSize) / 10f;
             thermometerLiquid.ImageScale = uiSize;
-            switch (uiSize) {
-                case 1f:
-                    thermometerLiquid.Left.Set(0, 0f);
-                    thermometerLiquid.Top.Set(0, 0f);
-                    temperatureReading.Top.Set(0, 0.675f);
-                    break;
-                case 0.75f:
-                    thermometerLiquid.Left.Set(0, 0.15f);
-                    thermometerLiquid.Top.Set(0, 0.15f);
-                    temperatureReading.Top.Set(0, 0.625f);
-                    break;
-                case 0.5f:
-                    thermometerLiquid.Left.Set(0, 0.25f);
-                    thermometerLiquid.Top.Set(0, 0.25f);
-                    temperatureReading.Top.Set(0, 0.6f);
-                    break;
-            }
-            
+            thermometerLiquid.Left.Set(0, recalculatedLiquidPosition);
+            thermometerLiquid.Top.Set(0, recalculatedLiquidPosition);
+            temperatureReading.Top.Set(0, recalculatedReadingPosition);
 
             //Update temperature reading
             temperatureReading.SetText((float)Math.Round(temperaturePlayer.currentTemperature) + "\u00B0C");

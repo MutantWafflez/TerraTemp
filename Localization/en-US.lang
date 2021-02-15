@@ -76,7 +76,7 @@ ItemTooltip.BarbFish='A bright, tropical fish that likes to spend its time on th
 
 #TerraTemp Miscellaneous Items/Tooltips
 ItemName.Thermometer=Thermometer
-ItemTooltip.Thermometer=Displays several temperature related statistics
+ItemTooltip.Thermometer=Displays several temperature related statistics while in your inventory or piggy bank
 
 #TerraTemp Potion Items/Tooltips
 ItemName.CoolingPotion=Cooling Potion
