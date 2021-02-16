@@ -86,6 +86,12 @@ namespace TerraTemp {
         /// </summary>
         public static List<AdjacencyChange> adjacencyChanges;
 
+        /// <summary>
+        /// Hashset of all NPCs that are detonated as "warm" that will determine whether or not
+        /// these NPCs will increase a player's temperature slightly upon hitting them.
+        /// </summary>
+        public static HashSet<int> warmNPCTypes;
+
         #endregion
 
         #region Mod Compatability Fields
@@ -129,7 +135,7 @@ namespace TerraTemp {
         /// A value that is randomized daily that adds (or potentially removes) Relative Humidity to
         /// the entire world for that day.
         /// </summary>
-        public static float dailyHumidityDeviation = 0f;
+        public static float dailyHumidityDeviation;
 
         /// <summary>
         /// Logger class for TerraTemp.
@@ -247,6 +253,7 @@ namespace TerraTemp {
             lootChanges = new List<NPCLootChange>();
             bagChanges = new List<BagChange>();
             adjacencyChanges = new List<AdjacencyChange>();
+            warmNPCTypes = new HashSet<int>();
 
             activeCompatibleMods = new List<ReflectionMod>();
             modEvents = new List<ModEvent>();
@@ -292,6 +299,8 @@ namespace TerraTemp {
                 adjacencyChanges.Add((AdjacencyChange)Activator.CreateInstance(type));
             }
 
+            warmNPCTypes = FillWarmNPCHashSet();
+
             #endregion
 
             #region UI Initialization
@@ -323,6 +332,7 @@ namespace TerraTemp {
             lootChanges = null;
             bagChanges = null;
             adjacencyChanges = null;
+            warmNPCTypes = null;
 
             activeCompatibleMods = null;
             modEvents = null;
@@ -442,6 +452,34 @@ namespace TerraTemp {
                 dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
                 dailyHumidityDeviation = Main.rand.NextFloat(-0.1f, 0.75f);
             }
+        }
+
+        public HashSet<int> FillWarmNPCHashSet() {
+            HashSet<int> placeholderHashSet = new HashSet<int>() {
+                NPCID.BlazingWheel,
+                NPCID.FireImp,
+                NPCID.Hellbat,
+                NPCID.LavaSlime,
+                NPCID.MeteorHead,
+                NPCID.DiabolistRed,
+                NPCID.DiabolistWhite,
+                NPCID.HellArmoredBones,
+                NPCID.HellArmoredBonesMace,
+                NPCID.HellArmoredBonesSpikeShield,
+                NPCID.HellArmoredBonesSword,
+                NPCID.Lavabat,
+                NPCID.SolarCorite,
+                NPCID.SolarCrawltipedeHead,
+                NPCID.SolarCrawltipedeBody,
+                NPCID.SolarCrawltipedeTail,
+                NPCID.SolarDrakomire,
+                NPCID.SolarDrakomireRider,
+                NPCID.SolarSpearman,
+                NPCID.SolarSolenian,
+                NPCID.SolarSroller,
+                NPCID.LunarTowerSolar
+            };
+            return placeholderHashSet;
         }
 
         #endregion

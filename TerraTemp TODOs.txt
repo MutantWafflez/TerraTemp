@@ -1,7 +1,9 @@
 Legend: ? = Potential change, on the fence about it
 
-Whenever TODOs:
+Done:
 -Cold attacks should instantly lower body temperature slightly
+
+Whenever TODOs:
 -Make the entire world extremely cold while the Moon Lord is alive (Send a message like "The earth freezes at the touch of the moon!" upon first impending doom message)?
 -Moon phases affect strength of the temperature decrease at night?
 -Make lava increase temperature by a much more balanced amount rather than instant death?
