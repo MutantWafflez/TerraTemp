@@ -1,2 +1,4 @@
 # TerraTemp
-Simple "brutality" mod for Terraria that adds temperature to the world, intended to add a bit more challenge traversing the world.
+Terraria 1.4 port of the temperature mod TerraTemp. At the current point in time, most features from TerraTemp version 1.1.1.0 are here and function as normal. However, due to 1.4 tModLoader simply not being finished, not *all* features have been added back. The main includes mod compababilitiy (though it doesn't really matter since the compatible mods aren't even ported yet) and automatic item recipe stat inheritence (for example, items with the Lava Charm in their recipes won't get the effects of said Lava Charm since the search device to search through recipes has been removed or otherwise is dysfunctional).
+
+Otherwise, everything else works as intended, but rigorous testing has not been done at all. Mod has not been entirely fitted for the new 1.4 content, however things should still be relatively balanced; 1.4 didn't add enough armors or accessories that could apply to temperature that would put a player at a temperature disadvantage if they were to wear them.
