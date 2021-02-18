@@ -1,5 +1,4 @@
 using log4net;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,11 +6,8 @@ using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.UI;
-using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
 using TerraTemp.Content.ModChanges;
-using TerraTemp.Content.UI;
 using TerraTemp.Core;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Attributes;
@@ -110,15 +106,6 @@ namespace TerraTemp {
 
         #endregion
 
-        #region UI Fields
-
-        internal GameTime lastGameTime;
-
-        internal ThermometerState thermometerUI;
-        internal UserInterface thermometerInterface;
-
-        #endregion
-
         /// <summary>
         /// A value that is randomized daily that determines how hot it will get during the day and
         /// how cold it will get during the night.
@@ -189,7 +176,8 @@ namespace TerraTemp {
 
         public override void PostSetupContent() {
             //Mod Compatability Loading
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<ReflectionMod>()) {
+            //TODO: Fix mod compatibility loading
+            /*foreach (Type type in TempUtilities.GetAllChildrenOfClass<ReflectionMod>()) {
                 string returnedInternalName = type.GetCustomAttribute<InternalModName>().name;
                 if (returnedInternalName != null) {
                     Mod returnedMod = ModLoader.GetMod(returnedInternalName);
@@ -230,7 +218,7 @@ namespace TerraTemp {
                 else {
                     throw new Exception("Mod Climate Type " + modClimateType.Name + " did not have a PertainedMod Attributed that returned a non-null value.");
                 }
-            }
+            }*/
         }
 
         public override void Load() {
@@ -294,17 +282,6 @@ namespace TerraTemp {
 
             #endregion
 
-            #region UI Initialization
-
-            if (Main.netMode != NetmodeID.Server) {
-                thermometerUI = new ThermometerState();
-                thermometerUI.Activate();
-                thermometerInterface = new UserInterface();
-                thermometerInterface.SetState(thermometerUI);
-            }
-
-            #endregion
-
             #region IL/Detours
 
             DetourManager.Load();
@@ -332,27 +309,6 @@ namespace TerraTemp {
         }
 
         #endregion Loading Overrides
-
-        #region Visual Overrides
-
-        public override void ModifyLightingBrightness(ref float scale) {
-            //Hypothermia/Heat Stroke "Blackout" Effect
-            if (Main.LocalPlayer.HasBuff(ModContent.BuffType<Hypothermia>()) || Main.LocalPlayer.HasBuff(ModContent.BuffType<HeatStroke>())) {
-                scale -= 0.34f;
-            }
-        }
-
-        #endregion
-
-        #region Update Overrides
-
-        public override void MidUpdateDustTime() {
-            if (Main.time >= 32400.0 && !Main.dayTime && (!Main.gameMenu || Main.netMode == NetmodeID.Server)) {
-                NewDayStarted();
-            }
-        }
-
-        #endregion
 
         #region Packet Handling
 
@@ -395,55 +351,5 @@ namespace TerraTemp {
         }
 
         #endregion Packet Handling
-
-        #region UI Handling
-
-        public override void UpdateUI(GameTime gameTime) {
-            lastGameTime = gameTime;
-            thermometerUI?.Update(gameTime);
-        }
-
-        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
-            int resourceBarIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Resource Bars"));
-            if (resourceBarIndex != -1) {
-                layers.Insert(resourceBarIndex, new LegacyGameInterfaceLayer(
-                    $"{nameof(TerraTemp)}: Thermometer Display",
-                    delegate {
-                        if (lastGameTime != null) {
-                            thermometerInterface.Draw(Main.spriteBatch, lastGameTime);
-                        }
-                        return true;
-                    },
-                    InterfaceScaleType.UI)
-                );
-            }
-        }
-
-        #endregion UI Handling
-
-        #region Custom Methods
-
-        public void NewDayStarted() {
-            //Temperature/Humidity Deviation
-            if (Main.netMode == NetmodeID.Server) {
-                dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
-                ModPacket packet = GetPacket();
-                packet.Write((byte)PacketID.DailyTemperatureDeviation);
-                packet.Write(dailyTemperatureDeviation);
-                packet.Send();
-
-                dailyHumidityDeviation = Main.rand.NextFloat(-0.1f, 0.75f);
-                packet = GetPacket();
-                packet.Write((byte)PacketID.DailyHumidityDeviation);
-                packet.Write(dailyHumidityDeviation);
-                packet.Send();
-            }
-            else if (Main.netMode == NetmodeID.SinglePlayer) {
-                dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
-                dailyHumidityDeviation = Main.rand.NextFloat(-0.1f, 0.75f);
-            }
-        }
-
-        #endregion
     }
 }

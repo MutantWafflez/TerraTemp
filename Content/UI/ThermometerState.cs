@@ -64,18 +64,19 @@ namespace TerraTemp.Content.UI {
                     thermometerLiquid.Top.Set(0, 0f);
                     temperatureReading.Top.Set(0, 0.675f);
                     break;
+
                 case 0.75f:
                     thermometerLiquid.Left.Set(0, 0.15f);
                     thermometerLiquid.Top.Set(0, 0.15f);
                     temperatureReading.Top.Set(0, 0.625f);
                     break;
+
                 case 0.5f:
                     thermometerLiquid.Left.Set(0, 0.25f);
                     thermometerLiquid.Top.Set(0, 0.25f);
                     temperatureReading.Top.Set(0, 0.6f);
                     break;
             }
-            
 
             //Update temperature reading
             temperatureReading.SetText((float)Math.Round(temperaturePlayer.currentTemperature) + "\u00B0C");

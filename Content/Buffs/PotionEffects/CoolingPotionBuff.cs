@@ -7,7 +7,7 @@ namespace TerraTemp.Content.Buffs.PotionEffects {
         public override float GetHeatComfortabilityChange(Player player) => 8f;
 
         public override void SetDefaults() {
-            canBeCleared = true;
+            CanBeCleared = true;
         }
     }
 }

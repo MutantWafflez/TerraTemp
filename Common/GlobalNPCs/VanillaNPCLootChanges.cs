@@ -9,8 +9,8 @@ namespace TerraTemp.Common.GlobalNPCs {
     /// Global NPC that is specific to handling any new drops of NPCs.
     /// </summary>
     public class VanillaNPCLootChanges : GlobalNPC {
-
-        public override void NPCLoot(NPC npc) {
+        //TODO: Fix later, 1.4 loot system completely changed everything
+        /*public override void NPCLoot(NPC npc) {
             foreach (NPCLootChange lootChange in TerraTemp.lootChanges) {
                 if (npc.type == lootChange.AppliedNPCID) {
                     foreach (ItemDrop drop in lootChange.ItemsToDrop) {
@@ -22,6 +22,6 @@ namespace TerraTemp.Common.GlobalNPCs {
                     }
                 }
             }
-        }
+        }*/
     }
 }

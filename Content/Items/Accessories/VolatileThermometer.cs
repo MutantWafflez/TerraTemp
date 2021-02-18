@@ -8,11 +8,11 @@ namespace TerraTemp.Content.Items.Accessories {
     public class VolatileThermometer : ModItem {
 
         public override void SetDefaults() {
-            item.width = 30;
-            item.height = 40;
-            item.rare = ItemRarityID.Pink;
-            item.value = Item.sellPrice(gold: 1);
-            item.accessory = true;
+            Item.width = 30;
+            Item.height = 40;
+            Item.rare = ItemRarityID.Pink;
+            Item.value = Item.sellPrice(gold: 1);
+            Item.accessory = true;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual) {

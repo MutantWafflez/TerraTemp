@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria.GameContent.UI.Elements;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
@@ -14,8 +15,8 @@ namespace TerraTemp.Content.UI {
 
         public Texture2D imageTexture;
 
-        public ColorableUIImage(Texture2D texture) : base(texture) {
-            imageTexture = texture;
+        public ColorableUIImage(Asset<Texture2D> texture) : base(texture) {
+            this.imageTexture = texture.Value;
         }
 
         public override void Draw(SpriteBatch spriteBatch) {

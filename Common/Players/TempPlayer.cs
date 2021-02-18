@@ -173,9 +173,9 @@ namespace TerraTemp {
         }
 
         public override void PostUpdate() {
-            bool isAffectedByWind = player.ZoneOverworldHeight && !(player.IsUnderRoof() && player.behindBackWall);
+            bool isAffectedByWind = Player.ZoneOverworldHeight && !(Player.IsUnderRoof() && Player.behindBackWall);
             //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
-            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, isAffectedByWind ? Math.Abs(Main.windSpeed * 100f) * 0.44704f : 0f);
+            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, isAffectedByWind ? /*Math.Abs(Main.windSpeed * 100f) * 0.44704f*/ 0f : 0f);
 
             //Body temperature will change at a rate equivalent to the difference between the body temperature and desired wet temperature
             // multiplied by the player's temperature change resistance.
@@ -194,9 +194,9 @@ namespace TerraTemp {
 
         #region Draw Overrides
 
-        public override void DrawEffects(PlayerDrawInfo drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright) {
+        /*public override void DrawEffects(PlayerDrawInfo drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright) {
             //Heat visuals
-            if (player.HasBuff(ModContent.BuffType<Sweaty>())) {
+            if (Player.HasBuff(ModContent.BuffType<Sweaty>())) {
                 r = 1f;
                 g = 189f / 255f;
                 b = 189 / 255f;
@@ -205,32 +205,32 @@ namespace TerraTemp {
                     //Adapted Vanilla Code for Dripping water
                     bool largerDroplets = Main.rand.NextBool();
                     Vector2 modifiedPosition = new Vector2(drawInfo.position.X - 2f, drawInfo.position.Y - 2f);
-                    Dust water = Dust.NewDustDirect(modifiedPosition, largerDroplets ? player.width + 8 : player.width + 4, largerDroplets ? player.height + 8 : player.height + 2, 211, 0f, 0f, 50, default, largerDroplets ? 1.1f : 0.8f);
+                    Dust water = Dust.NewDustDirect(modifiedPosition, largerDroplets ? Player.width + 8 : Player.width + 4, largerDroplets ? Player.height + 8 : Player.height + 2, 211, 0f, 0f, 50, default, largerDroplets ? 1.1f : 0.8f);
                     water.alpha += 25 * Main.rand.Next(0, 3);
                     water.noLight = true;
                     water.velocity.Y += largerDroplets ? 1f : 0.2f;
-                    water.velocity += player.velocity;
+                    water.velocity += Player.velocity;
                     water.velocity *= 0.05f;
                     Main.playerDrawDust.Add(water.dustIndex);
                 }
             }
-            if (player.HasBuff(ModContent.BuffType<HeatStroke>())) {
+            if (Player.HasBuff(ModContent.BuffType<HeatStroke>())) {
                 r = 1f;
                 g = 150f / 255f;
                 b = 150f / 255f;
             }
             //Cold visuals
-            if (player.HasBuff(ModContent.BuffType<Shivering>())) {
+            if (Player.HasBuff(ModContent.BuffType<Shivering>())) {
                 r = 190f / 255f;
                 g = 1f;
                 b = 1f;
             }
-            if (player.HasBuff(ModContent.BuffType<Hypothermia>())) {
+            if (Player.HasBuff(ModContent.BuffType<Hypothermia>())) {
                 r = 160f / 255f;
                 g = 1f;
                 b = 1f;
             }
-        }
+        }*/
 
         #endregion
 
@@ -254,7 +254,7 @@ namespace TerraTemp {
         public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
             //Upon a new player joining the server, they'll need to have their "Deviation" values synced to match with the server. That is handled here:
             if (newPlayer) {
-                ModPacket packet = mod.GetPacket();
+                ModPacket packet = Mod.GetPacket();
                 packet.Write((byte)PacketID.RequestServerTemperatureValues);
                 packet.Send();
             }
@@ -273,12 +273,12 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateClimate() {
             //Updating the player's current biome
             foreach (Climate biome in TerraTemp.climates) {
-                if (biome.PlayerZoneBool(player)) {
+                if (biome.PlayerZoneBool(Player)) {
                     currentBiome = biome;
                     break;
                 }
                 //Current biome being null means the player is in Forest, the default biome
-                if (!biome.PlayerZoneBool(player) && biome == TerraTemp.climates.Last()) {
+                if (!biome.PlayerZoneBool(Player) && biome == TerraTemp.climates.Last()) {
                     currentBiome = null;
                     break;
                 }
@@ -294,12 +294,12 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateEvilClimate() {
             //Updating the player's current evil biome
             foreach (EvilClimate evilBiome in TerraTemp.evilClimates) {
-                if (evilBiome.EvilZoneBool(player)) {
+                if (evilBiome.EvilZoneBool(Player)) {
                     currentEvilBiome = evilBiome;
                     break;
                 }
                 //Current evil biome being null means the player is not in any evil biome, thus no change
-                if (!evilBiome.EvilZoneBool(player) && evilBiome == TerraTemp.evilClimates.Last()) {
+                if (!evilBiome.EvilZoneBool(Player) && evilBiome == TerraTemp.evilClimates.Last()) {
                     currentEvilBiome = null;
                     break;
                 }
@@ -315,12 +315,12 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateModClimate() {
             //Updating the player's current modded biome
             foreach (ModClimate modClimate in TerraTemp.modClimates) {
-                if (modClimate.IsPlayerInBiome(player)) {
+                if (modClimate.IsPlayerInBiome(Player)) {
                     currentModBiome = modClimate;
                     break;
                 }
                 //Current mod biome being null means the player is not in any mod biome, thus no change
-                if (!modClimate.IsPlayerInBiome(player) && modClimate == TerraTemp.modClimates.Last()) {
+                if (!modClimate.IsPlayerInBiome(Player) && modClimate == TerraTemp.modClimates.Last()) {
                     currentModBiome = null;
                 }
             }
@@ -335,8 +335,8 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateEvents() {
             //Apply Event changes on player
             foreach (EventChange eventChange in TerraTemp.eventChanges) {
-                if (eventChange.EventBoolean && eventChange.ApplyEventEffects(player)) {
-                    TempUtilities.ApplyStatChanges(eventChange, player);
+                if (eventChange.EventBoolean && eventChange.ApplyEventEffects(Player)) {
+                    TempUtilities.ApplyStatChanges(eventChange, Player);
                 }
             }
         }
@@ -350,8 +350,8 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateModEvents() {
             //Apply any possible Modded Event changes on player
             foreach (ModEvent modEvent in TerraTemp.modEvents) {
-                if (modEvent.ApplyEventEffects(player)) {
-                    TempUtilities.ApplyStatChanges(modEvent, player);
+                if (modEvent.ApplyEventEffects(Player)) {
+                    TempUtilities.ApplyStatChanges(modEvent, Player);
                 }
             }
         }
@@ -365,8 +365,8 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateTileAdjacency() {
             //Apply Tile Adjacency changes on player
             foreach (AdjacencyChange adjacencyChange in TerraTemp.adjacencyChanges) {
-                if (adjacencyChange.CheckForAdjacency(player)) {
-                    TempUtilities.ApplyStatChanges(adjacencyChange, player);
+                if (adjacencyChange.CheckForAdjacency(Player)) {
+                    TempUtilities.ApplyStatChanges(adjacencyChange, Player);
                 }
             }
         }
@@ -380,9 +380,9 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateItemHoldoutChanges() {
             //This item holdout change must be handled here since the HeldItem() method in Global Items are called too late in the update process.
             foreach (ItemHoldoutChange itemHoldoutChange in TerraTemp.itemHoldoutChanges) {
-                if (itemHoldoutChange.AppliedItemIDs.Contains(player.HeldItem.type)) {
-                    TempUtilities.ApplyStatChanges(itemHoldoutChange, player);
-                    itemHoldoutChange.AdditionalItemHoldoutEffect(player);
+                if (itemHoldoutChange.AppliedItemIDs.Contains(Player.HeldItem.type)) {
+                    TempUtilities.ApplyStatChanges(itemHoldoutChange, Player);
+                    itemHoldoutChange.AdditionalItemHoldoutEffect(Player);
                 }
             }
         }
@@ -397,13 +397,13 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateApplyBiomeEffects() {
             //Change desired temp & temperature resistance depending on the current biome, if applicable
             if (currentBiome != null) {
-                baseDesiredTemperature += (currentBiome.GetDesiredTemperatureChange(player) + (player.wet ? currentBiome.WaterTemperature : 0f)) * climateExtremityValue;
-                relativeHumidity += currentBiome.GetHumidityChange(player);
-                comfortableHigh += currentBiome.GetHeatComfortabilityChange(player);
-                comfortableLow += currentBiome.GetColdComfortabilityChange(player);
-                temperatureChangeResist += currentBiome.GetTemperatureResistanceChange(player);
-                criticalRangeMaximum += currentBiome.GetCriticalTemperatureChange(player);
-                climateExtremityValue += currentBiome.GetClimateExtremityChange(player);
+                baseDesiredTemperature += (currentBiome.GetDesiredTemperatureChange(Player) + (Player.wet ? currentBiome.WaterTemperature : 0f)) * climateExtremityValue;
+                relativeHumidity += currentBiome.GetHumidityChange(Player);
+                comfortableHigh += currentBiome.GetHeatComfortabilityChange(Player);
+                comfortableLow += currentBiome.GetColdComfortabilityChange(Player);
+                temperatureChangeResist += currentBiome.GetTemperatureResistanceChange(Player);
+                criticalRangeMaximum += currentBiome.GetCriticalTemperatureChange(Player);
+                climateExtremityValue += currentBiome.GetClimateExtremityChange(Player);
             }
         }
 
@@ -417,13 +417,13 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateApplyEvilBiomeEffects() {
             //Change desired temp & temperature resistance depending on the current evil biome, if applicable
             if (currentEvilBiome != null) {
-                baseDesiredTemperature += (currentEvilBiome.GetDesiredTemperatureChange(player) + (player.wet ? currentEvilBiome.WaterTemperature : 0f)) * climateExtremityValue;
-                relativeHumidity += currentEvilBiome.GetHumidityChange(player);
-                comfortableHigh += currentEvilBiome.GetHeatComfortabilityChange(player);
-                comfortableLow += currentEvilBiome.GetColdComfortabilityChange(player);
-                temperatureChangeResist += currentEvilBiome.GetTemperatureResistanceChange(player);
-                criticalRangeMaximum += currentEvilBiome.GetCriticalTemperatureChange(player);
-                climateExtremityValue += currentEvilBiome.GetClimateExtremityChange(player);
+                baseDesiredTemperature += (currentEvilBiome.GetDesiredTemperatureChange(Player) + (Player.wet ? currentEvilBiome.WaterTemperature : 0f)) * climateExtremityValue;
+                relativeHumidity += currentEvilBiome.GetHumidityChange(Player);
+                comfortableHigh += currentEvilBiome.GetHeatComfortabilityChange(Player);
+                comfortableLow += currentEvilBiome.GetColdComfortabilityChange(Player);
+                temperatureChangeResist += currentEvilBiome.GetTemperatureResistanceChange(Player);
+                criticalRangeMaximum += currentEvilBiome.GetCriticalTemperatureChange(Player);
+                climateExtremityValue += currentEvilBiome.GetClimateExtremityChange(Player);
             }
         }
 
@@ -437,13 +437,13 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateApplyModBiomeEffects() {
             //Change desired temp & temperature resistance depending on the current mod biome, if applicable
             if (currentModBiome != null) {
-                baseDesiredTemperature += currentModBiome.GetDesiredTemperatureChange(player) * climateExtremityValue;
-                relativeHumidity += currentModBiome.GetHumidityChange(player);
-                comfortableHigh += currentModBiome.GetHeatComfortabilityChange(player);
-                comfortableLow += currentModBiome.GetColdComfortabilityChange(player);
-                temperatureChangeResist += currentModBiome.GetTemperatureResistanceChange(player);
-                criticalRangeMaximum += currentModBiome.GetCriticalTemperatureChange(player);
-                climateExtremityValue += currentModBiome.GetClimateExtremityChange(player);
+                baseDesiredTemperature += currentModBiome.GetDesiredTemperatureChange(Player) * climateExtremityValue;
+                relativeHumidity += currentModBiome.GetHumidityChange(Player);
+                comfortableHigh += currentModBiome.GetHeatComfortabilityChange(Player);
+                comfortableLow += currentModBiome.GetColdComfortabilityChange(Player);
+                temperatureChangeResist += currentModBiome.GetTemperatureResistanceChange(Player);
+                criticalRangeMaximum += currentModBiome.GetCriticalTemperatureChange(Player);
+                climateExtremityValue += currentModBiome.GetClimateExtremityChange(Player);
             }
         }
 
@@ -455,7 +455,7 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateApplySunExtremityEffects() {
             sunExtremityValue *= TerraTemp.dailyTemperatureDeviation;
             sunExtremityValue *= TempUtilities.GetCloudEffectsOnSunTemperature();
-            sunExtremityValue *= TempUtilities.GetShadeEffectsOnSunTemperature(player);
+            sunExtremityValue *= TempUtilities.GetShadeEffectsOnSunTemperature(Player);
         }
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace TerraTemp {
         public void MidEnvironmentUpdateApplyTimeEffects() {
             //Change desired temp based on what time of day it is and the daily temperature devation
             //Day will be hottest at Noon, the night will be coldest at Midnight
-            if (player.ZoneOverworldHeight) {
+            if (Player.ZoneOverworldHeight) {
                 if (Main.dayTime && !Main.eclipse) {
                     if (Main.time <= 27000 /* Noon */) {
                         baseDesiredTemperature += ((float)Main.time / 60f / 50f) * sunExtremityValue;
@@ -497,11 +497,11 @@ namespace TerraTemp {
         /// </summary>
         public void MidEnvironmentUpdateApplyDepthEffects() {
             //If player is not within the bottom third of the map and not in the underworld, apply depth influence.
-            if (player.Center.ToTileCoordinates().Y < Main.maxTilesY - (Main.maxTilesY / 3f) && !player.ZoneUnderworldHeight) {
-                if (player.ZoneDirtLayerHeight) {
+            if (Player.Center.ToTileCoordinates().Y < Main.maxTilesY - (Main.maxTilesY / 3f) && !Player.ZoneUnderworldHeight) {
+                if (Player.ZoneDirtLayerHeight) {
                     baseDesiredTemperature -= 3f;
                 }
-                else if (player.ZoneRockLayerHeight) {
+                else if (Player.ZoneRockLayerHeight) {
                     baseDesiredTemperature -= 5f;
                 }
             }
@@ -516,12 +516,12 @@ namespace TerraTemp {
         /// </summary>
         public void MidEnvironmentUpdateApplyLavaEffects() {
             //Increase desired temperature if player is adjacent to lava without an obsidian rose or obsidian skin effect
-            if (player.adjLava && !player.lavaWet && !player.lavaRose && !player.lavaImmune) {
+            if (Player.adjLava && !Player.lavaWet && !Player.lavaRose && !Player.lavaImmune) {
                 baseDesiredTemperature += 12.5f;
             }
 
             //Set desired temperature to the average temperature of lava in the real world if the player enters it without an active lava charm or obsidian rose
-            if (player.lavaWet && player.lavaTime <= 0 && !player.lavaRose && !player.lavaImmune) {
+            if (Player.lavaWet && Player.lavaTime <= 0 && !Player.lavaRose && !Player.lavaImmune) {
                 baseDesiredTemperature = 1125f;
             }
         }
@@ -536,33 +536,33 @@ namespace TerraTemp {
             //Heat Effects
             if (currentTemperature > comfortableHigh) {
                 //Sweaty Effect
-                player.AddBuff(ModContent.BuffType<Sweaty>(), 5);
+                Player.AddBuff(ModContent.BuffType<Sweaty>(), 5);
                 //Heat Stroke
                 if (currentTemperature > comfortableHigh + (criticalRangeMaximum / 2f) && currentTemperature < comfortableHigh + criticalRangeMaximum) {
-                    player.AddBuff(ModContent.BuffType<HeatStroke>(), 5);
+                    Player.AddBuff(ModContent.BuffType<HeatStroke>(), 5);
                 }
                 //Death
                 if (currentTemperature > comfortableHigh + criticalRangeMaximum) {
-                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Heat." + Main.rand.Next(0, 11)));
+                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(Player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Heat." + Main.rand.Next(0, 11)));
                     //For the Volatile Themometer effect to properly take place
                     deathReason.SourceItemType = ModContent.ItemType<VolatileThermometer>();
-                    player.KillMe(deathReason, 9999, 0);
+                    Player.KillMe(deathReason, 9999, 0);
                 }
             }
             //Cold Effects
             else if (currentTemperature < comfortableLow) {
                 //Chilly Effect
-                player.AddBuff(ModContent.BuffType<Shivering>(), 5);
+                Player.AddBuff(ModContent.BuffType<Shivering>(), 5);
                 //Hypothermia
                 if (currentTemperature < comfortableLow - (criticalRangeMaximum / 2f) && currentTemperature > comfortableLow - criticalRangeMaximum) {
-                    player.AddBuff(ModContent.BuffType<Hypothermia>(), 5);
+                    Player.AddBuff(ModContent.BuffType<Hypothermia>(), 5);
                 }
                 //Death
                 if (currentTemperature < comfortableLow - criticalRangeMaximum) {
-                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Cold." + Main.rand.Next(0, 11)));
+                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(Player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Cold." + Main.rand.Next(0, 11)));
                     //For the Volatile Themometer effect to properly take place
                     deathReason.SourceItemType = ModContent.ItemType<VolatileThermometer>();
-                    player.KillMe(deathReason, 9999, 0);
+                    Player.KillMe(deathReason, 9999, 0);
                 }
             }
         }

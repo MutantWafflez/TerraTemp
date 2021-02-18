@@ -2,6 +2,7 @@
 using System.Linq;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -55,10 +56,11 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override void AdditionalSetBonusEffect(Player player) {
             HashSet<int> listofCrits = new HashSet<int>() {
-                player.magicCrit,
-                player.meleeCrit,
-                player.rangedCrit,
-                player.thrownCrit
+                player.GetCritChance(DamageClass.Melee),
+                player.GetCritChance(DamageClass.Magic),
+                player.GetCritChance(DamageClass.Ranged),
+                player.GetCritChance(DamageClass.Summon),
+                player.GetCritChance(DamageClass.Throwing)
             };
             player.GetTempPlayer().temperatureChangeResist += (float)listofCrits.Max() / 100f;
         }

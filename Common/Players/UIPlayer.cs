@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using TerraTemp.Common.Systems;
 
 namespace TerraTemp.Common.Players {
 
@@ -13,13 +14,13 @@ namespace TerraTemp.Common.Players {
 
         public override TagCompound Save() {
             return new TagCompound {
-                {"thermometerUIOffset", TerraTemp.TerraTempInstance.thermometerUI.draggableElement.offset}
+                {"thermometerUIOffset", UIHandlerSystem.UIHandlerSystemInstance.thermometerUI.draggableElement.offset}
             };
         }
 
         public override void Load(TagCompound tag) {
-            if (TerraTemp.TerraTempInstance.thermometerUI != null && TerraTemp.TerraTempInstance.thermometerInterface != null) {
-                TerraTemp.TerraTempInstance.thermometerUI.draggableElement.offset = tag.Get<Vector2>("thermometerUIOffset");
+            if (UIHandlerSystem.UIHandlerSystemInstance.thermometerUI != null && UIHandlerSystem.UIHandlerSystemInstance.thermometerInterface != null) {
+                UIHandlerSystem.UIHandlerSystemInstance.thermometerUI.draggableElement.offset = tag.Get<Vector2>("thermometerUIOffset");
             }
         }
 

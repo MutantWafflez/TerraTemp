@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
@@ -59,7 +60,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int LegPieceID => ItemID.BeetleLeggings;
 
         public override void AdditionalSetBonusEffect(Player player) {
-            player.GetTempPlayer().temperatureChangeResist += (float)player.meleeCrit / 2f / 100f;
+            player.GetTempPlayer().temperatureChangeResist += (float)player.GetCritChance(DamageClass.Melee) / 2f / 100f;
         }
     }
 }

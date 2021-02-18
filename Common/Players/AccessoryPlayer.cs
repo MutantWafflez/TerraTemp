@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -25,26 +26,26 @@ namespace TerraTemp.Common.Players {
         }
 
         public override void PostUpdateEquips() {
-            TempPlayer temperaturePlayer = player.GetTempPlayer();
+            TempPlayer temperaturePlayer = Player.GetTempPlayer();
             if (flameRune) {
                 if (temperaturePlayer.currentTemperature > TempPlayer.NormalTemperature) {
-                    player.allDamageMult += 0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature);
-                    player.moveSpeed *= 1 + (0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature));
+                    Player.GetDamage(DamageClass.Generic) += 0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature);
+                    Player.moveSpeed *= 1 + (0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature));
                 }
             }
 
             if (frostRune) {
                 if (temperaturePlayer.currentTemperature < TempPlayer.NormalTemperature) {
-                    player.statDefense = (int)Math.Round(player.statDefense * (1f + (0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature))));
-                    player.endurance += 0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature);
+                    Player.statDefense = (int)Math.Round(Player.statDefense * (1f + (0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature))));
+                    Player.endurance += 0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature);
                 }
             }
         }
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
             if (volatileThermometer && damageSource.SourceItemType == ModContent.ItemType<VolatileThermometer>()) {
-                Projectile.NewProjectile(player.Center, Vector2.Zero, ModContent.ProjectileType<ThermometerExplosion>(), 1000, 4f, player.whoAmI);
-                Main.PlaySound(SoundID.Item100, player.Center);
+                Projectile.NewProjectile(Player.Center, Vector2.Zero, ModContent.ProjectileType<ThermometerExplosion>(), 1000, 4f, Player.whoAmI);
+                SoundEngine.PlaySound(SoundID.Item100, Player.Center);
             }
         }
     }
