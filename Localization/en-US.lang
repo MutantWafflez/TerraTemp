@@ -116,12 +116,14 @@ BuffDescription.Shivering=The cold air nips at your skin
 BuffName.Hypothermia=Hypothermia
 BuffDescription.Hypothermia=Feeling numb, the end feels near
 
+#TerraTemp NPC Names
+NPCName.Meteorologist=Meteorologist
+
 #Unique Item Change Tooltips
 GlobalItemChange.ObsidianSkull=40% decreased heat of the Underworld
 GlobalItemChange.ObsidianRose=Negates the temperature increase of touching and being near lava
 
 #Unique Item Holdout Change Tooltips
-
 
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
 GlobalSetBonus.RainArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedCriticalRange] (5)} while it's raining
