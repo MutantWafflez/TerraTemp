@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 
 using Terraria.ModLoader;
+using TerraTemp.Common.Players;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Custom;
 

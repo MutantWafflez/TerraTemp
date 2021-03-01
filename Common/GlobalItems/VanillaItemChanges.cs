@@ -4,6 +4,7 @@ using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTemp.Common.Players;
 using TerraTemp.Content.Changes;
 using TerraTemp.Custom;
 

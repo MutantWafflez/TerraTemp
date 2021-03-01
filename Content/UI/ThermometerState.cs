@@ -7,6 +7,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTemp.Common.Configs;
+using TerraTemp.Common.Players;
 using TerraTemp.Content.Items.Miscellaneous;
 using TerraTemp.Custom;
 

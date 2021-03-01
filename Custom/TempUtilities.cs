@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using TerraTemp.Common.Players;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Classes;
 using TerraTemp.Custom.Interfaces;

@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -13,7 +13,7 @@ using TerraTemp.Content.ModChanges;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Enums;
 
-namespace TerraTemp {
+namespace TerraTemp.Common.Players {
 
     /// <summary>
     /// Player class that handles the actual temperature of each player in the mod.
@@ -154,7 +154,7 @@ namespace TerraTemp {
 
             MidEnvironmentUpdateApplySunExtremityEffects();
 
-            //Sun Exremity should not exceed 200% (because that would be way too overkill if even possible in the first place) and a floor of 0% so the sun doesn't somehow make it colder.
+            //Sun Extremity should not exceed 200% (because that would be way too overkill if even possible in the first place) and a floor of 0% so the sun doesn't somehow make it colder.
             sunExtremityValue = MathHelper.Clamp(sunExtremityValue, 0f, 2f);
 
             MidEnvironmentUpdateApplyTimeEffects();
@@ -174,8 +174,12 @@ namespace TerraTemp {
 
         public override void PostUpdate() {
             bool isAffectedByWind = player.ZoneOverworldHeight && !(player.IsUnderRoof() && player.behindBackWall);
+
+            //In certain circumstances, the speed of the wind can cause an unholy level of cold that doesn't quite align with real life. Thus, the wind's effects will have a maximum potency that 45 mph winds have.
+            float clampedWindSpeed = MathHelper.Clamp(Main.windSpeed, -0.45f, 0.45f);
+
             //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
-            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, isAffectedByWind ? Math.Abs(Main.windSpeed * 100f) * 0.44704f : 0f);
+            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, isAffectedByWind ? Math.Abs(clampedWindSpeed * 100f) * 0.44704f : 0f);
 
             //Body temperature will change at a rate equivalent to the difference between the body temperature and desired wet temperature
             // multiplied by the player's temperature change resistance.
