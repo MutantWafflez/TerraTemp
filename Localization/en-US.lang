@@ -116,8 +116,9 @@ BuffDescription.Shivering=The cold air nips at your skin
 BuffName.Hypothermia=Hypothermia
 BuffDescription.Hypothermia=Feeling numb, the end feels near
 
-#TerraTemp NPC Names
+#TerraTemp NPC Info
 NPCName.Meteorologist=Meteorologist
+NPCButton2.Meteorologist=Forecast
 
 #Unique Item Change Tooltips
 GlobalItemChange.ObsidianSkull=40% decreased heat of the Underworld

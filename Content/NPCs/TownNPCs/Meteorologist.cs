@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.NPCs.TownNPCs {
 
@@ -53,6 +55,11 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
                 "Mathieu"
             };
             return nameList[WorldGen.genRand.Next(0, nameList.Count)];
+        }
+
+        public override void SetChatButtons(ref string button, ref string button2) {
+            button = Language.GetTextValue("LegacyInterface.28");
+            button2 = TempUtilities.GetTerraTempTextValue("NPCButton2." + GetType().Name);
         }
 
         public override string GetChat() {
