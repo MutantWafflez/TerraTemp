@@ -428,7 +428,7 @@ namespace TerraTemp.Custom {
                         continue;
                     }
                     derivedItems.Add(recipe.createItem.type);
-                    TerraTemp.TTLogging.Info("Item " + recipe.createItem.Name + " found with containing the ingredient with the ID of " + ingredientID);
+                    //TerraTemp.Logging.Info("Item " + recipe.createItem.Name + " found with containing the ingredient with the ID of " + ingredientID);
 
                     RecipeFinder checkForMaterial = new RecipeFinder();
                     checkForMaterial.AddIngredient(recipe.createItem.type);

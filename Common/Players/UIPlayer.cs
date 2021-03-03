@@ -13,13 +13,13 @@ namespace TerraTemp.Common.Players {
 
         public override TagCompound Save() {
             return new TagCompound {
-                {"thermometerUIOffset", TerraTemp.TerraTempInstance.thermometerUI.draggableElement.offset}
+                {"thermometerUIOffset", TerraTemp.Instance.thermometerUI.draggableElement.offset}
             };
         }
 
         public override void Load(TagCompound tag) {
-            if (TerraTemp.TerraTempInstance.thermometerUI != null && TerraTemp.TerraTempInstance.thermometerInterface != null) {
-                TerraTemp.TerraTempInstance.thermometerUI.draggableElement.offset = tag.Get<Vector2>("thermometerUIOffset");
+            if (TerraTemp.Instance.thermometerUI != null && TerraTemp.Instance.thermometerInterface != null) {
+                TerraTemp.Instance.thermometerUI.draggableElement.offset = tag.Get<Vector2>("thermometerUIOffset");
             }
         }
 

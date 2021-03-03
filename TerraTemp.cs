@@ -140,12 +140,12 @@ namespace TerraTemp {
         /// <summary>
         /// Logger class for TerraTemp.
         /// </summary>
-        internal static ILog TTLogging = LogManager.GetLogger("TerraTemp");
+        internal static ILog Logging = LogManager.GetLogger("TerraTemp");
 
-        public static TerraTemp TerraTempInstance { get; private set; }
+        public static TerraTemp Instance { get; private set; }
 
         public TerraTemp() {
-            TerraTempInstance = this;
+            Instance = this;
 
             Properties = new ModProperties() {
                 Autoload = true,
@@ -338,7 +338,7 @@ namespace TerraTemp {
             modEvents = null;
             modClimates = null;
 
-            TerraTempInstance = null;
+            Instance = null;
         }
 
         #endregion Loading Overrides

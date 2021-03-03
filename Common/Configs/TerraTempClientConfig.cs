@@ -3,9 +3,9 @@ using Terraria.ModLoader.Config;
 using TerraTemp.Content.UI;
 
 namespace TerraTemp.Common.Configs {
+
     [Label("Client Side")]
     public class TerraTempClientConfig : ModConfig {
-        public override ConfigScope Mode => ConfigScope.ClientSide;
 
         [Label("Thermometer UI Size")]
         [Tooltip("By what value to modify the size of the thermometer display UI. Defaults to 100% (normal size)")]
@@ -15,8 +15,10 @@ namespace TerraTemp.Common.Configs {
         [DefaultValue(1f)]
         public float thermometerUISize;
 
+        public override ConfigScope Mode => ConfigScope.ClientSide;
+
         public override void OnChanged() {
-            ThermometerState thermometerState = TerraTemp.TerraTempInstance.thermometerUI;
+            ThermometerState thermometerState = TerraTemp.Instance.thermometerUI;
             if (thermometerState != null) {
                 thermometerState.thermometerFrame.ImageScale = thermometerUISize;
                 thermometerState.thermometerLiquid.ImageScale = thermometerUISize;
