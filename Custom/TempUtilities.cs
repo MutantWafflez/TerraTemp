@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 using TerraTemp.Common.Players;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Classes;
@@ -323,6 +324,21 @@ namespace TerraTemp.Custom {
             return !Collision.CanHitLine(new Vector2(player.Center.X + 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X + 8f, player.Top.Y - 16 * 17), 4, 4) && !Collision.CanHitLine(new Vector2(player.Center.X - 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X - 8f, player.Top.Y - 16 * 17), 4, 4);
         }
 
+        /// <summary>
+        /// Adds the given object to this <see cref="WeightedRandom{T}"/> if the condition is true.
+        /// </summary>
+        /// <param name="list"> The list that will be added to. </param>
+        /// <param name="thing"> The thing that will be added to the list. </param>
+        /// <param name="condition">
+        /// The condition unto which the thing will be added to this list.
+        /// </param>
+        /// <param name="weight"> The weight of the given thing being added to the weighted random. </param>
+        public static void ConditionallyAdd<T>(this WeightedRandom<T> list, T thing, bool condition, double weight = 1) {
+            if (condition) {
+                list.Add(thing, weight);
+            }
+        }
+
         #endregion
 
         #region Stat Methods
@@ -414,6 +430,24 @@ namespace TerraTemp.Custom {
             SearchAnotherLayer(ingredientID);
 
             return derivedItems;
+        }
+
+        /// <summary>
+        /// Returns the name of first NPC with the given type of <param name="npcID"> </param>.
+        /// Gives the index of said NPC in the form of <param name="npcIndex"> </param>, if necessary.
+        /// </summary>
+        /// <param name="npcID"> The ID of the NPC to get the name of. </param>
+        /// <param name="npcIndex"> The index of the found NPC in the NPC array. </param>
+        /// <returns> The name of the first NPC if found, returns an empty string otherwise. </returns>
+        public static string GetNPCName(int npcID, out int npcIndex) {
+            if (NPC.FindFirstNPC(npcID) != -1) {
+                npcIndex = NPC.FindFirstNPC(npcID);
+                return NPC.firstNPCName(npcID);
+            }
+            else {
+                npcIndex = -1;
+                return string.Empty;
+            }
         }
 
         #endregion
