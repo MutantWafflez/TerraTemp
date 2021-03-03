@@ -164,7 +164,7 @@ namespace TerraTemp.Common.Players {
             MidEnvironmentUpdateApplyLavaEffects();
 
             //Simply adding the Daily Humidity Deviation to player values.
-            relativeHumidity += TerraTemp.dailyHumidityDeviation;
+            relativeHumidity += TerraTemp.weeklyHumidityDeviations[0];
 
             //Relative Humidity cannot exceed 100%, since that is impossible in real life and wouldn't make sense in game.
             relativeHumidity = MathHelper.Clamp(relativeHumidity, 0f, 1f);
@@ -457,7 +457,7 @@ namespace TerraTemp.Common.Players {
         /// immediately after <see cref="MidEnvironmentUpdateApplyModBiomeEffects"/>. For the next
         /// task in the process, see <see cref="MidEnvironmentUpdateApplyTimeEffects"/>. </summary>
         public void MidEnvironmentUpdateApplySunExtremityEffects() {
-            sunExtremityValue *= TerraTemp.dailyTemperatureDeviation;
+            sunExtremityValue *= TerraTemp.weeklyTemperatureDeviations[0];
             sunExtremityValue *= TempUtilities.GetCloudEffectsOnSunTemperature();
             sunExtremityValue *= TempUtilities.GetShadeEffectsOnSunTemperature(player);
         }
@@ -483,10 +483,10 @@ namespace TerraTemp.Common.Players {
                 }
                 else {
                     if (Main.time <= 16200 /* Midnight */) {
-                        baseDesiredTemperature -= (float)Main.time / 60f / 30f * TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature -= (float)Main.time / 60f / 30f * TerraTemp.weeklyTemperatureDeviations[0];
                     }
                     else {
-                        baseDesiredTemperature -= (32400f - (float)Main.time) / 60f / 30f * TerraTemp.dailyTemperatureDeviation;
+                        baseDesiredTemperature -= (32400f - (float)Main.time) / 60f / 30f * TerraTemp.weeklyTemperatureDeviations[0];
                     }
                 }
             }

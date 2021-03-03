@@ -339,6 +339,18 @@ namespace TerraTemp.Custom {
             }
         }
 
+        /// <summary>
+        /// Shifts the given array left by one index. The last index in the array is set to the
+        /// default value of it's type.
+        /// </summary>
+        public static void DestructivelyShiftLeftOne<T>(this T[] array) {
+            for (int i = 0; i < array.Length - 1; i++) {
+                array[i] = array[i + 1];
+            }
+
+            array[array.Length - 1] = default;
+        }
+
         #endregion
 
         #region Stat Methods
@@ -449,6 +461,16 @@ namespace TerraTemp.Custom {
                 return string.Empty;
             }
         }
+
+        /// <summary>
+        /// Generates and returns a Temperature Deviation value.
+        /// </summary>
+        public static float GenerateTemperatureDeviation() => Main.rand.NextFloat(0.33f, 1.67f);
+
+        /// <summary>
+        /// Generates and returns a Humidity Deviation value.
+        /// </summary>
+        public static float GenerateHumidityDeviation() => Main.rand.NextFloat(-0.1f, 0.75f);
 
         #endregion
     }

@@ -126,16 +126,16 @@ namespace TerraTemp {
         #endregion
 
         /// <summary>
-        /// A value that is randomized daily that determines how hot it will get during the day and
-        /// how cold it will get during the night.
+        /// The values for all of the temperatures deviations for a given "week." Temperature
+        /// deviations determine how potent the effects of the day/night are.
         /// </summary>
-        public static float dailyTemperatureDeviation = 1f;
+        public static float[] weeklyTemperatureDeviations = { 1f, 1f, 1f, 1f, 1f };
 
         /// <summary>
-        /// A value that is randomized daily that adds (or potentially removes) Relative Humidity to
-        /// the entire world for that day.
+        /// The values for all of the humidity deviations for a given "week." Humidity deviations
+        /// determine how much more additional humidity is added to each player, regardless of climate.
         /// </summary>
-        public static float dailyHumidityDeviation;
+        public static float[] weeklyHumidityDeviations = { 0f, 0f, 0f, 0f, 0f };
 
         /// <summary>
         /// Logger class for TerraTemp.
@@ -369,15 +369,19 @@ namespace TerraTemp {
         public override void HandlePacket(BinaryReader reader, int whoAmI) {
             PacketID packetMessage = (PacketID)reader.ReadByte();
             switch (packetMessage) {
-                case PacketID.DailyTemperatureDeviation:
+                case PacketID.WeeklyTemperatureDeviations:
                     if (Main.netMode == NetmodeID.MultiplayerClient) {
-                        dailyTemperatureDeviation = reader.ReadSingle();
+                        for (int i = 0; i < weeklyTemperatureDeviations.Length; i++) {
+                            weeklyTemperatureDeviations[i] = reader.ReadSingle();
+                        }
                     }
                     break;
 
-                case PacketID.DailyHumidityDeviation:
+                case PacketID.WeeklyHumidityDeviations:
                     if (Main.netMode == NetmodeID.MultiplayerClient) {
-                        dailyHumidityDeviation = reader.ReadSingle();
+                        for (int i = 0; i < weeklyHumidityDeviations.Length; i++) {
+                            weeklyHumidityDeviations[i] = reader.ReadSingle();
+                        }
                     }
                     break;
 
@@ -385,16 +389,24 @@ namespace TerraTemp {
                     if (Main.netMode == NetmodeID.Server) {
                         ModPacket packet = GetPacket();
                         packet.Write((byte)PacketID.ReceiveServerTemperatureValues);
-                        packet.Write(dailyTemperatureDeviation);
-                        packet.Write(dailyHumidityDeviation);
+                        for (int i = 0; i < weeklyTemperatureDeviations.Length; i++) {
+                            packet.Write(weeklyTemperatureDeviations[i]);
+                        }
+                        for (int i = 0; i < weeklyHumidityDeviations.Length; i++) {
+                            packet.Write(weeklyHumidityDeviations[i]);
+                        }
                         packet.Send(whoAmI);
                     }
                     break;
 
                 case PacketID.ReceiveServerTemperatureValues:
                     if (Main.netMode == NetmodeID.MultiplayerClient) {
-                        dailyTemperatureDeviation = reader.ReadSingle();
-                        dailyHumidityDeviation = reader.ReadSingle();
+                        for (int i = 0; i < weeklyTemperatureDeviations.Length; i++) {
+                            weeklyTemperatureDeviations[i] = reader.ReadSingle();
+                        }
+                        for (int i = 0; i < weeklyHumidityDeviations.Length; i++) {
+                            weeklyHumidityDeviations[i] = reader.ReadSingle();
+                        }
                     }
                     break;
 
@@ -436,21 +448,29 @@ namespace TerraTemp {
         public void NewDayStarted() {
             //Temperature/Humidity Deviation
             if (Main.netMode == NetmodeID.Server) {
-                dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
+                weeklyTemperatureDeviations.DestructivelyShiftLeftOne();
+                weeklyTemperatureDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateTemperatureDeviation();
                 ModPacket packet = GetPacket();
-                packet.Write((byte)PacketID.DailyTemperatureDeviation);
-                packet.Write(dailyTemperatureDeviation);
+                packet.Write((byte)PacketID.WeeklyTemperatureDeviations);
+                for (int i = 0; i < weeklyTemperatureDeviations.Length; i++) {
+                    packet.Write(weeklyTemperatureDeviations[i]);
+                }
                 packet.Send();
 
-                dailyHumidityDeviation = Main.rand.NextFloat(-0.1f, 0.75f);
+                weeklyHumidityDeviations.DestructivelyShiftLeftOne();
+                weeklyHumidityDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateHumidityDeviation();
                 packet = GetPacket();
-                packet.Write((byte)PacketID.DailyHumidityDeviation);
-                packet.Write(dailyHumidityDeviation);
+                packet.Write((byte)PacketID.WeeklyHumidityDeviations);
+                for (int i = 0; i < weeklyHumidityDeviations.Length; i++) {
+                    packet.Write(weeklyHumidityDeviations[i]);
+                }
                 packet.Send();
             }
             else if (Main.netMode == NetmodeID.SinglePlayer) {
-                dailyTemperatureDeviation = Main.rand.NextFloat(0.33f, 1.67f);
-                dailyHumidityDeviation = Main.rand.NextFloat(-0.1f, 0.75f);
+                weeklyTemperatureDeviations.DestructivelyShiftLeftOne();
+                weeklyTemperatureDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateTemperatureDeviation();
+                weeklyHumidityDeviations.DestructivelyShiftLeftOne();
+                weeklyHumidityDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateHumidityDeviation();
             }
         }
 
