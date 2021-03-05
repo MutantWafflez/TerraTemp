@@ -16,6 +16,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 
         public override int LegPieceID => ItemID.HallowedGreaves;
 
-        public override float GetTemperatureResistanceChange(Player player) => 0.5f;
+        public override float GetTemperatureResistanceChange(Player player) => 0.35f;
     }
 }

@@ -1,15 +1,17 @@
 Legend: ? = Potential change, on the fence about it
 
 TODOs:
--Meterologist NPC
+-Special TerraTemp Prefixes
 -"Enchantment" system (Flame & Frost enchantments) for modded armors and maybe? modded accessories
--Forecast UI
 -Finish the wiki
 
 Done:
 -Cold attacks should instantly lower body temperature slightly
 -Week based deviation system
 -Wind chill effect caps out at 45mph
+-Meterologist NPC
+-Forecast UI
+-Slightly nerf Hallowed Armor set bonus & Endurance potion buff
 
 Whenever TODOs:
 -Make the entire world extremely cold while the Moon Lord is alive (Send a message like "The earth freezes at the touch of the moon!" upon first impending doom message)?
