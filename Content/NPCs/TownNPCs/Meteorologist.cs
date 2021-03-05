@@ -81,7 +81,9 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
                 shop = true;
             }
             else {
-                //Open forecast UI (when implemented)
+                //Open forecast UI
+                Main.npcChatText = "";
+                TerraTemp.Instance.forecastInterface.SetState(TerraTemp.Instance.forecastUI);
             }
         }
 

@@ -123,6 +123,9 @@ namespace TerraTemp {
         internal ThermometerState thermometerUI;
         internal UserInterface thermometerInterface;
 
+        internal ForecastState forecastUI;
+        internal UserInterface forecastInterface;
+
         #endregion
 
         /// <summary>
@@ -310,6 +313,11 @@ namespace TerraTemp {
                 thermometerUI.Activate();
                 thermometerInterface = new UserInterface();
                 thermometerInterface.SetState(thermometerUI);
+
+                forecastUI = new ForecastState();
+                forecastUI.Activate();
+                forecastInterface = new UserInterface();
+                forecastInterface.SetState(null);
             }
 
             #endregion
@@ -423,6 +431,7 @@ namespace TerraTemp {
         public override void UpdateUI(GameTime gameTime) {
             lastGameTime = gameTime;
             thermometerUI?.Update(gameTime);
+            forecastUI?.Update(gameTime);
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
@@ -434,6 +443,21 @@ namespace TerraTemp {
                         if (lastGameTime != null) {
                             thermometerInterface.Draw(Main.spriteBatch, lastGameTime);
                         }
+                        return true;
+                    },
+                    InterfaceScaleType.UI)
+                );
+            }
+
+            int npcTalkIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: NPC / Sign Dialog"));
+            if (npcTalkIndex != -1) {
+                layers.Insert(npcTalkIndex + 1, new LegacyGameInterfaceLayer(
+                    $"{nameof(TerraTemp)}: Weather Forecast",
+                    delegate {
+                        if (lastGameTime != null) {
+                            forecastInterface.Draw(Main.spriteBatch, lastGameTime);
+                        }
+
                         return true;
                     },
                     InterfaceScaleType.UI)
