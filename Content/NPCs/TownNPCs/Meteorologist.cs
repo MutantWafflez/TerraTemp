@@ -22,7 +22,7 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
         #region Defaults Related
 
         public override void SetStaticDefaults() {
-            Main.npcFrameCount[npc.type] = 25;
+            Main.npcFrameCount[npc.type] = 21;
             NPCID.Sets.DangerDetectRange[npc.type] = 700;
             NPCID.Sets.HatOffsetY[npc.type] = 4;
         }
@@ -30,8 +30,8 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
         public override void SetDefaults() {
             npc.townNPC = true;
             npc.friendly = true;
-            npc.width = 18;
-            npc.height = 40;
+            npc.width = 20;
+            npc.height = 50;
             npc.aiStyle = 7;
             npc.damage = 10;
             npc.defense = 15;
