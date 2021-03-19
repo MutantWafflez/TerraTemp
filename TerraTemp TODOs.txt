@@ -1,11 +1,11 @@
 Legend: ? = Potential change, on the fence about it
 
 TODOs:
--Special TerraTemp Prefixes
 -"Enchantment" system (Flame & Frost enchantments) for modded armors and maybe? modded accessories
 -Finish the wiki
 
 Done:
+-Special TerraTemp Prefixes
 -Cold attacks should instantly lower body temperature slightly
 -Week based deviation system
 -Wind chill effect caps out at 45mph
