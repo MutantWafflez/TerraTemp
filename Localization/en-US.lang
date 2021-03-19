@@ -45,30 +45,39 @@ DeathMessage.Cold.19=ingested copious amounts of snow.
 #Global Tooltips
 GlobalTooltip.IncreasedDesiredTemp={0} degree increased body temperature
 GlobalTooltip.DecreasedDesiredTemp={0} degree decreased body temperature
+GlobalTooltip.DesiredTempPrefix={0} degree body temperature
 
 GlobalTooltip.IncreasedHumidity={0}% increased relative humidity
 GlobalTooltip.DecreasedHumidity={0}% decreased relative humidity
+GlobalTooltip.HumidityPrefix={0}% humidity
 
 GlobalTooltip.IncreasedColdComfortability={0} degree increased cold comfortability range
 GlobalTooltip.DecreasedColdComfortability={0} degree decreased cold comfortability range
+GlobalTooltip.ColdComfortabilityPrefix={0} degree cold comfortability
 
 GlobalTooltip.IncreasedHeatComfortability={0} degree increased heat comfortability range
 GlobalTooltip.DecreasedHeatComfortability={0} degree decreased heat comfortability range
+GlobalTooltip.HeatComfortabilityPrefix={0} degree heat comfortability
 
 GlobalTooltip.IncreasedGlobalComfortability={0} degree increased global comfortability range
 GlobalTooltip.DecreasedGlobalComfortability={0} degree decreased global comfortability range
+GlobalTooltip.GlobalComfortabilityPrefix={0} degree global comfortability
 
 GlobalTooltip.IncreasedTempResistance={0}% increased temperature change resistance
 GlobalTooltip.DecreasedTempResistance={0}% decreased temperature change resistance
+GlobalTooltip.TempResistancePrefix={0}% temperature change resistance
 
 GlobalTooltip.IncreasedCriticalRange={0} degree increased critical range
 GlobalTooltip.DecreasedCriticalRange={0} degree decreased critical range
+GlobalTooltip.CriticalRangePrefix={0} degree critical range
 
 GlobalTooltip.IncreasedClimateExtremity={0}% increased climate temperatures
 GlobalTooltip.DecreasedClimateExtremity={0}% decreased climate temperatures
+GlobalTooltip.ClimateExtremityPrefix={0}% climate temperatures
 
 GlobalTooltip.IncreasedSunExtremity={0}% decreased protection against the sun
 GlobalTooltip.DecreasedSunExtremity={0}% increased protection against the sun
+GlobalTooltip.SunExtremityPrefix={0}% sun extremity
 
 GlobalTooltip.WhileHeld=While holding this,
 

@@ -12,6 +12,7 @@ using TerraTemp.Common.Players;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Classes;
 using TerraTemp.Custom.Interfaces;
+using TerraTemp.Custom.Structs;
 
 namespace TerraTemp.Custom {
 
@@ -305,6 +306,85 @@ namespace TerraTemp.Custom {
             }
 
             return fullLine == "" ? null : fullLine;
+        }
+
+        /// <summary>
+        /// Method that create new localized line(s) based on what statistics a given prefix will
+        /// modify about a player's stats when given item is worn.
+        /// </summary>
+        /// <param name="statChanges"> The object that contains all of the stat changing data. </param>
+        /// <param name="additionalLine"> Any additional non-automated line to be added, if necessary. </param>
+        /// <returns> Localized lines(s) that say what the change has done to player's stats. </returns>
+        public static List<ColoredString> CreatePrefixStatLines(ITempStatChange statChanges) {
+            Player player = Main.LocalPlayer;
+
+            float desiredTempChange = statChanges.GetDesiredTemperatureChange(player);
+            float humidityChange = statChanges.GetHumidityChange(player);
+            float heatComfortabilityChange = statChanges.GetHeatComfortabilityChange(player);
+            float coldComfortabilityChange = statChanges.GetColdComfortabilityChange(player);
+            float temperatureResistanceChange = statChanges.GetTemperatureResistanceChange(player);
+            float criticalRangeChange = statChanges.GetCriticalTemperatureChange(player);
+            float climateExtremityChange = statChanges.GetClimateExtremityChange(player);
+            float sunExtremityChange = statChanges.GetSunExtremityChange(player);
+
+            float percentHumidityChange = humidityChange * 100f;
+            float percentTemperatureResistanceChange = temperatureResistanceChange * 100f;
+            float percentClimateExtremityChange = climateExtremityChange * 100f;
+            float percentSunExtremityChange = sunExtremityChange * 100f;
+
+            Color modifierGreen = new Color(190, 120, 120);
+            Color modifierRed = new Color(120, 190, 120);
+            Color modifierGray = new Color(190, 190, 190);
+
+            List<ColoredString> stringsToAdd = new List<ColoredString>();
+
+            //Desired Temperature Change Check
+            if (Math.Abs(desiredTempChange) > 0f) {
+                //This has a special check since changing body temperature is good/bad depending on context, thus it will be gray in color
+                stringsToAdd.Add(new ColoredString((desiredTempChange > 0f ? "+" : "") + GetTerraTempTextValue("GlobalTooltip.DesiredTempPrefix", desiredTempChange), modifierGray));
+            }
+
+            //Humidity Change Check
+            if (Math.Abs(humidityChange) > 0f) {
+                stringsToAdd.Add(new ColoredString((humidityChange > 0f ? "+" : "") + GetTerraTempTextValue("GlobalTooltip.HumidityPrefix", percentHumidityChange), humidityChange > 0f ? modifierGreen : modifierRed));
+            }
+
+            //Global Change Check
+            if (heatComfortabilityChange * -1f == coldComfortabilityChange && Math.Abs(heatComfortabilityChange) != 0f) {
+                stringsToAdd.Add(new ColoredString((heatComfortabilityChange > 0f ? "+" : "") + GetTerraTempTextValue("GlobalTooltip.GlobalComfortabilityPrefix", heatComfortabilityChange), heatComfortabilityChange < 0f ? modifierGreen : modifierRed));
+            }
+            //Heat/Cold Change Check
+            else {
+                if (Math.Abs(heatComfortabilityChange) > 0f) {
+                    stringsToAdd.Add(new ColoredString((heatComfortabilityChange > 0f ? "+" : "") + GetTerraTempTextValue("GlobalTooltip.HeatComfortabilityPrefix", heatComfortabilityChange), heatComfortabilityChange < 0f ? modifierGreen : modifierRed));
+                }
+
+                if (Math.Abs(coldComfortabilityChange) > 0f) {
+                    stringsToAdd.Add(new ColoredString((coldComfortabilityChange > 0f ? "+" : "") + GetTerraTempTextValue("GlobalTooltip.ColdComfortabilityPrefix", coldComfortabilityChange), coldComfortabilityChange > 0f ? modifierGreen : modifierRed));
+                }
+            }
+
+            //Temperature Resistance Change Check
+            if (Math.Abs(temperatureResistanceChange) > 0f) {
+                stringsToAdd.Add(new ColoredString((temperatureResistanceChange > 0f ? "+" : "") + GetTerraTempTextValue("GlobalTooltip.TempResistancePrefix", percentTemperatureResistanceChange), temperatureResistanceChange < 0f ? modifierGreen : modifierRed));
+            }
+
+            //Critical Temperature Change Check
+            if (Math.Abs(criticalRangeChange) > 0f) {
+                stringsToAdd.Add(new ColoredString((criticalRangeChange > 0f ? "+" : "") + GetTerraTempTextValue("GlobalTooltip.CriticalRangePrefix", criticalRangeChange), criticalRangeChange < 0f ? modifierGreen : modifierRed));
+            }
+
+            //Climate Extremity Change Check
+            if (Math.Abs(climateExtremityChange) > 0f) {
+                stringsToAdd.Add(new ColoredString((climateExtremityChange > 0f ? "+" : "") + GetTerraTempTextValue("GlobalTooltip.ClimateExtremityPrefix", percentClimateExtremityChange), climateExtremityChange > 0f ? modifierGreen : modifierRed));
+            }
+
+            //Sun Extremity Change Check
+            if (Math.Abs(sunExtremityChange) > 0f) {
+                stringsToAdd.Add(new ColoredString((sunExtremityChange > 0f ? "+" : "") + GetTerraTempTextValue("GlobalTooltip.SunExtremityPrefix", percentSunExtremityChange), sunExtremityChange > 0f ? modifierGreen : modifierRed));
+            }
+
+            return stringsToAdd;
         }
 
         #endregion
