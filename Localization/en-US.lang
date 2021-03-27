@@ -108,6 +108,13 @@ ItemTooltip.Thermometer=Displays several temperature related statistics while in
 #TerraTemp Potion Items/Tooltips
 ItemName.CoolingPotion=Cooling Potion
 
+#TerraTemp Tome Items/Tooltips
+ItemName.FlameTome=Flame Tome
+ItemTooltip.FlameTome=Can be bound to any non-vanilla armor piece at a binding station\nIncreases cold comfortability by 1 degree for each tome level
+
+ItemName.FrostTome=Frost Tome
+ItemTooltip.FrostTome=Can be bound to any non-vanilla armor piece at a binding station\nIncreases heat comfortability by 1 degree for each tome level
+
 #TerraTemp Buff Names/Tooltips
 BuffName.CoolingPotionBuff=Cooled
 
