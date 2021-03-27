@@ -108,6 +108,10 @@ ItemTooltip.Thermometer=Displays several temperature related statistics while in
 #TerraTemp Potion Items/Tooltips
 ItemName.CoolingPotion=Cooling Potion
 
+#TerraTemp Tile Items/Tooltips
+ItemName.EnchantedBookshelf=Enchanted Bookshelf
+ItemTooltip.EnchantedBookshelf=Allows for the binding of Frost and Flame Tomes to modded armors
+
 #TerraTemp Tome Items/Tooltips
 ItemName.FlameTome=Flame Tome
 ItemTooltip.FlameTome=Can be bound to any non-vanilla armor piece at an enchanted bookshelf\nIncreases heat comfortability by 1 degree for each tome level

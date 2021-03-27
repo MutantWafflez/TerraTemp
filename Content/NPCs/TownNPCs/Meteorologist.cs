@@ -6,6 +6,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using TerraTemp.Content.Items.Miscellaneous;
+using TerraTemp.Content.Items.Tiles.Furniture;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Structs;
 
@@ -16,7 +17,8 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
 
         public static readonly ShopItem[] shopItems = {
             new ShopItem(ItemID.WeatherRadio),
-            new ShopItem(ModContent.ItemType<Thermometer>())
+            new ShopItem(ModContent.ItemType<Thermometer>()),
+            new ShopItem(ModContent.ItemType<EnchantedBookshelf>())
         };
 
         #region Defaults Related
