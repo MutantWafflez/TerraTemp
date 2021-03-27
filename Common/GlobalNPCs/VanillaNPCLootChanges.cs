@@ -17,7 +17,8 @@ namespace TerraTemp.Common.GlobalNPCs {
                         if (drop.canDropMethod()) {
                             int dropCount = drop.dropCount.Item1 == drop.dropCount.Item2 ? drop.dropCount.Item1 : Main.rand.Next(drop.dropCount.Item1, drop.dropCount.Item2);
 
-                            Item.NewItem(npc.getRect(), drop.dropID, dropCount);
+                            int itemIndex = Item.NewItem(npc.getRect(), drop.dropID, dropCount);
+                            drop.postItemCreationMethod(itemIndex);
                         }
                     }
                 }

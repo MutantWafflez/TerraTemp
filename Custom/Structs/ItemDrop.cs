@@ -29,19 +29,22 @@ namespace TerraTemp.Custom.Structs {
         /// </summary>
         public CanDrop canDropMethod;
 
-        public ItemDrop(int itemID, Tuple<int, int> amount, CanDrop canDropDelegate = null) {
+        /// <summary>
+        /// Optional method that can do any specified action after the item that this ItemDrop
+        /// instance creates is created. Useful for modifying the mod item data of a modded item, as
+        /// an example.
+        /// </summary>
+        public PostItemCreation postItemCreationMethod;
+
+        public ItemDrop(int itemID, Tuple<int, int> amount, CanDrop canDropDelegate = null, PostItemCreation postItemCreationDelegate = null) {
             dropID = itemID;
             dropCount = amount;
-            if (canDropDelegate == null) {
-                canDropMethod = delegate () {
-                    return true;
-                };
-            }
-            else {
-                canDropMethod = canDropDelegate;
-            }
+            canDropMethod = canDropDelegate ?? (() => true);
+            postItemCreationMethod = postItemCreationDelegate ?? delegate { };
         }
 
         public delegate bool CanDrop();
+
+        public delegate void PostItemCreation(int itemIndex);
     }
 }

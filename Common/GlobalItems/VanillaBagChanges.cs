@@ -2,6 +2,7 @@
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
 using TerraTemp.Custom.Structs;
+using Terraria.ID;
 
 namespace TerraTemp.Common.GlobalItems {
 
@@ -17,7 +18,13 @@ namespace TerraTemp.Common.GlobalItems {
                         if (drop.canDropMethod()) {
                             int dropCount = drop.dropCount.Item1 == drop.dropCount.Item2 ? drop.dropCount.Item1 : Main.rand.Next(drop.dropCount.Item1, drop.dropCount.Item2);
 
-                            player.QuickSpawnItem(drop.dropID, dropCount);
+                            int itemIndex = Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, drop.dropID, dropCount, pfix: -1);
+                            drop.postItemCreationMethod(itemIndex);
+
+                            //Adapted Vanilla Code; ignore
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
+                                return;
+                            NetMessage.SendData(MessageID.SyncItem, number: itemIndex, number2: 1f);
                         }
                     }
                 }
