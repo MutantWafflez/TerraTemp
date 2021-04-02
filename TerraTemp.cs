@@ -126,6 +126,9 @@ namespace TerraTemp {
         internal ForecastState forecastUI;
         internal UserInterface forecastInterface;
 
+        internal EnchantedBookshelfState enchantedBookshelfUI;
+        internal UserInterface enchantedBookshelfInterface;
+
         #endregion
 
         /// <summary>
@@ -318,6 +321,11 @@ namespace TerraTemp {
                 forecastUI.Activate();
                 forecastInterface = new UserInterface();
                 forecastInterface.SetState(null);
+
+                enchantedBookshelfUI = new EnchantedBookshelfState();
+                enchantedBookshelfUI.Activate();
+                enchantedBookshelfInterface = new UserInterface();
+                enchantedBookshelfInterface.SetState(null);
             }
 
             #endregion
@@ -432,6 +440,7 @@ namespace TerraTemp {
             lastGameTime = gameTime;
             thermometerUI?.Update(gameTime);
             forecastUI?.Update(gameTime);
+            enchantedBookshelfUI?.Update(gameTime);
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
@@ -456,6 +465,20 @@ namespace TerraTemp {
                     delegate {
                         if (lastGameTime != null) {
                             forecastInterface.Draw(Main.spriteBatch, lastGameTime);
+                        }
+
+                        return true;
+                    },
+                    InterfaceScaleType.UI)
+                );
+            }
+
+            if (resourceBarIndex != -1) {
+                layers.Insert(npcTalkIndex + 1, new LegacyGameInterfaceLayer(
+                    $"{nameof(TerraTemp)}: Binding Interface",
+                    delegate {
+                        if (lastGameTime != null) {
+                            enchantedBookshelfInterface.Draw(Main.spriteBatch, lastGameTime);
                         }
 
                         return true;

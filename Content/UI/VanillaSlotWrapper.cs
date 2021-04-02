@@ -34,7 +34,8 @@ namespace TerraTemp.Content.UI {
 
             if (ContainsPoint(Main.MouseScreen) && !PlayerInput.IgnoreMouseInterface) {
                 Main.LocalPlayer.mouseInterface = true;
-                if (ValidItemFunc == null || ValidItemFunc(Main.mouseItem)) {
+                //IsAir Check is here so that the click will still function with an empty mouse, so that the player can pick up the item from the slot
+                if (ValidItemFunc == null || ValidItemFunc(Main.mouseItem) || Main.mouseItem.IsAir) {
                     // Handle handles all the click and hover actions based on the context.
                     ItemSlot.Handle(ref Item, _context);
                 }

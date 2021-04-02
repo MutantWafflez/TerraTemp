@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using TerraTemp.Content.Items.Tiles.Furniture;
@@ -34,7 +35,12 @@ namespace TerraTemp.Content.Tiles.Furniture {
         }
 
         public override bool NewRightClick(int i, int j) {
-            return true;
+            if (TerraTemp.Instance.enchantedBookshelfInterface.CurrentState != TerraTemp.Instance.enchantedBookshelfUI) {
+                TerraTemp.Instance.enchantedBookshelfInterface.SetState(TerraTemp.Instance.enchantedBookshelfUI);
+                return true;
+            }
+
+            return false;
         }
 
         public override void MouseOver(int i, int j) {
