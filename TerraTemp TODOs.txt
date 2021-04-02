@@ -1,10 +1,10 @@
 Legend: ? = Potential change, on the fence about it
 
 TODOs:
--"Enchantment" system (Flame & Frost enchantments) for modded armors and maybe? modded accessories
 -Finish the wiki
 
 Done:
+-"Enchantment" system (Flame & Frost enchantments) for modded armors
 -Special TerraTemp Prefixes
 -Cold attacks should instantly lower body temperature slightly
 -Week based deviation system

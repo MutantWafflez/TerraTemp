@@ -4,22 +4,23 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.UI;
+using Terraria.ID;
 
 namespace TerraTemp.Content.UI {
 
     /// <summary>
     /// Handy wrapper class that has the basic functionality of an item slot in vanilla. Code is
-    /// courtesy of Example Mod, thanks tML team!
+    /// courtesy of Example Mod with a few tweaks, thanks tML team!
     /// </summary>
     public class VanillaItemSlotWrapper : UIElement {
         public Item Item;
         public Func<Item, bool> ValidItemFunc;
-        private readonly int _context;
-        private readonly float _scale;
+        private readonly int slotContext;
+        private readonly float slotScale;
 
         public VanillaItemSlotWrapper(int context = ItemSlot.Context.BankItem, float scale = 1f) {
-            _context = context;
-            _scale = scale;
+            slotContext = context;
+            slotScale = scale;
             Item = new Item();
             Item.SetDefaults(0);
 
@@ -29,7 +30,7 @@ namespace TerraTemp.Content.UI {
 
         protected override void DrawSelf(SpriteBatch spriteBatch) {
             float oldScale = Main.inventoryScale;
-            Main.inventoryScale = _scale;
+            Main.inventoryScale = slotScale;
             Rectangle rectangle = GetDimensions().ToRectangle();
 
             if (ContainsPoint(Main.MouseScreen) && !PlayerInput.IgnoreMouseInterface) {
@@ -37,12 +38,12 @@ namespace TerraTemp.Content.UI {
                 //IsAir Check is here so that the click will still function with an empty mouse, so that the player can pick up the item from the slot
                 if (ValidItemFunc == null || ValidItemFunc(Main.mouseItem) || Main.mouseItem.IsAir) {
                     // Handle handles all the click and hover actions based on the context.
-                    ItemSlot.Handle(ref Item, _context);
+                    ItemSlot.Handle(ref Item, slotContext);
                 }
             }
             // Draw draws the slot itself and Item. Depending on context, the color will change, as
             // will drawing other things like stack counts.
-            ItemSlot.Draw(spriteBatch, ref Item, _context, rectangle.TopLeft());
+            ItemSlot.Draw(spriteBatch, ref Item, slotContext, rectangle.TopLeft());
             Main.inventoryScale = oldScale;
         }
     }

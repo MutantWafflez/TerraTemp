@@ -144,6 +144,14 @@ NPCButton2.Meteorologist=Forecast
 GlobalItemChange.ObsidianSkull=40% decreased heat of the Underworld
 GlobalItemChange.ObsidianRose=Negates the temperature increase of touching and being near lava
 
+#TerraTemp UI Info
+UIInfo.BindHover=Bind Tome
+UIInfo.InvalidBind=Invalid Bind!
+
+#TerraTemp Miscellaneous Keys
+MiscKeys.FlameEnchantment=Flame Protection
+MiscKeys.FrostEnchantment=Frost Protection
+
 #Unique Item Holdout Change Tooltips
 
 #Unique Vanilla Set Bonus Tooltips (Pre-Hardmode)
