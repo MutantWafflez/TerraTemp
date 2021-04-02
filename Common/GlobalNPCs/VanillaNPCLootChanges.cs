@@ -14,7 +14,8 @@ namespace TerraTemp.Common.GlobalNPCs {
             foreach (NPCLootChange lootChange in TerraTemp.lootChanges) {
                 if (npc.type == lootChange.AppliedNPCID) {
                     foreach (ItemDrop drop in lootChange.ItemsToDrop) {
-                        if (drop.canDropMethod()) {
+                        //Game Menu check is for mods such as Recipe Browser that call NPCLoot() when building the Loot Cache
+                        if (drop.canDropMethod() && !Main.gameMenu) {
                             int dropCount = drop.dropCount.Item1 == drop.dropCount.Item2 ? drop.dropCount.Item1 : Main.rand.Next(drop.dropCount.Item1, drop.dropCount.Item2);
 
                             int itemIndex = Item.NewItem(npc.getRect(), drop.dropID, dropCount);
