@@ -466,7 +466,8 @@ namespace TerraTemp {
                 );
             }
 
-            if (resourceBarIndex != -1) {
+            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+            if (mouseTextIndex != -1) {
                 layers.Insert(npcTalkIndex + 1, new LegacyGameInterfaceLayer(
                     $"{nameof(TerraTemp)}: Binding Interface",
                     delegate {
