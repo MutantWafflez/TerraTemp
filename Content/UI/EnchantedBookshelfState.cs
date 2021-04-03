@@ -110,7 +110,7 @@ namespace TerraTemp.Content.UI {
 
                 //Drawing of the outline around the tome icon similar to the vanilla reforge icon
                 Texture2D highlightTexture = ModContent.GetTexture(TempUtilities.TEXTURE_DIRECTORY + "UI/TomeOutline");
-                spriteBatch.Draw(highlightTexture, new Vector2(bindButton.Left.Pixels - 2f, bindButton.Top.Pixels - 4f), null, Color.White, 0f, new Vector2(0f, 0f), 1f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(highlightTexture, new Vector2(bindButton.Left.Pixels - 2f, bindButton.Top.Pixels - 4f), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
                 if (IsValidBinding) {
                     Main.instance.MouseText(TempUtilities.GetTerraTempTextValue("UIInfo.BindHover"));
@@ -123,6 +123,12 @@ namespace TerraTemp.Content.UI {
             }
             else {
                 playedHoverTick = false;
+            }
+
+            //Draw armor background visual to tell the player what slot is for armor pieces
+            if (armorItemSlot.Item.type == ItemID.None) {
+                Texture2D armorVisual = ModContent.GetTexture("Terraria/UI/DisplaySlots_0");
+                spriteBatch.Draw(armorVisual, new Vector2(armorItemSlot.Left.Pixels + 7.75f, armorItemSlot.Top.Pixels + 9f), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
         }
     }
