@@ -44,7 +44,7 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             animationType = NPCID.Guide;
         }
 
-        public override bool CanTownNPCSpawn(int numTownNPCs, int money) => NPC.downedSlimeKing && Main.raining;
+        public override bool CanTownNPCSpawn(int numTownNPCs, int money) => (NPC.downedSlimeKing && Main.raining) || NPC.downedBoss2;
 
         public override string TownNPCName() {
             List<string> nameList = new List<string> {
