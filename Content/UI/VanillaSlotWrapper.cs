@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -33,6 +34,11 @@ namespace TerraTemp.Content.UI {
             Main.inventoryScale = slotScale;
             Rectangle rectangle = GetDimensions().ToRectangle();
 
+            //Draw the item's name in the slot in the proper rarity if there is an item present and the player isn't holding any item on their mouse
+            if (ContainsPoint(Main.MouseScreen) && Main.mouseItem.type == ItemID.None && Item.type != ItemID.None) {
+                Main.instance.MouseText(Item.HoverName, Item.rare);
+            }
+
             if (ContainsPoint(Main.MouseScreen) && !PlayerInput.IgnoreMouseInterface) {
                 Main.LocalPlayer.mouseInterface = true;
                 //IsAir Check is here so that the click will still function with an empty mouse, so that the player can pick up the item from the slot
@@ -41,6 +47,7 @@ namespace TerraTemp.Content.UI {
                     ItemSlot.Handle(ref Item, slotContext);
                 }
             }
+
             // Draw draws the slot itself and Item. Depending on context, the color will change, as
             // will drawing other things like stack counts.
             ItemSlot.Draw(spriteBatch, ref Item, slotContext, rectangle.TopLeft());
