@@ -95,6 +95,7 @@ namespace TerraTemp.Content.UI {
                 }
 
                 tomeItemSlot.Item.TurnToAir();
+                CombatText.NewText(new Rectangle((int)Main.LocalPlayer.position.X, (int)Main.LocalPlayer.Bottom.Y, 15, 1), Color.Yellow, TempUtilities.GetTerraTempTextValue("UIInfo.SuccessfulBind"), true);
                 Main.PlaySound(SoundID.Item119);
             }
         }

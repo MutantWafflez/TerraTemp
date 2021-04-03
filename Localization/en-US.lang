@@ -147,6 +147,7 @@ GlobalItemChange.ObsidianRose=Negates the temperature increase of touching and b
 #TerraTemp UI Info
 UIInfo.BindHover=Bind Tome
 UIInfo.InvalidBind=Invalid Bind!
+UIInfo.SuccessfulBind=Bound!
 
 #TerraTemp Miscellaneous Keys
 MiscKeys.FlameEnchantment=Flame Protection
