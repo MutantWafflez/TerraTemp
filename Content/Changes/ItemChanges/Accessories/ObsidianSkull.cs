@@ -19,7 +19,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
         public override void AdditionalItemEquipEffect(Player player) {
             if (player.ZoneUnderworldHeight) {
-                player.GetTempPlayer().baseDesiredTemperature -= underworldClimate.GetDesiredTemperatureChange(player) * 0.4f;
+                player.GetTempPlayer().baseDesiredTemperature -= underworldClimate.GetDesiredTemperatureChange(player) * 0.5f;
             }
         }
     }

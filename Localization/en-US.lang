@@ -141,7 +141,7 @@ NPCName.Meteorologist=Meteorologist
 NPCButton2.Meteorologist=Forecast
 
 #Unique Item Change Tooltips
-GlobalItemChange.ObsidianSkull=40% decreased heat of the Underworld
+GlobalItemChange.ObsidianSkull=50% decreased heat of the Underworld
 GlobalItemChange.ObsidianRose=Negates the temperature increase of touching and being near lava
 
 #TerraTemp UI Info

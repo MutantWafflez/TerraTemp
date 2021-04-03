@@ -8,7 +8,7 @@ namespace TerraTemp.Content.Items.Accessories {
 
     public class FrostRune : TempEquipment {
 
-        public override float GetHeatComfortabilityChange(Player player) => -5f;
+        public override float GetHeatComfortabilityChange(Player player) => -2f;
 
         public override void SetDefaults() {
             item.accessory = true;
