@@ -16,6 +16,7 @@ using TerraTemp.Custom;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Classes.ReflectionMod;
 using TerraTemp.Custom.Enums;
+using TerraTemp.Custom.Patches;
 
 namespace TerraTemp {
 
@@ -242,6 +243,8 @@ namespace TerraTemp {
                     throw new Exception("Mod Climate Type " + modClimateType.Name + " did not have a PertainedMod Attributed that returned a non-null value.");
                 }
             }
+
+            ModILManager.LoadILEdits();
         }
 
         public override void Load() {
@@ -346,6 +349,8 @@ namespace TerraTemp {
             activeCompatibleMods = null;
             modEvents = null;
             modClimates = null;
+
+            ModILManager.UnloadILEdits();
 
             Instance = null;
         }

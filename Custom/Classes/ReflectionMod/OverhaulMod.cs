@@ -2,6 +2,7 @@
 using System.Reflection;
 using Terraria.ModLoader;
 using TerraTemp.Custom.Attributes;
+using TerraTemp.Custom.Patches;
 
 namespace TerraTemp.Custom.Classes.ReflectionMod {
 
@@ -16,6 +17,16 @@ namespace TerraTemp.Custom.Classes.ReflectionMod {
                     currentSeason = type.GetProperty("CurrentSeason", BindingFlags.Public | BindingFlags.Static);
                     if (currentSeason == null) {
                         throw new Exception("Error Retrieving Overhaul Current Season Property Info! Report immediately!");
+                    }
+                }
+
+                if (type.Name == "OverhaulPlayer") {
+                    MethodInfo updateLifeRegenMethod = type.GetMethod("UpdateLifeRegen", BindingFlags.Public | BindingFlags.Instance);
+                    if (updateLifeRegenMethod != null) {
+                        OverhaulILEdits.SubscribeToEvents(updateLifeRegenMethod);
+                    }
+                    else {
+                        throw new Exception("Error Retrieving Overhaul Life Regen Method Info! Report immediately!");
                     }
                 }
             }
