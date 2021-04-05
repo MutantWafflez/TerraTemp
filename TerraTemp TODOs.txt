@@ -13,6 +13,7 @@ Done:
 -Forecast UI
 -Slightly nerf Hallowed Armor set bonus & Endurance potion buff
 -Lowered comfortability decreases of Flame/Frost Rune & Buffed obsidian rose underworld protection
+-Increased base comfortability for players
 
 Whenever TODOs:
 -Make the entire world extremely cold while the Moon Lord is alive (Send a message like "The earth freezes at the touch of the moon!" upon first impending doom message)?
