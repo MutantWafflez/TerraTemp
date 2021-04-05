@@ -1,6 +1,6 @@
 ﻿using Terraria;
 
-namespace TerraTemp.Content.Changes.EvilTempBiomes {
+namespace TerraTemp.Content.Changes.EvilClimates {
 
     public class CrimsonClimate : EvilClimate {
         public override float WaterTemperature => -2f;

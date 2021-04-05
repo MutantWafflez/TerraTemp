@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-
-using TerraTemp.Content.Changes.EvilTempBiomes;
+using TerraTemp.Content.Changes.EvilClimates;
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {

@@ -1,6 +1,6 @@
 ﻿using Terraria;
 
-namespace TerraTemp.Content.Changes.TempBiomes {
+namespace TerraTemp.Content.Changes.Climates {
 
     public class UnderworldClimate : Climate {
 

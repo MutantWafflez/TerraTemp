@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using TerraTemp.Content.Changes.TempBiomes;
+using TerraTemp.Content.Changes.Climates;
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
