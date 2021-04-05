@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Items.Tomes {
 
@@ -31,7 +32,7 @@ namespace TerraTemp.Content.Items.Tomes {
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            TooltipLine tomeLevelLine = new TooltipLine(mod, "TomeLevel", "Level " + tomeLevel) {
+            TooltipLine tomeLevelLine = new TooltipLine(mod, "TomeLevel", TempUtilities.GetTerraTempTextValue("MiscKeys.EnchantmentLevel", tomeLevel)) {
                 overrideColor = Color.Orange
             };
 

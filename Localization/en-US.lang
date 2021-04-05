@@ -152,6 +152,7 @@ UIInfo.SuccessfulBind=Bound!
 #TerraTemp Miscellaneous Keys
 MiscKeys.FlameEnchantment=Flame Protection
 MiscKeys.FrostEnchantment=Frost Protection
+MiscKeys.EnchantmentLevel=Level {0}
 
 #Unique Item Holdout Change Tooltips
 
