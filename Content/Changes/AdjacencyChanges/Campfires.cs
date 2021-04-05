@@ -11,6 +11,6 @@ namespace TerraTemp.Content.Changes.AdjacencyChanges {
             TileID.Fireplace
         };
 
-        public override float GetDesiredTemperatureChange(Player player) => 3f;
+        public override float GetDesiredTemperatureChange(Player player) => 5f;
     }
 }

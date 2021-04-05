@@ -14,6 +14,6 @@ namespace TerraTemp.Content.Changes.AdjacencyChanges {
             TileID.GlassKiln
         };
 
-        public override float GetDesiredTemperatureChange(Player player) => 2f;
+        public override float GetDesiredTemperatureChange(Player player) => 3f;
     }
 }
