@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -24,7 +25,7 @@ namespace TerraTemp.Content.Items.Tomes {
 
         public override void SetDefaults() {
             item.rare = ItemRarityID.Green;
-            item.value = Item.buyPrice(silver: 20);
+            item.value = Item.buyPrice(gold: 5);
             item.material = true;
             item.maxStack = 1;
         }
@@ -33,7 +34,14 @@ namespace TerraTemp.Content.Items.Tomes {
             TooltipLine tomeLevelLine = new TooltipLine(mod, "TomeLevel", "Level " + tomeLevel) {
                 overrideColor = Color.Orange
             };
-            tooltips.Add(tomeLevelLine);
+
+            TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name == "Price" || tooltip.Name == "SpecialPrice"));
+            if (sellLine != null) {
+                tooltips.Insert(tooltips.IndexOf(sellLine), tomeLevelLine);
+            }
+            else {
+                tooltips.Add(tomeLevelLine);
+            }
         }
 
         public override TagCompound Save() {
