@@ -17,7 +17,7 @@ namespace TerraTemp.Content.UI {
     /// UI class that handles the UI for the Thermometer item.
     /// </summary>
     public class ThermometerState : UIState {
-        public ThermometerDraggableElement draggableElement;
+        public DraggableElement draggableElement;
         public UIImage thermometerFrame;
         public UIText temperatureReading;
         public ColorableUIImage thermometerLiquid;
@@ -27,11 +27,11 @@ namespace TerraTemp.Content.UI {
                 ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize
             };
 
-            draggableElement = new ThermometerDraggableElement();
+            draggableElement = new DraggableElement();
             draggableElement.Width.Set(thermometerFrame.Width.Pixels, 0f);
             draggableElement.Height.Set(thermometerFrame.Height.Pixels, 0f);
             draggableElement.Left.Set(0f, 0f);
-            draggableElement.Top.Set(-thermometerFrame.Height.Pixels, 1f);
+            draggableElement.Top.Set(GetDimensions().Height - thermometerFrame.Height.Pixels, 0f);
             draggableElement.Append(thermometerFrame);
 
             thermometerLiquid = new ColorableUIImage(ModContent.GetTexture(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerLiquid")) {
@@ -70,12 +70,11 @@ namespace TerraTemp.Content.UI {
             temperatureReading.SetText((float)Math.Round(temperaturePlayer.currentTemperature) + "\u00B0C");
 
             //Check for hovering to display text additional info
-            if (draggableElement.ContainsPoint(Main.MouseScreen) && !draggableElement.dragging) {
+            if (draggableElement.ContainsPoint(Main.MouseScreen) && !draggableElement.isDragging) {
                 Main.instance.MouseText("Feels Like: " + Math.Round(temperaturePlayer.modifiedDesiredTemperature) + "\u00B0C (" + TempUtilities.CelsiusToFahrenheit(temperaturePlayer.modifiedDesiredTemperature, true) + "\u00B0F)"
                     + "\nRelative Humidity: " + Math.Round(temperaturePlayer.relativeHumidity * 100f) + "% "
                     + "\nTemperature Change Resistance: " + Math.Round(temperaturePlayer.temperatureChangeResist * 100f) + "%"
-                    + "\nComfortable Range: " + Math.Round(temperaturePlayer.comfortableLow) + "\u00B0C - " + Math.Round(temperaturePlayer.comfortableHigh) + "\u00B0C"
-                    + "\nHold LeftControl to drag this UI");
+                    + "\nComfortable Range: " + Math.Round(temperaturePlayer.comfortableLow) + "\u00B0C - " + Math.Round(temperaturePlayer.comfortableHigh) + "\u00B0C");
             }
 
             float totalDifference = Math.Abs(temperaturePlayer.comfortableLow - temperaturePlayer.criticalRangeMaximum) + (temperaturePlayer.comfortableHigh + temperaturePlayer.criticalRangeMaximum);
