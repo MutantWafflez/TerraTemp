@@ -24,8 +24,8 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             new ShopItem(ModContent.ItemType<EnchantedBookshelf>()),
             new ShopItem(ModContent.ItemType<FlameTome>()),
             new ShopItem(ModContent.ItemType<FrostTome>()),
-            new ShopItem(ItemID.WarmthPotion, () => Main.hardMode),
-            new ShopItem(ModContent.ItemType<CoolingPotion>(), () => Main.hardMode),
+            new ShopItem(ItemID.WarmthPotion, () => NPC.downedBoss3),
+            new ShopItem(ModContent.ItemType<CoolingPotion>(), () => NPC.downedBoss3),
             new ShopItem(ModContent.ItemType<SatanicCross>(), () => Main.bloodMoon)
         };
 
