@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
-using Terraria.UI.Chat;
 using TerraTemp.Common.Players;
-using TerraTemp.Custom;
 
 namespace TerraTemp.Content.UI {
 

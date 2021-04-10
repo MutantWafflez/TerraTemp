@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using System.Linq;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using TerraTemp.Content.Items.Tiles.Furniture;

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.GameInput;
-using Terraria.UI;
 using Terraria.ID;
+using Terraria.UI;
 
 namespace TerraTemp.Content.UI {
 

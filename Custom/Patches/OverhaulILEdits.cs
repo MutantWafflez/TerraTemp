@@ -1,9 +1,7 @@
-﻿using System;
-using System.Reflection;
-using Terraria;
-using MonoMod.Cil;
+﻿using MonoMod.Cil;
 using MonoMod.RuntimeDetour.HookGen;
-using Terraria.ModLoader;
+using System;
+using System.Reflection;
 
 namespace TerraTemp.Custom.Patches {
 
