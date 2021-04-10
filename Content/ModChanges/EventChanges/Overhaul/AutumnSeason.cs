@@ -9,7 +9,7 @@ namespace TerraTemp.Content.ModChanges.EventChanges.Overhaul {
 
         public AutumnSeason(ReflectionMod reflectionModInstance) : base(reflectionModInstance) { }
 
-        public override float GetSunExtremityChange(Player player) => -0.1f;
+        public override float GetSunExtremityChange(Player player) => -0.25f;
 
         public override bool ApplyEventEffects(Player player) {
             //Since TerraTemp is literally a temperature mod, we can disable the temperature system in Overhaul
