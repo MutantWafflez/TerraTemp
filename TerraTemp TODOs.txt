@@ -4,18 +4,7 @@ TODOs:
 -Finish the wiki
 
 Done:
--"Enchantment" system (Flame & Frost enchantments) for modded armors
--Special TerraTemp Prefixes
--Cold attacks should instantly lower body temperature slightly
--Week based deviation system
--Wind chill effect caps out at 45mph
--Meterologist NPC
--Forecast UI
--Slightly nerf Hallowed Armor set bonus & Endurance potion buff
--Lowered comfortability decreases of Flame/Frost Rune & Buffed obsidian skull underworld protection
--Increased base comfortability for players
--Being chilled underwater now no longer causes DoT with Overhaul enabled
--Improve Thermometer UI dragging (and fix saving)
+
 
 Whenever TODOs:
 -Make the entire world extremely cold while the Moon Lord is alive (Send a message like "The earth freezes at the touch of the moon!" upon first impending doom message)?
