@@ -97,6 +97,9 @@ ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme h
 ItemName.RiskBadge=Risk Badge
 ItemTooltip.RiskBadge=Forcibly sets your temperature change resistance to -100%\n30% increased climate temperatures\n25% increased damage reduction
 
+ItemName.SatanicCross=Satanic Cross
+ItemTooltip.SatanicCross=Gain up to 20% increased damage depending on the time of day\nDamage bonus reaches its peak at high noon\nYou must be on the surface to gain the damage bonus\n66.6% decreased protection against the sun
+
 #TerraTemp Materials Names/Tooltips
 ItemName.BarbFish=Cherry Barb
 ItemTooltip.BarbFish='A bright, tropical fish that likes to spend its time on the Jungle surface'

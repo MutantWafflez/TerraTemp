@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using TerraTemp.Content.Items.Accessories;
 using TerraTemp.Content.Items.Miscellaneous;
 using TerraTemp.Content.Items.Potions;
 using TerraTemp.Content.Items.Tiles.Furniture;
@@ -24,7 +25,8 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             new ShopItem(ModContent.ItemType<FlameTome>()),
             new ShopItem(ModContent.ItemType<FrostTome>()),
             new ShopItem(ItemID.WarmthPotion, () => Main.hardMode),
-            new ShopItem(ModContent.ItemType<CoolingPotion>(), () => Main.hardMode)
+            new ShopItem(ModContent.ItemType<CoolingPotion>(), () => Main.hardMode),
+            new ShopItem(ModContent.ItemType<SatanicCross>(), () => Main.bloodMoon)
         };
 
         #region Defaults Related
