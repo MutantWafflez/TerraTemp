@@ -173,7 +173,7 @@ namespace TerraTemp.Common.Players {
         }
 
         public override void PostUpdate() {
-            bool isAffectedByWind = player.ZoneOverworldHeight && !(player.IsUnderRoof() && player.behindBackWall);
+            bool isAffectedByWind = player.ZoneOverworldHeight && !player.IsIndoors();
 
             //In certain circumstances, the speed of the wind can cause an unholy level of cold that doesn't quite align with real life. Thus, the wind's effects will have a maximum potency that 45 mph winds have.
             float clampedWindSpeed = MathHelper.Clamp(Main.windSpeed, -0.45f, 0.45f);

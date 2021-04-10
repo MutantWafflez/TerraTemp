@@ -398,10 +398,18 @@ namespace TerraTemp.Custom {
 
         /// <summary>
         /// Returns whether or not this given player is under a roof. Being "under a roof"
-        /// constitutes that there are two blocks somewhere at least 16 blocks above the player.
+        /// constitutes that there are two blocks somewhere at least 32 blocks above the player.
         /// </summary>
         public static bool IsUnderRoof(this Player player) {
-            return !Collision.CanHitLine(new Vector2(player.Center.X + 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X + 8f, player.Top.Y - 16 * 17), 4, 4) && !Collision.CanHitLine(new Vector2(player.Center.X - 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X - 8f, player.Top.Y - 16 * 17), 4, 4);
+            return !Collision.CanHitLine(new Vector2(player.Center.X + 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X + 8f, player.Top.Y - 16 * 33), 4, 4) && !Collision.CanHitLine(new Vector2(player.Center.X - 8f, player.Top.Y), 4, 4, new Vector2(player.Center.X - 8f, player.Top.Y - 16 * 33), 4, 4);
+        }
+
+        /// <summary>
+        /// Returns whether or not this given player is considered to be "indoors." They must be
+        /// under a roof and have a back wall on them to be considered indoors.
+        /// </summary>
+        public static bool IsIndoors(this Player player) {
+            return player.IsUnderRoof() && player.behindBackWall;
         }
 
         /// <summary>
