@@ -14,7 +14,7 @@ namespace TerraTemp.Content.ModChanges.EventChanges.Overhaul {
         public override bool ApplyEventEffects(Player player) {
             //Since TerraTemp is literally a temperature mod, we can disable the temperature system in Overhaul
             player.buffImmune[reflectionModInstance.ModInstance.BuffType("Freezing")] = true;
-            player.buffImmune[reflectionModInstance.ModInstance.BuffType("Coldburn")] = true;
+            player.buffImmune[reflectionModInstance.ModInstance.BuffType("AbsoluteZero")] = true;
             return (reflectionModInstance as OverhaulMod).IsSeasonOccuring(OverhaulMod.SeasonID.Winter);
         }
     }
