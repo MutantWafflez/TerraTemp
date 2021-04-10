@@ -54,12 +54,12 @@ namespace TerraTemp.Common.Players {
         /// <summary>
         /// Range of heat that the player can sustain with no negative side effects.
         /// </summary>
-        public float comfortableHigh; //Default 33f
+        public float comfortableHigh; //Default 30f
 
         /// <summary>
         /// Range of cold that the player can sustain with no negative side effects.
         /// </summary>
-        public float comfortableLow; //Default 7f
+        public float comfortableLow; //Default 10f
 
         /// <summary>
         /// The relative humidity of the player (or rather, the environment around them). Increases
@@ -118,8 +118,8 @@ namespace TerraTemp.Common.Players {
             baseDesiredTemperature = NormalTemperature;
             modifiedDesiredTemperature = baseDesiredTemperature;
             temperatureChangeResist = 0f;
-            comfortableHigh = 33f;
-            comfortableLow = 7f;
+            comfortableHigh = 30f;
+            comfortableLow = 10f;
             relativeHumidity = 0f;
             criticalRangeMaximum = 10f;
             climateExtremityValue = 1f;
