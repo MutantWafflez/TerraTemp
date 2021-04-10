@@ -6,6 +6,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using TerraTemp.Content.Items.Miscellaneous;
+using TerraTemp.Content.Items.Potions;
 using TerraTemp.Content.Items.Tiles.Furniture;
 using TerraTemp.Content.Items.Tomes;
 using TerraTemp.Custom;
@@ -21,7 +22,9 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             new ShopItem(ModContent.ItemType<Thermometer>()),
             new ShopItem(ModContent.ItemType<EnchantedBookshelf>()),
             new ShopItem(ModContent.ItemType<FlameTome>()),
-            new ShopItem(ModContent.ItemType<FrostTome>())
+            new ShopItem(ModContent.ItemType<FrostTome>()),
+            new ShopItem(ItemID.WarmthPotion, () => Main.hardMode),
+            new ShopItem(ModContent.ItemType<CoolingPotion>(), () => Main.hardMode)
         };
 
         #region Defaults Related
