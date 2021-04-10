@@ -15,6 +15,11 @@ namespace TerraTemp.Content.ModChanges.EventChanges.Overhaul {
         //Completely negates sun effects since the sun would be entirely blocked at that point
         public override float GetSunExtremityChange(Player player) => -10f;
 
-        public override bool ApplyEventEffects(Player player) => Main.raining && !player.IsIndoors() && player.ZoneOverworldHeight && ((OverhaulMod)reflectionModInstance).IsSeasonOccuring(OverhaulMod.SeasonID.Winter);
+        public override bool ApplyEventEffects(Player player) => Main.raining &&
+                                                                 !player.ZoneDesert &&
+                                                                 !player.ZoneJungle &&
+                                                                 !player.IsIndoors() &&
+                                                                 player.ZoneOverworldHeight &&
+                                                                 ((OverhaulMod)reflectionModInstance).IsSeasonOccuring(OverhaulMod.SeasonID.Winter);
     }
 }
