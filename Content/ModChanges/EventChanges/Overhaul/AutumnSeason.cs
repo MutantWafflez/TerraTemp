@@ -12,8 +12,6 @@ namespace TerraTemp.Content.ModChanges.EventChanges.Overhaul {
         public override float GetSunExtremityChange(Player player) => -0.25f;
 
         public override bool ApplyEventEffects(Player player) {
-            //Since TerraTemp is literally a temperature mod, we can disable the temperature system in Overhaul
-            player.buffImmune[reflectionModInstance.ModInstance.BuffType("Breezy")] = true;
             return (reflectionModInstance as OverhaulMod).IsSeasonOccuring(OverhaulMod.SeasonID.Autumn);
         }
     }

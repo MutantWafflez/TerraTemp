@@ -12,6 +12,8 @@ namespace TerraTemp.Custom.Classes.ReflectionMod {
         public readonly PropertyInfo currentSeason;
 
         public OverhaulMod(Mod instance) : base(instance) {
+            MethodInfo updateLifeRegenMethod;
+            MethodInfo preUpdateMethod;
             foreach (Type type in ModTypes) {
                 if (type.Name == "SeasonsAPI") {
                     currentSeason = type.GetProperty("CurrentSeason", BindingFlags.Public | BindingFlags.Static);
@@ -21,12 +23,13 @@ namespace TerraTemp.Custom.Classes.ReflectionMod {
                 }
 
                 if (type.Name == "OverhaulPlayer") {
-                    MethodInfo updateLifeRegenMethod = type.GetMethod("UpdateLifeRegen", BindingFlags.Public | BindingFlags.Instance);
-                    if (updateLifeRegenMethod != null) {
-                        OverhaulILEdits.SubscribeToEvents(updateLifeRegenMethod);
+                    updateLifeRegenMethod = type.GetMethod("UpdateLifeRegen", BindingFlags.Public | BindingFlags.Instance);
+                    preUpdateMethod = type.GetMethod("PreUpdate", BindingFlags.Public | BindingFlags.Instance);
+                    if (updateLifeRegenMethod != null && preUpdateMethod != null) {
+                        OverhaulILEdits.SubscribeToEvents(updateLifeRegenMethod, preUpdateMethod, type);
                     }
                     else {
-                        throw new Exception("Error Retrieving Overhaul Life Regen Method Info! Report immediately!");
+                        throw new Exception("Erorr loading either Pre Update or Update Life Regen method for Terraria Overhaul! Report immediately!");
                     }
                 }
             }
