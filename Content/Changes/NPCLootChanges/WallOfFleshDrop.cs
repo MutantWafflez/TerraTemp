@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Terraria;
+﻿using System.Collections.Generic;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Items.Accessories;
-using TerraTemp.Custom.Structs;
 
 namespace TerraTemp.Content.Changes.NPCLootChanges {
 
     public class WallOfFleshDrop : NPCLootChange {
         public override int AppliedNPCID => NPCID.WallofFlesh;
 
-        public override List<ItemDrop> ItemsToDrop => new List<ItemDrop>() {
-            new ItemDrop(ModContent.ItemType<RiskBadge>(), new Tuple<int, int>(1, 1), delegate {
-                return !Main.expertMode;
-            })
+        public override List<IItemDropRule> ItemsToDrop => new List<IItemDropRule>() {
+            new CommonDropNotScalingWithLuck(ModContent.ItemType<RiskBadge>(), 1, 1, 1)
         };
     }
 }

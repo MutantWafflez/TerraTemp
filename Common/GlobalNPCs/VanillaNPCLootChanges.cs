@@ -1,5 +1,8 @@
 ﻿using Terraria;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
+using TerraTemp.Content.Changes;
 
 namespace TerraTemp.Common.GlobalNPCs {
 
@@ -8,21 +11,14 @@ namespace TerraTemp.Common.GlobalNPCs {
     /// </summary>
     public class VanillaNPCLootChanges : GlobalNPC {
 
-        //TODO: Reimplement properly
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
-            /*foreach (NPCLootChange lootChange in TerraTemp.lootChanges) {
+            foreach (NPCLootChange lootChange in ContentListSystem.lootChanges) {
                 if (npc.type == lootChange.AppliedNPCID) {
-                    foreach (ItemDrop drop in lootChange.ItemsToDrop) {
-                        //Game Menu check is for mods such as Recipe Browser that call NPCLoot() when building the Loot Cache
-                        if (drop.canDropMethod() && !Main.gameMenu) {
-                            int dropCount = drop.dropCount.Item1 == drop.dropCount.Item2 ? drop.dropCount.Item1 : Main.rand.Next(drop.dropCount.Item1, drop.dropCount.Item2);
-
-                            int itemIndex = Item.NewItem(npc.getRect(), drop.dropID, dropCount);
-                            drop.postItemCreationMethod(itemIndex);
-                        }
+                    foreach (IItemDropRule drop in lootChange.ItemsToDrop) {
+                        npcLoot.Add(drop);
                     }
                 }
-            }*/
+            }
         }
     }
 }

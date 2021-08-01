@@ -63,12 +63,6 @@ namespace TerraTemp.Common.Systems {
         public static List<NPCLootChange> lootChanges;
 
         /// <summary>
-        /// A list of ALL newly added Bag Changes. If you wish to add or otherwise remove a given
-        /// Bag Change, search through this List with LINQ or any other method that is preferred.
-        /// </summary>
-        public static List<BagChange> bagChanges;
-
-        /// <summary>
         /// A list of ALL newly added Tile Adjacency Changes. If you wish to add or otherwise remove
         /// a given Tile Adjacency Change, search through this List with LINQ or any other method
         /// that is preferred.
@@ -82,9 +76,6 @@ namespace TerraTemp.Common.Systems {
         public static HashSet<int> warmNPCTypes;
 
         public override void Load() {
-
-            #region List Initialization
-
             climates = new List<Climate>();
             evilClimates = new List<EvilClimate>();
             eventChanges = new List<EventChange>();
@@ -93,53 +84,10 @@ namespace TerraTemp.Common.Systems {
             setBonusChanges = new List<SetBonusChange>();
             buffChanges = new List<BuffChange>();
             lootChanges = new List<NPCLootChange>();
-            bagChanges = new List<BagChange>();
             adjacencyChanges = new List<AdjacencyChange>();
             warmNPCTypes = new HashSet<int>();
 
-            /*foreach (Type type in TempUtilities.GetAllChildrenOfClass<Climate>()) {
-                climates.Add((Climate)Activator.CreateInstance(type));
-            }
-
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<EvilClimate>()) {
-                evilClimates.Add((EvilClimate)Activator.CreateInstance(type));
-            }
-
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<EventChange>()) {
-                eventChanges.Add((EventChange)Activator.CreateInstance(type));
-            }
-
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<ItemChange>()) {
-                itemChanges.Add((ItemChange)Activator.CreateInstance(type));
-            }
-
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<ItemHoldoutChange>()) {
-                itemHoldoutChanges.Add((ItemHoldoutChange)Activator.CreateInstance(type));
-            }
-
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<SetBonusChange>()) {
-                setBonusChanges.Add((SetBonusChange)Activator.CreateInstance(type));
-            }
-
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<BuffChange>()) {
-                buffChanges.Add((BuffChange)Activator.CreateInstance(type));
-            }
-
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<NPCLootChange>()) {
-                lootChanges.Add((NPCLootChange)Activator.CreateInstance(type));
-            }
-
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<BagChange>()) {
-                bagChanges.Add((BagChange)Activator.CreateInstance(type));
-            }
-
-            foreach (Type type in TempUtilities.GetAllChildrenOfClass<AdjacencyChange>()) {
-                adjacencyChanges.Add((AdjacencyChange)Activator.CreateInstance(type));
-            } */
-
             warmNPCTypes = FillWarmNPCHashSet();
-
-            #endregion
         }
 
         public override void Unload() {
@@ -151,7 +99,6 @@ namespace TerraTemp.Common.Systems {
             setBonusChanges = null;
             buffChanges = null;
             lootChanges = null;
-            bagChanges = null;
             adjacencyChanges = null;
             warmNPCTypes = null;
         }
