@@ -10,7 +10,6 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using TerraTemp.Common.Players;
 using TerraTemp.Custom.Attributes;
-using TerraTemp.Custom.Classes;
 using TerraTemp.Custom.Interfaces;
 using TerraTemp.Custom.Structs;
 

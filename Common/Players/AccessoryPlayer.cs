@@ -6,7 +6,6 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Items.Accessories;
-using TerraTemp.Content.Projectiles;
 using TerraTemp.Custom;
 
 namespace TerraTemp.Common.Players {
@@ -40,15 +39,6 @@ namespace TerraTemp.Common.Players {
                     Player.statDefense = (int)Math.Round(Player.statDefense * (1f + (0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature))));
                     Player.endurance += 0.02f * (TempPlayer.NormalTemperature - temperaturePlayer.currentTemperature);
                 }
-            }
-        }
-
-        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
-            if (volatileThermometer && damageSource.SourceItemType == ModContent.ItemType<VolatileThermometer>()) {
-                Item volatileThermometer = new Item();
-                volatileThermometer.SetDefaults(ModContent.ItemType<VolatileThermometer>());
-                Projectile.NewProjectile(new ProjectileSource_Item(Player, volatileThermometer), Player.Center, Vector2.Zero, ModContent.ProjectileType<ThermometerExplosion>(), 1000, 4f, Player.whoAmI);
-                SoundEngine.PlaySound(SoundID.Item100, Player.Center);
             }
         }
     }
