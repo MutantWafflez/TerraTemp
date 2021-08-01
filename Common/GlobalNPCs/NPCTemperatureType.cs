@@ -1,5 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Custom;
 
 namespace TerraTemp.Common.GlobalNPCs {
@@ -17,7 +18,7 @@ namespace TerraTemp.Common.GlobalNPCs {
 
         public override void SetDefaults(NPC npc) {
             isColdNPC = npc.coldDamage;
-            isWarmNPC = TerraTemp.warmNPCTypes.Contains(npc.type);
+            isWarmNPC = ContentListSystem.warmNPCTypes.Contains(npc.type);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, int damage, bool crit) {

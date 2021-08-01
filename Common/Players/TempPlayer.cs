@@ -262,13 +262,13 @@ namespace TerraTemp.Common.Players {
         /// </summary>
         public void MidEnvironmentUpdateClimate() {
             //Updating the player's current biome
-            foreach (Climate biome in TerraTemp.climates) {
+            foreach (Climate biome in ContentListSystem.climates) {
                 if (biome.PlayerZoneBool(Player)) {
                     currentBiome = biome;
                     break;
                 }
                 //Current biome being null means the player is in Forest, the default biome
-                if (!biome.PlayerZoneBool(Player) && biome == TerraTemp.climates.Last()) {
+                if (!biome.PlayerZoneBool(Player) && biome == ContentListSystem.climates.Last()) {
                     currentBiome = null;
                     break;
                 }
@@ -283,13 +283,13 @@ namespace TerraTemp.Common.Players {
         /// </summary>
         public void MidEnvironmentUpdateEvilClimate() {
             //Updating the player's current evil biome
-            foreach (EvilClimate evilBiome in TerraTemp.evilClimates) {
+            foreach (EvilClimate evilBiome in ContentListSystem.evilClimates) {
                 if (evilBiome.EvilZoneBool(Player)) {
                     currentEvilBiome = evilBiome;
                     break;
                 }
                 //Current evil biome being null means the player is not in any evil biome, thus no change
-                if (!evilBiome.EvilZoneBool(Player) && evilBiome == TerraTemp.evilClimates.Last()) {
+                if (!evilBiome.EvilZoneBool(Player) && evilBiome == ContentListSystem.evilClimates.Last()) {
                     currentEvilBiome = null;
                     break;
                 }
@@ -304,7 +304,7 @@ namespace TerraTemp.Common.Players {
         /// </summary>
         public void MidEnvironmentUpdateEvents() {
             //Apply Event changes on player
-            foreach (EventChange eventChange in TerraTemp.eventChanges) {
+            foreach (EventChange eventChange in ContentListSystem.eventChanges) {
                 if (eventChange.EventBoolean && eventChange.ApplyEventEffects(Player)) {
                     TempUtilities.ApplyStatChanges(eventChange, Player);
                 }
@@ -319,7 +319,7 @@ namespace TerraTemp.Common.Players {
         /// </summary>
         public void MidEnvironmentUpdateTileAdjacency() {
             //Apply Tile Adjacency changes on player
-            foreach (AdjacencyChange adjacencyChange in TerraTemp.adjacencyChanges) {
+            foreach (AdjacencyChange adjacencyChange in ContentListSystem.adjacencyChanges) {
                 if (adjacencyChange.CheckForAdjacency(Player)) {
                     TempUtilities.ApplyStatChanges(adjacencyChange, Player);
                 }
@@ -334,7 +334,7 @@ namespace TerraTemp.Common.Players {
         /// </summary>
         public void MidEnvironmentUpdateItemHoldoutChanges() {
             //This item holdout change must be handled here since the HeldItem() method in Global Items are called too late in the update process.
-            foreach (ItemHoldoutChange itemHoldoutChange in TerraTemp.itemHoldoutChanges) {
+            foreach (ItemHoldoutChange itemHoldoutChange in ContentListSystem.itemHoldoutChanges) {
                 if (itemHoldoutChange.AppliedItemIDs.Contains(Player.HeldItem.type)) {
                     TempUtilities.ApplyStatChanges(itemHoldoutChange, Player);
                     itemHoldoutChange.AdditionalItemHoldoutEffect(Player);

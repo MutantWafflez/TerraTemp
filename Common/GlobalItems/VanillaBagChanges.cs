@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Content.Changes;
 using TerraTemp.Custom.Structs;
 
@@ -12,7 +13,7 @@ namespace TerraTemp.Common.GlobalItems {
     public class VanillaBagChanges : GlobalItem {
 
         public override void OpenVanillaBag(string context, Player player, int arg) {
-            foreach (BagChange bagChange in TerraTemp.bagChanges) {
+            foreach (BagChange bagChange in ContentListSystem.bagChanges) {
                 if (context == bagChange.BagContext && arg == bagChange.AppliedBagID) {
                     foreach (ItemDrop drop in bagChange.BagDrops) {
                         if (drop.canDropMethod()) {

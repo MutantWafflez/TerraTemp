@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Common.Players;
+using TerraTemp.Common.Systems;
 using TerraTemp.Content.Changes;
 using TerraTemp.Custom;
 
@@ -17,7 +18,7 @@ namespace TerraTemp.Common.GlobalItems {
 
         //Vanilla Accessories/Armor, when equipped, give additional changes here
         public override void UpdateEquip(Item item, Player player) {
-            foreach (ItemChange itemChange in TerraTemp.itemChanges) {
+            foreach (ItemChange itemChange in ContentListSystem.itemChanges) {
                 if (itemChange.AppliedItemIDs.Contains(item.type) &&
                     !player.GetTempPlayer().equippedItemChanges.Contains(itemChange) &&
                     (!(itemChange is DerivedItemChange) || !TempUtilities.ContainsList(player.GetTempPlayer().equippedItemChanges, (itemChange as DerivedItemChange).GetBaseItemChanges()))) {
@@ -39,7 +40,7 @@ namespace TerraTemp.Common.GlobalItems {
 
         //Tooltip updating dealt here:
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
-            foreach (ItemChange change in TerraTemp.itemChanges) {
+            foreach (ItemChange change in ContentListSystem.itemChanges) {
                 if (change.AppliedItemIDs.Contains(item.type) && !item.social && change.AdditionalTooltip != null) {
                     TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", change.AdditionalTooltip);
 
@@ -62,7 +63,7 @@ namespace TerraTemp.Common.GlobalItems {
                     }
                 }
             }
-            foreach (ItemHoldoutChange itemHoldoutChange in TerraTemp.itemHoldoutChanges) {
+            foreach (ItemHoldoutChange itemHoldoutChange in ContentListSystem.itemHoldoutChanges) {
                 if (itemHoldoutChange.AppliedItemIDs.Contains(item.type) && !item.social && itemHoldoutChange.AdditionalTooltip != null) {
                     TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", itemHoldoutChange.AdditionalTooltip);
 
@@ -92,7 +93,7 @@ namespace TerraTemp.Common.GlobalItems {
         #region Additional Set Bonus Effects
 
         public override string IsArmorSet(Item head, Item body, Item legs) {
-            foreach (SetBonusChange change in TerraTemp.setBonusChanges) {
+            foreach (SetBonusChange change in ContentListSystem.setBonusChanges) {
                 if (change.HelmetPieceID.Contains(head.type) && change.ChestPieceID == body.type && (change.LegPieceID == legs.type || (change.LegPieceID == -1 && legs.type == ItemID.None)) /* this check is for the possible armor sets with no leggings */) {
                     if (change.ArmorSetName == null) {
                         throw new ArgumentNullException("ArmorSetName in change named " + change.ToString() + " is null, and cannot be null.");
@@ -104,7 +105,7 @@ namespace TerraTemp.Common.GlobalItems {
         }
 
         public override void UpdateArmorSet(Player player, string set) {
-            foreach (SetBonusChange setBonusChange in TerraTemp.setBonusChanges) {
+            foreach (SetBonusChange setBonusChange in ContentListSystem.setBonusChanges) {
                 if (setBonusChange.ArmorSetName == set) {
                     TempUtilities.ApplyStatChanges(setBonusChange, player);
 
