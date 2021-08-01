@@ -1,9 +1,5 @@
 ﻿using System.ComponentModel;
-using Terraria;
-using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
-using TerraTemp.Common.Systems;
-using TerraTemp.Content.UI;
 
 namespace TerraTemp.Common.Configs {
 

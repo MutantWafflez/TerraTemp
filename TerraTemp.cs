@@ -1,18 +1,13 @@
 using log4net;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.UI;
 using TerraTemp.Common.Systems;
-using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
 using TerraTemp.Custom;
-using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Enums;
 
 namespace TerraTemp {

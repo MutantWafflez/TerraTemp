@@ -1,11 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using Terraria.Audio;
+﻿using System;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.ModLoader;
-using TerraTemp.Content.Items.Accessories;
 using TerraTemp.Custom;
 
 namespace TerraTemp.Common.Players {

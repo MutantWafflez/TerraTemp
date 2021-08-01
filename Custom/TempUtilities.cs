@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.Localization;
-using Terraria.ModLoader;
 using Terraria.Utilities;
 using TerraTemp.Common.Players;
 using TerraTemp.Custom.Attributes;

@@ -1,7 +1,5 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
-using TerraTemp.Content.Changes;
-using TerraTemp.Custom.Structs;
 
 namespace TerraTemp.Common.GlobalNPCs {
 

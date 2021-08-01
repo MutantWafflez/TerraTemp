@@ -1,5 +1,4 @@
 ﻿using Terraria;
-using TerraTemp.Common.Players;
 using TerraTemp.Custom;
 
 namespace TerraTemp.Content.Base.Items {
