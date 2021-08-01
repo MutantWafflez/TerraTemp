@@ -1,5 +1,8 @@
 ﻿using System.ComponentModel;
+using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
+using TerraTemp.Common.Systems;
+using TerraTemp.Content.UI;
 
 namespace TerraTemp.Common.Configs {
 
@@ -17,14 +20,13 @@ namespace TerraTemp.Common.Configs {
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
         public override void OnChanged() {
-            //TODO: Re-implement config functionality
-            /*UISystem uiSystem = ModContent.GetInstance<UISystem>();
+            UISystem uiSystem = ModContent.GetInstance<UISystem>();
 
-            ThermometerState thermometerState = uiSystem.thermometerUI;
+            ThermometerState thermometerState = uiSystem?.thermometerUI;
             if (thermometerState != null) {
                 thermometerState.thermometerFrame.ImageScale = thermometerUISize;
                 thermometerState.thermometerLiquid.ImageScale = thermometerUISize;
-            }*/
+            }
         }
     }
 }
