@@ -1,4 +1,4 @@
-Terraria, now with Temperature!
+Terraria, now with Temperature! Now in 1.4!
 
 Ever wanted to die of Heat Stroke or Hypothermia in Terraria? Now you can! Here is a list of additions & changes for your dying pleasure:
 + Temperature, influenced by the biome you're in, time of day, humidity, wind speed, and many other factors
