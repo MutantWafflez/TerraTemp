@@ -1,5 +1,4 @@
 ﻿using System;
-using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Custom;
 
@@ -23,8 +22,7 @@ namespace TerraTemp.Common.Players {
             TempPlayer temperaturePlayer = Player.GetTempPlayer();
             if (flameRune) {
                 if (temperaturePlayer.currentTemperature > TempPlayer.NormalTemperature) {
-                    //TODO: Re-implement damage increase
-                    //Player.allDamageMult += 0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature);
+                    Player.GetDamage(DamageClass.Generic) += 0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature);
                     Player.moveSpeed *= 1 + (0.02f * (temperaturePlayer.currentTemperature - TempPlayer.NormalTemperature));
                 }
             }

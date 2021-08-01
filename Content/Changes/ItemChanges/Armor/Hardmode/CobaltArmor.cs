@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 using TerraTemp.Common.Players;
 using TerraTemp.Custom;
 
@@ -56,8 +57,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override void AdditionalSetBonusEffect(Player player) {
             TempPlayer tempPlayer = player.GetTempPlayer();
             if (tempPlayer.currentTemperature > tempPlayer.comfortableHigh) {
-                //TODO: Re-implement all damage multiplication
-                //player.allDamageMult += 0.03f * (tempPlayer.currentTemperature - tempPlayer.comfortableHigh);
+                player.GetDamage(DamageClass.Generic) += 0.03f * (tempPlayer.currentTemperature - tempPlayer.comfortableHigh);
             }
         }
     }

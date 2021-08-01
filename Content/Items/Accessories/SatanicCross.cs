@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -22,11 +23,10 @@ namespace TerraTemp.Content.Items.Accessories {
         public override void UpdateAccessory(Player player, bool hideVisual) {
             if (Main.dayTime && player.ZoneOverworldHeight) {
                 if (Main.time <= 27000 /* Noon */) {
-                    //TODO: Reimplement all damage multiplication
-                    //player.allDamageMult += (float)Math.Round(((float)Main.time / 27000f) * 0.20f);
+                    player.GetDamage(DamageClass.Generic) += (float)Math.Round(((float)Main.time / 27000f) * 0.20f);
                 }
                 else {
-                    //player.allDamageMult += (float)Math.Round(((54000f - (float)Main.time) / 27000f) * 0.20f);
+                    player.GetDamage(DamageClass.Generic) += (float)Math.Round(((54000f - (float)Main.time) / 27000f) * 0.20f);
                 }
             }
         }
