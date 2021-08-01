@@ -468,6 +468,12 @@ namespace TerraTemp.Common.Players {
         /// <summary> Method that checks & applies the effects of the player's current Body
         /// Temperature. </summary>
         public void CheckForTemperatureEffects() {
+            //This check is a theoretical fix for the issue in multiplayer where players would see other players die of temperature when the player didn't actually die
+            //If there is ever a de-sync of temperature values between clients, the other player won't fake die
+            if (Player != Main.LocalPlayer) {
+                return;
+            }
+
             //Heat Effects
             if (currentTemperature > comfortableHigh) {
                 //Sweaty Effect
@@ -476,6 +482,7 @@ namespace TerraTemp.Common.Players {
                 if (currentTemperature > comfortableHigh + (criticalRangeMaximum / 2f) && currentTemperature < comfortableHigh + criticalRangeMaximum) {
                     Player.AddBuff(ModContent.BuffType<HeatStroke>(), 5);
                 }
+
                 //Death
                 if (currentTemperature > comfortableHigh + criticalRangeMaximum) {
                     PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(Player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Heat." + Main.rand.Next(0, 20)));
@@ -491,6 +498,7 @@ namespace TerraTemp.Common.Players {
                 if (currentTemperature < comfortableLow - (criticalRangeMaximum / 2f) && currentTemperature > comfortableLow - criticalRangeMaximum) {
                     Player.AddBuff(ModContent.BuffType<Hypothermia>(), 5);
                 }
+
                 //Death
                 if (currentTemperature < comfortableLow - criticalRangeMaximum) {
                     PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(Player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Cold." + Main.rand.Next(0, 20)));
