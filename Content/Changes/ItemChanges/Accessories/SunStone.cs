@@ -7,10 +7,12 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
     public class SunStone : ItemChange {
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
-            ItemID.SunStone
+            ItemID.SunStone,
+            ItemID.CelestialStone,
+            ItemID.CelestialShell
         };
 
-        //public override bool DerivedItemsProvideEffects => true;
+        public override bool DerivedItemsProvideEffects => true;
 
         public override float GetHeatComfortabilityChange(Player player) => 3f;
     }

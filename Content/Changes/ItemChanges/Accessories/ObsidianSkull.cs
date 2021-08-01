@@ -11,9 +11,19 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ObsidianSkull,
+            ItemID.LavaSkull,
+            ItemID.MoltenCharm,
+            ItemID.ObsidianHorseshoe,
+            ItemID.ObsidianShield,
+            ItemID.AnkhShield,
+            ItemID.ObsidianSkullRose,
+            ItemID.MoltenSkullRose,
+            ItemID.ObsidianWaterWalkingBoots,
+            ItemID.LavaWaders,
+            ItemID.TerrasparkBoots
         };
 
-        //public override bool DerivedItemsProvideEffects => true;
+        public override bool DerivedItemsProvideEffects => true;
 
         public override float GetHeatComfortabilityChange(Player player) => 2f;
 

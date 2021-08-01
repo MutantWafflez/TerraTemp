@@ -15,20 +15,23 @@ namespace TerraTemp.Content.Changes {
     public abstract class ItemChange : ITempStatChange, ILoadable {
 
         /// <summary>
-        /// List of Item IDs that this change pertains to. The reason this is a list is for if the
-        /// base item is a material (such as the Lava charm), and its effects are carried over into
-        /// the new accessory (Lava Waders, with the example of the Lava Charm)
+        /// A list of Item IDs attached to its benefactory item ID which has it's change has given
+        /// its effects to because it is crafted from one or more of the items in the AppliedItemIDs
+        /// list somewhere in its potential crafting tree.
+        /// </summary>
+        public HashSet<int> InheritedItemIDs = new HashSet<int>();
+
+        /// <summary>
+        /// List of Item IDs that this change pertains to.
         /// </summary>
         public virtual HashSet<int> AppliedItemIDs => new HashSet<int>();
 
-        //TODO: Re-implement derived item stats
-        /*
         /// <summary>
         /// Whether or not the items that are crafting from this item will retain the effects. For
         /// example, if this is set to true on the Obsidian Skull, all accessories that have the
         /// Obsidian Skull ANYWHERE in the crafting tree will retain the effects of the Obsidian Skull.
         /// </summary>
-        public virtual bool DerivedItemsProvideEffects => false;*/
+        public virtual bool DerivedItemsProvideEffects => false;
 
         /// <summary>
         /// Additional tooltip line(s) to be added to the end of the item's tooltip. Done

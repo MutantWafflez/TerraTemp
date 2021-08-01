@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
@@ -101,6 +102,10 @@ namespace TerraTemp.Common.Systems {
             lootChanges = null;
             adjacencyChanges = null;
             warmNPCTypes = null;
+        }
+
+        public void HandleStatInheritance() {
+            //TODO: Re-implement stat inheritance
         }
 
         public HashSet<int> FillWarmNPCHashSet() {

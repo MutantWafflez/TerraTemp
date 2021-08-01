@@ -7,10 +7,11 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
     public class PhilosopherStone : ItemChange {
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
-            ItemID.PhilosophersStone
+            ItemID.PhilosophersStone,
+            ItemID.CharmofMyths
         };
 
-        //public override bool DerivedItemsProvideEffects => true;
+        public override bool DerivedItemsProvideEffects => true;
 
         public override float GetTemperatureResistanceChange(Player player) => 0.15f;
     }

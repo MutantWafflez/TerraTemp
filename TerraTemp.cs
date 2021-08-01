@@ -69,5 +69,9 @@ namespace TerraTemp {
                     break;
             }
         }
+
+        public override void PostAddRecipes() {
+            ModContent.GetInstance<ContentListSystem>().HandleStatInheritance();
+        }
     }
 }

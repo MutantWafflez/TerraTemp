@@ -19,8 +19,7 @@ namespace TerraTemp.Common.GlobalItems {
         //Vanilla Accessories/Armor, when equipped, give additional changes here
         public override void UpdateEquip(Item item, Player player) {
             foreach (ItemChange itemChange in ContentListSystem.itemChanges) {
-                if (itemChange.AppliedItemIDs.Contains(item.type) &&
-                    !player.GetTempPlayer().equippedItemChanges.Contains(itemChange)) {
+                if ((itemChange.AppliedItemIDs.Contains(item.type) || itemChange.InheritedItemIDs.Contains(item.type)) && !player.GetTempPlayer().equippedItemChanges.Contains(itemChange)) {
                     TempPlayer temperaturePlayer = player.GetTempPlayer();
                     temperaturePlayer.equippedItemChanges.Add(itemChange);
 
@@ -33,22 +32,24 @@ namespace TerraTemp.Common.GlobalItems {
 
         //Tooltip updating dealt here:
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
-            foreach (ItemChange change in ContentListSystem.itemChanges) {
-                if (change.AppliedItemIDs.Contains(item.type) && !item.social && change.AdditionalTooltip != null) {
-                    TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", change.AdditionalTooltip);
+            foreach (ItemChange itemChange in ContentListSystem.itemChanges) {
+                bool isWithinInheritedList = itemChange.InheritedItemIDs.Contains(item.type);
+                if ((itemChange.AppliedItemIDs.Contains(item.type) || isWithinInheritedList) && !item.social && itemChange.AdditionalTooltip != null) {
+                    TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", itemChange.AdditionalTooltip);
 
                     //These checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
                     TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Tooltip0");
                     TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Defense");
                     TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name is "Price" or "SpecialPrice"));
 
-                    if (defenseLine != null) {
+                    //All these checks force the inherited lines to go to the bottom, regardless of the item's tooltip
+                    if (defenseLine != null && !isWithinInheritedList) {
                         tooltips.Insert(tooltips.IndexOf(defenseLine) + 1, newLine);
                     }
-                    else if (toolTipZero != null) {
+                    else if (toolTipZero != null && !isWithinInheritedList) {
                         tooltips.Insert(tooltips.IndexOf(toolTipZero) + 1, newLine);
                     }
-                    else if (sellLine != null) {
+                    else if (sellLine != null && !isWithinInheritedList) {
                         tooltips.Insert(tooltips.IndexOf(sellLine), newLine);
                     }
                     else {
@@ -56,6 +57,7 @@ namespace TerraTemp.Common.GlobalItems {
                     }
                 }
             }
+
             foreach (ItemHoldoutChange itemHoldoutChange in ContentListSystem.itemHoldoutChanges) {
                 if (itemHoldoutChange.AppliedItemIDs.Contains(item.type) && !item.social && itemHoldoutChange.AdditionalTooltip != null) {
                     TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", itemHoldoutChange.AdditionalTooltip);

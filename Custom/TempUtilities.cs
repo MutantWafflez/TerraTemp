@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Microsoft.VisualBasic.FileIO;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
+using Terraria.ModLoader;
 using Terraria.Utilities;
 using TerraTemp.Common.Players;
 using TerraTemp.Custom.Attributes;
@@ -434,7 +437,7 @@ namespace TerraTemp.Custom {
                 array[i] = array[i + 1];
             }
 
-            array[array.Length - 1] = default;
+            array[^1] = default;
         }
 
         #endregion
@@ -463,14 +466,6 @@ namespace TerraTemp.Custom {
         #endregion
 
         #region Miscellaneous Methods
-
-        /// <summary>
-        /// Returns a List of Types that aren't abstract that extend the class T.
-        /// </summary>
-        /// <typeparam name="T"> The Class to get the children of. </typeparam>
-        public static List<Type> GetAllChildrenOfClass<T>() {
-            return Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(T)) && !type.IsAbstract && type.GetCustomAttribute<IgnoredSubclassAttribute>() == null).ToList();
-        }
 
         /// <summary>
         /// A more advanced Contains() method for lists that will check whether or not a given list
