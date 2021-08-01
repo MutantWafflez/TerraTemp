@@ -9,6 +9,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
             ItemID.ObsidianRose
         };
 
-        public override bool DerivedItemsProvideEffects => true;
+        //public override bool DerivedItemsProvideEffects => true;
     }
 }

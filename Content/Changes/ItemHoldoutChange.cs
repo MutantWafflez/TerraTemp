@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Changes {
 
-    public abstract class ItemHoldoutChange : ITempStatChange {
+    public abstract class ItemHoldoutChange : ITempStatChange, ILoadable {
 
         /// <summary>
         /// List of Item IDs that this holdout change pertains to.
@@ -75,5 +78,11 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         /// <param name="player"> Player that has this item equipped. </param>
         public virtual void AdditionalItemHoldoutEffect(Player player) { }
+
+        public void Load(Mod mod) {
+            ContentListSystem.itemHoldoutChanges.Add((ItemHoldoutChange)Activator.CreateInstance(GetType()));
+        }
+
+        public void Unload() { }
     }
 }

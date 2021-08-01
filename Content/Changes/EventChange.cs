@@ -1,4 +1,7 @@
-﻿using Terraria;
+﻿using System;
+using Terraria;
+using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Changes {
@@ -7,7 +10,7 @@ namespace TerraTemp.Content.Changes {
     /// Abstract class that can inherited and its fields overriden to change temperature related
     /// values during a given game event.
     /// </summary>
-    public abstract class EventChange : ITempStatChange {
+    public abstract class EventChange : ITempStatChange, ILoadable {
 
         /// <summary>
         /// The boolean in Main that handles whether this even is taking place. For example, for
@@ -65,5 +68,11 @@ namespace TerraTemp.Content.Changes {
         /// <param name="player"> Player instance to be checked. </param>
         /// <returns> Returns whether or not to apply the event effects. </returns>
         public virtual bool ApplyEventEffects(Player player) => true;
+
+        public void Load(Mod mod) {
+            ContentListSystem.eventChanges.Add((EventChange)Activator.CreateInstance(GetType()));
+        }
+
+        public void Unload() { }
     }
 }

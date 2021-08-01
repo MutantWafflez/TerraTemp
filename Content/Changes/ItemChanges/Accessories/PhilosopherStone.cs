@@ -10,7 +10,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
             ItemID.PhilosophersStone
         };
 
-        public override bool DerivedItemsProvideEffects => true;
+        //public override bool DerivedItemsProvideEffects => true;
 
         public override float GetTemperatureResistanceChange(Player player) => 0.15f;
     }

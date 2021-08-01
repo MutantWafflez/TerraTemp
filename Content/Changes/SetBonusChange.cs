@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Localization;
+using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
 
@@ -9,7 +12,7 @@ namespace TerraTemp.Content.Changes {
     /// <summary>
     /// Abstract class that can be inherited and its fields overriden to add to ANY Armor Set bonus.
     /// </summary>
-    public abstract class SetBonusChange : ITempStatChange {
+    public abstract class SetBonusChange : ITempStatChange, ILoadable {
 
         /// <summary>
         /// The ID of the helmet piece(s) item of the armor set. Is a list for armor sets that have
@@ -105,5 +108,11 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         /// <param name="player"> </param>
         public virtual void AdditionalSetBonusEffect(Player player) { }
+
+        public void Load(Mod mod) {
+            ContentListSystem.setBonusChanges.Add((SetBonusChange)Activator.CreateInstance(GetType()));
+        }
+
+        public void Unload() { }
     }
 }

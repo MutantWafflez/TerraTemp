@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
 
@@ -9,7 +12,7 @@ namespace TerraTemp.Content.Changes {
     /// Abstract class that can be inherited and its fields overriden for any potential change to
     /// ANY given item.
     /// </summary>
-    public abstract class ItemChange : ITempStatChange {
+    public abstract class ItemChange : ITempStatChange, ILoadable {
 
         /// <summary>
         /// List of Item IDs that this change pertains to. The reason this is a list is for if the
@@ -18,12 +21,14 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         public virtual HashSet<int> AppliedItemIDs => new HashSet<int>();
 
+        //TODO: Re-implement derived item stats
+        /*
         /// <summary>
         /// Whether or not the items that are crafting from this item will retain the effects. For
         /// example, if this is set to true on the Obsidian Skull, all accessories that have the
         /// Obsidian Skull ANYWHERE in the crafting tree will retain the effects of the Obsidian Skull.
         /// </summary>
-        public virtual bool DerivedItemsProvideEffects => false;
+        public virtual bool DerivedItemsProvideEffects => false;*/
 
         /// <summary>
         /// Additional tooltip line(s) to be added to the end of the item's tooltip. Done
@@ -87,5 +92,11 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         /// <param name="player"> Player that has this item equipped. </param>
         public virtual void AdditionalItemEquipEffect(Player player) { }
+
+        public void Load(Mod mod) {
+            ContentListSystem.itemChanges.Add((ItemChange)Activator.CreateInstance(GetType()));
+        }
+
+        public void Unload() { }
     }
 }

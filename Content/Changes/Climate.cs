@@ -1,4 +1,7 @@
-﻿using Terraria;
+﻿using System;
+using Terraria;
+using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Changes {
@@ -6,7 +9,7 @@ namespace TerraTemp.Content.Changes {
     /// <summary>
     /// Class that is instantiated for each biome in the game that affects temperature
     /// </summary>
-    public abstract class Climate : ITempStatChange {
+    public abstract class Climate : ITempStatChange, ILoadable {
 
         /// <summary>
         /// The typical temperature of the water in this biome. Defaults to reducing temperature by
@@ -60,5 +63,11 @@ namespace TerraTemp.Content.Changes {
         /// Zone bool that relates to this biome.
         /// </summary>
         public virtual bool PlayerZoneBool(Player player) => false;
+
+        public void Load(Mod mod) {
+            ContentListSystem.climates.Add((Climate)Activator.CreateInstance(GetType()));
+        }
+
+        public void Unload() { }
     }
 }

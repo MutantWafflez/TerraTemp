@@ -1,4 +1,7 @@
-﻿using Terraria;
+﻿using System;
+using Terraria;
+using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Changes {
@@ -7,7 +10,7 @@ namespace TerraTemp.Content.Changes {
     /// Class that is instantiated for each evil biome (including the Hallow) that affects
     /// temperature. Exists so the evil biomes can affect temperature on top of the normal biome effects.
     /// </summary>
-    public abstract class EvilClimate : ITempStatChange {
+    public abstract class EvilClimate : ITempStatChange, ILoadable {
 
         /// <summary>
         /// The typical temperature of the water in this evil biome. Defaults to reducing
@@ -61,5 +64,11 @@ namespace TerraTemp.Content.Changes {
         /// Zone bool that relates to this evil biome.
         /// </summary>
         public virtual bool EvilZoneBool(Player player) => false;
+
+        public void Load(Mod mod) {
+            ContentListSystem.evilClimates.Add((EvilClimate)Activator.CreateInstance(GetType()));
+        }
+
+        public void Unload() { }
     }
 }

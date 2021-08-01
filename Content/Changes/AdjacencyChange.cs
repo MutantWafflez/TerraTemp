@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Content.Changes {
@@ -7,7 +10,7 @@ namespace TerraTemp.Content.Changes {
     /// <summary>
     /// Class that handles if something will change based on a given players adjacency to any given tile.
     /// </summary>
-    public abstract class AdjacencyChange : ITempStatChange {
+    public abstract class AdjacencyChange : ITempStatChange, ILoadable {
 
         /// <summary>
         /// The ID(s) of the tile(s) that will have the changes applied when the player is adjacent
@@ -69,5 +72,11 @@ namespace TerraTemp.Content.Changes {
             }
             return false;
         }
+
+        public void Load(Mod mod) {
+            ContentListSystem.adjacencyChanges.Add((AdjacencyChange)Activator.CreateInstance(GetType()));
+        }
+
+        public void Unload() { }
     }
 }

@@ -10,7 +10,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
             ItemID.SunStone
         };
 
-        public override bool DerivedItemsProvideEffects => true;
+        //public override bool DerivedItemsProvideEffects => true;
 
         public override float GetHeatComfortabilityChange(Player player) => 3f;
     }

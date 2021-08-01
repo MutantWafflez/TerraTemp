@@ -1,4 +1,7 @@
-﻿using Terraria;
+﻿using System;
+using Terraria;
+using Terraria.ModLoader;
+using TerraTemp.Common.Systems;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
 
@@ -8,7 +11,7 @@ namespace TerraTemp.Content.Changes {
     /// Abstract class that can be inherited and its fields overriden to give temperature related
     /// changes to any pre-existing buffs.
     /// </summary>
-    public abstract class BuffChange : ITempStatChange {
+    public abstract class BuffChange : ITempStatChange, ILoadable {
 
         /// <summary>
         /// ID of the buff being changed.
@@ -62,5 +65,11 @@ namespace TerraTemp.Content.Changes {
         /// protection, essentially).
         /// </summary>
         public virtual float GetSunExtremityChange(Player player) => 0f;
+
+        public void Load(Mod mod) {
+            ContentListSystem.buffChanges.Add((BuffChange)Activator.CreateInstance(GetType()));
+        }
+
+        public void Unload() { }
     }
 }
