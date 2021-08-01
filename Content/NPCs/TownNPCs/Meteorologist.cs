@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -36,6 +37,13 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             Main.npcFrameCount[NPC.type] = 21;
             NPCID.Sets.DangerDetectRange[NPC.type] = 700;
             NPCID.Sets.HatOffsetY[NPC.type] = 4;
+
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0) {
+                Velocity = 1f,
+                Direction = 1
+            };
+
+            NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
         }
 
         public override void SetDefaults() {
@@ -51,6 +59,18 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.knockBackResist = 0.5f;
             AnimationType = NPCID.Guide;
+        }
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+            // We can use AddRange instead of calling Add multiple times in order to add multiple
+            // items at once
+            bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Events.Rain,
+
+                new FlavorTextBestiaryInfoElement("Mods.TerraTemp.BestiaryInfo.Meteorologist")
+            });
         }
 
         public override bool CanTownNPCSpawn(int numTownNPCs, int money) => (NPC.downedSlimeKing && Main.raining) || NPC.downedBoss2;

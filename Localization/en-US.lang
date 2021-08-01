@@ -143,6 +143,8 @@ BuffDescription.Hypothermia=Feeling numb, the end feels near
 NPCName.Meteorologist=Meteorologist
 NPCButton2.Meteorologist=Forecast
 
+BestiaryInfo.Meteorologist=Your local meteorologist, hailing from rainy lands where the mountains get snow and the jungles gets monsoons.
+
 #Unique Item Change Tooltips
 GlobalItemChange.ObsidianSkull=50% decreased heat of the Underworld
 GlobalItemChange.ObsidianRose=Negates the temperature increase of touching and being near lava
