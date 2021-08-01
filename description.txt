@@ -1,12 +1,15 @@
-Terraria, now with Temperature! Now in 1.4!
+Terraria 1.4, now with Temperature!
 
 Ever wanted to die of Heat Stroke or Hypothermia in Terraria? Now you can! Here is a list of additions & changes for your dying pleasure:
+
 + Temperature, influenced by the biome you're in, time of day, humidity, wind speed, and many other factors
-+ New "Thermometer" item that displays several different temperature related statistics (Hint: Might want to make one of these as soon as possible)
++ New "Thermometer" UI that displays temperature statistics
 + Entirely new accessories that can twist the temperature toward your advantage
 * Every armor set & many accesories grant effects to combat the elements
 * Many buff and debuff changes that now affect temperature
 
 If you'd like to contribute to the mod or give suggestions, check out the forum homepage; from there you can see the GitHub repository as well as a link to join the mod discord, if you'd like to join it.
+
+Note: If you notice that upon generating a new world that there is no wind, that's not a bug, that is intentional to make sure you can survive your first few days more easily!
 
 Happy Freezing and/or Burning!

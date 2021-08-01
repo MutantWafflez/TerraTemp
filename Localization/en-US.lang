@@ -91,9 +91,6 @@ ItemTooltip.FrostRune=2% increased defense and damage reduction for each degree 
 ItemName.HeterostaticRune=Heterostatic Rune
 ItemTooltip.HeterostaticRune=2% increased damage and movement speed for each degree above normal body temperature\n2% increased defense and damage reduction for each degree below normal body temperature
 
-ItemName.VolatileThermometer=Volatile Thermometer
-ItemTooltip.VolatileThermometer=Releases a large explosion from either extreme heat or cold upon death
-
 ItemName.RiskBadge=Risk Badge
 ItemTooltip.RiskBadge=Forcibly sets your temperature change resistance to -100%\n30% increased climate temperatures\n25% increased damage reduction
 
@@ -106,7 +103,7 @@ ItemTooltip.BarbFish='A bright, tropical fish that likes to spend its time on th
 
 #TerraTemp Miscellaneous Items/Tooltips
 ItemName.Thermometer=Thermometer
-ItemTooltip.Thermometer=Displays several temperature related statistics while in your inventory or piggy bank
+ItemTooltip.Thermometer=While in your inventory or piggy bank, hovering over the Thermometer UI will display more information
 
 #TerraTemp Potion Items/Tooltips
 ItemName.CoolingPotion=Cooling Potion

@@ -48,11 +48,6 @@ namespace TerraTemp.Content.UI {
         }
 
         protected override void DrawChildren(SpriteBatch spriteBatch) {
-            //Don't draw without the Thermometer Item within the inventory/piggy bank
-            if (Main.LocalPlayer.inventory.All(item => item.type != ModContent.ItemType<Thermometer>()) && Main.LocalPlayer.bank.item.All(item => item.type != ModContent.ItemType<Thermometer>())) {
-                return;
-            }
-
             base.DrawChildren(spriteBatch);
 
             TempPlayer temperaturePlayer = Main.LocalPlayer.GetTempPlayer();
@@ -65,14 +60,6 @@ namespace TerraTemp.Content.UI {
             //Update temperature reading
             temperatureReading.SetText((float)Math.Round(temperaturePlayer.currentTemperature) + "\u00B0C");
 
-            //Check for hovering to display text additional info
-            if (draggableElement.ContainsPoint(Main.MouseScreen) && !draggableElement.isDragging) {
-                Main.instance.MouseText("Feels Like: " + Math.Round(temperaturePlayer.modifiedDesiredTemperature) + "\u00B0C (" + TempUtilities.CelsiusToFahrenheit(temperaturePlayer.modifiedDesiredTemperature, true) + "\u00B0F)"
-                    + "\nRelative Humidity: " + Math.Round(temperaturePlayer.relativeHumidity * 100f) + "% "
-                    + "\nTemperature Change Resistance: " + Math.Round(temperaturePlayer.temperatureChangeResist * 100f) + "%"
-                    + "\nComfortable Range: " + Math.Round(temperaturePlayer.comfortableLow) + "\u00B0C - " + Math.Round(temperaturePlayer.comfortableHigh) + "\u00B0C");
-            }
-
             float totalDifference = Math.Abs(temperaturePlayer.comfortableLow - temperaturePlayer.criticalRangeMaximum) + (temperaturePlayer.comfortableHigh + temperaturePlayer.criticalRangeMaximum);
 
             //Update color of Liquid based off of current temperature
@@ -81,7 +68,24 @@ namespace TerraTemp.Content.UI {
                 0f, //G
                 (temperaturePlayer.comfortableHigh + temperaturePlayer.criticalRangeMaximum - temperaturePlayer.currentTemperature) / totalDifference, //B
                 1f  //A
-                );
+            );
+
+            //Only show additional information if the player has the thermometer item
+            bool hasThermometerItem = Main.LocalPlayer.inventory.Any(item => item.type == ModContent.ItemType<Thermometer>()) || Main.LocalPlayer.bank.item.Any(item => item.type == ModContent.ItemType<Thermometer>());
+
+            //Check for hovering to display text additional info
+            if (draggableElement.ContainsPoint(Main.MouseScreen) && !draggableElement.isDragging) {
+                if (hasThermometerItem) {
+                    Main.instance.MouseText("Feels Like: " + Math.Round(temperaturePlayer.modifiedDesiredTemperature) + "\u00B0C (" + TempUtilities.CelsiusToFahrenheit(temperaturePlayer.modifiedDesiredTemperature, true) + "\u00B0F)"
+                        + "\nRelative Humidity: " + Math.Round(temperaturePlayer.relativeHumidity * 100f) + "% "
+                        + "\nTemperature Change Resistance: " + Math.Round(temperaturePlayer.temperatureChangeResist * 100f) + "%"
+                        + "\nComfortable Range: " + Math.Round(temperaturePlayer.comfortableLow) + "\u00B0C - " + Math.Round(temperaturePlayer.comfortableHigh) + "\u00B0C");
+                }
+                else {
+                    Main.instance.MouseText("Craft a Thermometer for additional temperature statistics!"
+                    + "\nTo craft one, you need a water bucket, iron, and glass!");
+                }
+            }
         }
     }
 }
