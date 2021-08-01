@@ -39,8 +39,7 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             NPCID.Sets.HatOffsetY[NPC.type] = 4;
 
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0) {
-                Velocity = 1f,
-                Direction = 1
+                Velocity = 1f
             };
 
             NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
@@ -62,8 +61,6 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
         }
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-            // We can use AddRange instead of calling Add multiple times in order to add multiple
-            // items at once
             bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 
