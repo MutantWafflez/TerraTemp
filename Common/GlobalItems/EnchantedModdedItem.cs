@@ -38,20 +38,20 @@ namespace TerraTemp.Common.GlobalItems {
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             if (flameEnchantmentLevel != 0) {
-                tooltips.Add(new TooltipLine(mod, "FlameEnchantTip", TempUtilities.GetTerraTempTextValue("MiscKeys.FlameEnchantment") + " " + flameEnchantmentLevel) {
+                tooltips.Add(new TooltipLine(Mod, "FlameEnchantTip", TempUtilities.GetTerraTempTextValue("MiscKeys.FlameEnchantment") + " " + flameEnchantmentLevel) {
                     overrideColor = Color.Orange
                 });
             }
 
             if (frostEnchantmentLevel != 0) {
-                tooltips.Add(new TooltipLine(mod, "FrostEnchantTip", TempUtilities.GetTerraTempTextValue("MiscKeys.FrostEnchantment") + " " + frostEnchantmentLevel) {
+                tooltips.Add(new TooltipLine(Mod, "FrostEnchantTip", TempUtilities.GetTerraTempTextValue("MiscKeys.FrostEnchantment") + " " + frostEnchantmentLevel) {
                     overrideColor = Color.Cyan
                 });
             }
         }
 
         public override bool NeedsSaving(Item item) {
-            return item.modItem != null && (item.wornArmor || item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1);
+            return item.ModItem != null && (item.wornArmor || item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1);
         }
 
         public override TagCompound Save(Item item) {

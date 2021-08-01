@@ -3,6 +3,7 @@ using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using TerraTemp.Common.Systems;
 using TerraTemp.Content.Items.Tiles.Furniture;
 using TerraTemp.Content.Items.Tomes;
 
@@ -10,7 +11,7 @@ namespace TerraTemp.Content.Tiles.Furniture {
 
     public class EnchantedBookshelfTile : ModTile {
 
-        public override void SetDefaults() {
+        public override void SetStaticDefaults() {
             Main.tileFrameImportant[Type] = true;
             Main.tileWaterDeath[Type] = true;
             Main.tileLavaDeath[Type] = true;
@@ -23,8 +24,8 @@ namespace TerraTemp.Content.Tiles.Furniture {
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x4);
             TileObjectData.addTile(Type);
 
-            minPick = 0;
-            mineResist = 1.1f;
+            MinPick = 0;
+            MineResist = 1.1f;
 
             AddMapEntry(new Color(255, 255, 0));
         }
@@ -33,9 +34,11 @@ namespace TerraTemp.Content.Tiles.Furniture {
             Item.NewItem(new Vector2(i * 16, j * 16), ModContent.ItemType<EnchantedBookshelf>());
         }
 
-        public override bool NewRightClick(int i, int j) {
-            if (TerraTemp.Instance.enchantedBookshelfInterface.CurrentState != TerraTemp.Instance.enchantedBookshelfUI) {
-                TerraTemp.Instance.enchantedBookshelfInterface.SetState(TerraTemp.Instance.enchantedBookshelfUI);
+        public override bool RightClick(int i, int j) {
+            UISystem uiSystem = ModContent.GetInstance<UISystem>();
+
+            if (uiSystem.enchantedBookshelfInterface.CurrentState != uiSystem.enchantedBookshelfUI) {
+                uiSystem.enchantedBookshelfInterface.SetState(uiSystem.enchantedBookshelfUI);
                 return true;
             }
 
@@ -47,8 +50,9 @@ namespace TerraTemp.Content.Tiles.Furniture {
 
             bool hasATome = player.inventory.Any(item => item.type == ModContent.ItemType<FlameTome>() || item.type == ModContent.ItemType<FrostTome>());
 
-            player.showItemIcon2 = player.inventory.Any(item => item.type == ModContent.ItemType<FlameTome>()) ? ModContent.ItemType<FlameTome>() : player.inventory.Any(item => item.type == ModContent.ItemType<FrostTome>()) ? ModContent.ItemType<FrostTome>() : 0;
-            player.showItemIcon = hasATome;
+            player.cursorItemIconID = player.inventory.Any(item => item.type == ModContent.ItemType<FlameTome>()) ? ModContent.ItemType<FlameTome>() : player.inventory.Any(item => item.type == ModContent.ItemType<FrostTome>()) ? ModContent.ItemType<FrostTome>() : 0;
+            player.cursorItemIconEnabled = hasATome;
+
             player.noThrow = 2;
         }
     }

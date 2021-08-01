@@ -3,13 +3,12 @@ using Terraria.ModLoader;
 
 namespace TerraTemp.Content.Buffs.TempEffects {
 
-    //TODO: Add custom shivering buff sprite
     public class Shivering : ModBuff {
 
-        public override void SetDefaults() {
+        public override void SetStaticDefaults() {
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
-            canBeCleared = false;
+            CanBeCleared = false;
         }
 
         public override void Update(Player player, ref int buffIndex) {

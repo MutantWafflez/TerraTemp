@@ -34,7 +34,7 @@ namespace TerraTemp.Common.GlobalItems {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             if (!item.social && item.prefix > 0 && appliedAccessoryPrefix != null) {
                 for (int i = 0; i < appliedAccessoryPrefix.PrefixTooltips.Count; i++) {
-                    tooltips.Add(new TooltipLine(mod, "TemperaturePrefix" + i, appliedAccessoryPrefix.PrefixTooltips[i].value) {
+                    tooltips.Add(new TooltipLine(Mod, "TemperaturePrefix" + i, appliedAccessoryPrefix.PrefixTooltips[i].value) {
                         overrideColor = appliedAccessoryPrefix.PrefixTooltips[i].stringColor
                     });
                 }

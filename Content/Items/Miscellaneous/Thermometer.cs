@@ -7,21 +7,20 @@ namespace TerraTemp.Content.Items.Miscellaneous {
     public class Thermometer : ModItem {
 
         public override void SetDefaults() {
-            item.rare = ItemRarityID.Blue;
-            item.value = Item.sellPrice(silver: 1);
-            item.width = 32;
-            item.height = 32;
-            item.accessory = false;
+            Item.rare = ItemRarityID.Blue;
+            Item.value = Item.sellPrice(silver: 1);
+            Item.width = 32;
+            Item.height = 32;
+            Item.accessory = false;
         }
 
         public override void AddRecipes() {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.Glass, 3);
-            recipe.AddIngredient(ItemID.WaterBucket, 1);
-            recipe.AddRecipeGroup("IronBar", 2);
-            recipe.AddTile(TileID.Anvils);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            CreateRecipe()
+                .AddIngredient(ItemID.Glass, 3)
+                .AddIngredient(ItemID.WaterBucket)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 2)
+                .AddTile(TileID.Anvils)
+                .Register();
         }
     }
 }

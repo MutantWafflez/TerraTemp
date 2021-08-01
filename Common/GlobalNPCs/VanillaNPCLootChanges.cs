@@ -10,8 +10,9 @@ namespace TerraTemp.Common.GlobalNPCs {
     /// </summary>
     public class VanillaNPCLootChanges : GlobalNPC {
 
-        public override void NPCLoot(NPC npc) {
-            foreach (NPCLootChange lootChange in TerraTemp.lootChanges) {
+        //TODO: Reimplement properly
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
+            /*foreach (NPCLootChange lootChange in TerraTemp.lootChanges) {
                 if (npc.type == lootChange.AppliedNPCID) {
                     foreach (ItemDrop drop in lootChange.ItemsToDrop) {
                         //Game Menu check is for mods such as Recipe Browser that call NPCLoot() when building the Loot Cache
@@ -23,7 +24,7 @@ namespace TerraTemp.Common.GlobalNPCs {
                         }
                     }
                 }
-            }
+            }*/
         }
     }
 }

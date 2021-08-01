@@ -13,7 +13,7 @@ namespace TerraTemp.Content.Changes.NPCLootChanges {
 
         public override List<ItemDrop> ItemsToDrop => new List<ItemDrop>() {
             new ItemDrop(ModContent.ItemType<FrostTome>(), new Tuple<int, int>(1, 1), () => Main.rand.Next(0, 9) == 0, delegate(int itemIndex) {
-                ((FrostTome)Main.item[itemIndex].modItem).tomeLevel = 2;
+                ((FrostTome)Main.item[itemIndex].ModItem).tomeLevel = 2;
             })
         };
     }

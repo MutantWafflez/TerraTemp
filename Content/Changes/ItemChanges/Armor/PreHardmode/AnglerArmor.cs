@@ -44,7 +44,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
         public override int LegPieceID => ItemID.AnglerPants;
 
         public override void AdditionalSetBonusEffect(Player player) {
-            player.GetTempPlayer().temperatureChangeResist += ((float)player.FishingLevel() / 100f) * 0.34f;
+            player.GetTempPlayer().temperatureChangeResist += (player.fishingSkill / 100f) * 0.34f;
         }
     }
 }

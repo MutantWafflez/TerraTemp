@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using TerraTemp.Common.Systems;
 using TerraTemp.Content.Items.Accessories;
 using TerraTemp.Content.Items.Miscellaneous;
 using TerraTemp.Content.Items.Potions;
@@ -32,24 +33,24 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
         #region Defaults Related
 
         public override void SetStaticDefaults() {
-            Main.npcFrameCount[npc.type] = 21;
-            NPCID.Sets.DangerDetectRange[npc.type] = 700;
-            NPCID.Sets.HatOffsetY[npc.type] = 4;
+            Main.npcFrameCount[NPC.type] = 21;
+            NPCID.Sets.DangerDetectRange[NPC.type] = 700;
+            NPCID.Sets.HatOffsetY[NPC.type] = 4;
         }
 
         public override void SetDefaults() {
-            npc.townNPC = true;
-            npc.friendly = true;
-            npc.width = 20;
-            npc.height = 50;
-            npc.aiStyle = 7;
-            npc.damage = 10;
-            npc.defense = 15;
-            npc.lifeMax = 250;
-            npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = SoundID.NPCDeath1;
-            npc.knockBackResist = 0.5f;
-            animationType = NPCID.Guide;
+            NPC.townNPC = true;
+            NPC.friendly = true;
+            NPC.width = 20;
+            NPC.height = 50;
+            NPC.aiStyle = 7;
+            NPC.damage = 10;
+            NPC.defense = 15;
+            NPC.lifeMax = 250;
+            NPC.HitSound = SoundID.NPCHit1;
+            NPC.DeathSound = SoundID.NPCDeath1;
+            NPC.knockBackResist = 0.5f;
+            AnimationType = NPCID.Guide;
         }
 
         public override bool CanTownNPCSpawn(int numTownNPCs, int money) => (NPC.downedSlimeKing && Main.raining) || NPC.downedBoss2;
@@ -91,9 +92,11 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
                 shop = true;
             }
             else {
+                UISystem uiSystem = ModContent.GetInstance<UISystem>();
+
                 //Open forecast UI
                 Main.npcChatText = "";
-                TerraTemp.Instance.forecastInterface.SetState(TerraTemp.Instance.forecastUI);
+                uiSystem.forecastInterface.SetState(uiSystem.forecastUI);
             }
         }
 
@@ -129,7 +132,7 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             listOfPossibleChats.ConditionallyAdd("I forecast many corpses within the coming hours, whether they be your or the monsters'.", Main.eclipse, 2);
             listOfPossibleChats.ConditionallyAdd("You happen to have any white paper anywhere? I may need it in case you die.", Main.eclipse, 2);
             //High wind
-            bool isHighWind = Math.Abs(Main.windSpeed * 100f) >= 30f;
+            bool isHighWind = Math.Abs(Main.windPhysicsStrength * 100f) >= 30f;
             listOfPossibleChats.ConditionallyAdd("When I was younger, I was always curious as why wind was caused by the sun. It's one of the many questions I had that led me to my current profession.", isHighWind, 2);
             listOfPossibleChats.ConditionallyAdd("I wouldn't suggest going anywhere near the Tundra right now. That place is a real killer with high winds like this if you're not ready!", isHighWind, 2);
             //Pumpkin Moon

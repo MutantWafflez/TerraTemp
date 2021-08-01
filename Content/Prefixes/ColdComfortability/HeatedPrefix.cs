@@ -4,7 +4,7 @@ namespace TerraTemp.Content.Prefixes.ColdComfortability {
 
     public class HeatedPrefix : TemperatureAccessoryPrefix {
 
-        public override void SetDefaults() {
+        public override void SetStaticDefaults() {
             DisplayName.SetDefault("Heated");
         }
 

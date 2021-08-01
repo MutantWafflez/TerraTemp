@@ -7,6 +7,6 @@ namespace TerraTemp.Content.Changes.EvilClimates {
 
         public override float GetTemperatureResistanceChange(Player player) => 0.1f;
 
-        public override bool EvilZoneBool(Player player) => player.ZoneHoly;
+        public override bool EvilZoneBool(Player player) => player.ZoneHallow;
     }
 }

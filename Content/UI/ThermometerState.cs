@@ -23,7 +23,7 @@ namespace TerraTemp.Content.UI {
         public ColorableUIImage thermometerLiquid;
 
         public override void OnInitialize() {
-            thermometerFrame = new UIImage(ModContent.GetTexture(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerFrame")) {
+            thermometerFrame = new UIImage(ModContent.Request<Texture2D>(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerFrame")) {
                 ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize
             };
 
@@ -34,7 +34,7 @@ namespace TerraTemp.Content.UI {
             draggableElement.Top.Set(GetDimensions().Height - thermometerFrame.Height.Pixels, 0f);
             draggableElement.Append(thermometerFrame);
 
-            thermometerLiquid = new ColorableUIImage(ModContent.GetTexture(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerLiquid")) {
+            thermometerLiquid = new ColorableUIImage(ModContent.Request<Texture2D>(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerLiquid")) {
                 ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize
             };
             draggableElement.Append(thermometerLiquid);

@@ -11,11 +11,11 @@ namespace TerraTemp.Content.Items.Accessories {
         public override float GetHeatComfortabilityChange(Player player) => -3f;
 
         public override void SetDefaults() {
-            item.accessory = true;
-            item.width = 32;
-            item.height = 32;
-            item.value = Item.sellPrice(gold: 2);
-            item.rare = ItemRarityID.LightRed;
+            Item.accessory = true;
+            Item.width = 32;
+            Item.height = 32;
+            Item.value = Item.sellPrice(gold: 2);
+            Item.rare = ItemRarityID.LightRed;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual) {
@@ -23,13 +23,12 @@ namespace TerraTemp.Content.Items.Accessories {
         }
 
         public override void AddRecipes() {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.FrostCore);
-            recipe.AddIngredient(ItemID.StoneBlock, 20);
-            recipe.AddIngredient(ItemID.Shiverthorn, 3);
-            recipe.AddTile(TileID.Bookcases);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            CreateRecipe()
+                .AddIngredient(ItemID.FrostCore)
+                .AddIngredient(ItemID.StoneBlock, 20)
+                .AddIngredient(ItemID.Shiverthorn, 3)
+                .AddTile(TileID.Bookcases)
+                .Register();
         }
     }
 }

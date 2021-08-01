@@ -8,10 +8,10 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
+using TerraTemp.Common.Systems;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
 using TerraTemp.Content.ModChanges;
-using TerraTemp.Content.UI;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Attributes;
 using TerraTemp.Custom.Classes.ReflectionMod;
@@ -115,33 +115,6 @@ namespace TerraTemp {
         public static List<ModClimate> modClimates;
 
         #endregion
-
-        #region UI Fields
-
-        internal GameTime lastGameTime;
-
-        internal ThermometerState thermometerUI;
-        internal UserInterface thermometerInterface;
-
-        internal ForecastState forecastUI;
-        internal UserInterface forecastInterface;
-
-        internal EnchantedBookshelfState enchantedBookshelfUI;
-        internal UserInterface enchantedBookshelfInterface;
-
-        #endregion
-
-        /// <summary>
-        /// The values for all of the temperatures deviations for a given "week." Temperature
-        /// deviations determine how potent the effects of the day/night are.
-        /// </summary>
-        public static float[] weeklyTemperatureDeviations = { 1f, 1f, 1f, 1f, 1f };
-
-        /// <summary>
-        /// The values for all of the humidity deviations for a given "week." Humidity deviations
-        /// determine how much more additional humidity is added to each player, regardless of climate.
-        /// </summary>
-        public static float[] weeklyHumidityDeviations = { 0f, 0f, 0f, 0f, 0f };
 
         /// <summary>
         /// Logger class for TerraTemp.
@@ -310,27 +283,6 @@ namespace TerraTemp {
             warmNPCTypes = FillWarmNPCHashSet();
 
             #endregion
-
-            #region UI Initialization
-
-            if (Main.netMode != NetmodeID.Server) {
-                thermometerUI = new ThermometerState();
-                thermometerUI.Activate();
-                thermometerInterface = new UserInterface();
-                thermometerInterface.SetState(thermometerUI);
-
-                forecastUI = new ForecastState();
-                forecastUI.Activate();
-                forecastInterface = new UserInterface();
-                forecastInterface.SetState(null);
-
-                enchantedBookshelfUI = new EnchantedBookshelfState();
-                enchantedBookshelfUI.Activate();
-                enchantedBookshelfInterface = new UserInterface();
-                enchantedBookshelfInterface.SetState(null);
-            }
-
-            #endregion
         }
 
         public override void Unload() {
@@ -357,27 +309,6 @@ namespace TerraTemp {
 
         #endregion Loading Overrides
 
-        #region Visual Overrides
-
-        public override void ModifyLightingBrightness(ref float scale) {
-            //Hypothermia/Heat Stroke "Blackout" Effect
-            if (Main.LocalPlayer.HasBuff(ModContent.BuffType<Hypothermia>()) || Main.LocalPlayer.HasBuff(ModContent.BuffType<HeatStroke>())) {
-                scale -= 0.34f;
-            }
-        }
-
-        #endregion
-
-        #region Update Overrides
-
-        public override void MidUpdateDustTime() {
-            if (Main.time >= 32400.0 && !Main.dayTime && (!Main.gameMenu || Main.netMode == NetmodeID.Server)) {
-                NewDayStarted();
-            }
-        }
-
-        #endregion
-
         #region Packet Handling
 
         public override void HandlePacket(BinaryReader reader, int whoAmI) {
@@ -385,16 +316,16 @@ namespace TerraTemp {
             switch (packetMessage) {
                 case PacketID.WeeklyTemperatureDeviations:
                     if (Main.netMode == NetmodeID.MultiplayerClient) {
-                        for (int i = 0; i < weeklyTemperatureDeviations.Length; i++) {
-                            weeklyTemperatureDeviations[i] = reader.ReadSingle();
+                        for (int i = 0; i < WeeklyTemperatureSystem.weeklyTemperatureDeviations.Length; i++) {
+                            WeeklyTemperatureSystem.weeklyTemperatureDeviations[i] = reader.ReadSingle();
                         }
                     }
                     break;
 
                 case PacketID.WeeklyHumidityDeviations:
                     if (Main.netMode == NetmodeID.MultiplayerClient) {
-                        for (int i = 0; i < weeklyHumidityDeviations.Length; i++) {
-                            weeklyHumidityDeviations[i] = reader.ReadSingle();
+                        for (int i = 0; i < WeeklyTemperatureSystem.weeklyHumidityDeviations.Length; i++) {
+                            WeeklyTemperatureSystem.weeklyHumidityDeviations[i] = reader.ReadSingle();
                         }
                     }
                     break;
@@ -403,11 +334,11 @@ namespace TerraTemp {
                     if (Main.netMode == NetmodeID.Server) {
                         ModPacket packet = GetPacket();
                         packet.Write((byte)PacketID.ReceiveServerTemperatureValues);
-                        for (int i = 0; i < weeklyTemperatureDeviations.Length; i++) {
-                            packet.Write(weeklyTemperatureDeviations[i]);
+                        for (int i = 0; i < WeeklyTemperatureSystem.weeklyTemperatureDeviations.Length; i++) {
+                            packet.Write(WeeklyTemperatureSystem.weeklyTemperatureDeviations[i]);
                         }
-                        for (int i = 0; i < weeklyHumidityDeviations.Length; i++) {
-                            packet.Write(weeklyHumidityDeviations[i]);
+                        for (int i = 0; i < WeeklyTemperatureSystem.weeklyHumidityDeviations.Length; i++) {
+                            packet.Write(WeeklyTemperatureSystem.weeklyHumidityDeviations[i]);
                         }
                         packet.Send(whoAmI);
                     }
@@ -415,11 +346,11 @@ namespace TerraTemp {
 
                 case PacketID.ReceiveServerTemperatureValues:
                     if (Main.netMode == NetmodeID.MultiplayerClient) {
-                        for (int i = 0; i < weeklyTemperatureDeviations.Length; i++) {
-                            weeklyTemperatureDeviations[i] = reader.ReadSingle();
+                        for (int i = 0; i < WeeklyTemperatureSystem.weeklyTemperatureDeviations.Length; i++) {
+                            WeeklyTemperatureSystem.weeklyTemperatureDeviations[i] = reader.ReadSingle();
                         }
-                        for (int i = 0; i < weeklyHumidityDeviations.Length; i++) {
-                            weeklyHumidityDeviations[i] = reader.ReadSingle();
+                        for (int i = 0; i < WeeklyTemperatureSystem.weeklyHumidityDeviations.Length; i++) {
+                            WeeklyTemperatureSystem.weeklyHumidityDeviations[i] = reader.ReadSingle();
                         }
                     }
                     break;
@@ -432,93 +363,7 @@ namespace TerraTemp {
 
         #endregion Packet Handling
 
-        #region UI Handling
-
-        public override void UpdateUI(GameTime gameTime) {
-            lastGameTime = gameTime;
-            thermometerUI?.Update(gameTime);
-            forecastUI?.Update(gameTime);
-            enchantedBookshelfUI?.Update(gameTime);
-        }
-
-        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
-            int resourceBarIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Resource Bars"));
-            if (resourceBarIndex != -1) {
-                layers.Insert(resourceBarIndex, new LegacyGameInterfaceLayer(
-                    $"{nameof(TerraTemp)}: Thermometer Display",
-                    delegate {
-                        if (lastGameTime != null) {
-                            thermometerInterface.Draw(Main.spriteBatch, lastGameTime);
-                        }
-                        return true;
-                    },
-                    InterfaceScaleType.UI)
-                );
-            }
-
-            int npcTalkIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: NPC / Sign Dialog"));
-            if (npcTalkIndex != -1) {
-                layers.Insert(npcTalkIndex + 1, new LegacyGameInterfaceLayer(
-                    $"{nameof(TerraTemp)}: Weather Forecast",
-                    delegate {
-                        if (lastGameTime != null) {
-                            forecastInterface.Draw(Main.spriteBatch, lastGameTime);
-                        }
-
-                        return true;
-                    },
-                    InterfaceScaleType.UI)
-                );
-            }
-
-            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
-            if (mouseTextIndex != -1) {
-                layers.Insert(npcTalkIndex + 1, new LegacyGameInterfaceLayer(
-                    $"{nameof(TerraTemp)}: Binding Interface",
-                    delegate {
-                        if (lastGameTime != null) {
-                            enchantedBookshelfInterface.Draw(Main.spriteBatch, lastGameTime);
-                        }
-
-                        return true;
-                    },
-                    InterfaceScaleType.UI)
-                );
-            }
-        }
-
-        #endregion UI Handling
-
         #region Custom Methods
-
-        public void NewDayStarted() {
-            //Temperature/Humidity Deviation
-            if (Main.netMode == NetmodeID.Server) {
-                weeklyTemperatureDeviations.DestructivelyShiftLeftOne();
-                weeklyTemperatureDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateTemperatureDeviation();
-                ModPacket packet = GetPacket();
-                packet.Write((byte)PacketID.WeeklyTemperatureDeviations);
-                for (int i = 0; i < weeklyTemperatureDeviations.Length; i++) {
-                    packet.Write(weeklyTemperatureDeviations[i]);
-                }
-                packet.Send();
-
-                weeklyHumidityDeviations.DestructivelyShiftLeftOne();
-                weeklyHumidityDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateHumidityDeviation();
-                packet = GetPacket();
-                packet.Write((byte)PacketID.WeeklyHumidityDeviations);
-                for (int i = 0; i < weeklyHumidityDeviations.Length; i++) {
-                    packet.Write(weeklyHumidityDeviations[i]);
-                }
-                packet.Send();
-            }
-            else if (Main.netMode == NetmodeID.SinglePlayer) {
-                weeklyTemperatureDeviations.DestructivelyShiftLeftOne();
-                weeklyTemperatureDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateTemperatureDeviation();
-                weeklyHumidityDeviations.DestructivelyShiftLeftOne();
-                weeklyHumidityDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateHumidityDeviation();
-            }
-        }
 
         public HashSet<int> FillWarmNPCHashSet() {
             HashSet<int> placeholderHashSet = new HashSet<int>() {

@@ -7,11 +7,11 @@ namespace TerraTemp.Content.Items.Materials.Fish {
     public class BarbFish : ModItem {
 
         public override void SetDefaults() {
-            item.maxStack = 999;
-            item.value = Item.sellPrice(silver: 1);
-            item.rare = ItemRarityID.Blue;
-            item.width = 34;
-            item.height = 34;
+            Item.maxStack = 999;
+            Item.value = Item.sellPrice(silver: 1);
+            Item.rare = ItemRarityID.Blue;
+            Item.width = 34;
+            Item.height = 34;
         }
 
         public override void CaughtFishStack(ref int stack) {

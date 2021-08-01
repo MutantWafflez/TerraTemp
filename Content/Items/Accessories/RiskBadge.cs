@@ -13,11 +13,11 @@ namespace TerraTemp.Content.Items.Accessories {
         public override float GetClimateExtremityChange(Player player) => 0.3f;
 
         public override void SetDefaults() {
-            item.width = 32;
-            item.height = 32;
-            item.accessory = true;
-            item.value = Item.sellPrice(gold: 1);
-            item.rare = ItemRarityID.LightRed;
+            Item.width = 32;
+            Item.height = 32;
+            Item.accessory = true;
+            Item.value = Item.sellPrice(gold: 1);
+            Item.rare = ItemRarityID.LightRed;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual) {

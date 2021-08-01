@@ -4,7 +4,7 @@ namespace TerraTemp.Content.Prefixes.HeatComfortability {
 
     public class CongealedPrefix : TemperatureAccessoryPrefix {
 
-        public override void SetDefaults() {
+        public override void SetStaticDefaults() {
             DisplayName.SetDefault("Congealed");
         }
 

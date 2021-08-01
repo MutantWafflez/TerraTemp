@@ -13,21 +13,21 @@ namespace TerraTemp.Content.Projectiles {
         }
 
         public override void SetDefaults() {
-            projectile.hide = true;
-            projectile.friendly = true;
-            projectile.width = 16 * 32; //32 blocks across
-            projectile.height = 16 * 32; //32 blocks high
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.penetrate = 999;
-            projectile.velocity = Vector2.Zero;
-            projectile.timeLeft = 10;
-            projectile.aiStyle = -1;
+            Projectile.hide = true;
+            Projectile.friendly = true;
+            Projectile.width = 16 * 32; //32 blocks across
+            Projectile.height = 16 * 32; //32 blocks high
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.penetrate = 999;
+            Projectile.velocity = Vector2.Zero;
+            Projectile.timeLeft = 10;
+            Projectile.aiStyle = -1;
         }
 
         public override void AI() {
             for (int j = 0; j < 360; j += 15) {
-                Dust dust = Dust.NewDustPerfect(projectile.Center, DustID.Fire, new Vector2(0, -projectile.timeLeft * 2.5f).RotatedBy(MathHelper.ToRadians(j)), Scale: 2.5f);
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.Fireworks, new Vector2(0, -Projectile.timeLeft * 2.5f).RotatedBy(MathHelper.ToRadians(j)), Scale: 2.5f);
                 dust.noGravity = true;
             }
         }

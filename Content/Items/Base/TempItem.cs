@@ -57,7 +57,7 @@ namespace TerraTemp.Content.Base.Items {
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
             string returnedLine = TempUtilities.CreateNewLineBasedOnStats(this);
             if (returnedLine != null) {
-                TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", returnedLine);
+                TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", returnedLine);
 
                 TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Defense");
                 TooltipLine buffDurationLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "BuffTime");

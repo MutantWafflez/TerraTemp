@@ -13,20 +13,19 @@ namespace TerraTemp.Content.Items.Potions {
 
         //Carbon copy opposite of Warmth Potion
         public override void SetDefaults() {
-            item.CloneDefaults(ItemID.WarmthPotion);
-            item.width = 32;
-            item.height = 32;
-            item.buffType = ModContent.BuffType<CoolingPotionBuff>();
+            Item.CloneDefaults(ItemID.WarmthPotion);
+            Item.width = 32;
+            Item.height = 32;
+            Item.buffType = ModContent.BuffType<CoolingPotionBuff>();
         }
 
         public override void AddRecipes() {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.BottledWater);
-            recipe.AddIngredient(ModContent.ItemType<BarbFish>());
-            recipe.AddIngredient(ItemID.Fireblossom);
-            recipe.AddTile(TileID.Bottles);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            CreateRecipe()
+                .AddIngredient(ItemID.BottledWater)
+                .AddIngredient<BarbFish>()
+                .AddIngredient(ItemID.Fireblossom)
+                .AddTile(TileID.Bottles)
+                .Register();
         }
     }
 }

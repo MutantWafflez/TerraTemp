@@ -3,6 +3,7 @@ using System;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 using TerraTemp.Common.Players;
+using TerraTemp.Common.Systems;
 
 namespace TerraTemp.Content.UI {
 
@@ -85,7 +86,7 @@ namespace TerraTemp.Content.UI {
 
                 UIText temperatureHighReading = dayPanelTexts[i, 2];
                 //Temperature for the given day at absolute noon
-                temperatureHighReading.SetText(Math.Round(TempPlayer.NormalTemperature + ((27000f / 60f / 50f) * TerraTemp.weeklyTemperatureDeviations[i])) + "\u00B0");
+                temperatureHighReading.SetText(Math.Round(TempPlayer.NormalTemperature + ((27000f / 60f / 50f) * WeeklyTemperatureSystem.weeklyTemperatureDeviations[i])) + "\u00B0");
                 temperatureHighReading.Left.Set(currentPanel.Width.Pixels * 0.5f - DayPanelsPadding - temperatureHighReading.GetDimensions().Width / 2f, 0f);
                 temperatureHighReading.Top.Set(highText.GetDimensions().Height + highText.Top.Pixels + TemperatureReadingPadding, 0f);
 
@@ -95,7 +96,7 @@ namespace TerraTemp.Content.UI {
 
                 UIText temperatureLowReading = dayPanelTexts[i, 4];
                 //Temperature for the given night at absolute midnight
-                temperatureLowReading.SetText(Math.Round(TempPlayer.NormalTemperature - (16200f / 60f / 30f * TerraTemp.weeklyTemperatureDeviations[i])) + "\u00B0");
+                temperatureLowReading.SetText(Math.Round(TempPlayer.NormalTemperature - (16200f / 60f / 30f * WeeklyTemperatureSystem.weeklyTemperatureDeviations[i])) + "\u00B0");
                 temperatureLowReading.Left.Set(currentPanel.Width.Pixels * 0.5f - DayPanelsPadding - temperatureLowReading.GetDimensions().Width / 2f, 0f);
                 temperatureLowReading.Top.Set(lowText.GetDimensions().Height + lowText.Top.Pixels + TemperatureReadingPadding, 0f);
 
@@ -105,7 +106,7 @@ namespace TerraTemp.Content.UI {
 
                 UIText humidityReading = dayPanelTexts[i, 6];
                 //The deviation of humidity for the given day regardless of the given climate (biome)
-                humidityReading.SetText(Math.Round(TerraTemp.weeklyHumidityDeviations[i] * 100f) + "%");
+                humidityReading.SetText(Math.Round(WeeklyTemperatureSystem.weeklyHumidityDeviations[i] * 100f) + "%");
                 humidityReading.Left.Set(currentPanel.Width.Pixels * 0.5f - DayPanelsPadding - humidityReading.GetDimensions().Width / 2f, 0f);
                 humidityReading.Top.Set(humidityText.GetDimensions().Height + humidityText.Top.Pixels + TemperatureReadingPadding, 0f);
             }

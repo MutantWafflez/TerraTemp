@@ -4,7 +4,7 @@ namespace TerraTemp.Content.Prefixes.SunExtremity {
 
     public class ShadedPrefix : TemperatureAccessoryPrefix {
 
-        public override void SetDefaults() {
+        public override void SetStaticDefaults() {
             DisplayName.SetDefault("Shaded");
         }
 

@@ -12,8 +12,6 @@ namespace TerraTemp.Content.Items.Tomes {
     public class FrostTome : ModItem {
         public int tomeLevel;
 
-        public override bool CloneNewInstances => true;
-
         public FrostTome() {
             tomeLevel = 1;
         }
@@ -25,14 +23,14 @@ namespace TerraTemp.Content.Items.Tomes {
         }
 
         public override void SetDefaults() {
-            item.rare = ItemRarityID.Green;
-            item.value = Item.buyPrice(gold: 5);
-            item.material = true;
-            item.maxStack = 1;
+            Item.rare = ItemRarityID.Green;
+            Item.value = Item.buyPrice(gold: 5);
+            Item.material = true;
+            Item.maxStack = 1;
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            TooltipLine tomeLevelLine = new TooltipLine(mod, "TomeLevel", TempUtilities.GetTerraTempTextValue("MiscKeys.EnchantmentLevel", tomeLevel)) {
+            TooltipLine tomeLevelLine = new TooltipLine(Mod, "TomeLevel", TempUtilities.GetTerraTempTextValue("MiscKeys.EnchantmentLevel", tomeLevel)) {
                 overrideColor = Color.Cyan
             };
 

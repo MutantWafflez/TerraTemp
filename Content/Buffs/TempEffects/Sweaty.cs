@@ -5,10 +5,10 @@ namespace TerraTemp.Content.Buffs.TempEffects {
 
     public class Sweaty : ModBuff {
 
-        public override void SetDefaults() {
+        public override void SetStaticDefaults() {
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
-            canBeCleared = false;
+            CanBeCleared = false;
         }
 
         public override void Update(Player player, ref int buffIndex) {

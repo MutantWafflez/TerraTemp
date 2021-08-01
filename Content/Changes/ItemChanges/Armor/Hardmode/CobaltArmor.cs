@@ -56,7 +56,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override void AdditionalSetBonusEffect(Player player) {
             TempPlayer tempPlayer = player.GetTempPlayer();
             if (tempPlayer.currentTemperature > tempPlayer.comfortableHigh) {
-                player.allDamageMult += 0.03f * (tempPlayer.currentTemperature - tempPlayer.comfortableHigh);
+                //TODO: Re-implement all damage multiplication
+                //player.allDamageMult += 0.03f * (tempPlayer.currentTemperature - tempPlayer.comfortableHigh);
             }
         }
     }

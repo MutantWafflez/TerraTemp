@@ -21,7 +21,7 @@ namespace TerraTemp.Common.Players {
         }
 
         public override void OnHitAnything(float x, float y, Entity victim) {
-            TempPlayer tempPlayer = player.GetTempPlayer();
+            TempPlayer tempPlayer = Player.GetTempPlayer();
             //Spider Set Bonus
             if (spiderSetBonus && tempPlayer.currentTemperature > tempPlayer.comfortableHigh) {
                 if (victim is NPC) {
@@ -36,7 +36,7 @@ namespace TerraTemp.Common.Players {
         public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit) {
             //Mythril Set Bonus
             if (mythrilSetBonus) {
-                player.AddBuff(ModContent.BuffType<TempResistBuff>(), 60 * 5);
+                Player.AddBuff(ModContent.BuffType<TempResistBuff>(), 60 * 5);
             }
         }
     }

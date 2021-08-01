@@ -24,8 +24,8 @@ namespace TerraTemp.Content.UI {
             Item = new Item();
             Item.SetDefaults(0);
 
-            Width.Set(Main.inventoryBack9Texture.Width * scale, 0f);
-            Height.Set(Main.inventoryBack9Texture.Height * scale, 0f);
+            Width.Set(28f * scale, 0f);
+            Height.Set(28f * scale, 0f);
         }
 
         protected override void DrawSelf(SpriteBatch spriteBatch) {

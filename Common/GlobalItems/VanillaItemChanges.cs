@@ -41,7 +41,7 @@ namespace TerraTemp.Common.GlobalItems {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             foreach (ItemChange change in TerraTemp.itemChanges) {
                 if (change.AppliedItemIDs.Contains(item.type) && !item.social && change.AdditionalTooltip != null) {
-                    TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", change.AdditionalTooltip);
+                    TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", change.AdditionalTooltip);
 
                     //These checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
                     TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Tooltip0");
@@ -64,7 +64,7 @@ namespace TerraTemp.Common.GlobalItems {
             }
             foreach (ItemHoldoutChange itemHoldoutChange in TerraTemp.itemHoldoutChanges) {
                 if (itemHoldoutChange.AppliedItemIDs.Contains(item.type) && !item.social && itemHoldoutChange.AdditionalTooltip != null) {
-                    TooltipLine newLine = new TooltipLine(mod, "TempAdditionalLine", itemHoldoutChange.AdditionalTooltip);
+                    TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", itemHoldoutChange.AdditionalTooltip);
 
                     //These checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
                     TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Tooltip0");

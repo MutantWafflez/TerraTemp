@@ -6,8 +6,8 @@ namespace TerraTemp.Content.Buffs.MiscEffects {
 
         public override float GetTemperatureResistanceChange(Player player) => 0.4f;
 
-        public override void SetDefaults() {
-            canBeCleared = true;
+        public override void SetStaticDefaults() {
+            CanBeCleared = true;
         }
     }
 }

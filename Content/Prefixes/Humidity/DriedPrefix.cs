@@ -4,7 +4,7 @@ namespace TerraTemp.Content.Prefixes.Humidity {
 
     public class DehydratedPrefix : TemperatureAccessoryPrefix {
 
-        public override void SetDefaults() {
+        public override void SetStaticDefaults() {
             DisplayName.SetDefault("Dehydrated");
         }
 

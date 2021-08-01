@@ -507,7 +507,9 @@ namespace TerraTemp.Custom {
         public static HashSet<int> DeepRecipeSearch(int ingredientID) {
             HashSet<int> derivedItems = new HashSet<int>();
 
-            void SearchAnotherLayer(int nextSearchIngredient) {
+            //TODO: Re-implement DeepRecipeSearch
+
+            /*void SearchAnotherLayer(int nextSearchIngredient) {
                 RecipeFinder finder = new RecipeFinder();
                 finder.AddIngredient(nextSearchIngredient);
                 List<Recipe> searchedRecipes = finder.SearchRecipes().Distinct(new RecipeProductComparer()).ToList();
@@ -527,7 +529,7 @@ namespace TerraTemp.Custom {
                 }
             }
 
-            SearchAnotherLayer(ingredientID);
+            SearchAnotherLayer(ingredientID); */
 
             return derivedItems;
         }

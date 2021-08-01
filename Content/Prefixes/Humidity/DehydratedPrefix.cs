@@ -4,7 +4,7 @@ namespace TerraTemp.Content.Prefixes.Humidity {
 
     public class DriedPrefix : TemperatureAccessoryPrefix {
 
-        public override void SetDefaults() {
+        public override void SetStaticDefaults() {
             DisplayName.SetDefault("Dried");
         }
 

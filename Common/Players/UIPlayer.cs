@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.UI;
+using TerraTemp.Common.Systems;
 using TerraTemp.Content.Tiles.Furniture;
 using TerraTemp.Content.UI;
 
@@ -12,11 +13,13 @@ namespace TerraTemp.Common.Players {
     /// ModPlayer that handles UI, such as saving the offset of draggable UI.
     /// </summary>
     public class UIPlayer : ModPlayer {
-        public ThermometerState ThermometerState => TerraTemp.Instance.thermometerUI;
+        public ThermometerState ThermometerState => UISystem.thermometerUI;
 
-        public UserInterface ForecastInterface => TerraTemp.Instance.forecastInterface;
+        public UserInterface ForecastInterface => UISystem.forecastInterface;
 
-        public UserInterface EnchantedBookshelfInterface => TerraTemp.Instance.enchantedBookshelfInterface;
+        public UserInterface EnchantedBookshelfInterface => UISystem.enchantedBookshelfInterface;
+
+        private static UISystem UISystem => ModContent.GetInstance<UISystem>();
 
         public override TagCompound Save() {
             return new TagCompound {
@@ -38,12 +41,12 @@ namespace TerraTemp.Common.Players {
 
         public override void PostUpdate() {
             //Hide forecast UI upon stop talking to NPC
-            if (player.talkNPC == -1 && ForecastInterface.CurrentState != null) {
+            if (Player.talkNPC == -1 && ForecastInterface.CurrentState != null) {
                 ForecastInterface.SetState(null);
             }
             //Hide Enchanted Bookshelf UI upon moving away from bookshelf
-            if ((!player.adjTile[ModContent.TileType<EnchantedBookshelfTile>()] && EnchantedBookshelfInterface.CurrentState != null) || !Main.playerInventory) {
-                TerraTemp.Instance.enchantedBookshelfInterface.SetState(null);
+            if ((!Player.adjTile[ModContent.TileType<EnchantedBookshelfTile>()] && EnchantedBookshelfInterface.CurrentState != null) || !Main.playerInventory) {
+                UISystem.enchantedBookshelfInterface.SetState(null);
             }
         }
     }
