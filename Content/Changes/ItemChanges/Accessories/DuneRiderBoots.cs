@@ -4,12 +4,12 @@ using Terraria.ID;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
 
-    public class FlurryBoots : ItemChange {
+    public class DuneRiderBoots : ItemChange {
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
-            ItemID.FlurryBoots
+            ItemID.SandBoots
         };
 
-        public override float GetColdComfortabilityChange(Player player) => -2f;
+        public override float GetHeatComfortabilityChange(Player player) => 2f;
     }
 }
