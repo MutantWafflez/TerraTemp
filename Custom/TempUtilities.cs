@@ -22,7 +22,7 @@ namespace TerraTemp.Custom {
         /// <summary>
         /// The string of the directory for all of the miscellaneous textures for TerraTemp.
         /// </summary>
-        public const string TEXTURE_DIRECTORY = nameof(TerraTemp) + "/Content/Textures/";
+        public const string TEXTURE_DIRECTORY = nameof(TerraTemp) + "/Assets/Sprites/";
 
         #region Calculation Methods
 

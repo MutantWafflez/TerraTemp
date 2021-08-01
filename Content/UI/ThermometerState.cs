@@ -20,21 +20,21 @@ namespace TerraTemp.Content.UI {
         public DraggableElement draggableElement;
         public UIImage thermometerFrame;
         public UIText temperatureReading;
-        public ColorableUIImage thermometerLiquid;
+        public UIImage thermometerLiquid;
 
         public override void OnInitialize() {
+            draggableElement = new DraggableElement();
+            draggableElement.Width.Set(76f, 0f);
+            draggableElement.Height.Set(140f, 0f);
+            draggableElement.Left.Set(0f, 0f);
+            draggableElement.Top.Set(GetDimensions().Height - 140f, 0f);
+
             thermometerFrame = new UIImage(ModContent.Request<Texture2D>(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerFrame")) {
                 ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize
             };
-
-            draggableElement = new DraggableElement();
-            draggableElement.Width.Set(thermometerFrame.Width.Pixels, 0f);
-            draggableElement.Height.Set(thermometerFrame.Height.Pixels, 0f);
-            draggableElement.Left.Set(0f, 0f);
-            draggableElement.Top.Set(GetDimensions().Height - thermometerFrame.Height.Pixels, 0f);
             draggableElement.Append(thermometerFrame);
 
-            thermometerLiquid = new ColorableUIImage(ModContent.Request<Texture2D>(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerLiquid")) {
+            thermometerLiquid = new UIImage(ModContent.Request<Texture2D>(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerLiquid")) {
                 ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize
             };
             draggableElement.Append(thermometerLiquid);
@@ -49,7 +49,7 @@ namespace TerraTemp.Content.UI {
 
         protected override void DrawChildren(SpriteBatch spriteBatch) {
             //Don't draw without the Thermometer Item within the inventory/piggy bank
-            if (!Main.LocalPlayer.inventory.Any(item => item.type == ModContent.ItemType<Thermometer>()) && !Main.LocalPlayer.bank.item.Any(item => item.type == ModContent.ItemType<Thermometer>())) {
+            if (Main.LocalPlayer.inventory.All(item => item.type != ModContent.ItemType<Thermometer>()) && Main.LocalPlayer.bank.item.All(item => item.type != ModContent.ItemType<Thermometer>())) {
                 return;
             }
 
@@ -59,11 +59,7 @@ namespace TerraTemp.Content.UI {
 
             //Check/Apply for potential Image Scale change
             float uiSize = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize;
-            float recalculatedLiquidPosition = (1f - uiSize) / 2f;
             float recalculatedReadingPosition = 0.675f - (1f - uiSize) / 10f;
-            thermometerLiquid.ImageScale = uiSize;
-            thermometerLiquid.Left.Set(0, recalculatedLiquidPosition);
-            thermometerLiquid.Top.Set(0, recalculatedLiquidPosition);
             temperatureReading.Top.Set(0, recalculatedReadingPosition);
 
             //Update temperature reading
@@ -80,7 +76,7 @@ namespace TerraTemp.Content.UI {
             float totalDifference = Math.Abs(temperaturePlayer.comfortableLow - temperaturePlayer.criticalRangeMaximum) + (temperaturePlayer.comfortableHigh + temperaturePlayer.criticalRangeMaximum);
 
             //Update color of Liquid based off of current temperature
-            thermometerLiquid.textureColor = new Color(
+            thermometerLiquid.Color = new Color(
                 Math.Abs(temperaturePlayer.comfortableLow - temperaturePlayer.criticalRangeMaximum + temperaturePlayer.currentTemperature) / totalDifference, //R
                 0f, //G
                 (temperaturePlayer.comfortableHigh + temperaturePlayer.criticalRangeMaximum - temperaturePlayer.currentTemperature) / totalDifference, //B
