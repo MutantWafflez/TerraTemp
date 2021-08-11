@@ -183,6 +183,7 @@ GlobalSetBonus.MythrilArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistan
 GlobalSetBonus.OrichalcumArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedCriticalRange] (1)} for each active buff or debuff
 GlobalSetBonus.AdamantiteArmor=Gain up to {[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (67)} based on how fast you are moving
 GlobalSetBonus.TitaniumArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedColdComfortability] (8)} while under the effects of the Shadow Dodge buff
+GlobalSetBonus.CrystalAssassinArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (34)} during the night
 GlobalSetBonus.FrostArmor=Grants the effects of the Frost Rune
 GlobalSetBonus.ForbiddenArmor=Grants the effects of the Flame Rune
 GlobalSetBonus.SquireArmor={[Mods.TerraTemp.GlobalTooltip.IncreasedTempResistance] (67)} while protecting the Eternia Crystal
