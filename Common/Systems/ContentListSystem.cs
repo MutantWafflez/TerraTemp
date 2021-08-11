@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Changes;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.Systems {
 
@@ -105,7 +106,20 @@ namespace TerraTemp.Common.Systems {
         }
 
         public void HandleStatInheritance() {
-            //TODO: Re-implement stat inheritance
+            foreach (ItemChange itemChange in itemChanges) {
+                if (!itemChange.DerivedItemsProvideEffects) {
+                    continue;
+                }
+
+                foreach (int appliedType in itemChange.AppliedItemIDs) {
+                    foreach (int inheritor in CollectionUtilities.CreateRecipeTree(appliedType)) {
+                        itemChange.InheritedItemIDs.Add(inheritor);
+#if DEBUG
+                        TerraTemp.Logging.Debug(inheritor + " inherited from " + appliedType);
+#endif
+                    }
+                }
+            }
         }
 
         public HashSet<int> FillWarmNPCHashSet() {

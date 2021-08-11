@@ -11,17 +11,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
         private readonly UnderworldClimate underworldClimate = new UnderworldClimate();
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
-            ItemID.ObsidianSkull,
-            ItemID.LavaSkull,
-            ItemID.MoltenCharm,
-            ItemID.ObsidianHorseshoe,
-            ItemID.ObsidianShield,
-            ItemID.AnkhShield,
-            ItemID.ObsidianSkullRose,
-            ItemID.MoltenSkullRose,
-            ItemID.ObsidianWaterWalkingBoots,
-            ItemID.LavaWaders,
-            ItemID.TerrasparkBoots
+            ItemID.ObsidianSkull
         };
 
         public override bool DerivedItemsProvideEffects => true;

@@ -7,9 +7,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
     public class SunStone : ItemChange {
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
-            ItemID.SunStone,
-            ItemID.CelestialStone,
-            ItemID.CelestialShell
+            ItemID.SunStone
         };
 
         public override bool DerivedItemsProvideEffects => true;

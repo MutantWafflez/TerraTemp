@@ -7,9 +7,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
     public class MoonStone : ItemChange {
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
-            ItemID.MoonStone,
-            ItemID.CelestialStone,
-            ItemID.CelestialShell
+            ItemID.MoonStone
         };
 
         public override bool DerivedItemsProvideEffects => true;

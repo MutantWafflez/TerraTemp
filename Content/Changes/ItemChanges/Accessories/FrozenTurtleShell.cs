@@ -7,8 +7,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
     public class FrozenTurtleShell : ItemChange {
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
-            ItemID.FrozenTurtleShell,
-            ItemID.FrozenShield
+            ItemID.FrozenTurtleShell
         };
 
         public override bool DerivedItemsProvideEffects => true;

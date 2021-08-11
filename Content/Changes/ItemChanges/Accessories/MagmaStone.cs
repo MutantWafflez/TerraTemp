@@ -7,11 +7,7 @@ namespace TerraTemp.Content.Changes.ItemChanges.Accessories {
     public class MagmaStone : ItemChange {
 
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
-            ItemID.MagmaStone,
-            ItemID.FireGauntlet,
-            ItemID.LavaSkull,
-            ItemID.MoltenQuiver,
-            ItemID.MoltenSkullRose
+            ItemID.MagmaStone
         };
 
         public override bool DerivedItemsProvideEffects => true;
