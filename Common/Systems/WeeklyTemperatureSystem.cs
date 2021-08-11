@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Enums;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.Systems {
 
@@ -33,7 +34,7 @@ namespace TerraTemp.Common.Systems {
             //Temperature/Humidity Deviation
             if (Main.netMode == NetmodeID.Server) {
                 weeklyTemperatureDeviations.DestructivelyShiftLeftOne();
-                weeklyTemperatureDeviations[^1] = TempUtilities.GenerateTemperatureDeviation();
+                weeklyTemperatureDeviations[^1] = MathUtilities.GenerateTemperatureDeviation();
                 ModPacket packet = Mod.GetPacket();
                 packet.Write((byte)PacketID.WeeklyTemperatureDeviations);
                 for (int i = 0; i < weeklyTemperatureDeviations.Length; i++) {
@@ -42,7 +43,7 @@ namespace TerraTemp.Common.Systems {
                 packet.Send();
 
                 weeklyHumidityDeviations.DestructivelyShiftLeftOne();
-                weeklyHumidityDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateHumidityDeviation();
+                weeklyHumidityDeviations[weeklyTemperatureDeviations.Length - 1] = MathUtilities.GenerateHumidityDeviation();
                 packet = Mod.GetPacket();
                 packet.Write((byte)PacketID.WeeklyHumidityDeviations);
                 for (int i = 0; i < weeklyHumidityDeviations.Length; i++) {
@@ -52,9 +53,9 @@ namespace TerraTemp.Common.Systems {
             }
             else if (Main.netMode == NetmodeID.SinglePlayer) {
                 weeklyTemperatureDeviations.DestructivelyShiftLeftOne();
-                weeklyTemperatureDeviations[^1] = TempUtilities.GenerateTemperatureDeviation();
+                weeklyTemperatureDeviations[^1] = MathUtilities.GenerateTemperatureDeviation();
                 weeklyHumidityDeviations.DestructivelyShiftLeftOne();
-                weeklyHumidityDeviations[weeklyTemperatureDeviations.Length - 1] = TempUtilities.GenerateHumidityDeviation();
+                weeklyHumidityDeviations[weeklyTemperatureDeviations.Length - 1] = MathUtilities.GenerateHumidityDeviation();
             }
         }
     }

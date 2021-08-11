@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using TerraTemp.Common.Systems;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Changes {
 
@@ -39,11 +40,11 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         public virtual string AdditionalTooltip {
             get {
-                string additionalLine = TempUtilities.GetTerraTempTextValue("GlobalItemChange." + GetType().Name);
+                string additionalLine = LocalizationUtilities.GetTerraTempTextValue("GlobalItemChange." + GetType().Name);
                 if (additionalLine == "Mods.TerraTemp.GlobalItemChange." + GetType().Name) {
                     additionalLine = null;
                 }
-                return TempUtilities.CreateNewLineBasedOnStats(this, additionalLine);
+                return LocalizationUtilities.CreateNewLineBasedOnStats(this, additionalLine);
             }
         }
 

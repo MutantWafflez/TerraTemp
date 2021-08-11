@@ -11,6 +11,7 @@ using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Enums;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.Players {
 
@@ -166,7 +167,7 @@ namespace TerraTemp.Common.Players {
             float clampedWindSpeed = MathHelper.Clamp(Main.windSpeedCurrent, -0.45f, 0.45f);
 
             //In real life, there is a mathematical formula that can be used to determine what the air temperature "feels like" to a human (AKA apparent temperature) being by taking humidity/wind speed into account.
-            modifiedDesiredTemperature = TempUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, isAffectedByWind ? Math.Abs(clampedWindSpeed * 100f) * 0.44704f : 0f);
+            modifiedDesiredTemperature = MathUtilities.CalculateApparentTemperature(baseDesiredTemperature, relativeHumidity, isAffectedByWind ? Math.Abs(clampedWindSpeed * 100f) * 0.44704f : 0f);
 
             //Body temperature will change at a rate equivalent to the difference between the body temperature and desired wet temperature
             // multiplied by the player's temperature change resistance.
@@ -306,7 +307,7 @@ namespace TerraTemp.Common.Players {
             //Apply Event changes on player
             foreach (EventChange eventChange in ContentListSystem.eventChanges) {
                 if (eventChange.EventBoolean && eventChange.ApplyEventEffects(Player)) {
-                    TempUtilities.ApplyStatChanges(eventChange, Player);
+                    PlayerUtilities.ApplyStatChanges(eventChange, Player);
                 }
             }
         }
@@ -321,7 +322,7 @@ namespace TerraTemp.Common.Players {
             //Apply Tile Adjacency changes on player
             foreach (AdjacencyChange adjacencyChange in ContentListSystem.adjacencyChanges) {
                 if (adjacencyChange.CheckForAdjacency(Player)) {
-                    TempUtilities.ApplyStatChanges(adjacencyChange, Player);
+                    PlayerUtilities.ApplyStatChanges(adjacencyChange, Player);
                 }
             }
         }
@@ -336,7 +337,7 @@ namespace TerraTemp.Common.Players {
             //This item holdout change must be handled here since the HeldItem() method in Global Items are called too late in the update process.
             foreach (ItemHoldoutChange itemHoldoutChange in ContentListSystem.itemHoldoutChanges) {
                 if (itemHoldoutChange.AppliedItemIDs.Contains(Player.HeldItem.type)) {
-                    TempUtilities.ApplyStatChanges(itemHoldoutChange, Player);
+                    PlayerUtilities.ApplyStatChanges(itemHoldoutChange, Player);
                     itemHoldoutChange.AdditionalItemHoldoutEffect(Player);
                 }
             }
@@ -389,8 +390,8 @@ namespace TerraTemp.Common.Players {
         /// task in the process, see <see cref="MidEnvironmentUpdateApplyTimeEffects"/>. </summary>
         public void MidEnvironmentUpdateApplySunExtremityEffects() {
             sunExtremityValue *= WeeklyTemperatureSystem.weeklyTemperatureDeviations[0];
-            sunExtremityValue *= TempUtilities.GetCloudEffectsOnSunTemperature();
-            sunExtremityValue *= TempUtilities.GetShadeEffectsOnSunTemperature(Player);
+            sunExtremityValue *= MathUtilities.GetCloudEffectsOnSunTemperature();
+            sunExtremityValue *= MathUtilities.GetShadeEffectsOnSunTemperature(Player);
         }
 
         /// <summary>
@@ -485,7 +486,7 @@ namespace TerraTemp.Common.Players {
 
                 //Death
                 if (currentTemperature > comfortableHigh + criticalRangeMaximum) {
-                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(Player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Heat." + Main.rand.Next(0, 20)));
+                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(Player.name + " " + LocalizationUtilities.GetTerraTempTextValue("DeathMessage.Heat." + Main.rand.Next(0, 20)));
 
                     Player.KillMe(deathReason, 9999, 0);
                 }
@@ -501,7 +502,7 @@ namespace TerraTemp.Common.Players {
 
                 //Death
                 if (currentTemperature < comfortableLow - criticalRangeMaximum) {
-                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(Player.name + " " + TempUtilities.GetTerraTempTextValue("DeathMessage.Cold." + Main.rand.Next(0, 20)));
+                    PlayerDeathReason deathReason = PlayerDeathReason.ByCustomReason(Player.name + " " + LocalizationUtilities.GetTerraTempTextValue("DeathMessage.Cold." + Main.rand.Next(0, 20)));
 
                     Player.KillMe(deathReason, 9999, 0);
                 }

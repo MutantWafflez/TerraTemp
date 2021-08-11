@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using TerraTemp.Common.Systems;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Changes {
 
@@ -44,16 +45,16 @@ namespace TerraTemp.Content.Changes {
         /// </summary>
         public virtual string AdditionalSetBonusText {
             get {
-                string statLine = TempUtilities.CreateNewLineBasedOnStats(this);
+                string statLine = LocalizationUtilities.CreateNewLineBasedOnStats(this);
                 if (statLine != null) {
                     if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
-                        return statLine + "\n" + TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);
+                        return statLine + "\n" + LocalizationUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);
                     }
                     return statLine;
                 }
                 else {
                     if (Language.Exists("Mods.TerraTemp.GlobalSetBonus." + ArmorSetName)) {
-                        return TempUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);
+                        return LocalizationUtilities.GetTerraTempTextValue("GlobalSetBonus." + ArmorSetName, useRegexSearch: true);
                     }
                     return null;
                 }

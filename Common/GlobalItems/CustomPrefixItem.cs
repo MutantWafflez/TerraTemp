@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using TerraTemp.Content.Prefixes;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.GlobalItems {
 
@@ -43,7 +44,7 @@ namespace TerraTemp.Common.GlobalItems {
 
         public override void UpdateAccessory(Item item, Player player, bool hideVisual) {
             if (appliedAccessoryPrefix != null) {
-                TempUtilities.ApplyStatChanges(appliedAccessoryPrefix, player);
+                PlayerUtilities.ApplyStatChanges(appliedAccessoryPrefix, player);
             }
         }
     }

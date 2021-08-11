@@ -1,5 +1,6 @@
 ﻿using Terraria;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Base.Items {
 
@@ -10,7 +11,7 @@ namespace TerraTemp.Content.Base.Items {
     public abstract class TempEquipment : TempItem {
 
         public override void UpdateEquip(Player player) {
-            TempUtilities.ApplyStatChanges(this, player);
+            PlayerUtilities.ApplyStatChanges(this, player);
         }
     }
 }

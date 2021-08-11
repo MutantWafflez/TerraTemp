@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Base.Items {
 
@@ -55,7 +56,7 @@ namespace TerraTemp.Content.Base.Items {
         public virtual float GetSunExtremityChange(Player player) => 0f;
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(this);
+            string returnedLine = LocalizationUtilities.CreateNewLineBasedOnStats(this);
             if (returnedLine != null) {
                 TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", returnedLine);
 

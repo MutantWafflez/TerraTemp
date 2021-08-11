@@ -9,7 +9,7 @@ using Terraria.UI;
 using TerraTemp.Common.Configs;
 using TerraTemp.Common.Players;
 using TerraTemp.Content.Items.Miscellaneous;
-using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.UI {
 
@@ -29,12 +29,12 @@ namespace TerraTemp.Content.UI {
             draggableElement.Left.Set(0f, 0f);
             draggableElement.Top.Set(GetDimensions().Height - 140f, 0f);
 
-            thermometerFrame = new UIImage(ModContent.Request<Texture2D>(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerFrame")) {
+            thermometerFrame = new UIImage(ModContent.Request<Texture2D>(TerraTemp.TextureDirectory + "UI/ThermometerFrame")) {
                 ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize
             };
             draggableElement.Append(thermometerFrame);
 
-            thermometerLiquid = new UIImage(ModContent.Request<Texture2D>(TempUtilities.TEXTURE_DIRECTORY + "UI/ThermometerLiquid")) {
+            thermometerLiquid = new UIImage(ModContent.Request<Texture2D>(TerraTemp.TextureDirectory + "UI/ThermometerLiquid")) {
                 ImageScale = ModContent.GetInstance<TerraTempClientConfig>().thermometerUISize
             };
             draggableElement.Append(thermometerLiquid);
@@ -76,7 +76,7 @@ namespace TerraTemp.Content.UI {
             //Check for hovering to display text additional info
             if (draggableElement.ContainsPoint(Main.MouseScreen) && !draggableElement.isDragging) {
                 if (hasThermometerItem) {
-                    Main.instance.MouseText("Feels Like: " + Math.Round(temperaturePlayer.modifiedDesiredTemperature) + "\u00B0C (" + TempUtilities.CelsiusToFahrenheit(temperaturePlayer.modifiedDesiredTemperature, true) + "\u00B0F)"
+                    Main.instance.MouseText("Feels Like: " + Math.Round(temperaturePlayer.modifiedDesiredTemperature) + "\u00B0C (" + MathUtilities.CelsiusToFahrenheit(temperaturePlayer.modifiedDesiredTemperature, true) + "\u00B0F)"
                         + "\nRelative Humidity: " + Math.Round(temperaturePlayer.relativeHumidity * 100f) + "% "
                         + "\nTemperature Change Resistance: " + Math.Round(temperaturePlayer.temperatureChangeResist * 100f) + "%"
                         + "\nComfortable Range: " + Math.Round(temperaturePlayer.comfortableLow) + "\u00B0C - " + Math.Round(temperaturePlayer.comfortableHigh) + "\u00B0C");

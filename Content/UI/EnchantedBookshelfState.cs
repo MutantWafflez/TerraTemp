@@ -11,6 +11,7 @@ using Terraria.UI;
 using TerraTemp.Common.GlobalItems;
 using TerraTemp.Content.Items.Tomes;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.UI {
 
@@ -98,7 +99,7 @@ namespace TerraTemp.Content.UI {
                 }
 
                 tomeItemSlot.Item.TurnToAir();
-                CombatText.NewText(new Rectangle((int)Main.LocalPlayer.position.X, (int)Main.LocalPlayer.Bottom.Y, 15, 1), Color.Yellow, TempUtilities.GetTerraTempTextValue("UIInfo.SuccessfulBind"), true);
+                CombatText.NewText(new Rectangle((int)Main.LocalPlayer.position.X, (int)Main.LocalPlayer.Bottom.Y, 15, 1), Color.Yellow, LocalizationUtilities.GetTerraTempTextValue("UIInfo.SuccessfulBind"), true);
                 SoundEngine.PlaySound(SoundID.Item119);
             }
         }
@@ -113,14 +114,14 @@ namespace TerraTemp.Content.UI {
                 }
 
                 //Drawing of the outline around the tome icon similar to the vanilla reforge icon
-                Asset<Texture2D> highlightTexture = ModContent.Request<Texture2D>(TempUtilities.TEXTURE_DIRECTORY + "UI/TomeOutline");
+                Asset<Texture2D> highlightTexture = ModContent.Request<Texture2D>(TerraTemp.TextureDirectory + "UI/TomeOutline");
                 spriteBatch.Draw(highlightTexture.Value, new Vector2(bindButton.Left.Pixels - 2f, bindButton.Top.Pixels - 4f), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
                 if (IsValidBinding) {
-                    Main.instance.MouseText(TempUtilities.GetTerraTempTextValue("UIInfo.BindHover"));
+                    Main.instance.MouseText(LocalizationUtilities.GetTerraTempTextValue("UIInfo.BindHover"));
                 }
                 else {
-                    Main.instance.MouseText(TempUtilities.GetTerraTempTextValue("UIInfo.InvalidBind"), ItemRarityID.Red);
+                    Main.instance.MouseText(LocalizationUtilities.GetTerraTempTextValue("UIInfo.InvalidBind"), ItemRarityID.Red);
                 }
 
                 Main.LocalPlayer.mouseInterface = true;

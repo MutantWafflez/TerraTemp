@@ -2,6 +2,7 @@
 using Terraria.ModLoader;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Buffs {
 
@@ -54,11 +55,11 @@ namespace TerraTemp.Content.Buffs {
         public virtual float GetSunExtremityChange(Player player) => 0f;
 
         public override void Update(Player player, ref int buffIndex) {
-            TempUtilities.ApplyStatChanges(this, player);
+            PlayerUtilities.ApplyStatChanges(this, player);
         }
 
         public override void ModifyBuffTip(ref string tip, ref int rare) {
-            string returnedLine = TempUtilities.CreateNewLineBasedOnStats(this);
+            string returnedLine = LocalizationUtilities.CreateNewLineBasedOnStats(this);
             if (returnedLine != null) {
                 tip = returnedLine;
             }

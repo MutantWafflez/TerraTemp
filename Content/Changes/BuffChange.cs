@@ -2,8 +2,8 @@
 using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Common.Systems;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Changes {
 
@@ -23,7 +23,7 @@ namespace TerraTemp.Content.Changes {
         /// based on how each property is changed, if you wish to add an additional line on top of
         /// this, use base.AdditionalBuffTip + "your string here"
         /// </summary>
-        public virtual string AdditionalBuffTip => TempUtilities.CreateNewLineBasedOnStats(this);
+        public virtual string AdditionalBuffTip => LocalizationUtilities.CreateNewLineBasedOnStats(this);
 
         /// <summary>
         /// By how much this given buff will change the player's Base Desired (Environmental) Temperature.

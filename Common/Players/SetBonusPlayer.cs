@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Buffs.MiscEffects;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.Players {
 
@@ -24,11 +25,11 @@ namespace TerraTemp.Common.Players {
             TempPlayer tempPlayer = Player.GetTempPlayer();
             //Spider Set Bonus
             if (spiderSetBonus && tempPlayer.currentTemperature > tempPlayer.comfortableHigh) {
-                if (victim is NPC) {
-                    (victim as NPC).AddBuff(BuffID.Venom, 60 * 5);
+                if (victim is NPC npc) {
+                    npc.AddBuff(BuffID.Venom, 60 * 5);
                 }
-                else if (victim is Player) {
-                    (victim as Player).AddBuff(BuffID.Venom, 60 * 5);
+                else if (victim is Player player) {
+                    player.AddBuff(BuffID.Venom, 60 * 5);
                 }
             }
         }

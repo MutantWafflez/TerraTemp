@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using TerraTemp.Common.Systems;
 using TerraTemp.Content.Changes;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.GlobalBuffs {
 
@@ -15,7 +16,7 @@ namespace TerraTemp.Common.GlobalBuffs {
         public override void Update(int type, Player player, ref int buffIndex) {
             foreach (BuffChange buffChange in ContentListSystem.buffChanges) {
                 if (type == buffChange.AppliedBuffID) {
-                    TempUtilities.ApplyStatChanges(buffChange, player);
+                    PlayerUtilities.ApplyStatChanges(buffChange, player);
                 }
             }
         }

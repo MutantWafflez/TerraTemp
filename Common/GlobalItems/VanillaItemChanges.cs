@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using TerraTemp.Common.Players;
 using TerraTemp.Common.Systems;
 using TerraTemp.Content.Changes;
-using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.GlobalItems {
 
@@ -23,7 +23,7 @@ namespace TerraTemp.Common.GlobalItems {
                     TempPlayer temperaturePlayer = player.GetTempPlayer();
                     temperaturePlayer.equippedItemChanges.Add(itemChange);
 
-                    TempUtilities.ApplyStatChanges(itemChange, player);
+                    PlayerUtilities.ApplyStatChanges(itemChange, player);
 
                     itemChange.AdditionalItemEquipEffect(player);
                 }
@@ -102,7 +102,7 @@ namespace TerraTemp.Common.GlobalItems {
         public override void UpdateArmorSet(Player player, string set) {
             foreach (SetBonusChange setBonusChange in ContentListSystem.setBonusChanges) {
                 if (setBonusChange.ArmorSetName == set) {
-                    TempUtilities.ApplyStatChanges(setBonusChange, player);
+                    PlayerUtilities.ApplyStatChanges(setBonusChange, player);
 
                     player.setBonus += player.setBonus == "" ? setBonusChange.AdditionalSetBonusText : "\n" + setBonusChange.AdditionalSetBonusText;
 

@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using TerraTemp.Content.Changes.Climates;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.PreHardmode {
 

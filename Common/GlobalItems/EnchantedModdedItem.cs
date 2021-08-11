@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTemp.Common.Players;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.GlobalItems {
 
@@ -38,13 +39,13 @@ namespace TerraTemp.Common.GlobalItems {
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             if (flameEnchantmentLevel != 0) {
-                tooltips.Add(new TooltipLine(Mod, "FlameEnchantTip", TempUtilities.GetTerraTempTextValue("MiscKeys.FlameEnchantment") + " " + flameEnchantmentLevel) {
+                tooltips.Add(new TooltipLine(Mod, "FlameEnchantTip", LocalizationUtilities.GetTerraTempTextValue("MiscKeys.FlameEnchantment") + " " + flameEnchantmentLevel) {
                     overrideColor = Color.Orange
                 });
             }
 
             if (frostEnchantmentLevel != 0) {
-                tooltips.Add(new TooltipLine(Mod, "FrostEnchantTip", TempUtilities.GetTerraTempTextValue("MiscKeys.FrostEnchantment") + " " + frostEnchantmentLevel) {
+                tooltips.Add(new TooltipLine(Mod, "FrostEnchantTip", LocalizationUtilities.GetTerraTempTextValue("MiscKeys.FrostEnchantment") + " " + frostEnchantmentLevel) {
                     overrideColor = Color.Cyan
                 });
             }

@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using TerraTemp.Common.Players;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
 

@@ -2,6 +2,7 @@
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTemp.Custom;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.Systems {
 
@@ -24,19 +25,19 @@ namespace TerraTemp.Common.Systems {
             //For any legacy loading, swap over to the new weekly system (by generating whole new arrays)
             if (!WeeklyTemperatureSystem.weeklyTemperatureDeviations.Any()) {
                 WeeklyTemperatureSystem.weeklyTemperatureDeviations = new float[] {
-                    TempUtilities.GenerateTemperatureDeviation(),
-                    TempUtilities.GenerateTemperatureDeviation(),
-                    TempUtilities.GenerateTemperatureDeviation(),
-                    TempUtilities.GenerateTemperatureDeviation(),
-                    TempUtilities.GenerateTemperatureDeviation() };
+                    MathUtilities.GenerateTemperatureDeviation(),
+                    MathUtilities.GenerateTemperatureDeviation(),
+                    MathUtilities.GenerateTemperatureDeviation(),
+                    MathUtilities.GenerateTemperatureDeviation(),
+                    MathUtilities.GenerateTemperatureDeviation() };
             }
             if (!WeeklyTemperatureSystem.weeklyHumidityDeviations.Any()) {
                 WeeklyTemperatureSystem.weeklyHumidityDeviations = new float[] {
-                    TempUtilities.GenerateHumidityDeviation(),
-                    TempUtilities.GenerateHumidityDeviation(),
-                    TempUtilities.GenerateHumidityDeviation(),
-                    TempUtilities.GenerateHumidityDeviation(),
-                    TempUtilities.GenerateHumidityDeviation() };
+                    MathUtilities.GenerateHumidityDeviation(),
+                    MathUtilities.GenerateHumidityDeviation(),
+                    MathUtilities.GenerateHumidityDeviation(),
+                    MathUtilities.GenerateHumidityDeviation(),
+                    MathUtilities.GenerateHumidityDeviation() };
             }
         }
     }

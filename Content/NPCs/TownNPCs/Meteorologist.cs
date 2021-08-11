@@ -14,6 +14,7 @@ using TerraTemp.Content.Items.Tiles.Furniture;
 using TerraTemp.Content.Items.Tomes;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Structs;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.NPCs.TownNPCs {
 
@@ -101,7 +102,7 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
 
         public override void SetChatButtons(ref string button, ref string button2) {
             button = Language.GetTextValue("LegacyInterface.28");
-            button2 = TempUtilities.GetTerraTempTextValue("NPCButton2." + GetType().Name);
+            button2 = LocalizationUtilities.GetTerraTempTextValue("NPCButton2." + GetType().Name);
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref bool shop) {
@@ -158,11 +159,6 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             //Frost Moon
             listOfPossibleChats.ConditionallyAdd("Please don't tell me you're on the naughty list.", Main.snowMoon, 2);
             listOfPossibleChats.ConditionallyAdd("I have a strong premonition that this very sudden cold is your doing, is that correct?", Main.snowMoon, 2);
-
-            //Chats that appear based on other NPCs
-            listOfPossibleChats.ConditionallyAdd($"Can you tell {TempUtilities.GetNPCName(NPCID.Wizard, out int wizardIndex)} to stop casting his fireballs around? This town is gonna be reduced to ashes one day because of him.", wizardIndex != -1);
-            listOfPossibleChats.ConditionallyAdd($"Yeah, {TempUtilities.GetNPCName(NPCID.Guide, out int guideIndex)} is pretty cool. Too bad he can't teach you anything about pressure systems, though!", guideIndex != -1);
-            listOfPossibleChats.ConditionallyAdd($"If you see {TempUtilities.GetNPCName(NPCID.Demolitionist, out int demolitionistIndex)}, can you tell him the phrase \"Tu manque d’intelligience.\" He won't know what it means, but say it anyway.", demolitionistIndex != -1);
 
             return listOfPossibleChats;
         }

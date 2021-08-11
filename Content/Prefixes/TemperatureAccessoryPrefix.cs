@@ -5,11 +5,12 @@ using TerraTemp.Common.GlobalItems;
 using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
 using TerraTemp.Custom.Structs;
+using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Prefixes {
 
     public abstract class TemperatureAccessoryPrefix : ModPrefix, ITempStatChange {
-        public List<ColoredString> PrefixTooltips => TempUtilities.CreatePrefixStatLines(this);
+        public List<ColoredString> PrefixTooltips => LocalizationUtilities.CreatePrefixStatLines(this);
 
         public override PrefixCategory Category => PrefixCategory.Accessory;
 

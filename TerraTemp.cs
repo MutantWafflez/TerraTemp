@@ -16,6 +16,11 @@ namespace TerraTemp {
     public class TerraTemp : Mod {
 
         /// <summary>
+        /// The string of the directory for all of the miscellaneous textures for TerraTemp.
+        /// </summary>
+        public const string TextureDirectory = nameof(TerraTemp) + "/Assets/Sprites/";
+
+        /// <summary>
         /// Logger class for TerraTemp.
         /// </summary>
         internal static ILog Logging = LogManager.GetLogger("TerraTemp");
