@@ -10,12 +10,10 @@ namespace TerraTemp.Common.Players {
     public class AccessoryPlayer : ModPlayer {
         public bool flameRune;
         public bool frostRune;
-        public bool volatileThermometer;
 
         public override void ResetEffects() {
             flameRune = false;
             frostRune = false;
-            volatileThermometer = false;
         }
 
         public override void PostUpdateEquips() {
