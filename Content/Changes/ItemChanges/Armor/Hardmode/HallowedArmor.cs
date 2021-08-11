@@ -9,7 +9,8 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override HashSet<int> HelmetPieceID => new HashSet<int> {
             ItemID.HallowedHelmet,
             ItemID.HallowedMask,
-            ItemID.HallowedHeadgear
+            ItemID.HallowedHeadgear,
+            ItemID.HallowedHood
         };
 
         public override int ChestPieceID => ItemID.HallowedPlateMail;
