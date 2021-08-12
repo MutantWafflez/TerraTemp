@@ -113,7 +113,7 @@ namespace TerraTemp.Common.Systems {
 
                 foreach (int appliedType in itemChange.AppliedItemIDs) {
                     foreach (int inheritor in CollectionUtilities.CreateRecipeTree(appliedType)) {
-                        itemChange.InheritedItemIDs.Add(inheritor);
+                        itemChange.InheritedItemIDs.Add(new Tuple<int, int>(appliedType, inheritor));
 #if DEBUG
                         TerraTemp.Logging.Debug(inheritor + " inherited from " + appliedType);
 #endif
