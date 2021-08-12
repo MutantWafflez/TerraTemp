@@ -2,7 +2,6 @@
 using Terraria.ModLoader;
 using TerraTemp.Common.Systems;
 using TerraTemp.Content.Changes;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.GlobalBuffs {

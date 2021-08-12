@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.Systems {

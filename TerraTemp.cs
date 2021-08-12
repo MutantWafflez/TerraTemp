@@ -1,5 +1,5 @@
-using System.IO;
 using log4net;
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

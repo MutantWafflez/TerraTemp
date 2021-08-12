@@ -4,7 +4,6 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTemp.Common.Players;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.GlobalItems {

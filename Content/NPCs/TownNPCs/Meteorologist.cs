@@ -12,7 +12,6 @@ using TerraTemp.Content.Items.Miscellaneous;
 using TerraTemp.Content.Items.Potions;
 using TerraTemp.Content.Items.Tiles.Furniture;
 using TerraTemp.Content.Items.Tomes;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Structs;
 using TerraTemp.Custom.Utilities;
 

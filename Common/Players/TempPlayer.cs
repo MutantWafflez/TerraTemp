@@ -9,7 +9,6 @@ using Terraria.ModLoader.IO;
 using TerraTemp.Common.Systems;
 using TerraTemp.Content.Buffs.TempEffects;
 using TerraTemp.Content.Changes;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Enums;
 using TerraTemp.Custom.Utilities;
 

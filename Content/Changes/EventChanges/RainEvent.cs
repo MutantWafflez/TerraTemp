@@ -1,5 +1,4 @@
 ﻿using Terraria;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Changes.EventChanges {

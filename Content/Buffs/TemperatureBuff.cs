@@ -1,6 +1,5 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
 using TerraTemp.Custom.Utilities;
 

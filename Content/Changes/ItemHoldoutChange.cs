@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Common.Systems;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
 using TerraTemp.Custom.Utilities;
 

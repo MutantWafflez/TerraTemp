@@ -2,7 +2,6 @@
 using Terraria;
 using Terraria.ModLoader;
 using TerraTemp.Common.GlobalItems;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Interfaces;
 using TerraTemp.Custom.Structs;
 using TerraTemp.Custom.Utilities;

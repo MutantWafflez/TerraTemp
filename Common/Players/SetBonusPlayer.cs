@@ -2,7 +2,6 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTemp.Content.Buffs.MiscEffects;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.Players {

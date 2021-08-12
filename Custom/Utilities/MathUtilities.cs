@@ -1,7 +1,5 @@
 ﻿using System;
 using Terraria;
-using TerraTemp.Common.Players;
-using TerraTemp.Custom.Interfaces;
 
 namespace TerraTemp.Custom.Utilities {
 

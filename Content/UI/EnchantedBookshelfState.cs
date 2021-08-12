@@ -10,7 +10,6 @@ using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTemp.Common.GlobalItems;
 using TerraTemp.Content.Items.Tomes;
-using TerraTemp.Custom;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.UI {
