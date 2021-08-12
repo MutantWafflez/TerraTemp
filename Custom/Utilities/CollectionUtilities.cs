@@ -31,16 +31,16 @@ namespace TerraTemp.Custom.Utilities {
         }
 
         /// <summary>
-        /// Creates and returns a "Recipe Tree" (a Queue of integers) of item types that contain the
-        /// passed in item type ANYWHERE in their crafting tree, if applicable.
+        /// Creates and returns a "Recipe Tree" (a HashSet of integers) of item types that contain
+        /// the passed in item type ANYWHERE in their crafting tree, if applicable.
         /// </summary>
         /// <param name="typeToFind"> The type to search for. </param>
-        public static Queue<int> CreateRecipeTree(int typeToFind) {
-            Queue<int> inheritedItems = new Queue<int>();
+        public static HashSet<int> CreateRecipeTree(int typeToFind) {
+            HashSet<int> inheritedItems = new HashSet<int>();
 
             foreach (Recipe recipe in Main.recipe) {
                 if (recipe.requiredItem.Any(item => item.type == typeToFind)) {
-                    inheritedItems.Enqueue(recipe.createItem.type);
+                    inheritedItems.Add(recipe.createItem.type);
                 }
             }
 
@@ -48,19 +48,19 @@ namespace TerraTemp.Custom.Utilities {
             do {
                 startingLength = inheritedItems.Count;
 
-                Queue<int> placeholderQueue = new Queue<int>();
+                HashSet<int> placeholderList = new HashSet<int>();
                 foreach (Recipe recipe in Main.recipe) {
                     foreach (int inheritorType in inheritedItems) {
                         if (recipe.requiredItem.Any(item => item.type == inheritorType)) {
-                            placeholderQueue.Enqueue(recipe.createItem.type);
+                            placeholderList.Add(recipe.createItem.type);
                         }
                     }
                 }
 
-                foreach (int inheritor in placeholderQueue) {
-                    inheritedItems.Enqueue(inheritor);
+                foreach (int inheritor in placeholderList) {
+                    inheritedItems.Add(inheritor);
                 }
-            } while (inheritedItems.Count < startingLength);
+            } while (inheritedItems.Count > startingLength);
 
             return inheritedItems;
         }
