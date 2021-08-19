@@ -71,10 +71,15 @@ namespace TerraTemp.Common.GlobalItems {
                             ? itemChange.AdditionalTooltip.Replace("\n", $" [i:{possibleInheritor.Item1}]\n") + $" [i:{possibleInheritor.Item1}]"
                             : itemChange.AdditionalTooltip + $" [i:{possibleInheritor.Item1}]");
 
-                    //In the case of the inherited item list, we want the tooltips to be at the bottom of the list, but above the sellLine if being sold.
+                    //In the case of the inherited item list, we want the tooltips to be at the bottom of the list, but above the sellLine if being sold or prefix.
                     TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name is "Price" or "SpecialPrice"));
+                    TooltipLine prefixLine = tooltips.FirstOrDefault(tooltip => (tooltip.Name.Contains("TemperaturePrefix") && tooltip.mod == nameof(TerraTemp))
+                                                                                || (tooltip.Name.Contains("Prefix") && tooltip.mod == "Terraria"));
 
-                    if (sellLine != null) {
+                    if (prefixLine != null) {
+                        tooltips.Insert(tooltips.IndexOf(prefixLine), newLine);
+                    }
+                    else if (sellLine != null) {
                         tooltips.Insert(tooltips.IndexOf(sellLine), newLine);
                     }
                     else {
