@@ -50,18 +50,12 @@ namespace TerraTemp.Common.GlobalItems {
             }
         }
 
-        public override bool NeedsSaving(Item item) {
-            return item.ModItem != null && (item.wornArmor || item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1);
+        public override void SaveData(Item item, TagCompound tag) {
+            tag["FlameLevel"] = flameEnchantmentLevel;
+            tag["FrostLevel"] = frostEnchantmentLevel;
         }
 
-        public override TagCompound Save(Item item) {
-            return new TagCompound {
-                {"FlameLevel", flameEnchantmentLevel},
-                {"FrostLevel", frostEnchantmentLevel}
-            };
-        }
-
-        public override void Load(Item item, TagCompound tag) {
+        public override void LoadData(Item item, TagCompound tag) {
             flameEnchantmentLevel = tag.GetInt("FlameLevel");
             frostEnchantmentLevel = tag.GetInt("FrostLevel");
         }

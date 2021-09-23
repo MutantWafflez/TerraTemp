@@ -227,13 +227,12 @@ namespace TerraTemp.Common.Players {
         #region I/O
 
         //Saving/Loading Temperature
-        public override TagCompound Save() {
-            return new TagCompound {
-                {"currentTemp", currentTemperature},
-            };
+
+        public override void SaveData(TagCompound tag) {
+            tag["currentTemp"] = currentTemperature;
         }
 
-        public override void Load(TagCompound tag) {
+        public override void LoadData(TagCompound tag) {
             currentTemperature = tag.GetFloat("currentTemp");
         }
 

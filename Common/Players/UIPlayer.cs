@@ -21,13 +21,11 @@ namespace TerraTemp.Common.Players {
 
         private static UISystem UISystem => ModContent.GetInstance<UISystem>();
 
-        public override TagCompound Save() {
-            return new TagCompound {
-                {"thermometerOffset", ThermometerState.draggableElement.elementOffset}
-            };
+        public override void SaveData(TagCompound tag) {
+            tag["thermometerOffset"] = ThermometerState.draggableElement.elementOffset;
         }
 
-        public override void Load(TagCompound tag) {
+        public override void LoadData(TagCompound tag) {
             if (ThermometerState != null) {
                 DraggableElement element = ThermometerState.draggableElement;
                 Vector2 offset = tag.Get<Vector2>("thermometerOffset");

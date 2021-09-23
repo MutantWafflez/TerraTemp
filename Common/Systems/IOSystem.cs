@@ -10,11 +10,9 @@ namespace TerraTemp.Common.Systems {
     /// </summary>
     public class IOSystem : ModSystem {
 
-        public override TagCompound SaveWorldData() {
-            return new TagCompound {
-                {"temperatureDeviations", WeeklyTemperatureSystem.weeklyTemperatureDeviations.ToList() },
-                {"humidityDeviations", WeeklyTemperatureSystem.weeklyHumidityDeviations.ToList() }
-            };
+        public override void SaveWorldData(TagCompound tag) {
+            tag["temperatureDeviations"] = WeeklyTemperatureSystem.weeklyTemperatureDeviations.ToList();
+            tag["humidityDeviations"] = WeeklyTemperatureSystem.weeklyHumidityDeviations.ToList();
         }
 
         public override void LoadWorldData(TagCompound tag) {

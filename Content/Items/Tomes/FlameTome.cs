@@ -43,13 +43,11 @@ namespace TerraTemp.Content.Items.Tomes {
             }
         }
 
-        public override TagCompound Save() {
-            return new TagCompound {
-                {"Level", tomeLevel}
-            };
+        public override void SaveData(TagCompound tag) {
+            tag["Level"] = tomeLevel;
         }
 
-        public override void Load(TagCompound tag) {
+        public override void LoadData(TagCompound tag) {
             tomeLevel = tag.GetInt("Level");
         }
     }
