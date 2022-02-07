@@ -1,14 +1,13 @@
 ﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace TerraTemp.Content.Buffs.TempEffects {
-
     public class HeatStroke : ModBuff {
-
         public override void SetStaticDefaults() {
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
-            CanBeCleared = false;
+            BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
         }
 
         public override void Update(Player player, ref int buffIndex) {
