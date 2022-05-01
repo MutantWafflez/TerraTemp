@@ -6,7 +6,6 @@ using TerraTemp.Content.Prefixes;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.GlobalItems {
-
     /// <summary>
     /// GlobalItem that handles the custom prefixes for TerraTemp and applies them properly, along
     /// with the tooltips.
@@ -35,7 +34,7 @@ namespace TerraTemp.Common.GlobalItems {
             if (!item.social && item.prefix > 0 && appliedAccessoryPrefix != null) {
                 for (int i = 0; i < appliedAccessoryPrefix.PrefixTooltips.Count; i++) {
                     tooltips.Add(new TooltipLine(Mod, "TemperaturePrefix" + i, appliedAccessoryPrefix.PrefixTooltips[i].value) {
-                        overrideColor = appliedAccessoryPrefix.PrefixTooltips[i].stringColor
+                        OverrideColor = appliedAccessoryPrefix.PrefixTooltips[i].stringColor
                     });
                 }
             }

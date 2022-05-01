@@ -8,7 +8,6 @@ using Terraria.ModLoader.IO;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Items.Tomes {
-
     public class FlameTome : ModItem {
         public int tomeLevel;
 
@@ -31,10 +30,10 @@ namespace TerraTemp.Content.Items.Tomes {
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
             TooltipLine tomeLevelLine = new TooltipLine(Mod, "TomeLevel", LocalizationUtilities.GetTerraTempTextValue("MiscKeys.EnchantmentLevel", tomeLevel)) {
-                overrideColor = Color.Orange
+                OverrideColor = Color.Orange
             };
 
-            TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name == "Price" || tooltip.Name == "SpecialPrice"));
+            TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.Mod == "Terraria" && (tooltip.Name == "Price" || tooltip.Name == "SpecialPrice"));
             if (sellLine != null) {
                 tooltips.Insert(tooltips.IndexOf(sellLine), tomeLevelLine);
             }

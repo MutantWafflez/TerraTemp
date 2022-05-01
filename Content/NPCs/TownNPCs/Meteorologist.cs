@@ -16,10 +16,8 @@ using TerraTemp.Custom.Structs;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.NPCs.TownNPCs {
-
     [AutoloadHead]
     public class Meteorologist : ModNPC {
-
         public static readonly ShopItem[] shopItems = {
             new ShopItem(ItemID.WeatherRadio),
             new ShopItem(ModContent.ItemType<Thermometer>()),
@@ -30,6 +28,15 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             new ShopItem(ModContent.ItemType<CoolingPotion>(), () => NPC.downedBoss3),
             new ShopItem(ModContent.ItemType<SatanicCross>(), () => Main.bloodMoon)
         };
+
+        public override void SetupShop(Chest shop, ref int nextSlot) {
+            foreach (ShopItem shopItem in shopItems) {
+                if (shopItem.IsForSale()) {
+                    shop.item[nextSlot].SetDefaults(shopItem.shopItemID);
+                    nextSlot++;
+                }
+            }
+        }
 
         #region Defaults Related
 
@@ -70,30 +77,27 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             });
         }
 
-        public override bool CanTownNPCSpawn(int numTownNPCs, int money) => (NPC.downedSlimeKing && Main.raining) || NPC.downedBoss2;
+        public override bool CanTownNPCSpawn(int numTownNPCs, int money) => NPC.downedSlimeKing && Main.raining || NPC.downedBoss2;
 
-        public override string TownNPCName() {
-            List<string> nameList = new List<string> {
-                "Aimé",
-                "Diodore",
-                "Nathanaël",
-                "Arnaud",
-                "Guillaume",
-                "Justin",
-                "Loan",
-                "Gilbert",
-                "Loup",
-                "Florian",
-                "Bernard",
-                "Philippe",
-                "Dany",
-                "Corin",
-                "Rosaire",
-                "Bertrand",
-                "Mathieu"
-            };
-            return nameList[WorldGen.genRand.Next(0, nameList.Count)];
-        }
+        public override List<string> SetNPCNameList() => new List<string> {
+            "Aimé",
+            "Diodore",
+            "Nathanaël",
+            "Arnaud",
+            "Guillaume",
+            "Justin",
+            "Loan",
+            "Gilbert",
+            "Loup",
+            "Florian",
+            "Bernard",
+            "Philippe",
+            "Dany",
+            "Corin",
+            "Rosaire",
+            "Bertrand",
+            "Mathieu"
+        };
 
         #endregion
 
@@ -121,15 +125,19 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             WeightedRandom<string> listOfPossibleChats = new WeightedRandom<string>();
 
             //Chats that can appear whenever
-            listOfPossibleChats.Add("You know, I've always wondered, how exactly are we even alive right now? Considering how close we are to space, there doesn't seem to be much of an ozone layer to protect us from the sun's radiation. Oh well.");
+            listOfPossibleChats.Add(
+                "You know, I've always wondered, how exactly are we even alive right now? Considering how close we are to space, there doesn't seem to be much of an ozone layer to protect us from the sun's radiation. Oh well.");
             listOfPossibleChats.Add("I don't know how the things that live in the Underworld even stand it. That heat is unbearable!");
             listOfPossibleChats.Add("The climate of the Crimson is fascinating. It seems like the blood that covers the place evaporates as a part of the water cycle, causing it to be more humid than usual. Very peculiar.");
             listOfPossibleChats.Add("That rainbow that perpetually sits in the Hallow has always confused me. Usually rainbows only appear after it rains, yet the rainbow stays long after the rain has ceased. It makes no sense!");
             listOfPossibleChats.Add("On the surface level, those ice torches found in the Tundra make sense to be cold. But scientifically speaking, it makes absolutely no sense. How in the hell can fire be cold?");
-            listOfPossibleChats.Add("The climates of Terraria are either really fascinating or really boring. There's fascinating phenomenon like the blood-water cycle of the Crimson, then there's Desert which is just painfully hot. Boring!");
+            listOfPossibleChats.Add(
+                "The climates of Terraria are either really fascinating or really boring. There's fascinating phenomenon like the blood-water cycle of the Crimson, then there's Desert which is just painfully hot. Boring!");
             listOfPossibleChats.Add("Alright, I have to ask. How do you survive in Space, let alone stay up there for long periods of time? Heat is about as scarce as a of Rod of Discord up there!");
-            listOfPossibleChats.Add("Have you traveled through the Corruption? It's climate is something of which I've never felt before. It's cold, but even more than that, it's like being in the place inspires your body to WANT to be cold! I'm fascinated, but I'm never stepping foot near there again!");
-            listOfPossibleChats.Add("I've always wondered, why doesn't the center of this world not have a climate similar to that of the Jungle? Surely being in the center would imply its near the equator, thus likely having a tropical climate...");
+            listOfPossibleChats.Add(
+                "Have you traveled through the Corruption? It's climate is something of which I've never felt before. It's cold, but even more than that, it's like being in the place inspires your body to WANT to be cold! I'm fascinated, but I'm never stepping foot near there again!");
+            listOfPossibleChats.Add(
+                "I've always wondered, why doesn't the center of this world not have a climate similar to that of the Jungle? Surely being in the center would imply its near the equator, thus likely having a tropical climate...");
             listOfPossibleChats.Add("I'd love to live in the Crimson to study its climate more. Unlike the Corruption, it's much more warm and humid, but I don't think I'd survive with all the dubious monsters that creep around there.");
 
             //Chats that appear during events
@@ -139,8 +147,11 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
             listOfPossibleChats.ConditionallyAdd("I'd be worried to travel anywhere particularly hot right now. Humidity is particularly high!", Main.raining, 2);
             listOfPossibleChats.ConditionallyAdd("Do you like the rain? I do. No bias from me though, of course.", Main.raining, 2);
             //Blood moon
-            listOfPossibleChats.ConditionallyAdd("You know, usually, Lunar Eclipses like these don't really have any effect on a given climate. However, judging by the several monsters outside, I'd bet a bit more on the air being a bit stickier than usual.", Main.bloodMoon, 2);
-            listOfPossibleChats.ConditionallyAdd("Although it's not within my scope of practice, blood moons intrigue me quite a lot due to the fact that in these parts they seem to have a profound effect on the surface climate.", Main.bloodMoon, 2);
+            listOfPossibleChats.ConditionallyAdd(
+                "You know, usually, Lunar Eclipses like these don't really have any effect on a given climate. However, judging by the several monsters outside, I'd bet a bit more on the air being a bit stickier than usual.",
+                Main.bloodMoon, 2);
+            listOfPossibleChats.ConditionallyAdd("Although it's not within my scope of practice, blood moons intrigue me quite a lot due to the fact that in these parts they seem to have a profound effect on the surface climate.",
+                Main.bloodMoon, 2);
             listOfPossibleChats.ConditionallyAdd("Hello, can you do me a favor and not let any monsters in here? I'd rather like to study the blood moon without losing my limbs. Merci.", Main.bloodMoon, 2);
             listOfPossibleChats.ConditionallyAdd("Je n’aime pas les cris incessants du monstre!", Main.bloodMoon, 2);
             //Solar eclipse
@@ -163,14 +174,5 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
         }
 
         #endregion
-
-        public override void SetupShop(Chest shop, ref int nextSlot) {
-            foreach (ShopItem shopItem in shopItems) {
-                if (shopItem.IsForSale()) {
-                    shop.item[nextSlot].SetDefaults(shopItem.shopItemID);
-                    nextSlot++;
-                }
-            }
-        }
     }
 }

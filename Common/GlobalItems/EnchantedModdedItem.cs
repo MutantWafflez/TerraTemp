@@ -7,7 +7,6 @@ using TerraTemp.Common.Players;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.GlobalItems {
-
     /// <summary>
     /// GlobalItem that handles all modded armors with enchantments on them, if applicable.
     /// </summary>
@@ -39,13 +38,13 @@ namespace TerraTemp.Common.GlobalItems {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             if (flameEnchantmentLevel != 0) {
                 tooltips.Add(new TooltipLine(Mod, "FlameEnchantTip", LocalizationUtilities.GetTerraTempTextValue("MiscKeys.FlameEnchantment") + " " + flameEnchantmentLevel) {
-                    overrideColor = Color.Orange
+                    OverrideColor = Color.Orange
                 });
             }
 
             if (frostEnchantmentLevel != 0) {
                 tooltips.Add(new TooltipLine(Mod, "FrostEnchantTip", LocalizationUtilities.GetTerraTempTextValue("MiscKeys.FrostEnchantment") + " " + frostEnchantmentLevel) {
-                    overrideColor = Color.Cyan
+                    OverrideColor = Color.Cyan
                 });
             }
         }

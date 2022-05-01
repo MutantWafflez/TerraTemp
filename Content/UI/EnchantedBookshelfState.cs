@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
@@ -13,7 +14,6 @@ using TerraTemp.Content.Items.Tomes;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.UI {
-
     public class EnchantedBookshelfState : UIState {
         public VanillaItemSlotWrapper armorItemSlot;
         public VanillaItemSlotWrapper tomeItemSlot;
@@ -30,9 +30,9 @@ namespace TerraTemp.Content.UI {
                 //True = Flame, False = Frost
                 bool tomeType = tomeItemSlot.Item.ModItem is FlameTome;
 
-                return tomeType ?
-                    armorItemSlot.Item.GetGlobalItem<EnchantedModdedItem>().flameEnchantmentLevel < ((FlameTome)tomeItemSlot.Item.ModItem).tomeLevel :
-                    armorItemSlot.Item.GetGlobalItem<EnchantedModdedItem>().frostEnchantmentLevel < ((FrostTome)tomeItemSlot.Item.ModItem).tomeLevel;
+                return tomeType
+                    ? armorItemSlot.Item.GetGlobalItem<EnchantedModdedItem>().flameEnchantmentLevel < ((FlameTome)tomeItemSlot.Item.ModItem).tomeLevel
+                    : armorItemSlot.Item.GetGlobalItem<EnchantedModdedItem>().frostEnchantmentLevel < ((FrostTome)tomeItemSlot.Item.ModItem).tomeLevel;
             }
         }
 
@@ -73,12 +73,12 @@ namespace TerraTemp.Content.UI {
 
             //Return items to player if UI is closed with items in the slots
             if (!armorItemSlot.Item.IsAir) {
-                Main.LocalPlayer.QuickSpawnClonedItem(armorItemSlot.Item, armorItemSlot.Item.stack);
+                Main.LocalPlayer.QuickSpawnClonedItem(new EntitySource_Misc("UIClose"), armorItemSlot.Item, armorItemSlot.Item.stack);
                 armorItemSlot.Item.TurnToAir();
             }
 
             if (!tomeItemSlot.Item.IsAir) {
-                Main.LocalPlayer.QuickSpawnClonedItem(tomeItemSlot.Item, tomeItemSlot.Item.stack);
+                Main.LocalPlayer.QuickSpawnClonedItem(new EntitySource_Misc("UIClose"), tomeItemSlot.Item, tomeItemSlot.Item.stack);
                 tomeItemSlot.Item.TurnToAir();
             }
 

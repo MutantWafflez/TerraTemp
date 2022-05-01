@@ -10,12 +10,10 @@ using TerraTemp.Content.Changes;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.GlobalItems {
-
     /// <summary>
     /// GlobalItem class that handles all vanilla item changes for the mod.
     /// </summary>
     public class VanillaItemChanges : GlobalItem {
-
         //Vanilla Accessories/Armor, when equipped, give additional changes here
         public override void UpdateEquip(Item item, Player player) {
             foreach (ItemChange itemChange in ContentListSystem.itemChanges) {
@@ -43,9 +41,9 @@ namespace TerraTemp.Common.GlobalItems {
                     TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", itemChange.AdditionalTooltip);
 
                     //These checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
-                    TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Tooltip0");
-                    TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Defense");
-                    TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name is "Price" or "SpecialPrice"));
+                    TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.Mod == "Terraria" && t.Name == "Tooltip0");
+                    TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.Mod == "Terraria" && t.Name == "Defense");
+                    TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.Mod == "Terraria" && tooltip.Name is "Price" or "SpecialPrice");
 
                     //All these checks force the inherited lines to go to the bottom, regardless of the item's tooltip
                     if (defenseLine != null) {
@@ -72,9 +70,9 @@ namespace TerraTemp.Common.GlobalItems {
                             : itemChange.AdditionalTooltip + $" [i:{possibleInheritor.Item1}]");
 
                     //In the case of the inherited item list, we want the tooltips to be at the bottom of the list, but above the sellLine if being sold or prefix.
-                    TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name is "Price" or "SpecialPrice"));
-                    TooltipLine prefixLine = tooltips.FirstOrDefault(tooltip => (tooltip.Name.Contains("TemperaturePrefix") && tooltip.mod == nameof(TerraTemp))
-                                                                                || (tooltip.Name.Contains("Prefix") && tooltip.mod == "Terraria"));
+                    TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.Mod == "Terraria" && tooltip.Name is "Price" or "SpecialPrice");
+                    TooltipLine prefixLine = tooltips.FirstOrDefault(tooltip => tooltip.Name.Contains("TemperaturePrefix") && tooltip.Mod == nameof(TerraTemp)
+                                                                                || tooltip.Name.Contains("Prefix") && tooltip.Mod == "Terraria");
 
                     if (prefixLine != null) {
                         tooltips.Insert(tooltips.IndexOf(prefixLine), newLine);
@@ -93,9 +91,9 @@ namespace TerraTemp.Common.GlobalItems {
                     TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", itemHoldoutChange.AdditionalTooltip);
 
                     //These checks are so the new tooltips are placed properly and follow the normal formatting of vanilla tooltips.
-                    TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Tooltip0");
-                    TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Defense");
-                    TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name is "Price" or "SpecialPrice"));
+                    TooltipLine toolTipZero = tooltips.FirstOrDefault(t => t.Mod == "Terraria" && t.Name == "Tooltip0");
+                    TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.Mod == "Terraria" && t.Name == "Defense");
+                    TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.Mod == "Terraria" && tooltip.Name is "Price" or "SpecialPrice");
 
                     if (defenseLine != null) {
                         tooltips.Insert(tooltips.IndexOf(defenseLine) + 1, newLine);
@@ -119,7 +117,8 @@ namespace TerraTemp.Common.GlobalItems {
 
         public override string IsArmorSet(Item head, Item body, Item legs) {
             foreach (SetBonusChange change in ContentListSystem.setBonusChanges) {
-                if (change.HelmetPieceID.Contains(head.type) && change.ChestPieceID == body.type && (change.LegPieceID == legs.type || (change.LegPieceID == -1 && legs.type == ItemID.None)) /* this check is for the possible armor sets with no leggings */) {
+                if (change.HelmetPieceID.Contains(head.type) && change.ChestPieceID == body.type &&
+                    (change.LegPieceID == legs.type || change.LegPieceID == -1 && legs.type == ItemID.None) /* this check is for the possible armor sets with no leggings */) {
                     if (change.ArmorSetName == null) {
                         throw new ArgumentNullException("ArmorSetName in change named " + change + " is null, and cannot be null.");
                     }

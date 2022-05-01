@@ -6,13 +6,11 @@ using TerraTemp.Custom.Interfaces;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Base.Items {
-
     /// <summary>
     /// Abstract class for any item that can affect a given player's temperature stats in ANY given
     /// way. Tooltip is automatically handled, no matter the change.
     /// </summary>
     public abstract class TempItem : ModItem, ITempStatChange {
-
         /// <summary>
         /// By how much this given item will change the player's Base Desired (Environmental) Temperature.
         /// </summary>
@@ -59,10 +57,10 @@ namespace TerraTemp.Content.Base.Items {
             if (returnedLine != null) {
                 TooltipLine newLine = new TooltipLine(Mod, "TempAdditionalLine", returnedLine);
 
-                TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "Defense");
-                TooltipLine buffDurationLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name == "BuffTime");
-                TooltipLine modifierLine = tooltips.FirstOrDefault(t => t.mod == "Terraria" && t.Name.Contains("Prefix"));
-                TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && (tooltip.Name == "Price" || tooltip.Name == "SpecialPrice"));
+                TooltipLine defenseLine = tooltips.FirstOrDefault(t => t.Mod == "Terraria" && t.Name == "Defense");
+                TooltipLine buffDurationLine = tooltips.FirstOrDefault(t => t.Mod == "Terraria" && t.Name == "BuffTime");
+                TooltipLine modifierLine = tooltips.FirstOrDefault(t => t.Mod == "Terraria" && t.Name.Contains("Prefix"));
+                TooltipLine sellLine = tooltips.FirstOrDefault(tooltip => tooltip.Mod == "Terraria" && (tooltip.Name == "Price" || tooltip.Name == "SpecialPrice"));
 
                 if (defenseLine != null) {
                     tooltips.Insert(tooltips.IndexOf(defenseLine) + 1, newLine);

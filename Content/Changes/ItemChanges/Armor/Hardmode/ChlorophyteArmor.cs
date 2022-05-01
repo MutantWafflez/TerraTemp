@@ -6,9 +6,7 @@ using Terraria.ModLoader;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
-
     public class ChlorophyteHelmet : ItemChange {
-
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ChlorophyteHelmet,
             ItemID.ChlorophyteMask,
@@ -21,7 +19,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
     }
 
     public class ChlorophyteChestplate : ItemChange {
-
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ChlorophytePlateMail
         };
@@ -32,7 +29,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
     }
 
     public class ChlorophyteLeggings : ItemChange {
-
         public override HashSet<int> AppliedItemIDs => new HashSet<int>() {
             ItemID.ChlorophyteGreaves
         };
@@ -43,7 +39,6 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
     }
 
     public class ChlorophyteArmor : SetBonusChange {
-
         public override HashSet<int> HelmetPieceID => new HashSet<int>() {
             ItemID.ChlorophyteHelmet,
             ItemID.ChlorophyteMask,
@@ -55,13 +50,13 @@ namespace TerraTemp.Content.Changes.ItemChanges.Armor.Hardmode {
         public override int LegPieceID => ItemID.ChlorophyteGreaves;
 
         public override void AdditionalSetBonusEffect(Player player) {
-            HashSet<int> listofCrits = new HashSet<int>() {
+            HashSet<float> listofCrits = new HashSet<float>() {
                 player.GetCritChance<MeleeDamageClass>(),
                 player.GetCritChance<RangedDamageClass>(),
                 player.GetCritChance<MagicDamageClass>(),
                 player.GetCritChance<ThrowingDamageClass>()
             };
-            player.GetTempPlayer().temperatureChangeResist += (float)listofCrits.Max() / 100f;
+            player.GetTempPlayer().temperatureChangeResist += listofCrits.Max() / 100f;
         }
     }
 }
