@@ -6,13 +6,11 @@ using TerraTemp.Content.Changes;
 using TerraTemp.Custom.Utilities;
 
 namespace TerraTemp.Common.Systems {
-
     /// <summary>
     /// System that handles all of the content lists in the mod that have some effect on
     /// temperature, from climates to holding out items and all in-between.
     /// </summary>
     public class ContentListSystem : ModSystem {
-
         /// <summary>
         /// A list of ALL newly added Climates. If you wish to add or otherwise remove a given
         /// Climate, search through this List with LINQ or any other method that is preferred.
@@ -103,7 +101,7 @@ namespace TerraTemp.Common.Systems {
             warmNPCTypes = null;
         }
 
-        public void HandleStatInheritance() {
+        public override void PostAddRecipes() {
             foreach (ItemChange itemChange in itemChanges) {
                 if (!itemChange.DerivedItemsProvideEffects) {
                     continue;
@@ -112,9 +110,9 @@ namespace TerraTemp.Common.Systems {
                 foreach (int appliedType in itemChange.AppliedItemIDs) {
                     foreach (int inheritor in CollectionUtilities.CreateRecipeTree(appliedType)) {
                         itemChange.InheritedItemIDs.Add(new Tuple<int, int>(appliedType, inheritor));
-#if DEBUG
+                        #if DEBUG
                         TerraTemp.Logging.Debug(inheritor + " inherited from " + appliedType);
-#endif
+                        #endif
                     }
                 }
             }

@@ -33,7 +33,7 @@ namespace TerraTemp.Common.Players {
             }
         }
 
-        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit) {
+        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter) {
             //Mythril Set Bonus
             if (mythrilSetBonus) {
                 Player.AddBuff(ModContent.BuffType<TempResistBuff>(), 60 * 5);
