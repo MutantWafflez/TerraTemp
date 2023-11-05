@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Bestiary;
@@ -175,4 +176,5 @@ namespace TerraTemp.Content.NPCs.TownNPCs {
 
         #endregion
     }
-}
+}*/
+
